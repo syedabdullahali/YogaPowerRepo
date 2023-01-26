@@ -572,25 +572,23 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'All classes Report',
-        to: '/base/cards',
+        name: 'Shift Timing Managment ',
+        to: '/hr/shift-timing-managment',
       },
-     
       {
         component: CNavItem,
-        name: 'Shift Timing Managment ',
-        to: '/hr/emp-document',
+        name: 'All classes Report',
+        to: '/hr/all-class-report',
       },
-   
       {
         component: CNavItem,
         name: 'All-Rights',
-        to: '/hr/attendance-report',
+        to: '/hr/all-righthr',
       },
       {
         component: CNavItem,
         name: 'Emp Performance',
-        to: '/hr/holiday-list',
+        to: '/hr/emp-performance',
       },
     ],
   },

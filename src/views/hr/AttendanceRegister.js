@@ -102,15 +102,19 @@ const AttendanceRegister = () => {
                                     aria-label="Recipient's username"
                                     aria-describedby="button-addon2"
                                 />
-                                <CButton type="button" color="primary">
+                                {/* <CButton type="button" color="primary">
                                     Search
-                                </CButton>
+                                </CButton> */}
                             </CCol>
                             <CCol lg={4} sm={6} className='mb-2' >
                                 <CButtonGroup className='float-end'>
                                     <CButton color="primary">
                                         <CIcon icon={cilArrowCircleTop} />
                                         {' '}Export
+                                    </CButton>
+                                    <CButton color="primary">
+                                        <CIcon icon={cilArrowCircleTop} />
+                                        {' '}Import
                                     </CButton>
                                 </CButtonGroup>
                             </CCol>

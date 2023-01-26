@@ -82,6 +82,10 @@ const LeaveSetUp = React.lazy(()=>import('./views/hr/LeaveSetUp'))
 const SalarySheet = React.lazy(()=>import('./views/hr/SalarySheet'))
 const EmpSalarySlip = React.lazy(()=>import('./views/hr/EmpSalarySlip'))
 const TrainerySalary = React.lazy(()=>import('./views/hr/TrainerySalarySlip'))
+const AllClassReport = React.lazy(()=>import('./views/hr/AllClassReport'))
+const ShiftTimingManagment = React.lazy(()=>import('./views/hr/ShiftTimingManagment'))
+const AllRightHr =  React.lazy(()=>import('./views/hr/AllRightHr')) 
+const EmpPerformance = React.lazy(()=>import('./views/hr/EmpPerformance'))
 
 //Master
 const CenterSetup = React.lazy(() => import('./views/Master/centerSetup/CenterSetup'))
@@ -295,6 +299,10 @@ const routes = [
   { path:'/hr/salary-sheet',name:'Salary Sheet',element:SalarySheet},
   { path:'/hr/salary-slip',name:'Salary Slip',element:EmpSalarySlip},
   { path:'/hr/trainer-salary',name:'Trainer Salary Slip',element:TrainerySalary},
+  { path:'/hr/all-class-report',name:'All Classs Report',element:AllClassReport},
+  { path:'/hr/shift-timing-managment',name:'Shift Timing Managment',element:ShiftTimingManagment},
+  { path:'/hr/all-righthr',name:'All Right',element:AllRightHr},
+  { path:'/hr/emp-performance',name:'Emp Performance',element:EmpPerformance},
 
   //Master
   { path: '/master', name: 'Master', element: CenterSetup, exact: true },
