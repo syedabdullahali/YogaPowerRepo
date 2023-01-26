@@ -278,19 +278,32 @@ const AllSuppilerList = () => {
             <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
                 <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                     <CTableRow >
-                        <CTableHeaderCell>Sr.No</CTableHeaderCell>
+                    <CTableHeaderCell>Sr.No</CTableHeaderCell>
+                        <CTableHeaderCell>Date</CTableHeaderCell>
+                        <CTableHeaderCell>Client Name</CTableHeaderCell>
+                        <CTableHeaderCell>Mobile No.</CTableHeaderCell>
                         <CTableHeaderCell>Product Code</CTableHeaderCell>
                         <CTableHeaderCell>Product Name</CTableHeaderCell>
                         <CTableHeaderCell>Brand Name</CTableHeaderCell>
                         <CTableHeaderCell>Category</CTableHeaderCell>
                         <CTableHeaderCell>Colour</CTableHeaderCell>
                         <CTableHeaderCell>Price</CTableHeaderCell>
-                        <CTableHeaderCell>TOtal Stock</CTableHeaderCell>
+                        <CTableHeaderCell>Qty</CTableHeaderCell>
+                        <CTableHeaderCell>Sold By</CTableHeaderCell>
+                        <CTableHeaderCell>Total Invoice</CTableHeaderCell>
+                        {/* <CTableHeaderCell>Sr.No</CTableHeaderCell>
+                        <CTableHeaderCell>Name</CTableHeaderCell>
+                        <CTableHeaderCell>Mobile</CTableHeaderCell>
+                        <CTableHeaderCell>Email-Id</CTableHeaderCell>
+                        <CTableHeaderCell>Address</CTableHeaderCell>
+                        <CTableHeaderCell>Category</CTableHeaderCell>
+                        <CTableHeaderCell>Company Name</CTableHeaderCell> */}
+                        {/* <CTableHeaderCell></CTableHeaderCell>
                         <CTableHeaderCell>Sold</CTableHeaderCell>
                         <CTableHeaderCell>AVL Stock</CTableHeaderCell>
                         <CTableHeaderCell>Sold By</CTableHeaderCell>
                         <CTableHeaderCell>Action</CTableHeaderCell>
-                        {/* <CTableHeaderCell>Edit</CTableHeaderCell> */}
+                        <CTableHeaderCell>Edit</CTableHeaderCell> */}
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -418,7 +431,7 @@ const AllSuppilerList = () => {
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
-                        {/* <CTableDataCell>
+                        <CTableDataCell>
                             <CFormInput
                                 className="mb-1"
                                 type="text"
@@ -426,7 +439,7 @@ const AllSuppilerList = () => {
                                 disabled
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
-                        </CTableDataCell>  */}
+                        </CTableDataCell> 
                     </CTableRow>
                     <CTableRow>
                         <CTableDataCell>
@@ -499,7 +512,7 @@ const AllSuppilerList = () => {
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
-                        <CTableDataCell>
+                         <CTableDataCell>
                             <CFormInput
                                 className="mb-1"
                                 style={{ minWidth: "120px" }}
@@ -552,7 +565,7 @@ const AllSuppilerList = () => {
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
-                        {/* <CTableDataCell>
+                        <CTableDataCell>
                             <CFormInput
                                 className="mb-1"
                                 type="text"
@@ -560,7 +573,7 @@ const AllSuppilerList = () => {
                                 disabled
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
-                        </CTableDataCell>  */}
+                        </CTableDataCell> 
                     </CTableRow>
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                         list.username === username && list.productName.includes(search2) && list.brandName.includes(search3) && list.category.includes(search4) && list.color.includes(search5) &&

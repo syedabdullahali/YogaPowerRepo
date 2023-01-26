@@ -303,33 +303,33 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'All Call List',
+        name: 'IMP Call List',
         to: '/inventory/all-call-list',
       },
       {
         component: CNavItem,
+        name: 'All Supplier List',
+        to: '/inventory/all-suppiler1',
+      },
+      {
+        component: CNavItem,
+        name: 'Guest List',
+        to: '/inventory/guest-list1',
+      },
+      {
+        component: CNavItem,
         name: 'Stock Listing',
-        to: '/inventory/stock-listing',
+        to: '/inventory/stock-listing1',
       },
       {
         component: CNavItem,
         name: 'Stock Report',
-        to: '/inventory/stock-report',
+        to: '/inventory/sales-report',
       },
       {
         component: CNavItem,
-        name: 'Stock Classification',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Purchases',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Recepits',
-        to: '/base/cards',
+        name: 'Purchase Report',
+        to: '/inventory/purchase-report ',
       },
       {
         component: CNavItem,

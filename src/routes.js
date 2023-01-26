@@ -37,10 +37,13 @@ const OfferMaster = React.lazy(() => import('./views/marketing/OfferMarketing'))
 // Inventory
 const AllCallList = React.lazy(() => import('./views/Inventory/AllCallList'))
 const ImpCallList = React.lazy(() => import('./views/Inventory/ImpCallList'))
-const AllSuppilerList = React.lazy(() => import('./views/Inventory/AllSuppilerList'))
-const GuestList = React.lazy(() => import('./views/Inventory/GuestList'))
-const StockListing = React.lazy(() => import('./views/Inventory/StockListing'))
+const AllSuppilerList = React.lazy(() => import('./views/Inventory/AllSuppilerLis'))
+const AllSuppilerList1 = React.lazy(() => import('./views/Inventory/AllSupplierList1'))
+const GuestList = React.lazy(() => import('./views/Inventory/GuestList1'))
+const StockListing1 = React.lazy(() => import('./views/Inventory/StockListing1'))
 const StockReport = React.lazy(() => import('./views/Inventory/StockReport'))
+const ProductSalesReport = React.lazy(() => import('./views/Inventory/ProductSalesReport'))
+const PurchaseReport = React.lazy(() => import('./views/Inventory/PurchaseReport'))
 
 //finance
 const TotalInvoices = React.lazy(() => import('./views/finance/TotalInvoice'))
@@ -251,10 +254,12 @@ const routes = [
   { path: '/inventory/all-call-list', name: 'All Call List', element: AllCallList },
   { path: '/inventory/imp-call', name: 'Imp Call List', element: ImpCallList },
   { path: '/inventory/all-suppiler', name: 'All Suppiler List', element: AllSuppilerList },
-  { path: '/inventory/guest-list', name: 'Guest List', element: GuestList },
-  { path: '/inventory/stock-listing', name: 'Stock Listing', element: StockListing },
+  { path: '/inventory/all-suppiler1', name: 'All Suppiler List', element: AllSuppilerList1 },
+  { path: '/inventory/guest-list1', name: 'Guest List', element: GuestList },
+  { path: '/inventory/stock-listing1', name: 'Stock Listing', element: StockListing1 },
   { path: '/inventory/stock-report', name: 'Stock Report', element: StockReport },
-
+  { path: '/inventory/sales-report', name: 'PSales Report', element: ProductSalesReport },
+  { path: '/inventory/purchase-report', name: 'Purchase Report', element: PurchaseReport},
   //Finance
   { path: '/finance', name: 'Finance', element: TotalInvoices, exact: true },
   { path: '/finance/total-invoice', name: 'Total Invoice', element: TotalInvoices },

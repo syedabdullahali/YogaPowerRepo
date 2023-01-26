@@ -27,8 +27,9 @@ import ClothesProduct from "./AllSupplierList";
 import AyurvedaMedicine from "./AyurvedaMedicine";
 import FitnessProduct from "./FitnessProduct";
 import FoodsProduct from "./FoodsProduct";
+import GeneralStock from "./GeneralStock"
 
-const StockListing = () => {
+const StockListing1 = () => {
     const [action, setAction] = useState(false)
     const [activeKey, setActiveKey] = useState(1)
 
@@ -103,7 +104,7 @@ const StockListing = () => {
                                         active={activeKey === 1}
                                         onClick={() => setActiveKey(1)}
                                     >
-                                        All Supplier List
+                                        clothes product
                                     </CNavLink>
                                 </CNavItem>
                                 <CNavItem>
@@ -137,12 +138,22 @@ const StockListing = () => {
                                         Foods Product
                                     </CNavLink>
                                 </CNavItem>
+                                <CNavItem>
+                                    <CNavLink
+                                        style={{ color: "white" }}
+                                        href="javascript:void(0);"
+                                        active={activeKey === 5}
+                                        onClick={() => setActiveKey(5)}
+                                    >
+                                        General Product
+                                    </CNavLink>
+                                </CNavItem>
                             </CNav>
                         </CCardHeader>
                         <CCardBody>
                             <CTabContent>
                                 <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 1}>
-                                    <AllSuppilerList />
+                                    <ClothesProduct />
                                 </CTabPane>
                                 <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 2}>
                                     <AyurvedaMedicine />
@@ -153,6 +164,9 @@ const StockListing = () => {
                                 <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 4}>
                                     <FoodsProduct />
                                 </CTabPane>
+                                <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 5}>
+                                    <GeneralStock />
+                                </CTabPane>
                             </CTabContent>
                         </CCardBody>
                     </CCard>
@@ -162,4 +176,4 @@ const StockListing = () => {
     );
 };
 
-export default StockListing;
+export default StockListing1;

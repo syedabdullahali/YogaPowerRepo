@@ -275,8 +275,8 @@ const GuestList = () => {
                         <CTableHeaderCell>Address</CTableHeaderCell>
                         <CTableHeaderCell>Category</CTableHeaderCell>
                         <CTableHeaderCell>Event</CTableHeaderCell>
-                        <CTableHeaderCell>Action</CTableHeaderCell>
-                        <CTableHeaderCell>Edit</CTableHeaderCell>
+                        {/* <CTableHeaderCell>Action</CTableHeaderCell>
+                        <CTableHeaderCell>Edit</CTableHeaderCell> */}
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>

@@ -25,7 +25,7 @@ import { BsWhatsapp } from "react-icons/bs";
 import { MdCall, MdDelete, MdEdit, MdMail } from "react-icons/md";
 const url = 'https://yog-api.herokuapp.com'
 
-const AllSuppilerList = () => {
+const ClothesProduct = () => {
     const [action, setAction] = useState(false)
     const [toast, setToast] = useState(false)
     const [id, setId] = useState()
@@ -60,7 +60,7 @@ const AllSuppilerList = () => {
     }, [])
 
     function getImpCall() {
-        axios.get(`${url}/stockListing/all`, {
+        axios.get(`${url}/fitnessProduct/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -80,7 +80,7 @@ const AllSuppilerList = () => {
             productName: name, brandName: phone, category: email, color: category, productPrice: address, totalStock: company, available: company,
         }
 
-        fetch(`${url}/stockListing/create`, {
+        fetch(`${url}/fitnessProduct/create`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -102,7 +102,7 @@ const AllSuppilerList = () => {
             productName: name, brandName: phone, category: email, color: category, productPrice: address, totalStock: company, available: company, sold: 0,
         }
 
-        fetch(`${url}/stockListing/update/${id}`, {
+        fetch(`${url}/fitnessProduct/update/${id}`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -121,7 +121,7 @@ const AllSuppilerList = () => {
     function deleteCall(id) {
 
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/stockListing/delete/${id}`, {
+            fetch(`${url}/fitnessProduct/delete/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -151,7 +151,7 @@ const AllSuppilerList = () => {
     }
 
     function getUpdate(id) {
-        axios.get(`${url}/stockListing/${id}`, {
+        axios.get(`${url}/fitnessProduct/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -180,10 +180,9 @@ const AllSuppilerList = () => {
                 </CToast>
             </CCol>
             <CCol lg={3} sm={6} className='mb-2'>
-                <CButton className="float-end" onClick={() => { setAction(!action), clear() }}>{action ? 'Close' : 'Add Supplier List'}</CButton>
+                <CButton className="float-end" onClick={() => { setAction(!action), clear() }}>{action ? 'Close' : 'Add New Fitness Product'}</CButton>
             </CCol>
             {action &&
-
                 <CCard className="mt-2 mb-2" >
                     <CCardBody>
                         <CForm>
@@ -282,15 +281,15 @@ const AllSuppilerList = () => {
                         <CTableHeaderCell>Product Code</CTableHeaderCell>
                         <CTableHeaderCell>Product Name</CTableHeaderCell>
                         <CTableHeaderCell>Brand Name</CTableHeaderCell>
-                        <CTableHeaderCell>Category</CTableHeaderCell>
-                        <CTableHeaderCell>Colour</CTableHeaderCell>
+                        <CTableHeaderCell>Quantity</CTableHeaderCell>
                         <CTableHeaderCell>Price</CTableHeaderCell>
-                        <CTableHeaderCell>TOtal Stock</CTableHeaderCell>
-                        <CTableHeaderCell>Sold</CTableHeaderCell>
+                        <CTableHeaderCell>Total Stock</CTableHeaderCell>
+                        <CTableHeaderCell>Use</CTableHeaderCell>
                         <CTableHeaderCell>AVL Stock</CTableHeaderCell>
-                        <CTableHeaderCell>Sold By</CTableHeaderCell>
+                        <CTableHeaderCell>Allot By</CTableHeaderCell>
                         <CTableHeaderCell>Action</CTableHeaderCell>
-                        {/* <CTableHeaderCell>Edit</CTableHeaderCell> */}
+                        {/* <CTableHeaderCell>Action</CTableHeaderCell>
+                        <CTableHeaderCell>Edit</CTableHeaderCell> */}
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -365,140 +364,6 @@ const AllSuppilerList = () => {
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
-                         <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                type="number"
-                                disabled
-                                value={search7}
-                                onChange={(e) => setSearch7(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="number"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                value={search8}
-                                onChange={(e) => setSearch8(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="number"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                value={search9}
-                                onChange={(e) => setSearch9(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                value={search10}
-                                onChange={(e) => setSearch10(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        {/* <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>  */}
-                    </CTableRow>
-                    <CTableRow>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "60px" }}
-                                type="text"
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                value={search1}
-                                disabled
-                                onChange={(e) => setSearch1(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                value={search2}
-                                onChange={(e) => setSearch2(e.target.value)}
-                                type="text"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "100px" }}
-                                value={search3}
-                                onChange={(e) => setSearch3(e.target.value)}
-                                type="text"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "200px" }}
-                                value={search4}
-                                onChange={(e) => setSearch4(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                value={search5}
-                                onChange={(e) => setSearch5(e.target.value)}
-                                type="text"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                value={search6}
-                                onChange={(e) => setSearch6(e.target.value)}
-                                type="number"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
                         <CTableDataCell>
                             <CFormInput
                                 className="mb-1"
@@ -543,15 +408,6 @@ const AllSuppilerList = () => {
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
                         {/* <CTableDataCell>
                             <CFormInput
                                 className="mb-1"
@@ -560,7 +416,16 @@ const AllSuppilerList = () => {
                                 disabled
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
-                        </CTableDataCell>  */}
+                        </CTableDataCell>
+                        <CTableDataCell>
+                            <CFormInput
+                                className="mb-1"
+                                type="text"
+                                style={{ minWidth: "120px" }}
+                                disabled
+                                aria-describedby="exampleFormControlInputHelpInline"
+                            />
+                        </CTableDataCell> */}
                     </CTableRow>
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                         list.username === username && list.productName.includes(search2) && list.brandName.includes(search3) && list.category.includes(search4) && list.color.includes(search5) &&
@@ -617,4 +482,4 @@ const AllSuppilerList = () => {
 };
 
 
-export default AllSuppilerList;
+export default ClothesProduct;

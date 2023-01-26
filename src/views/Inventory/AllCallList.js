@@ -11,7 +11,7 @@ import {
     CTabPane,
 } from '@coreui/react'
 import React, { useState } from 'react'
-import AllSuppilerList from './AllSuppilerList'
+import AllSuppilerList from './AllSuppilerLis'
 import GuestList from './GuestList'
 import ImpCallList from './ImpCallList'
 const AllCallList = () => {
