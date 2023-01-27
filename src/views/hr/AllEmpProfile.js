@@ -332,7 +332,20 @@ const AllEmpProfile = () => {
                                             <CTableDataCell>{item.JobDesignation}</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell>{item.status ? <><CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton></> : <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>}</CTableDataCell>
+                                            {/* <CTableDataCell>{
+                                            item.status ? 
+                                            <>
+                                            <CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton>
+                                            </> : 
+                                            <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>}
+                                            
+                                            </CTableDataCell> */}
+
+                                             <CTableDataCell>
+                                            <CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton>                                            
+                                            <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>
+                                             </CTableDataCell> 
+                                            
                                             <CTableDataCell className='text-center'><a href={`tel:${item.ContactNumber}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.EmailAddress}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a></CTableDataCell>
                                          
                                             <CTableDataCell className='text-center'>

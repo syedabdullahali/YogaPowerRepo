@@ -26,10 +26,19 @@ const DSRreport = () => {
         <CRow>
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
+
                     <CCardHeader>
                         <strong className="mt-2">Target vs Achievment</strong>
                     </CCardHeader>
+
                     <CCardBody>
+                        
+
+                        
+
+
+
+
                         <CRow className='d-flex justify-content-center mb-2'>
                             <CCol lg={3} sm={6} className='mb-2'>
                                 <CInputGroup
@@ -116,64 +125,74 @@ const DSRreport = () => {
                                 </CButton>
                             </CCol>
                         </CRow>
-                        <CTable bordered style={{ borderColor: "#106103" }} responsive>
-                            <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="col">Date</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Day</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Existing Leads Counts</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">
-                                        Added Today Count
-                                    </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Referral generated Count</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Lead converted</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">
-                                        Target
-                                    </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Revenue</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Target</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Revenue</CTableHeaderCell>
-                                </CTableRow>
-                            </CTableHead>
-                            <CTableBody>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
-                            </CTableBody>
-                        </CTable>
+                    <div className='table_parent'>
+                         <div className='dsr_report_table'>
+                            <div className="table_header-1">Lead Analysis</div>
+                            <div className="table_header-2">Trail Analysis</div>
+                            <div className="table_header-3">Lead Analysis</div>
+                            <div className="table_header-4">New Clients</div>
+                            <div className="table_header-5">Existing Clients </div>
+                            <div className="table_header-6">Incremental Revenue</div>
+                            <div className="table_header-7"></div>
+                            <div className="table_header-8">Collection</div>
+
+                            <div className="table_header2-1">Existing Leads</div>
+                            <div className="table_header2-2">Added Today</div>
+                            <div className="table_header2-3">Referral generated</div>
+                            <div className="table_header2-4">Lead Converted</div>
+                            <div className="table_header2-5">Spot Coversion</div>
+                            <div className="table_header2-6">Total Closures</div>
+                            <div className="table_header2-7">Trial Scheduled</div>
+                            <div className="table_header2-8">Trial Completed</div>
+                            <div className="table_header2-9">Today's SALE </div>
+                            <div className="table_header2-10">Service Non-PT</div>
+                            <div className="table_header2-11">PT</div>
+                            <div className="table_header2-12">Service Non-PT</div>
+                            <div className="table_header2-13">PT</div>
+                            <div className="table_header2-14">Store</div>
+                            <div className="table_header2-15">Others(Admin Fee)</div>
+                            <div className="table_header2-16">Today Collection</div>
+                            <div className="table_header2-17">New Sales</div>
+                            <div className="table_header2-18">Due Recovered</div>
+
+
+                            <div className="table_header">Date</div>
+                            <div className="table_header">Day</div>
+
+                            <div className="table_header">Count</div>
+                            <div className="table_header">Count</div>
+                            <div className="table_header">Count</div>
+                            <div className="table_header">Count</div>
+
+                            <div className="table_header">Value</div>
+                            <div className="table_header">Count</div>
+
+                            <div className="table_header">Value</div>
+                            <div className="table_header">Count</div>
+
+                            <div className="table_header">Value</div>
+                            <div className="table_header">Count</div>
+
+                            <div className="table_header">Count</div>
+                            <div className="table_header">Value</div>
+
+                            <div className="table_header">Count</div>
+                            <div className="table_header">Revenue</div>
+                            <div className="table_header">Count</div>
+                            <div className="table_header">Revenue</div>
+                            <div className="table_header">Count</div>
+                            <div className="table_header">Revenue</div>
+                            <div className="table_header">Count</div>
+                            <div className="table_header">Revenue</div>
+                            <div className="table_header">Count</div>
+                            <div className="table_header">Revenue</div>
+                            <div className="table_header">Count</div>
+                            <div className="table_header">Revenue</div>
+                            <div className="table_header">Value</div>
+                            <div className="table_header">Revenue</div>
+                            <div className="table_header">Revenue</div>
+                         </div>
+                    </div>
                     </CCardBody>
                 </CCard>
             </CCol>

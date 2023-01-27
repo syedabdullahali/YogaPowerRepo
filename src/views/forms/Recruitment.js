@@ -28,25 +28,27 @@ const Recruitment = () => {
     const [city, setCity] = useState('')
     const [pincode, setPincode] = useState('')
     const [state, setState] = useState('')
-    const [dateOfBirth, setDateOfBirth] = useState('')
-    const [Anniversary, setAnniversary] = useState('')
     const [Salary, setSalary] = useState('')
-    const [joiningDate, setJoiningDate] = useState('')
-    const [empCategory, setEmpCategory] = useState('')
     const [Source, setSource] = useState('')
-    const [EmployeeID, setEmployeeID] = useState('')
-    const [AttendanceID, setAttendanceID] = useState('')
-    const [accountNo, setAccountNo] = useState('')
-    const [IFSCCode, setIFSCCode] = useState('')
-    const [PANNo, setPANNo] = useState('')
-    const [aadharNo, setAadharNo] = useState('')
-    const [PANcard, setPANcard] = useState(null)
-    const [aadharcard, setAadharcard] = useState(null)
-    const [PANcardUrl, setPANcardUrl] = useState('')
-    const [aadharcardUrl, setAadharcardUrl] = useState('')
     const [grade, setgrade] = useState('')
     const [comment, setComment] = useState('')
 
+    // Step 2
+    // const [dateOfBirth, setDateOfBirth] = useState('')
+    // const [Anniversary, setAnniversary] = useState('')
+    // const [joiningDate, setJoiningDate] = useState('')
+    // const [empCategory, setEmpCategory] = useState('')
+    // const [EmployeeID, setEmployeeID] = useState('')
+    // const [AttendanceID, setAttendanceID] = useState('')
+    // const [accountNo, setAccountNo] = useState('')
+    // const [IFSCCode, setIFSCCode] = useState('')
+    // const [PANNo, setPANNo] = useState('')
+    // const [aadharNo, setAadharNo] = useState('')
+    // const [PANcardUrl, setPANcardUrl] = useState('')
+    // const [PANcardUrl, setPANcardUrl] = useState('')
+    // const [aadharcardUrl, setAadharcardUrl] = useState('')
+    // const [PANcard, setPANcard] = useState(null)
+    // const [aadharcard, setAadharcard] = useState(null)
 
     const navigate = useNavigate()
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -105,14 +107,17 @@ const Recruitment = () => {
     }
 
     const saveRecruitment = (e) => {
-        if (imageUrl !== '' && resumeUrl !== '' && PANcardUrl !== '' && aadharcardUrl !== '' && Fullname !== '' && Salary !== '' &&
-            Email !== '' && dateOfBirth !== '' && pincode !== '' && state !== '' && dateOfBirth !== '' && Gender !== '' && Address !== '') {
+        if (imageUrl !== '' && resumeUrl !== ''  &&  Fullname !== '' && Salary !== '' &&
+            Email !== ''  && pincode !== '' && state !== ''  && Gender !== '' && Address !== '') {
             let data = {
                 username: username,
                 image: imageUrl,
-                FullName: Fullname, EmailAddress: Email, ContactNumber, Gander: Gender, DateofBirth: dateOfBirth, address: Address, Area, city, resume: resumeUrl, EmployeeCategory: empCategory, PinCode: pincode, State: state,
-                PayoutType: Source, Grade: grade, Comment: comment, Anniversary: Anniversary, JobDesignation: Designation, Department: Department, Salary: Salary, joiningDate: joiningDate, EmployeeID: EmployeeID, AttendanceID: AttendanceID,
-                AccountNo: accountNo, IFSC: IFSCCode, PANCardNumber: PANNo, AadharNumber: aadharNo, PANCard: PANcardUrl, AadharCard: aadharcardUrl, status: false
+                FullName: Fullname, EmailAddress: Email, ContactNumber,                
+                Gander: Gender, address: Address, Area, city, 
+                resume: resumeUrl, PinCode: pincode, State: state,
+                PayoutType: Source, Grade: grade, Comment: comment, 
+                JobDesignation: Designation, Department: Department, Salary: Salary,
+                status: false
             }
 
             fetch(`${url}/employeeForm/create`, {
@@ -136,14 +141,14 @@ const Recruitment = () => {
         }
     }
 
-    const step2 = () => {
-        if (resumeUrl !== null && imageUrl !== null) {
-            setError('')
-            setStep(2)
-        } else {
-            setError('Please upload documents')
-        }
-    }
+    // const step2 = () => {
+    //     if (resumeUrl !== null && imageUrl !== null) {
+    //         setError('')
+    //         setStep(2)
+    //     } else {
+    //         setError('Please upload documents')
+    //     }
+    // }
 
     const imgRef = useRef(null)
     const handleImage = (e) => {
@@ -181,39 +186,41 @@ const Recruitment = () => {
         })
     }
 
-    const UploadDocument = () => {
-        if (PANcard == null) return setError('Please Choose Pancard ');
-        if (aadharcard == null) return setError('Please Choose AadharCard ');
-        const panRef = ref(storage, `document/pan/${PANcard.name + v4()}`)
-        const aadharRef = ref(storage, `document/aadhar/${aadharcard.name + v4()}`)
-        console.log(panRef.fullPath);
-        setPANcardUrl(panRef.fullPath)
-        console.log(aadharRef.fullPath);
-        setAadharcardUrl(aadharRef.fullPath)
+    // const UploadDocument = () => {
+    //     if (PANcard == null) return setError('Please Choose Pancard ');
+    //     if (aadharcard == null) return setError('Please Choose AadharCard ');
+    //     const panRef = ref(storage, `document/pan/${PANcard.name + v4()}`)
+    //     const aadharRef = ref(storage, `document/aadhar/${aadharcard.name + v4()}`)
+    //     console.log(panRef.fullPath);
+    //     setPANcardUrl(panRef.fullPath)
+    //     console.log(aadharRef.fullPath);
+    //     setAadharcardUrl(aadharRef.fullPath)
 
-        uploadBytes(panRef, PANcard).then(() => {
-            console.log('pan card uploaded');
-        })
+    //     uploadBytes(panRef, PANcard).then(() => {
+    //         console.log('pan card uploaded');
+    //     })
 
-        uploadBytes(aadharRef, aadharcard).then(() => {
-            console.log('aadhar card uploaded');
-            alert('Pancard and AadharCard uploaded', panRef, aadharRef)
-        })
-    }
+    //     uploadBytes(aadharRef, aadharcard).then(() => {
+    //         console.log('aadhar card uploaded');
+    //         alert('Pancard and AadharCard uploaded', panRef, aadharRef)
+    //     })
+    // }
 
     return (
         <>
             <CRow className='mb-2 ms-2'>
-                <CCard color={step == 1 ? 'primary' : 'success'} style={{ padding: '10px', color: '#ffffff', width: '100px', margin: '3px', cursor: 'pointer' }}
+                <CCard color={step == 1 ? 'primary' : 'success'} 
+                style={{ padding: '10px', color: '#ffffff', width: '100px', margin: '3px', cursor: 'pointer' }}
                     onClick={() => setStep(1)}
                 >
                     Step-1
                 </CCard>
-                <CCard color={step == 2 ? 'primary' : 'success'} style={{ padding: '10px', color: '#ffffff', width: '100px', margin: '3px', cursor: 'pointer' }}
+
+                {/* <CCard color={step == 2 ? 'primary' : 'success'} style={{ padding: '10px', color: '#ffffff', width: '100px', margin: '3px', cursor: 'pointer' }}
                     onClick={() => setStep(2)}
                 >
                     Step-2
-                </CCard>
+                </CCard> */}
             </CRow>
             {step === 1 &&
                 <CCard>
@@ -301,6 +308,7 @@ const Recruitment = () => {
                                     />
                                 </CCol>
                             </CRow>
+
                             <CCol>
                                 <CFormTextarea
                                     id="exampleFormControlTextarea1"
@@ -334,6 +342,7 @@ const Recruitment = () => {
                                         placeholder="Enter City"
                                     />
                                 </CCol>
+                                
                             </CRow>
                             <CRow>
                                 <CCol lg={6} md={6} sm={12}>
@@ -360,8 +369,114 @@ const Recruitment = () => {
                                     />
                                 </CCol>
                             </CRow>
+
                             <CRow>
                                 <CCol lg={6} md={6} sm={12}>
+                                    <CFormSelect
+                                                className="mb-1"
+                                                aria-label="Select Assign Staff"
+                                                value={Source}
+                                                onChange={(e) => setSource(e.target.value)}
+                                                label="Source"
+                                            >
+                                                <option>Select Source</option>
+                                                {leadArr.filter((list) => list.username === username).map((item, index) => (
+                                                    item.username === username && (
+                                                        <option key={index}>{item.LeadSource}</option>
+                                                    )
+                                    ))}</CFormSelect>
+                                </CCol>
+                                <CCol lg={6} md={6} sm={12}>
+
+                                   <CFormSelect
+                                                className="mb-1"
+                                                aria-label="Select Job Department"
+                                                value={Department}
+                                                onChange={(e) => setDepartment(e.target.value)}
+                                                label="Department"
+                                            >
+                                                {result.map((item, index) => (
+                                                    item.username === username && (
+                                                        item.status === true && (
+                                                            <option key={index} value={item.department}>{item.department}</option>
+                                                        )
+                                                    )
+                                                ))}
+                                    </CFormSelect>
+                               </CCol>
+   
+                            </CRow>
+                            <CRow>
+
+                            <CCol lg={6} md={6} sm={12}>
+
+                                    <CFormSelect
+                                                className="mb-1"
+                                                aria-label="Select Job Designation"
+                                                value={Designation}
+                                                onChange={(e) => setDesignation(e.target.value)}
+                                                label="Job Designation"
+                                            >
+                                                {result.map((item, index) => (
+                                                    item.username === username && (
+                                                        item.status === true && (
+                                                            <option key={index} value={item.jobDesignation}>{item.jobDesignation}</option>
+                                                        )
+                                                    )
+                                                ))}
+                                            </CFormSelect>
+                            </CCol>
+           
+                        
+                                <CCol lg={6} md={6} sm={12}>                                   
+                                    <CFormInput
+                                                className="mb-1"
+                                                type="number"
+                                                value={Salary}
+                                                onChange={(e) => setSalary(e.target.value)}
+                                                id="exampleFormControlInput1"
+                                                label="Salary"
+                                                placeholder="Enter Salary"
+                                            />
+                                </CCol>
+                    
+                            </CRow>
+
+                            <CRow>
+                            <CCol lg={6} md={6} sm={12}>
+                                  <CFormSelect
+                                                className="mb-1"
+                                                aria-label="Select Grade"
+                                                value={grade}
+                                                onChange={(e) => setgrade(e.target.value)}
+                                                label="Grade"
+                                                options={[
+                                                    "Select Grade",
+                                                    { label: "A", value: "A" },
+                                                    { label: "B", value: "B" },
+                                                    { label: "C", value: "C" },
+                                                    { label: "D", value: "D" },
+                                                ]}
+                                            />
+                                </CCol>
+
+                               <CCol lg={6} md={6} sm={12}>
+                                     <CFormInput
+                                                className="mb-1"
+                                                value={comment}
+                                                onChange={(e) => setComment(e.target.value)}
+                                                type="text"
+                                                id="exampleFormControlInput1"
+                                                label="Comments"
+                                                placeholder="Add Comments"
+                                            />
+                                </CCol>
+                                
+                              
+                            </CRow>
+
+                            <CRow>
+                            <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
                                         className="mb-1"
                                         type="file"
@@ -376,16 +491,17 @@ const Recruitment = () => {
                                 </CCol>
                             </CRow>
                             <CButton className="mt-2" onClick={() => {
-                                step2()
-                            }}>Next</CButton>
+                                saveRecruitment()
+                            }}>Save</CButton>
+                           
                         </CForm>
                     </CCardBody>
                 </CCard>
             }
-            {step === 2 &&
+            {/* {step === 2 &&
                 <CCard>
                     <CCardHeader>
-                        <CCardTitle>Recruitment Application</CCardTitle>
+                        <CCardTitle>Employee Application</CCardTitle>
                     </CCardHeader>
                     <CCardBody>
                         <CForm>
@@ -646,7 +762,7 @@ const Recruitment = () => {
                         </CForm>
                     </CCardBody>
                 </CCard>
-            }
+            } */}
         </>
     )
 }
