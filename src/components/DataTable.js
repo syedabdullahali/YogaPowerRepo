@@ -19,7 +19,7 @@ const DataTable = ({ heading, data }) => {
             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                 <CTableRow >
                     {heading.map((item, index) => (
-                        <CTableHeaderCell key={index}>{item.heading}</CTableHeaderCell>
+                        <CTableHeaderCell style={{minWidth:'100px'}} key={index}>{item.heading}</CTableHeaderCell>
                     ))}
                 </CTableRow>
             </CTableHead>

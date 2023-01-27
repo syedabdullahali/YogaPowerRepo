@@ -231,15 +231,16 @@ const JobProfile = () => {
                                             
                                             <CTableDataCell>{item.Gander}</CTableDataCell>
                                             <CTableDataCell>{centerCode}E{index + 1 + (paging * 10)}</CTableDataCell>
-                                            <CTableDataCell>{item.JobDesignation}</CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel:${item.ContactNumber}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.EmailAddress}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a></CTableDataCell>
                                             
                                             <CTableDataCell className='text-center'>
+                                             <MdEdit style={{ cursor: 'pointer', markerStart: '10px', 
+                                                marginLeft: "5px" }} onClick={() =>
+                                                 deleteEnquiry(item._id)} size='20px' />
                                                 <MdDelete style={{ cursor: 'pointer', markerStart: '10px', 
                                                 marginLeft: "5px" }} onClick={() =>
                                                  deleteEnquiry(item._id)} size='20px' />
-                                                 <MdEdit style={{ cursor: 'pointer', markerStart: '10px', 
-                                                marginLeft: "5px" }} onClick={() =>
-                                                 deleteEnquiry(item._id)} size='20px' />
+                                                
                                                  </CTableDataCell>
                                         </CTableRow>
                                     )

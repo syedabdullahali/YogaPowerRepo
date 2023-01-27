@@ -15,6 +15,8 @@ import CIcon from '@coreui/icons-react'
 import { cilArrowCircleTop, cilFile } from '@coreui/icons'
 import { FaBeer } from 'react-icons/fa';
 import DataTable from 'src/components/DataTable'
+import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md';
+
 
 
 const EmpOfDocuments = () => {
@@ -33,11 +35,12 @@ const EmpOfDocuments = () => {
         { heading: 'Sources', value: 'variation_name' },
         { heading: 'Department', value: 'expiry_date' },
         { heading: 'Desgantion', btn: 'renew' },
-        { heading: 'Doc Type', iconBtn: cilFile },
+        { heading: 'Doc Type', value: cilFile },
         { heading: 'Doc Name', btn: 'renew' },
         { heading: 'Document', iconBtn: cilFile },
         { heading: 'Action', com: (<> <FaBeer size='20px' /></>) },
         { heading:'Edit/Delete',value:''}
+    
     ]
 
     const Users = [

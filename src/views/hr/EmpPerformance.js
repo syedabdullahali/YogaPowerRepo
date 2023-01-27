@@ -245,20 +245,193 @@ const EmpPerformance = () => {
                                             <CTableDataCell>{centerCode}E{index + 1 + (paging * 10)}</CTableDataCell>
                                             <CTableDataCell>{item.address}</CTableDataCell>
                                             <CTableDataCell>{item.Department}</CTableDataCell>
-                                            <CTableDataCell>{item.JobDesignation}</CTableDataCell>
+                                            
+                                        </CTableRow>
+                                    )
+                                ))}
+                            </CTableBody>
+                        </CTable>
+                    </CCardBody>
+                    <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
+                        <CCardTitle className="mt-2">Trainer Performance</CCardTitle>
+                    </CCardHeader>
+                    <CCardBody>
+                        <CRow className='d-flex mb-2'>
+                            <CCol lg={6} sm={12} className='mb-2'>
+                                <CButtonGroup role="group" aria-label="Basic example">
+                                    <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Total Employee: {staff.filter((list) => list.username === username).length}</CButton>
+                                    <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Active Employee: {staff.filter((list) => list.username === username && list.status === true).length}</CButton>
+                                    <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Left Employee: {staff.filter((list) => list.username === username && list.status === false).length}</CButton>
+                                </CButtonGroup>
+                            </CCol>
+                            <CCol lg={3}></CCol>
+                            <CCol lg={3} sm={12}>
+                                <CButtonGroup className='float-end'>
+                                    <CButton color="primary">
+                                        <CIcon icon={cilArrowCircleBottom} />
+                                        {' '}Import
+                                    </CButton>
+                                    <CButton color="primary">
+                                        <CIcon icon={cilArrowCircleTop} />
+                                        {' '}Export
+                                    </CButton>
+                                </CButtonGroup>
+                            </CCol>
+                        </CRow>
+                        <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
+                            <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
+                                <CTableRow >
+                                    <CTableHeaderCell>Sr No</CTableHeaderCell>
+                                    <CTableHeaderCell>Name</CTableHeaderCell>
+                                    <CTableHeaderCell>Trainer Id</CTableHeaderCell>
+                                    <CTableHeaderCell>Department</CTableHeaderCell>
+                                    <CTableHeaderCell>Designation</CTableHeaderCell>
+                                    <CTableHeaderCell>Punctuality</CTableHeaderCell>
+                                    <CTableHeaderCell>Attendance %</CTableHeaderCell>
+                                    <CTableHeaderCell>Renewals %</CTableHeaderCell>
+
+                                    <CTableHeaderCell>Training feedBACK</CTableHeaderCell>
+                                    <CTableHeaderCell>Behaviour</CTableHeaderCell>
+                                    <CTableHeaderCell>Overall feedback</CTableHeaderCell>
+
+                                </CTableRow>
+                            </CTableHead>
+                            <CTableBody>
+                                <CTableRow>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            style={{ minWidth: "60px" }}
+                                            type="text"
+                                            disabled
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            style={{ minWidth: "90px" }}
+                                            value={Search1}
+                                            onChange={(e) => setSearch1(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            style={{ minWidth: "120px" }}
+                                            type="text"
+                                            disabled
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="number"
+                                            style={{ minWidth: "100px" }}
+                                            value={Search10}
+
+                                            onChange={(e) => setSearch10(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            style={{ minWidth: "120px" }}
+                                            disabled
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                   
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            style={{ minWidth: "120px" }}
+                                            value={Search2}
+                                            onChange={(e) => setSearch2(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            value={Search3}
+                                            disabled
+                                            onChange={(e) => setSearch3(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            value={Search3}
+                                            disabled
+                                            onChange={(e) => setSearch3(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            value={Search3}
+                                            disabled
+                                            onChange={(e) => setSearch3(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            value={Search3}
+                                            disabled
+                                            onChange={(e) => setSearch3(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            value={Search3}
+                                            disabled
+                                            onChange={(e) => setSearch3(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                  
+                                    
+                                   
+                                   
+                                </CTableRow>
+                                {staff.slice(paging * 10, paging * 10 + 10).filter((list) =>
+                                    list.username === username && list.selected === 'Select' && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
+                                    && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
+                                    && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
+                                    && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
+                                ).map((item, index) => (
+                                    item.username === username && (
+                                        <CTableRow key={index}>
+                                            <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
+                                            <CTableDataCell>{item.FullName}</CTableDataCell>
+                                            <CTableDataCell>{item.ContactNumber}</CTableDataCell>
+                                            <CTableDataCell>{item.EmailAddress}</CTableDataCell>
+                                            <CTableDataCell>{moment(item.DateofBirth).format("MM-DD-YYYY")}</CTableDataCell>
+                                            <CTableDataCell>{item.Gander}</CTableDataCell>
+                                            <CTableDataCell>{centerCode}E{index + 1 + (paging * 10)}</CTableDataCell>
+                                            <CTableDataCell>{item.address}</CTableDataCell>
+                                            <CTableDataCell>{item.Department}</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell>{item.status ? <><CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton></> : <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>}</CTableDataCell>
-                                            <CTableDataCell><CButton>View</CButton></CTableDataCell>
-                                         
-                                            <CTableDataCell className='text-center'>
-                                                <MdDelete style={{ cursor: 'pointer', markerStart: '10px', 
-                                                marginLeft: "5px" }} onClick={() =>
-                                                 deleteEnquiry(item._id)} size='20px' />
-                                                 <MdEdit style={{ cursor: 'pointer', markerStart: '10px', 
-                                                marginLeft: "5px" }} onClick={() =>
-                                                 deleteEnquiry(item._id)} size='20px' />
-                                                 </CTableDataCell>
+                                            
                                         </CTableRow>
                                     )
                                 ))}

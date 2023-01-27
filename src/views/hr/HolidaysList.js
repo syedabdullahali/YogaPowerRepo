@@ -136,8 +136,8 @@ const HolidaysList = () => {
                                 <CTableRow >
                                     <CTableHeaderCell>Sno.</CTableHeaderCell>
                                     <CTableHeaderCell>Date</CTableHeaderCell>
-                                    <CTableHeaderCell>Enter Holiday</CTableHeaderCell>
-                                    <CTableHeaderCell>Status</CTableHeaderCell>
+                                    <CTableHeaderCell>Holiday Name</CTableHeaderCell>
+                                    <CTableHeaderCell>No of Holiday</CTableHeaderCell>
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
@@ -147,7 +147,11 @@ const HolidaysList = () => {
                                             <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
                                             <CTableDataCell>{moment(item.Date).format("MM-DD-YYYY")}</CTableDataCell>
                                             <CTableDataCell>{item.Holiday}</CTableDataCell>
-                                            <CTableDataCell className="text-center"><CFormSwitch size="xl" style={{ cursor: 'pointer' }} id={item._id} value={item.Status} checked={item.Status} onChange={() => updateStatus(item._id, !item.Status)} /></CTableDataCell>
+                                            <CTableDataCell className="text-center">
+                                                {/* <CFormSwitch size="xl" style={{ cursor: 'pointer' }} 
+                                                id={item._id} value={item.Status} checked={item.Status} 
+                                                onChange={() => updateStatus(item._id, !item.Status)} /> */}
+                                                </CTableDataCell>
                                         </CTableRow>
                                     )
                                 ))}

@@ -42,7 +42,14 @@ const EMPPayrolSetup = () => {
         { heading: 'Late Mark', btn: '0' },
         { heading: 'Leave', iconBtn:'' },
         { heading: 'TWD',value:''},
-        { heading:'TPD',value:''}
+        { heading:'TPD',value:''},
+        { heading:'Basic Salary',value:''},
+        { heading:'Incentive',value:''},
+        { heading:'Gross Salary',value:''},
+        { heading:'PT',value:''},
+        { heading:'Adev Dec',value:''},
+        { heading:'Net Salary Remark',value:''},
+        { heading:'Remark',value:''}
     ]
 
     const Users = [

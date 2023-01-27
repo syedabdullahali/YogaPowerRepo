@@ -151,7 +151,7 @@ const SalarySheet = () => {
                                     <CTableHeaderCell>Emp Id</CTableHeaderCell>
                                     <CTableHeaderCell>Basic Slarry</CTableHeaderCell>
                                     <CTableHeaderCell>Incentive</CTableHeaderCell>
-                                    <CTableHeaderCell>Not Salary</CTableHeaderCell>
+                                    <CTableHeaderCell>Net Salary</CTableHeaderCell>
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>

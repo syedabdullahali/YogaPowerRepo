@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
+import CIcon from '@coreui/icons-react'
 import {
     CButton,
     CButtonGroup,
@@ -9,296 +10,320 @@ import {
     CCol,
     CFormInput,
     CFormSelect,
+    CFormSwitch,
     CInputGroup,
     CInputGroupText,
-    CPagination,
-    CPaginationItem,
+    CNav,
+    CNavItem,
+    CNavLink,
     CRow,
+    CTabContent,
     CTable,
     CTableBody,
     CTableDataCell,
     CTableHead,
     CTableHeaderCell,
     CTableRow,
+    CTabPane,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilArrowCircleBottom, cilArrowCircleTop, cilInfo } from '@coreui/icons'
-import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md';
-import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs';
-import axios from 'axios';
-import moment from 'moment';
-const url = 'https://yog-seven.vercel.app'
-const url2 = 'https://yog-seven.vercel.app'
-
-
-const AllRightHr = () => {
-
-    const [Search1, setSearch1] = useState('')
-    const [Search2, setSearch2] = useState('')
-    const [Search3, setSearch3] = useState('')
-    const [Search4, setSearch4] = useState('')
-    const [Search5, setSearch5] = useState('')
-    const [Search6, setSearch6] = useState('')
-    const [Search7, setSearch7] = useState('')
-    const [Search8, setSearch8] = useState('')
-    const [Search9, setSearch9] = useState('')
-    const [Search10, setSearch10] = useState('')
-
-
-    let user = JSON.parse(localStorage.getItem('user-info'))
-    console.log(user);
-    const token = user.token;
-    const username = user.user.username;
-    const centerCode = user.user.centerCode;
-    const [result1, setResult1] = useState([]);
-    const [paging, setPaging] = useState(0);
-    console.log(token);
-    useEffect(() => {
-        getStaff()
-    }, [])
-
-    const [staff, setStaff] = useState([])
-    function getStaff() {
-        axios.get(`${url}/employeeForm/all`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                setStaff(res.data.reverse())
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
-    console.log(staff);
-
-    function deleteEnquiry(id) {
-
-        if (confirm('Do you want to delete this')) {
-            fetch(`${url}/employeeForm/delete/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-            }).then((result) => {
-                result.json().then((resp) => {
-                    console.warn(resp)
-                    getStaff()
-                })
-            })
-        }
-    }
-
-    function updateRec(id, status) {
-        const data1 = { status: status }
-        fetch(`${url}/employeeForm/update/${id}`, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data1)
-        }).then((resp) => {
-            resp.json().then(() => {
-                getStaff()
-            })
-        })
-    }
+import React, { useState } from 'react'
+const AllRight = () => {
+    const [activeKey, setActiveKey] = useState(1)
 
     return (
         <CRow>
-            <CCol lg={12} sm={12}>
-                <CCard className="mb-3 border-success">
-                    <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                        <CCardTitle className="mt-2">All Classes Report</CCardTitle>
+            <CCol xs={12}>
+                <CCard>
+                    <CCardHeader>
+                        <CNav variant="pills" role="tablist">
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 1}
+                                    onClick={() => setActiveKey(1)}
+                                >
+                                    Dashboard
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 2}
+                                    onClick={() => setActiveKey(2)}
+                                >
+
+                                    Lead
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 3}
+                                    onClick={() => setActiveKey(3)}
+                                >
+                                    Clients
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 4}
+                                    onClick={() => setActiveKey(4)}
+                                >
+                                    Marketing & Communication
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 5}
+                                    onClick={() => setActiveKey(5)}
+                                >
+                                    Inventory
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 6}
+                                    onClick={() => setActiveKey(6)}
+                                >
+                                    Finance
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 7}
+                                    onClick={() => setActiveKey(7)}
+                                >
+                                    HR
+                                </CNavLink>
+                            </CNavItem>
+
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 8}
+                                    onClick={() => setActiveKey(8)}
+                                >
+                                    Fitness
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 9}
+                                    onClick={() => setActiveKey(9)}
+                                >
+                                    Export
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 10}
+                                    onClick={() => setActiveKey(10)}
+                                >
+                                    Master
+                                </CNavLink>
+                            </CNavItem>
+                        </CNav>
                     </CCardHeader>
                     <CCardBody>
-                        <CRow className='d-flex mb-2'>
-                            <CCol lg={6} sm={12} className='mb-2'>
-                                <CButtonGroup role="group" aria-label="Basic example">
-                                    <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Total Employee: {staff.filter((list) => list.username === username).length}</CButton>
-                                    <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Active Employee: {staff.filter((list) => list.username === username && list.status === true).length}</CButton>
-                                    <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Left Employee: {staff.filter((list) => list.username === username && list.status === false).length}</CButton>
-                                </CButtonGroup>
-                            </CCol>
-                            <CCol lg={3}></CCol>
-                            <CCol lg={3} sm={12}>
-                                <CButtonGroup className='float-end'>
-                                    <CButton color="primary">
-                                        <CIcon icon={cilArrowCircleBottom} />
-                                        {' '}Import
-                                    </CButton>
-                                    <CButton color="primary">
-                                        <CIcon icon={cilArrowCircleTop} />
-                                        {' '}Export
-                                    </CButton>
-                                </CButtonGroup>
-                            </CCol>
-                        </CRow>
-                        <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
-                            <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
-                                <CTableRow >
-                                    <CTableHeaderCell></CTableHeaderCell>
-                                    <CTableHeaderCell></CTableHeaderCell>
-                                    <CTableHeaderCell></CTableHeaderCell>
-                                    <CTableHeaderCell></CTableHeaderCell>
-                                    <CTableHeaderCell></CTableHeaderCell>
-                                    <CTableHeaderCell></CTableHeaderCell>
-                                    <CTableHeaderCell></CTableHeaderCell>
-                                </CTableRow>
-                            </CTableHead>
-                            <CTableBody>
-                                <CTableRow>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            style={{ minWidth: "60px" }}
-                                            type="text"
-                                            disabled
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            type="text"
-                                            style={{ minWidth: "90px" }}
-                                            value={Search1}
-                                            onChange={(e) => setSearch1(e.target.value)}
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            style={{ minWidth: "120px" }}
-                                            type="text"
-                                            disabled
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            type="number"
-                                            style={{ minWidth: "100px" }}
-                                            value={Search10}
-
-                                            onChange={(e) => setSearch10(e.target.value)}
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            type="text"
-                                            style={{ minWidth: "120px" }}
-                                            disabled
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            type="text"
-                                            style={{ minWidth: "120px" }}
-                                            value={Search2}
-                                            onChange={(e) => setSearch2(e.target.value)}
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            type="text"
-                                            value={Search3}
-                                            disabled
-                                            onChange={(e) => setSearch3(e.target.value)}
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
-                                  
-                                    
-                                   
-                                   
-                                </CTableRow>
-                                {staff.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                                    list.username === username && list.selected === 'Select' && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                                    && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
-                                    && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
-                                    && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
-                                ).map((item, index) => (
-                                    item.username === username && (
-                                        <CTableRow key={index}>
-                                            <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
-                                            <CTableDataCell>{item.FullName}</CTableDataCell>
-                                            <CTableDataCell>{item.ContactNumber}</CTableDataCell>
-                                            <CTableDataCell>{item.EmailAddress}</CTableDataCell>
-                                            <CTableDataCell>{moment(item.DateofBirth).format("MM-DD-YYYY")}</CTableDataCell>
-                                            <CTableDataCell>{item.Gander}</CTableDataCell>
-                                            <CTableDataCell>{centerCode}E{index + 1 + (paging * 10)}</CTableDataCell>
-                                            <CTableDataCell>{item.address}</CTableDataCell>
-                                            <CTableDataCell>{item.Department}</CTableDataCell>
-                                            <CTableDataCell>{item.JobDesignation}</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell>{item.status ? <><CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton></> : <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>}</CTableDataCell>
-                                            <CTableDataCell><CButton>View</CButton></CTableDataCell>
-                                         
-                                            <CTableDataCell className='text-center'>
-                                                <MdDelete style={{ cursor: 'pointer', markerStart: '10px', 
-                                                marginLeft: "5px" }} onClick={() =>
-                                                 deleteEnquiry(item._id)} size='20px' />
-                                                 <MdEdit style={{ cursor: 'pointer', markerStart: '10px', 
-                                                marginLeft: "5px" }} onClick={() =>
-                                                 deleteEnquiry(item._id)} size='20px' />
-                                                 </CTableDataCell>
+                        <CTabContent>
+                            <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 1}>
+                                <CRow>
+                                    <CCol>
+                                        <CCardTitle>Dashboard</CCardTitle>
+                                        <CFormSwitch size="xl" label="Search" />
+                                        <CFormSwitch size="xl" label="Universal Search" />
+                                        <CFormSwitch size="xl" label="Summary" />
+                                        <CFormSwitch size="xl" label="Sales, Pending Payment and Payment Collected Display" />
+                                        <CFormSwitch size="xl" label="Payment mode summary" />
+                                        <CFormSwitch size="xl" label="Expense summary" />
+                                    </CCol>
+                                    <CCol>
+                                        <CCardTitle>Follow-ups</CCardTitle>
+                                        <CFormSwitch size="xl" label="View all follow-ups" />
+                                        <CFormSwitch size="xl" label="View only my follow-ups" />
+                                    </CCol>
+                                    <CCol>
+                                        <CCardTitle>Emplyoee  Dahsbord</CCardTitle>
+                                        <CFormSwitch size="xl" label="Sales Target" />
+                                        <CFormSwitch size="xl" label="PT Target" />
+                                    </CCol>
+                                </CRow>
+                            </CTabPane>
+                            <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 2}>
+                                <CRow>
+                                    <CCol>
+                                        <CFormSwitch size="xl" label="Add enquiry, manage enquiries, enquiry archive" />
+                                        <CFormSwitch size="xl" label="Convert Enquiry & Add member" />
+                                        <CFormSwitch size="xl" label="Delete enquiries" />
+                                        <CFormSwitch size="xl" label="Print all enquiries" />
+                                        <CFormSwitch size="xl" label="Daily sales (DSR)" />
+                                        <CFormSwitch size="xl" label="Revenue" />
+                                    </CCol>
+                                    <CCol>
+                                        <CFormSwitch size="xl" label="Expected Revenue" />
+                                        <CFormSwitch size="xl" label="Revenue vs target" />
+                                        <CFormSwitch size="xl" label="Revenue month till date" />
+                                        <CFormSwitch size="xl" label="Service sale, service type" />
+                                        <CFormSwitch size="xl" label="Upgrade and cross-sell (3 reports)" />
+                                        <CFormSwitch size="xl" label="Registration fee" />
+                                    </CCol>
+                                    <CCol>
+                                        <CFormSwitch size="xl" label="Not interested" />
+                                        <CFormSwitch size="xl" label="PT Sales Report" />
+                                        <CFormSwitch size="xl" label="Corporate sales" />
+                                    </CCol>
+                                </CRow>
+                            </CTabPane>
+                            <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 3}>
+                                <CRow>
+                                    <CCol>
+                                        <CFormSwitch size="xl" label="Add enquiry, manage enquiries, enquiry archive" />
+                                        <CFormSwitch size="xl" label="Convert Enquiry & Add member" />
+                                        <CFormSwitch size="xl" label="Delete enquiries" />
+                                        <CFormSwitch size="xl" label="Print all enquiries" />
+                                        <CFormSwitch size="xl" label="Daily sales (DSR)" />
+                                        <CFormSwitch size="xl" label="Revenue" />
+                                    </CCol>
+                                    <CCol>
+                                        <CFormSwitch size="xl" label="Expected Revenue" />
+                                        <CFormSwitch size="xl" label="Revenue vs target" />
+                                        <CFormSwitch size="xl" label="Revenue month till date" />
+                                        <CFormSwitch size="xl" label="Service sale, service type" />
+                                        <CFormSwitch size="xl" label="Upgrade and cross-sell (3 reports)" />
+                                        <CFormSwitch size="xl" label="Registration fee" />
+                                    </CCol>
+                                    <CCol>
+                                        <CFormSwitch size="xl" label="Not interested" />
+                                        <CFormSwitch size="xl" label="PT Sales Report" />
+                                        <CFormSwitch size="xl" label="Corporate sales" />
+                                    </CCol>
+                                </CRow>
+                            </CTabPane>
+                            <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 4}>
+                                <CRow className='mb-3'>
+                                    <CCol xs={2}>
+                                        <CInputGroup>
+                                            <CInputGroupText
+                                                component="label"
+                                                htmlFor="inputGroupSelect01"
+                                            >
+                                                Month
+                                            </CInputGroupText>
+                                            <CFormSelect id="inputGroupSelect01">
+                                                <option>Sep</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </CFormSelect>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol xs={2}>
+                                        <CInputGroup>
+                                            <CInputGroupText
+                                                component="label"
+                                                htmlFor="inputGroupSelect01"
+                                            >
+                                                Year
+                                            </CInputGroupText>
+                                            <CFormSelect id="inputGroupSelect01">
+                                                <option>2022</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </CFormSelect>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol>
+                                        <CInputGroup className="left">
+                                            <CFormInput
+                                                placeholder="Staff Name"
+                                                aria-label="Recipient's username"
+                                                aria-describedby="button-addon2"
+                                            />
+                                            <CButton type="button" color="primary" id="button-addon2">
+                                                Go
+                                            </CButton>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol>
+                                        <CButtonGroup>
+                                            <CButton color="primary">
+                                                <CIcon icon={cilArrowCircleBottom} />
+                                                Import
+                                            </CButton>
+                                            <CButton color="primary">
+                                                <CIcon icon={cilArrowCircleTop} />
+                                                Export
+                                            </CButton>
+                                        </CButtonGroup>
+                                    </CCol>
+                                </CRow>
+                                <CTable bordered borderColor="primary" responsive>
+                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                        <CTableRow>
+                                            <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Target</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Achieved/Collected
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Balance Collection
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">View</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
                                         </CTableRow>
-                                    )
-                                ))}
-                            </CTableBody>
-                        </CTable>
+                                    </CTableHead>
+                                    <CTableBody>
+                                        <CTableRow>
+                                            <CTableHeaderCell scope="row">1</CTableHeaderCell>
+                                            <CTableDataCell>Sejal</CTableDataCell>
+                                            <CTableDataCell>10000</CTableDataCell>
+                                            <CTableDataCell>10000</CTableDataCell>
+                                            <CTableDataCell>5000</CTableDataCell>
+                                            <CTableDataCell>2000</CTableDataCell>
+                                            <CTableDataCell>3000</CTableDataCell>
+                                            <CTableDataCell>View</CTableDataCell>
+                                            <CTableDataCell>100%</CTableDataCell>
+                                        </CTableRow>
+                                        <CTableRow>
+                                            <CTableHeaderCell scope="row">2</CTableHeaderCell>
+                                            <CTableDataCell>Sejal</CTableDataCell>
+                                            <CTableDataCell>10000</CTableDataCell>
+                                            <CTableDataCell>10000</CTableDataCell>
+                                            <CTableDataCell>5000</CTableDataCell>
+                                            <CTableDataCell>2000</CTableDataCell>
+                                            <CTableDataCell>3000</CTableDataCell>
+                                            <CTableDataCell>View</CTableDataCell>
+                                            <CTableDataCell>100%</CTableDataCell>
+                                        </CTableRow>
+                                        <CTableRow>
+                                            <CTableHeaderCell scope="row">3</CTableHeaderCell>
+                                            <CTableDataCell>Sejal</CTableDataCell>
+                                            <CTableDataCell>10000</CTableDataCell>
+                                            <CTableDataCell>10000</CTableDataCell>
+                                            <CTableDataCell>5000</CTableDataCell>
+                                            <CTableDataCell>2000</CTableDataCell>
+                                            <CTableDataCell>3000</CTableDataCell>
+                                            <CTableDataCell>View</CTableDataCell>
+                                            <CTableDataCell>100%</CTableDataCell>
+                                        </CTableRow>
+                                    </CTableBody>
+                                </CTable>
+                            </CTabPane>
+                        </CTabContent>
                     </CCardBody>
-                    <CPagination aria-label="Page navigation example" align="center" className='mt-2'>
-                        <CPaginationItem aria-label="Previous" disabled={paging != 0 ? false : true} onClick={() => paging > 0 && setPaging(paging - 1)}>
-                            <span aria-hidden="true">&laquo;</span>
-                        </CPaginationItem>
-                        <CPaginationItem active onClick={() => setPaging(0)}>{paging + 1}</CPaginationItem>
-                        {staff.filter((list) =>
-                            list.username === username && list.selected === 'Select' && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                            && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
-                            && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
-                            && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
-                        ).length > (paging + 1) * 10 && <CPaginationItem onClick={() => setPaging(paging + 1)} >{paging + 2}</CPaginationItem>}
-
-                        {staff.filter((list) =>
-                            list.username === username && list.selected === 'Select' && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                            && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
-                            && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
-                            && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
-                        ).length > (paging + 2) * 10 && <CPaginationItem onClick={() => setPaging(paging + 2)}>{paging + 3}</CPaginationItem>}
-                        {staff.filter((list) =>
-                            list.username === username && list.selected === 'Select' && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                            && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
-                            && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
-                            && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
-                        ).length > (paging + 1) * 10 ?
-                            <CPaginationItem aria-label="Next" onClick={() => setPaging(paging + 1)}>
-                                <span aria-hidden="true">&raquo;</span>
-                            </CPaginationItem>
-                            : <CPaginationItem disabled aria-label="Next" onClick={() => setPaging(paging + 1)}>
-                                <span aria-hidden="true">&raquo;</span>
-                            </CPaginationItem>
-                        }
-                    </CPagination>
                 </CCard>
             </CCol>
         </CRow>
     )
 }
-
-export default AllRightHr
+export default AllRight

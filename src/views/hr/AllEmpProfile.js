@@ -148,12 +148,12 @@ const AllEmpProfile = () => {
                                     <CTableHeaderCell>Email-ID</CTableHeaderCell>
                                     <CTableHeaderCell>Date Of Birth</CTableHeaderCell>
                                     <CTableHeaderCell>Gender</CTableHeaderCell>
-                                    <CTableHeaderCell>Emp Id</CTableHeaderCell>
+                                    <CTableHeaderCell style={{minWidth:'150px'}}>Emp Id</CTableHeaderCell>
                                     <CTableHeaderCell>Attendance Id</CTableHeaderCell>
                                     <CTableHeaderCell>Department</CTableHeaderCell>
                                     <CTableHeaderCell>Designation</CTableHeaderCell>
                                     <CTableHeaderCell>Emp Right</CTableHeaderCell>
-                                    <CTableHeaderCell>Emp Target</CTableHeaderCell>
+                                    <CTableHeaderCell style={{minWidth:'150px'}}>Emp Target</CTableHeaderCell>
                                     <CTableHeaderCell>Status</CTableHeaderCell>
                                     <CTableHeaderCell>Action</CTableHeaderCell>
                                     <CTableHeaderCell>Edit</CTableHeaderCell>
@@ -333,15 +333,16 @@ const AllEmpProfile = () => {
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell>{item.status ? <><CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton></> : <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>}</CTableDataCell>
-                                            <CTableDataCell><CButton>View</CButton></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel:${item.ContactNumber}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.EmailAddress}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a></CTableDataCell>
                                          
                                             <CTableDataCell className='text-center'>
+                                             <MdEdit style={{ cursor: 'pointer', markerStart: '10px', 
+                                                marginLeft: "5px" }} onClick={() =>
+                                                 deleteEnquiry(item._id)} size='20px' />
                                                 <MdDelete style={{ cursor: 'pointer', markerStart: '10px', 
                                                 marginLeft: "5px" }} onClick={() =>
                                                  deleteEnquiry(item._id)} size='20px' />
-                                                 <MdEdit style={{ cursor: 'pointer', markerStart: '10px', 
-                                                marginLeft: "5px" }} onClick={() =>
-                                                 deleteEnquiry(item._id)} size='20px' />
+                                                
                                                  </CTableDataCell>
                                         </CTableRow>
                                     )
