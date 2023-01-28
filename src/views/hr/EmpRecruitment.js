@@ -102,7 +102,6 @@ const EmpRecruitment = () => {
         setEmpRecrumentForm((value)=>[!value[0]])
     }
 
-    console.log(showEmpRecrument)
 
     function updateRec(id, status) {
         const data1 = { selected: status }
