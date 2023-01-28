@@ -27,7 +27,7 @@ const CashReport = () => {
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">Revenue Details</strong>
+                        <strong className="mt-2">Cash Report</strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-center mb-2'>

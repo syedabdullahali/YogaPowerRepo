@@ -121,7 +121,7 @@ const TotalInvoice = () => {
                                 <CTableRow>
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Date</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Counter Name</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Center Name</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">
                                         Client Id
                                     </CTableHeaderCell>

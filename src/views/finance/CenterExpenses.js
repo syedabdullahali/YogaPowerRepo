@@ -1,4 +1,3 @@
-
 import React from 'react'
 import {
     CButton,
@@ -22,13 +21,13 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop, cilPlus } from '@coreui/icons'
 
-const NewClientRevenue = props => {
-  return (
-    <CRow>
-        <CCol lg={12} sm={12}>
+const CenterExpenses = () => {
+    return (
+        <CRow>
+            <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">Revenue Details</strong>
+                        <strong className="mt-2">CenterExpense</strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-center mb-2'>
@@ -119,44 +118,79 @@ const NewClientRevenue = props => {
                         </CRow>
                         <CTable bordered style={{ borderColor: "#106103" }} responsive>
                             <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
-                            <CTableRow>
-                                <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Month</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Type of Service</CTableHeaderCell>
+                                <CTableRow>
+                                    <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Details of Expense</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Budgeting</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">
-                                        No of Leads
+                                        Jan Expense
                                     </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">No of clients</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
-                            </CTableRow>
+                                    <CTableHeaderCell scope="col">Feb Expense</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">March Expense</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">April Expense</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">May Expense</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">June Expense</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">July Expense</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">August Expense</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">
+                                        September Expense
+                                    </CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Oct Expense</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Nov Expense</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Dec Expense</CTableHeaderCell>
+                                </CTableRow>
                             </CTableHead>
                             <CTableBody>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                             </CTableBody>
                         </CTable>
@@ -164,12 +198,7 @@ const NewClientRevenue = props => {
                 </CCard>
             </CCol>
         </CRow>
-  )
+    )
 }
 
-
-
-export default NewClientRevenue
-
-
-
+export default CenterExpenses;

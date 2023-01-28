@@ -135,7 +135,6 @@ const DSRreport = () => {
                             <div className="table_header-6">Incremental Revenue</div>
                             <div className="table_header-7"></div>
                             <div className="table_header-8">Collection</div>
-
                             <div className="table_header2-1">Existing Leads</div>
                             <div className="table_header2-2">Added Today</div>
                             <div className="table_header2-3">Referral generated</div>
@@ -158,24 +157,18 @@ const DSRreport = () => {
 
                             <div className="table_header">Date</div>
                             <div className="table_header">Day</div>
-
                             <div className="table_header">Count</div>
                             <div className="table_header">Count</div>
                             <div className="table_header">Count</div>
                             <div className="table_header">Count</div>
-
                             <div className="table_header">Value</div>
                             <div className="table_header">Count</div>
-
                             <div className="table_header">Value</div>
                             <div className="table_header">Count</div>
-
                             <div className="table_header">Value</div>
                             <div className="table_header">Count</div>
-
                             <div className="table_header">Count</div>
                             <div className="table_header">Value</div>
-
                             <div className="table_header">Count</div>
                             <div className="table_header">Revenue</div>
                             <div className="table_header">Count</div>
@@ -191,6 +184,38 @@ const DSRreport = () => {
                             <div className="table_header">Value</div>
                             <div className="table_header">Revenue</div>
                             <div className="table_header">Revenue</div>
+
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+                             <div id="table_row"></div>
+
+
                          </div>
                     </div>
                     </CCardBody>

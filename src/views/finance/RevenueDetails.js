@@ -120,53 +120,53 @@ const RevenueDetails = () => {
                             <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
                                 <CTableRow>
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Target</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">year</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Month</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">
-                                        Achieved/Collected
+                                        Total Invoice Amount
                                     </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">
+                                    <CTableHeaderCell scope="col">Total Collection Amount</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Total Balance Amount</CTableHeaderCell>
+                                    {/* <CTableHeaderCell scope="col">
                                         Balance Collection
                                     </CTableHeaderCell>
                                     <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Achived %</CTableHeaderCell> */}
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    {/* <CTableDataCell>3000</CTableDataCell>
                                     <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell>100%</CTableDataCell> */}
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    {/* <CTableDataCell>3000</CTableDataCell>
                                     <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell>100%</CTableDataCell> */}
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    {/* <CTableDataCell>3000</CTableDataCell>
                                     <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell>100%</CTableDataCell> */}
                                 </CTableRow>
                             </CTableBody>
                         </CTable>

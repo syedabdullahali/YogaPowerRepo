@@ -1,4 +1,3 @@
-
 import React from 'react'
 import {
     CButton,
@@ -28,7 +27,7 @@ const LeadReport= props => {
         <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">Revenue Details</strong>
+                        <strong className="mt-2">Lead Report</strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-center mb-2'>
@@ -135,36 +134,36 @@ const LeadReport= props => {
                             <CTableBody>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
-                                    <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    {/* <CTableDataCell>View</CTableDataCell>
+                                    <CTableDataCell>100%</CTableDataCell> */}
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
-                                    <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    {/* <CTableDataCell>View</CTableDataCell>
+                                    <CTableDataCell>100%</CTableDataCell> */}
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
-                                    <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    {/* <CTableDataCell>View</CTableDataCell>
+                                    <CTableDataCell>100%</CTableDataCell> */}
                                 </CTableRow>
                             </CTableBody>
                         </CTable>
@@ -178,7 +177,6 @@ const LeadReport= props => {
 
 
 export default LeadReport
-
 
 
 

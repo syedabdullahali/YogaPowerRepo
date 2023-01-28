@@ -20,37 +20,56 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop, cilPlus } from '@coreui/icons'
+import { BsReceipt } from 'react-icons/bs'
 
-const Receipts = () => {
+const Receipt = () => {
     return (
         <CRow>
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">Cancelled Invoice</strong>
+                        <strong className="mt-2">Receipt</strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-center mb-2'>
-                            <CCol lg={5} className='mb-2'>
-                                <CInputGroup>
-                                    <CFormSelect
-                                        id="inputGroupSelect04"
-                                        aria-label="Example select with button addon"
+                            <CCol lg={3} sm={6} className='mb-2'>
+                                <CInputGroup
+                                    className='mb-2'
+                                >
+                                    <CInputGroupText
+                                        component="label"
+                                        htmlFor="inputGroupSelect01"
                                     >
-                                        <option>Name</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
+                                        From
+                                    </CInputGroupText>
                                     <CFormInput
+                                        type='date'
                                         placeholder="Search"
                                         aria-label="Recipient's username"
                                         aria-describedby="button-addon2"
                                     />
-                                    <CButton type="button" color="primary">
-                                        Search
-                                    </CButton>
                                 </CInputGroup>
+                            </CCol>
+                            <CCol lg={3} sm={6} className='mb-2'>
+                                <CInputGroup className='mb-2'>
+                                    <CInputGroupText
+                                        component="label"
+                                        htmlFor="inputGroupSelect01"
+                                    >
+                                        To
+                                    </CInputGroupText>
+                                    <CFormInput
+                                        type='date'
+                                        placeholder="Search"
+                                        aria-label="Recipient's username"
+                                        aria-describedby="button-addon2"
+                                    />
+                                </CInputGroup>
+                            </CCol>
+                            <CCol lg={5} className='mb-2'>
+                                <CButton type="button" color="primary">
+                                    Search
+                                </CButton>
                             </CCol>
                             <CCol></CCol>
                         </CRow>
@@ -71,7 +90,7 @@ const Receipts = () => {
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol lg={2} sm={6} className='mb-2'>
+                            <CCol lg={3} sm={6} className='mb-2'>
                                 <CInputGroup>
                                     <CFormSelect id="inputGroupSelect01">
                                         <option>Service Receipt</option>
@@ -81,7 +100,7 @@ const Receipts = () => {
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol lg={2} sm={6} className='mb-2'>
+                            <CCol lg={3} sm={6} className='mb-2'>
                                 <CInputGroup>
                                     <CFormSelect id="inputGroupSelect01">
                                         <option>Select Service</option>
@@ -91,7 +110,7 @@ const Receipts = () => {
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol lg={2} sm={6} className='mb-2' >
+                            <CCol lg={4} sm={6} className='mb-2' >
                                 <CButton color="primary" className='float-end '>
                                     <CIcon icon={cilPlus} />
                                     {' '}New Invoice
@@ -102,53 +121,60 @@ const Receipts = () => {
                             <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
                                 <CTableRow>
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Target</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Date</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Receipt No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">
-                                        Achieved/Collected
-                                    </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">
+                                        Invoice No                                    </CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Client Id</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Client Name</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Service</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Created By</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Paid Amount</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Pay Mode</CTableHeaderCell>
+                                    {/* <CTableHeaderCell scope="col">Renewls Revenue</CTableHeaderCell> */}
+                                    {/* <CTableHeaderCell scope="col">
                                         Balance Collection
                                     </CTableHeaderCell>
                                     <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Achived %</CTableHeaderCell> */}
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
-                                    <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
-                                    <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
-                                    <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                             </CTableBody>
                         </CTable>
@@ -159,4 +185,4 @@ const Receipts = () => {
     )
 }
 
-export default Receipts
+export default Receipt;

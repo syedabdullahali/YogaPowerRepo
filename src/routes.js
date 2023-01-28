@@ -63,6 +63,7 @@ const PaymentMode = React.lazy(() => import('./views/finance/PaymentMode.js'))
 const CashReport = React.lazy(() => import('./views/finance/CashReport'))
 const ChequeReport = React.lazy(() => import('./views/finance/ChequeReport'))
 const DailyExpense = React.lazy(() => import('./views/finance/DailyExpense'))
+const CenterExpenses = React.lazy(() => import('./views/finance/CenterExpenses'))
 const PettyCash = React.lazy(() => import('./views/finance/PettyCash'))
 const DSRreport = React.lazy(() => import('./views/finance/DSRreport'))
 const TargetvsAchievment = React.lazy(() => import('./views/finance/TargetvsAchievment.js'))
@@ -267,7 +268,7 @@ const routes = [
   { path: '/finance/balance-payment', name: 'Balance Payment', element: BalancePayment },
   { path: '/finance/receipt', name: 'Receipt', element: Receipts },
   { path: '/finance/cancel-invoice', name: 'cancel Invoice', element: CancelInvoices },
-  { path: '/finance/comment-written', name: 'cancel Invoice', element: CommentOfWritten },
+  { path: '/finance/comment-written', name: 'Comments Of written Off Invoice', element: CommentOfWritten },
   { path: '/finance/revenue-details', name: 'Revenue details', element: RevenueDetails },
   { path: '/finance/service-revenue', name: 'Services Revenue', element: ServiceRevenue },
   { path: '/finance/renew-revenue', name: 'Renew Revenue', element: RenewRevenue },
@@ -283,6 +284,7 @@ const routes = [
   { path: '/finance/petty-cash', name: 'Petty Cash', element: PettyCash},
   { path: '/finance/dsr-report', name: 'Petty Cash', element: DSRreport},
   { path: '/finance/targetvs-achievment', name: 'Target vs Achievment', element: TargetvsAchievment},  
+  { path: '/finance/center-expense', name: 'Center Expense', element: CenterExpenses },
 
   //HR
   { path: '/hr', name: 'HR Management', element: AllEmpProfile, exact: true },

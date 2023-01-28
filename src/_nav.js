@@ -453,9 +453,14 @@ const _nav = [
         },
       {
         component: CNavGroup,
-        name: 'Center Expenses',
+        name: 'Expense',
         to: '/inventory',
         items: [
+          {
+            component: CNavItem,
+            name: 'Center Expense',
+            to: '/finance/center-expense',
+          },
           {
             component: CNavItem,
             name: 'Daily Expense',

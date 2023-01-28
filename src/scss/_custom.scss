@@ -8,7 +8,7 @@
 .dsr_report_table{
     display: grid;
     grid-template-columns: repeat(29,1fr);
-    min-width: 5500px;
+    min-width: 550%;
     background-color: #106103;
     color:white;
     text-align: center;
@@ -16,7 +16,16 @@
 
 .dsr_report_table >div{
     padding: 10px;
+    border: 1px solid white;
 }
+
+#table_row{
+    padding: 10px;
+    border: 1px solid #106103;
+    background-color: white;
+}
+
+
 
 .table_header-1{
     grid-column:3/12 ;

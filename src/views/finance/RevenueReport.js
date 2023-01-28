@@ -27,7 +27,7 @@ const RevenueReport= () => {
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">Revenue Details</strong>
+                        <strong className="mt-2">Revenue Report</strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-center mb-2'>
@@ -131,6 +131,10 @@ const RevenueReport= () => {
                                     <CTableHeaderCell scope="col">June</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">July</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Aug</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Sep</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Oct</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Nov</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Dec</CTableHeaderCell>
                                     {/* <CTableHeaderCell scope="col">Renewls Revenue</CTableHeaderCell> */}
                                     {/* <CTableHeaderCell scope="col">
                                         Balance Collection
@@ -142,6 +146,10 @@ const RevenueReport= () => {
                             <CTableBody>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">1</CTableHeaderCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
@@ -163,9 +171,17 @@ const RevenueReport= () => {
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">3</CTableHeaderCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>

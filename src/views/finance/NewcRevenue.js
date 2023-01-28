@@ -27,7 +27,7 @@ const NewcRevenue = () => {
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">Revenue Details</strong>
+                        <strong className="mt-2">New Client Revenue</strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-center mb-2'>
@@ -138,36 +138,36 @@ const NewcRevenue = () => {
                             <CTableBody>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    {/* <CTableDataCell>3000</CTableDataCell>
                                     <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell>100%</CTableDataCell> */}
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    {/* <CTableDataCell>3000</CTableDataCell>
                                     <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell>100%</CTableDataCell> */}
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    {/* <CTableDataCell>3000</CTableDataCell>
                                     <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                    <CTableDataCell>100%</CTableDataCell> */}
                                 </CTableRow>
                             </CTableBody>
                         </CTable>

@@ -133,6 +133,11 @@ const CancelInvoice = () => {
                                     <CTableHeaderCell scope="col">End Date</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Created By</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Final Amount</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Paid</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Balance</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Mode</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Cancelled By</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Reason</CTableHeaderCell>
                                     {/* <CTableHeaderCell scope="col">Renewls Revenue</CTableHeaderCell> */}
                                     {/* <CTableHeaderCell scope="col">
                                         Balance Collection
@@ -144,6 +149,11 @@ const CancelInvoice = () => {
                             <CTableBody>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">1</CTableHeaderCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
@@ -169,9 +179,19 @@ const CancelInvoice = () => {
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                                 <CTableRow>
                                     <CTableHeaderCell scope="row">3</CTableHeaderCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
