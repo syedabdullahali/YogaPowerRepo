@@ -26,6 +26,7 @@ import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
 import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md';
 import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs';
 import ApplicationForm from '../forms/ApplicationForm';
+import EmployeeForm from '../forms/EmployeeForm';
 import axios from 'axios';
 import moment from 'moment';
 const url = 'https://yog-seven.vercel.app'
@@ -45,6 +46,7 @@ const EmpRecruitment = () => {
     const [Search9, setSearch9] = useState('')
     const [Search10, setSearch10] = useState('')
     const [showEditFrom,setEditFormValue] = useState([false,[]])
+    const [showEmpRecrument,setEmpRecrumentForm] =useState([false])
   
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
@@ -96,8 +98,11 @@ const EmpRecruitment = () => {
         setEditFormValue((value)=>[!value[0],userData])                   
     }
 
-   
-  
+    function showEmpRecrumentFormFun(){
+        setEmpRecrumentForm((value)=>[!value[0]])
+    }
+
+    console.log(showEmpRecrument)
 
     function updateRec(id, status) {
         const data1 = { selected: status }
@@ -122,6 +127,7 @@ const EmpRecruitment = () => {
         <CRow>
             <CCol lg={12} sm={12}>
                 {showEditFrom[0]&&<ApplicationForm  shouldEdit ={true} data={showEditFrom[1]} editEnquiry={editEnquiry} />}
+                { showEmpRecrument[0]&& <EmployeeForm shouldEdit ={true} showEmpRecrumentFormFun={showEmpRecrumentFormFun}/>}
                 <CCard className="mb-3 border-success">
                     <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
                         <CCardTitle className="mt-2">All Recruitment</CCardTitle>
@@ -369,7 +375,7 @@ const EmpRecruitment = () => {
                                             <CTableDataCell>{item.Salary}</CTableDataCell>
                                             
                                             <CTableDataCell>
-                                            <CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton>                                            
+                                            <CButton className='mt-1' color='success' onClick={()=>showEmpRecrumentFormFun()} >Accept</CButton>                                            
                                             <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>
                                              </CTableDataCell> 
                                             <CTableDataCell><CButton>View</CButton></CTableDataCell>

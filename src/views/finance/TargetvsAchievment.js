@@ -11,6 +11,7 @@ import {
     CInputGroup,
     CInputGroupText,
     CRow,
+    CContainer,
     CTable,
     CTableBody,
     CTableDataCell,
@@ -29,7 +30,7 @@ const TargetvsAchievment = () => {
                     <CCardHeader>
                         <strong className="mt-2">Target vs Achievment</strong>
                     </CCardHeader>
-                    <CCardBody>
+                    <CCardBody style={{overflowX:"scroll"}}>
                         <CRow className='d-flex justify-content-center mb-2'>
                             <CCol lg={3} sm={6} className='mb-2'>
                                 <CInputGroup
@@ -116,64 +117,110 @@ const TargetvsAchievment = () => {
                                 </CButton>
                             </CCol>
                         </CRow>
-                        <CTable bordered style={{ borderColor: "#106103" }} responsive>
-                            <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Center Name</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Target</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">
-                                        Revenue
-                                    </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Target</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Revenue</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">
-                                        Target
-                                    </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Revenue</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Target</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Revenue</CTableHeaderCell>
-                                </CTableRow>
-                            </CTableHead>
-                            <CTableBody>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
-                            </CTableBody>
-                        </CTable>
+                        <table>
+                            <tbody>
+                                <tr>
+                                <th rowSpan={2} >Sr No</th>
+                                <th rowSpan={2} >Center Name</th>
+                                <th colSpan={2}>January</th>
+                                <th colSpan={2}>February</th>
+                                <th colSpan={2}>March</th>
+                                <th colSpan={2}>April</th>
+                                <th colSpan={2}>May</th>
+                                <th colSpan={2}>June</th>
+                                <th colSpan={2}>July</th>
+                                <th colSpan={2}>August</th>
+                                <th colSpan={2}>September</th>
+                                <th colSpan={2}>October</th>
+                                <th colSpan={2}>November</th>
+                                <th colSpan={2}>December</th>
+                            </tr>
+                            <tr>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                                <th>Target</th>
+                                <th>Revenue</th>
+                               
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>    
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>
+                                <td></td>    
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>
+                                <td></td>    
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>
+                                <td></td>    
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>
+                                <td></td>  
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td></td>
+                                <td></td>    
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>
+                                <td></td>    
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>
+                                <td></td>    
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>
+                                <td></td>    
+                                <td></td>  
+                                <td></td>  
+                                <td></td> 
+                                <td></td>  
+                                <td></td> 
+                                <td></td>  
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                  
                     </CCardBody>
                 </CCard>
             </CCol>

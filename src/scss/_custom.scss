@@ -22,7 +22,7 @@
 
 #table_row{
     padding: 10px;
-    border: 1px solid #106103;
+    border: 1px solid black;
     background-color: white;
 }
 
@@ -107,4 +107,27 @@
 }
 .table_header2-18{
     grid-column: 29/30;
+}
+
+/////////
+.targetHeader > .col{
+    border: 1px solid black;
+}
+table{
+    width:400%;
+    overflow-x: scroll;
+}
+th{
+    text-align: center;
+    background-color: green;
+    color: white;
+    
+}
+td{
+    border:1.5px solid black;
+    border-collapse: collapse;
+}
+table,th{
+    border: 1.5px solid white;
+    border-collapse: collapse;
 }
