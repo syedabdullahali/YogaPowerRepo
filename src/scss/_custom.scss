@@ -8,7 +8,8 @@
 .dsr_report_table{
     display: grid;
     grid-template-columns: repeat(29,1fr);
-    min-width: 550%;
+    min-width: 3000px;
+    width: 550%;
     background-color: #106103;
     color:white;
     text-align: center;
