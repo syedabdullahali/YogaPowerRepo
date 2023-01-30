@@ -1,5 +1,6 @@
 import { CButton, CCard, CCardBody, CCardHeader, CCardTitle, CCol, CForm, CFormInput, CFormSelect, CFormTextarea, CImage, CRow } from '@coreui/react'
-// import axios from 'axios'
+import { async } from '@firebase/util'
+import axios from 'axios'
 import { ref, uploadBytes } from 'firebase/storage'
 import React, { useEffect, useRef, useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
@@ -8,9 +9,9 @@ import { storage } from 'src/firebase'
 import { v4 } from 'uuid'   
 
 
-const EmployeeForm = ({showEmpRecrumentFormFun}) => {
-    const [dateOfBirth, setDateOfBirth] = useState('')
+const EmployeeForm = ({showEmpRecrumentFormFun,token,userdata,data}) => {
 
+    const [dateOfBirth, setDateOfBirth] = useState('')
     const [Anniversary, setAnniversary] = useState('')
     const [joiningDate, setJoiningDate] = useState('')
     const [empCategory, setEmpCategory] = useState('')
@@ -20,37 +21,13 @@ const EmployeeForm = ({showEmpRecrumentFormFun}) => {
     const [IFSCCode, setIFSCCode] = useState('')
     const [PANNo, setPANNo] = useState('')
     const [aadharNo, setAadharNo] = useState('')
-    
-
-    // const [PANcard, setPANcard] = useState(null)
-    // const [aadharcard, setAadharcard] = useState(null)
+    const [validation ,setFormValidation] = useState(true)
 
 
-    
-
-    //     const UploadDocument = () => {
-    
-    //     const panRef = ref(storage, `document/pan/${PANcard.name + v4()}`)
-    //     const aadharRef = ref(storage, `document/aadhar/${aadharcard.name + v4()}`)
-    //     console.log(panRef.fullPath);
-    //    //  setPANcardUrl(panRef.fullPath)
-    //     console.log(aadharRef.fullPath);
-    //    //  setAadharcardUrl(aadharRef.fullPath)
-
-    //     uploadBytes(panRef, PANcard).then(() => {
-    //         console.log('pan card uploaded');
-    //     })
-
-    //     uploadBytes(aadharRef, aadharcard).then(() => {
-    //         console.log('aadhar card uploaded');
-    //         alert('Pancard and AadharCard uploaded', panRef, aadharRef)
-    //     })
-    // }
-
-    const  formRenderParentObjeact = {  
+const  formRenderParentObjeact = {  
         minHeight:'150%', 
-        width: '98vw',
-        background:'rgb(255,255,255,0.5)',
+        width: '99.6vw',
+        background:'rgb(0,0,0,0.1)',
         position:'absolute',
         top:'0',
         left:'0'
@@ -61,12 +38,71 @@ const toggaleModel=(e)=>{
         showEmpRecrumentFormFun()
 }
 }
-    
+ 
+const url = 'https://yog-seven.vercel.app'
+
+
+const getEmployeeDataFun =  ()=>{
+
+    if (dateOfBirth !== '' && Anniversary !== ''  &&  joiningDate !== '' && empCategory !== '' && EmployeeID !== '' 
+     && AttendanceID !== '' && accountNo !== ''  && IFSCCode !== '' && aadharNo !== '' &&PANNo !== '') {
+            let Step2data = {
+                DateOfBirth:dateOfBirth,
+                Anniversary: Anniversary,
+                joiningDate: joiningDate,                
+                EmployeeCategory: empCategory, 
+                EmployeeID: EmployeeID,
+                AttendanceID: AttendanceID, 
+                AccountNo: accountNo,
+                IFSC: IFSCCode,
+                AdharNumber:aadharNo,
+                PANCardNumber:PANNo
+            }
+
+ const FilterData = data.filter((el)=>el._id === userdata._id)
+ const dataWithSelectedData =  data.map((el)=>{
+        if(el._id === userdata._id){
+            Step2data.selected = "Select"
+            return {...FilterData[0],...Step2data}
+        }
+        return el
+})    
+ 
+console.log(dataWithSelectedData)
+
+
+const sendDatawithSlectedData = async ()=>{
+fetch(`${url}/employeeForm/all`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataWithSelectedData)
+    }).then((res)=>{
+     console.log(res)
+    })
+}
+
+sendDatawithSlectedData()
+setFormValidation(true)
+showEmpRecrumentFormFun()
+ }else{
+     setFormValidation(false)
+ }    
+}
+
+
+
+
 return<CCard style={formRenderParentObjeact} className='Parent' onClick={toggaleModel}>
      <CCard style={ {width:'90%',margin:'10% auto',background:'rgb(255,255,255)'}}>
      <CCard color={'success'} style={{ padding: '10px', color: '#ffffff', width: '100px', margin: '15px', cursor: 'pointer' }}>
         Step-2
       </CCard> 
+      {validation || <p style={{color:'red',fontSize:'17px',margin:'0 10px',}}>Please Fill All Details </p>}
+
 
       <CCard>
                     <CCardHeader>
@@ -201,7 +237,7 @@ return<CCard style={formRenderParentObjeact} className='Parent' onClick={toggale
                                              />
                                          </CCol>
                                          <CCol xs={6}>
-                                         <CButton className="mt-2"onClick={() => {}}>Save</CButton>
+                                         <CButton className="mt-2"onClick={() => getEmployeeDataFun()}>Save</CButton>
                                          </CCol>
                                       </CRow>
                                       
@@ -213,6 +249,7 @@ return<CCard style={formRenderParentObjeact} className='Parent' onClick={toggale
      </CCard>
 </CCard>
 }
+
 export default EmployeeForm
 
 

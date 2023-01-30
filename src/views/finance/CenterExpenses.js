@@ -21,7 +21,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop, cilPlus } from '@coreui/icons'
 
-const CenterExpenses = () => {
+const CenterExpense = () => {
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -117,7 +117,7 @@ const CenterExpenses = () => {
                             </CCol>
                         </CRow>
                         <CTable bordered style={{ borderColor: "#106103" }} responsive>
-                            <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
+                            <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
                                 <CTableRow>
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Details of Expense</CTableHeaderCell>
@@ -142,7 +142,7 @@ const CenterExpenses = () => {
                             </CTableHead>
                             <CTableBody>
                                 <CTableRow>
-                                    <CTableHeaderCell scope="row">1</CTableHeaderCell>
+                                <CTableDataCell>1</CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
@@ -159,7 +159,7 @@ const CenterExpenses = () => {
                                     <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                                 <CTableRow>
-                                    <CTableHeaderCell scope="row">2</CTableHeaderCell>
+                                <CTableDataCell>2</CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
@@ -176,7 +176,7 @@ const CenterExpenses = () => {
                                     <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                                 <CTableRow>
-                                    <CTableHeaderCell scope="row">3</CTableHeaderCell>
+                                <CTableDataCell>3</CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
@@ -201,4 +201,4 @@ const CenterExpenses = () => {
     )
 }
 
-export default CenterExpenses;
+export default CenterExpense;

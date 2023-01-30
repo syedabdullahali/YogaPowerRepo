@@ -52,7 +52,7 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Sales Target',
+        name: 'Employee Target',
         to: '/employee/sales-target',
       },
       {
@@ -67,25 +67,15 @@ const _nav = [
           },
           {
             component: CNavItem,
-            name: 'Sales Call',
-            to: '/base/breadcrumbs',
+            name: 'Service Calls',
+            to: '/clients/service-call',
           },
           {
             component: CNavItem,
             name: 'Calls Report',
             to: '/base/cards',
-          },
-          {
-            component: CNavItem,
-            name: 'All Rights',
-            to: '/employee/all-right',
-          },
+          }
         ],
-      },
-      {
-        component: CNavItem,
-        name: 'Employee Proformance',
-        to: '/employee/pt',
       },
 
     ],
@@ -505,7 +495,7 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'All Emp Profile',
+        name: 'Employee Profile',
         to: '/hr/all-emp',
       },
       {
@@ -572,7 +562,7 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Trainery Salary Slip',
+        name: 'Trainer Salary Slip',
         to: '/hr/trainer-salary',
       },
       {

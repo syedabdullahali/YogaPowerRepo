@@ -46,7 +46,6 @@ const SalarySheet = () => {
 
 
     let user = JSON.parse(localStorage.getItem('user-info'))
-    console.log(user);
     const token = user.token;
     const username = user.user.username;
     const centerCode = user.user.centerCode;

@@ -109,6 +109,8 @@ const AllEmpProfile = () => {
         })
     }
 
+    console.log(staff)
+
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -331,7 +333,7 @@ const AllEmpProfile = () => {
                                             <CTableDataCell>{item.Department}</CTableDataCell>
                                             <CTableDataCell>{item.JobDesignation}</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='p-2'><CButton>View</CButton></CTableDataCell>
                                             {/* <CTableDataCell>{
                                             item.status ? 
                                             <>

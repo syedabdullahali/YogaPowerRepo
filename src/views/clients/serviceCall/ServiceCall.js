@@ -86,7 +86,7 @@ const ServiceCall = () => {
                                     active={activeKey === 6}
                                     onClick={() => setActiveKey(6)}
                                 >
-                                    Birthday & Anniversary Calls
+                                    Greeting Calls
                                 </CNavLink>
                             </CNavItem>
                         </CNav>

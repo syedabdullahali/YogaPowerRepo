@@ -26,6 +26,8 @@ const [Grade,setGrade] = useState('')
             width: '98vw',
             background:'rgb(255,255,255,0.5)',
             position:'absolute',
+            width: '99.6vw',
+            background:'rgb(0,0,0,0.1)',
             top:'0',
             left:'0'
             ,zIndex:'10000',

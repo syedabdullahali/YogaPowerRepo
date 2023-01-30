@@ -114,7 +114,7 @@ const ShiftTimingManagment = () => {
             <CCol lg={12} sm={12}>
                 <CCard className="mb-3 border-success">
                     <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                        <CCardTitle className="mt-2">All Classes Report</CCardTitle>
+                        <CCardTitle className="mt-2">Shift Timing Managment </CCardTitle>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex mb-2'>
@@ -228,15 +228,8 @@ const ShiftTimingManagment = () => {
                                             <CTableDataCell>{item.ContactNumber}</CTableDataCell>
                                             <CTableDataCell>{item.EmailAddress}</CTableDataCell>
                                             <CTableDataCell>{moment(item.DateofBirth).format("MM-DD-YYYY")}</CTableDataCell>
-                                            <CTableDataCell>{item.Gander}</CTableDataCell>
-                                            <CTableDataCell>{centerCode}E{index + 1 + (paging * 10)}</CTableDataCell>
-                                            <CTableDataCell>{item.address}</CTableDataCell>
-                                            <CTableDataCell>{item.Department}</CTableDataCell>
-                                            <CTableDataCell>{item.JobDesignation}</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell>{item.status ? <><CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton></> : <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>}</CTableDataCell>
-                                            <CTableDataCell><CButton>View</CButton></CTableDataCell>
+                                        
+                                           
                                          
                                             <CTableDataCell className='text-center'>
                                                 <MdDelete style={{ cursor: 'pointer', markerStart: '10px', 

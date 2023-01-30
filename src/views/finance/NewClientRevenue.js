@@ -118,7 +118,7 @@ const NewClientRevenue = props => {
                             </CCol>
                         </CRow>
                         <CTable bordered style={{ borderColor: "#106103" }} responsive>
-                            <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
+                            <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
                             <CTableRow>
                                 <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Month</CTableHeaderCell>

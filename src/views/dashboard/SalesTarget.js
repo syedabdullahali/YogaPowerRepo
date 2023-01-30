@@ -40,7 +40,7 @@ const SalesTarget = () => {
                                     active={activeKey === 1}
                                     onClick={() => setActiveKey(1)}
                                 >
-                                    Sales Closure
+                                    Sales Target
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
@@ -50,7 +50,7 @@ const SalesTarget = () => {
                                     onClick={() => setActiveKey(2)}
                                 >
 
-                                    Client Closure
+                                    Client Target
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
@@ -59,7 +59,7 @@ const SalesTarget = () => {
                                     active={activeKey === 3}
                                     onClick={() => setActiveKey(3)}
                                 >
-                                    Lead Target
+                                    Calls Target
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
@@ -68,7 +68,7 @@ const SalesTarget = () => {
                                     active={activeKey === 4}
                                     onClick={() => setActiveKey(4)}
                                 >
-                                    Renewals Target
+                                    Lead Target
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
@@ -77,7 +77,7 @@ const SalesTarget = () => {
                                     active={activeKey === 5}
                                     onClick={() => setActiveKey(5)}
                                 >
-                                    Refrance Lead Target
+                                    Renewals
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
@@ -86,7 +86,7 @@ const SalesTarget = () => {
                                     active={activeKey === 6}
                                     onClick={() => setActiveKey(6)}
                                 >
-                                    Daily Calls
+                                    Referral Leads
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
@@ -99,7 +99,7 @@ const SalesTarget = () => {
                                 </CNavLink>
                             </CNavItem>
 
-                            <CNavItem>
+                            {/* <CNavItem>
                                 <CNavLink
                                     href="javascript:void(0);"
                                     active={activeKey === 7}
@@ -107,8 +107,8 @@ const SalesTarget = () => {
                                 >
                                     PT Target
                                 </CNavLink>
-                            </CNavItem>
-                            <CNavItem>
+                            </CNavItem> */}
+                            {/* <CNavItem>
                                 <CNavLink
                                     href="javascript:void(0);"
                                     active={activeKey === 7}
@@ -116,7 +116,7 @@ const SalesTarget = () => {
                                 >
                                     Corporate Target
                                 </CNavLink>
-                            </CNavItem>
+                            </CNavItem> */}
                         </CNav>
                     </CCardHeader>
                     <CCardBody>
@@ -184,62 +184,65 @@ const SalesTarget = () => {
                                 <CTable bordered borderColor="success" responsive>
                                     <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
-                                            <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Target</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">
-                                                Achieved/Collected
+                                                New Sales
                                             </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">upgrade sales</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">
-                                                Balance Collection
+                                                cross sales
                                             </CTableHeaderCell>
                                             <CTableHeaderCell scope="col">
-                                                Incentive Target
+                                                Balance collection
                                             </CTableHeaderCell>
                                             <CTableHeaderCell scope="col">
-                                                100%
+                                                Total collected
                                             </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">View</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                        
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>3</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            
                                         </CTableRow>
                                     </CTableBody>
                                 </CTable>
@@ -306,54 +309,59 @@ const SalesTarget = () => {
                                 <CTable bordered borderColor="primary" responsive>
                                     <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
                                         <CTableRow>
-                                            <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Target</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">
-                                                Achieved/Collected
+                                                New Sales
                                             </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Reference</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Renewal</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">
-                                                Balance Collection
+                                                Upgrade Sales
                                             </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Cross-selling</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Total</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Achieved</CTableHeaderCell>
+
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>3</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
                                         </CTableRow>
                                     </CTableBody>
                                 </CTable>
@@ -420,54 +428,49 @@ const SalesTarget = () => {
                                 <CTable bordered borderColor="primary" responsive>
                                     <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
                                         <CTableRow>
-                                            <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Target</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Call Target</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">
-                                                Achieved/Collected
+                                                Follows ups
                                             </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Members Call</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Total Completed</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">
-                                                Balance Collection
+                                                    Achived %
                                             </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                            
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                        
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                            
                                         </CTableRow>
                                     </CTableBody>
                                 </CTable>
@@ -535,53 +538,382 @@ const SalesTarget = () => {
                                     <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Target</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Lead assign</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">
-                                                Achieved/Collected
+                                                Spot Conversions
                                             </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Total leads Conversion</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Total Amount</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">
-                                                Balance Collection
+                                            Achived %
                                             </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
+                                
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>3</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                           
+                                        </CTableRow>
+                                    </CTableBody>
+                                </CTable>
+                            </CTabPane>
+                           
+                           
+                            <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 5}>
+                                <CRow className='mb-3'>
+                                    <CCol xs={2}>
+                                        <CInputGroup>
+                                            <CInputGroupText
+                                                component="label"
+                                                htmlFor="inputGroupSelect01"
+                                            >
+                                                Month
+                                            </CInputGroupText>
+                                            <CFormSelect id="inputGroupSelect01">
+                                                <option>Sep</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </CFormSelect>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol xs={2}>
+                                        <CInputGroup>
+                                            <CInputGroupText
+                                                component="label"
+                                                htmlFor="inputGroupSelect01"
+                                            >
+                                                Year
+                                            </CInputGroupText>
+                                            <CFormSelect id="inputGroupSelect01">
+                                                <option>2022</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </CFormSelect>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol>
+                                        <CInputGroup className="left">
+                                            <CFormInput
+                                                placeholder="Staff Name"
+                                                aria-label="Recipient's username"
+                                                aria-describedby="button-addon2"
+                                            />
+                                            <CButton type="button" color="primary" id="button-addon2">
+                                                Go
+                                            </CButton>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol>
+                                        <CButtonGroup>
+                                            <CButton color="primary">
+                                                <CIcon icon={cilArrowCircleBottom} />
+                                                Import
+                                            </CButton>
+                                            <CButton color="primary">
+                                                <CIcon icon={cilArrowCircleTop} />
+                                                Export
+                                            </CButton>
+                                        </CButtonGroup>
+                                    </CCol>
+                                </CRow>
+                                <CTable bordered borderColor="primary" responsive>
+                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                        <CTableRow>
+                                            <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Target</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                No of Renewals
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Conversion</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Total Amount</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                            Achived %
+                                            </CTableHeaderCell>
+                                
+                                        </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                        <CTableRow>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                
+                                        </CTableRow>
+                                        <CTableRow>
+                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            
+                                        </CTableRow>
+                                        <CTableRow>
+                                        <CTableDataCell>3</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                           
+                                        </CTableRow>
+                                    </CTableBody>
+                                </CTable>
+                            </CTabPane>
+                            <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 6}>
+                                <CRow className='mb-3'>
+                                    <CCol xs={2}>
+                                        <CInputGroup>
+                                            <CInputGroupText
+                                                component="label"
+                                                htmlFor="inputGroupSelect01"
+                                            >
+                                                Month
+                                            </CInputGroupText>
+                                            <CFormSelect id="inputGroupSelect01">
+                                                <option>Sep</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </CFormSelect>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol xs={2}>
+                                        <CInputGroup>
+                                            <CInputGroupText
+                                                component="label"
+                                                htmlFor="inputGroupSelect01"
+                                            >
+                                                Year
+                                            </CInputGroupText>
+                                            <CFormSelect id="inputGroupSelect01">
+                                                <option>2022</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </CFormSelect>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol>
+                                        <CInputGroup className="left">
+                                            <CFormInput
+                                                placeholder="Staff Name"
+                                                aria-label="Recipient's username"
+                                                aria-describedby="button-addon2"
+                                            />
+                                            <CButton type="button" color="primary" id="button-addon2">
+                                                Go
+                                            </CButton>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol>
+                                        <CButtonGroup>
+                                            <CButton color="primary">
+                                                <CIcon icon={cilArrowCircleBottom} />
+                                                Import
+                                            </CButton>
+                                            <CButton color="primary">
+                                                <CIcon icon={cilArrowCircleTop} />
+                                                Export
+                                            </CButton>
+                                        </CButtonGroup>
+                                    </CCol>
+                                </CRow>
+                                <CTable bordered borderColor="primary" responsive>
+                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                        <CTableRow>
+                                            <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">No. of Referrals Target</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                No. of Referrals Leads
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Convert to member</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Total Amount</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                            Achived %
+                                            </CTableHeaderCell>
+                                
+                                        </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                        <CTableRow>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                
+                                        </CTableRow>
+                                        <CTableRow>
+                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            
+                                        </CTableRow>
+                                        <CTableRow>
+                                        <CTableDataCell>3</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                           
+                                        </CTableRow>
+                                    </CTableBody>
+                                </CTable>
+                            </CTabPane>
+                            <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 7}>
+                                <CRow className='mb-3'>
+                                    <CCol xs={2}>
+                                        <CInputGroup>
+                                            <CInputGroupText
+                                                component="label"
+                                                htmlFor="inputGroupSelect01"
+                                            >
+                                                Month
+                                            </CInputGroupText>
+                                            <CFormSelect id="inputGroupSelect01">
+                                                <option>Sep</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </CFormSelect>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol xs={2}>
+                                        <CInputGroup>
+                                            <CInputGroupText
+                                                component="label"
+                                                htmlFor="inputGroupSelect01"
+                                            >
+                                                Year
+                                            </CInputGroupText>
+                                            <CFormSelect id="inputGroupSelect01">
+                                                <option>2022</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </CFormSelect>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol>
+                                        <CInputGroup className="left">
+                                            <CFormInput
+                                                placeholder="Staff Name"
+                                                aria-label="Recipient's username"
+                                                aria-describedby="button-addon2"
+                                            />
+                                            <CButton type="button" color="primary" id="button-addon2">
+                                                Go
+                                            </CButton>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol>
+                                        <CButtonGroup>
+                                            <CButton color="primary">
+                                                <CIcon icon={cilArrowCircleBottom} />
+                                                Import
+                                            </CButton>
+                                            <CButton color="primary">
+                                                <CIcon icon={cilArrowCircleTop} />
+                                                Export
+                                            </CButton>
+                                        </CButtonGroup>
+                                    </CCol>
+                                </CRow>
+                                <CTable bordered borderColor="primary" responsive>
+                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                        <CTableRow>
+                                            <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Google Reviewst</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Facebook
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Instagram</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Linkedin</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                            Justdial
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Achieved</CTableHeaderCell>
+                                
+                                        </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                        <CTableRow>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                        </CTableRow>
+                                        <CTableRow>
+                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                        </CTableRow>
+                                        <CTableRow>
+                                        <CTableDataCell>3</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
                                         </CTableRow>
                                     </CTableBody>
                                 </CTable>

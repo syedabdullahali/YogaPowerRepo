@@ -47,6 +47,7 @@ const EmpRecruitment = () => {
     const [Search10, setSearch10] = useState('')
     const [showEditFrom,setEditFormValue] = useState([false,[]])
     const [showEmpRecrument,setEmpRecrumentForm] =useState([false])
+    const [userdata,setUserData] = useState([])
   
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
@@ -60,7 +61,11 @@ const EmpRecruitment = () => {
         getStaff()
     }, [])
 
+    console.log(user.token);
+
     const [staff, setStaff] = useState([])
+
+
     function getStaff() {
         axios.get(`${url}/employeeForm/all`, {
             headers: {
@@ -98,7 +103,8 @@ const EmpRecruitment = () => {
         setEditFormValue((value)=>[!value[0],userData])                   
     }
 
-    function showEmpRecrumentFormFun(){
+    function showEmpRecrumentFormFun(item){
+        setUserData(item)
         setEmpRecrumentForm((value)=>[!value[0]])
     }
 
@@ -126,7 +132,7 @@ const EmpRecruitment = () => {
         <CRow>
             <CCol lg={12} sm={12}>
                 {showEditFrom[0]&&<ApplicationForm  shouldEdit ={true} data={showEditFrom[1]} editEnquiry={editEnquiry} />}
-                { showEmpRecrument[0]&& <EmployeeForm shouldEdit ={true} showEmpRecrumentFormFun={showEmpRecrumentFormFun}/>}
+                { showEmpRecrument[0]&& <EmployeeForm token={token} userdata={userdata} data={staff} showEmpRecrumentFormFun={showEmpRecrumentFormFun}/>}
                 <CCard className="mb-3 border-success">
                     <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
                         <CCardTitle className="mt-2">All Recruitment</CCardTitle>
@@ -166,7 +172,7 @@ const EmpRecruitment = () => {
                                     <CTableHeaderCell>Designation</CTableHeaderCell>
                                     <CTableHeaderCell>Grade</CTableHeaderCell>
                                     <CTableHeaderCell>Comment</CTableHeaderCell>
-                                    <CTableHeaderCell>Expected Sales</CTableHeaderCell>
+                                    <CTableHeaderCell>Expected Salary</CTableHeaderCell>
 
                                     <CTableHeaderCell>Status</CTableHeaderCell>
                                     <CTableHeaderCell>Resume</CTableHeaderCell>
@@ -351,10 +357,16 @@ const EmpRecruitment = () => {
                                     </CTableDataCell>
                                 </CTableRow>
                                 {staff.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                                    list.username === username && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                                    && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
-                                    && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
-                                    && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
+                                    list.username === username && list.FullName.toLowerCase().includes(Search1.toLowerCase())
+                                     && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
+                                    && list.Gander.toLowerCase().includes(Search3.toLowerCase())
+                                     && list.address.toLowerCase().includes(Search4.toLowerCase()) 
+                                     && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
+                                    && list.Department.toLowerCase().includes(Search6.toLowerCase()) 
+                                    && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase())
+                                     && list.Grade.toLowerCase().includes(Search8.toLowerCase())
+                                    && list.Salary.toString().includes(Search9.toString()) 
+                                    && list.ContactNumber.toString().includes(Search10.toString())
                                 ).map((item, index) => (
                                     item.username === username && (
                                         <CTableRow key={index}>
@@ -374,7 +386,7 @@ const EmpRecruitment = () => {
                                             <CTableDataCell>{item.Salary}</CTableDataCell>
                                             
                                             <CTableDataCell>
-                                            <CButton className='mt-1' color='success' onClick={()=>showEmpRecrumentFormFun()} >Accept</CButton>                                            
+                                            <CButton className='mt-1' color='success' onClick={()=>showEmpRecrumentFormFun(item)} >Accept</CButton>                                            
                                             <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>
                                              </CTableDataCell> 
                                             <CTableDataCell><CButton>View</CButton></CTableDataCell>

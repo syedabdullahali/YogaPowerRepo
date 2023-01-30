@@ -117,7 +117,7 @@ const RenewRevenue = () => {
                             </CCol>
                         </CRow>
                         <CTable bordered style={{ borderColor: "#106103" }} responsive>
-                            <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
+                            <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
                                 <CTableRow>
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Month</CTableHeaderCell>
@@ -137,7 +137,7 @@ const RenewRevenue = () => {
                             </CTableHead>
                             <CTableBody>
                                 <CTableRow>
-                                    <CTableHeaderCell scope="row">1</CTableHeaderCell>
+                                <CTableDataCell>1</CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
@@ -148,7 +148,7 @@ const RenewRevenue = () => {
                                     {/* <CTableDataCell>100%</CTableDataCell> */}
                                 </CTableRow>
                                 <CTableRow>
-                                    <CTableHeaderCell scope="row">2</CTableHeaderCell>
+                                <CTableDataCell>2</CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
@@ -159,7 +159,7 @@ const RenewRevenue = () => {
                                     {/* <CTableDataCell>100%</CTableDataCell> */}
                                 </CTableRow>
                                 <CTableRow>
-                                    <CTableHeaderCell scope="row">3</CTableHeaderCell>
+                                <CTableDataCell>3</CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>

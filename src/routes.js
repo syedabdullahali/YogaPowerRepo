@@ -9,7 +9,6 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const PTTarget = React.lazy(() => import('./views/dashboard/PTTarget'))
 const SalesTarget = React.lazy(() => import('./views/dashboard/SalesTarget'))
 const CorporateTarget = React.lazy(() => import('./views/dashboard/CorporateTarget'))
-const AllRight = React.lazy(() => import('./views/Master/AllRight'))
 //Leads
 const AllEnquires = React.lazy(() => import('./views/leads/AllEnquires'))
 const EnquireAppoitment = React.lazy(() => import('./views/leads/EnquireAppointment'))
@@ -209,7 +208,7 @@ const routes = [
 
   { path: '/employee', name: 'Employee', element: Tables, exact: true },
   { path: '/employee/pt', name: 'PT Target', element: PTTarget },
-  { path: '/employee/all-right', name: 'All Right', element: AllRight },
+  
   {
     path: '/employee/sales-target',
     name: 'Sales Target',
