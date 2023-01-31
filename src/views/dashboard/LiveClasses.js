@@ -343,7 +343,7 @@ const LiveClasses = () => {
                                         </CButtonGroup>
                                     </CCol>
                                 </CRow>
-                                <CTable bordered borderColor="black" responsive style={{width:'2500px'}}>
+                                <CTable bordered borderColor="black" responsive style={{width:'4500px'}}>
                                     <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
@@ -373,6 +373,17 @@ const LiveClasses = () => {
                                             <CTableHeaderCell scope="col">Mon <br/>16</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Tue <br/>17</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Wed <br/>18</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Thu <br/>19</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Fri <br/>20</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sat <br/>21</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sun <br/>22</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">mon <br/>23</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Wed <br/>24</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Thu <br/>25</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Fri <br/>27</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sat <br/>28</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sun <br/>29</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Mon<br/>30</CTableHeaderCell>
                                          
 
                                             
@@ -384,8 +395,19 @@ const LiveClasses = () => {
                                     </CTableHead>
                                     <CTableBody>
                                         <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                        <CTableDataCell></CTableDataCell>
+                                           <CTableDataCell>1</CTableDataCell>
+                                           <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
@@ -416,8 +438,7 @@ const LiveClasses = () => {
                             
                                         </CTableRow>
                                         <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                        <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell>2</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
@@ -443,11 +464,23 @@ const LiveClasses = () => {
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                                            
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
 
                                         </CTableRow>
                                         <CTableRow>
-                                           <CTableDataCell>3</CTableDataCell>
+                                          <CTableDataCell>3</CTableDataCell>
+                                           <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
@@ -467,7 +500,17 @@ const LiveClasses = () => {
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
