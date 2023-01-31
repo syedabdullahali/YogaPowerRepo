@@ -32,7 +32,7 @@ const SalesTarget = () => {
         <CRow>
             <CCol xs={12}>
                 <CCard>
-                    <CCardHeader>
+                    <CCardHeader >
                         <CNav variant="pills" role="tablist">
                             <CNavItem>
                                 <CNavLink
@@ -99,24 +99,7 @@ const SalesTarget = () => {
                                 </CNavLink>
                             </CNavItem>
 
-                            {/* <CNavItem>
-                                <CNavLink
-                                    href="javascript:void(0);"
-                                    active={activeKey === 7}
-                                    onClick={() => setActiveKey(7)}
-                                >
-                                    PT Target
-                                </CNavLink>
-                            </CNavItem> */}
-                            {/* <CNavItem>
-                                <CNavLink
-                                    href="javascript:void(0);"
-                                    active={activeKey === 7}
-                                    onClick={() => setActiveKey(7)}
-                                >
-                                    Corporate Target
-                                </CNavLink>
-                            </CNavItem> */}
+                            
                         </CNav>
                     </CCardHeader>
                     <CCardBody>
@@ -181,7 +164,7 @@ const SalesTarget = () => {
                                         </CButtonGroup>
                                     </CCol>
                                 </CRow>
-                                <CTable bordered borderColor="success" responsive>
+                                <CTable bordered borderColor="black" responsive>
                                     <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
@@ -306,8 +289,8 @@ const SalesTarget = () => {
                                         </CButtonGroup>
                                     </CCol>
                                 </CRow>
-                                <CTable bordered borderColor="primary" responsive>
-                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                <CTable bordered borderColor="balck" responsive>
+                                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
@@ -425,8 +408,8 @@ const SalesTarget = () => {
                                         </CButtonGroup>
                                     </CCol>
                                 </CRow>
-                                <CTable bordered borderColor="primary" responsive>
-                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                <CTable bordered borderColor="black" responsive>
+                                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
@@ -534,8 +517,8 @@ const SalesTarget = () => {
                                         </CButtonGroup>
                                     </CCol>
                                 </CRow>
-                                <CTable bordered borderColor="primary" responsive>
-                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                <CTable bordered borderColor="black" responsive>
+                                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
@@ -646,8 +629,8 @@ const SalesTarget = () => {
                                         </CButtonGroup>
                                     </CCol>
                                 </CRow>
-                                <CTable bordered borderColor="primary" responsive>
-                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                <CTable bordered borderColor="black" responsive>
+                                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
@@ -756,8 +739,8 @@ const SalesTarget = () => {
                                         </CButtonGroup>
                                     </CCol>
                                 </CRow>
-                                <CTable bordered borderColor="primary" responsive>
-                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                <CTable bordered borderColor="black" responsive>
+                                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Employee</CTableHeaderCell>
@@ -866,8 +849,8 @@ const SalesTarget = () => {
                                         </CButtonGroup>
                                     </CCol>
                                 </CRow>
-                                <CTable bordered borderColor="primary" responsive>
-                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                <CTable bordered borderColor="black" responsive>
+                                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Employee</CTableHeaderCell>

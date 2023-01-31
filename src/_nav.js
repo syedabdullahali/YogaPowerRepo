@@ -83,32 +83,29 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Trainer',
-    to: '/base',
+    to: '/trainer',
     icon: <CIcon icon={cilGroup} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Trainer Dashboard',
-        to: '/trainer-dashboard',
+        name: 'Live Classes',
+        to: '/trainer/live-classes'
       },
       {
         component: CNavItem,
-        name: 'Live Class',
-        to: '/base/pt',
-        badge: {
-          color: 'danger',
-          text: 'LIVE',
-        },
+        name: 'All Batches',
+        to: '/trainer/all-batches',
+        
       },
       {
         component: CNavItem,
-        name: 'All Batch',
-        to: '/base/breadcrumbs',
+        name: 'PT CLASSES',
+        to: '/trainer/pt-classes',
       },
       {
         component: CNavItem,
-        name: 'Classes',
-        to: '/base/cards',
+        name: 'TTC CLASSES',
+        to: '/trainer/ttc-classes',
       },
     ],
   },

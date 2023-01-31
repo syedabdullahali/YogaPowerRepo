@@ -1,4 +1,5 @@
 import React from 'react'
+import TtcClassses from './views/dashboard/TtcClassses'
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Login = React.lazy(() => import('./views/pages/login/Login'))
 const EmployeeDashboard = React.lazy(() => import('./views/dashboard/EmployeeDashboard'))
@@ -9,6 +10,14 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const PTTarget = React.lazy(() => import('./views/dashboard/PTTarget'))
 const SalesTarget = React.lazy(() => import('./views/dashboard/SalesTarget'))
 const CorporateTarget = React.lazy(() => import('./views/dashboard/CorporateTarget'))
+
+// Trainer
+const LiveClasses = React.lazy(()=>import('./views/dashboard/LiveClasses'))
+const AllBatches = React.lazy(()=>import('./views/dashboard/AllBatches'))
+const PtClasses = React.lazy(()=>import('./views/dashboard/PtClasses'))
+const TTCClasses = React.lazy(()=>import('./views/dashboard/TtcClassses'))
+
+
 //Leads
 const AllEnquires = React.lazy(() => import('./views/leads/AllEnquires'))
 const EnquireAppoitment = React.lazy(() => import('./views/leads/EnquireAppointment'))
@@ -219,6 +228,15 @@ const routes = [
     name: 'Corporate Target',
     element: CorporateTarget,
   },
+
+  // Trainer
+  {path:'/trainer/live-classes',name:'Live Classes', element:LiveClasses},
+  {path:'/trainer/all-batches',name:'All Batches',element:AllBatches},
+  {path:'/trainer/pt-classes',name:'PT Classes',element:PtClasses},
+  {path:'/trainer/ttc-classes',name:'TCC Classes',element:TtcClassses},
+
+
+
 
   //Leads
   { path: '/leads', name: 'Leads', element: AllEnquires, exact: true },
