@@ -578,6 +578,7 @@ const _nav = [
         name: 'Emp Performance',
         to: '/hr/emp-performance',
       },
+      
     ],
   },
   {

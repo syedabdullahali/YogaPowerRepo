@@ -98,6 +98,7 @@ const AllClassReport = React.lazy(()=>import('./views/hr/AllClassReport'))
 const ShiftTimingManagment = React.lazy(()=>import('./views/hr/ShiftTimingManagment'))
 const AllRightHr =  React.lazy(()=>import('./views/hr/AllRightHr')) 
 const EmpPerformance = React.lazy(()=>import('./views/hr/EmpPerformance'))
+const Stafftarget = React.lazy(()=>import('./views/hr/staffTarget/Stafftarget'))
 
 //Master
 const CenterSetup = React.lazy(() => import('./views/Master/centerSetup/CenterSetup'))
@@ -327,6 +328,7 @@ const routes = [
   { path:'/hr/shift-timing-managment',name:'Shift Timing Managment',element:ShiftTimingManagment},
   { path:'/hr/all-righthr',name:'All Right',element:AllRightHr},
   { path:'/hr/emp-performance',name:'Emp Performance',element:EmpPerformance},
+  { path:'/hr/view-staff-target',name:'View Staff Target',element:Stafftarget},
 
   //Master
   { path: '/master', name: 'Master', element: CenterSetup, exact: true },

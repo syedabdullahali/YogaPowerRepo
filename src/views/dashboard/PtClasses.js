@@ -347,7 +347,7 @@ const PtClasses = () => {
                                         </CButtonGroup>
                                     </CCol>
                                 </CRow>
-                                <CTable bordered borderColor="black" responsive>
+                                <CTable bordered borderColor="black" responsive style={{width:'2500px'}}>
                                     <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
@@ -360,6 +360,24 @@ const PtClasses = () => {
                                             <CTableHeaderCell scope="col">Days</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Start Date</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">End Date</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sun<br/> 1</CTableHeaderCell>                                           
+                                            <CTableHeaderCell scope="col">Mon<br/> 2</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Tue<br/> 3</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Wed<br/> 4</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Thu <br/>5</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Fri <br/> 6</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sat <br/> 7</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sun <br/> 8</CTableHeaderCell>                                            
+                                            <CTableHeaderCell scope="col">Mon <br/>9</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Tue <br/>10</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Wed <br/>11</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Thu <br/>12</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Fri <br/>13</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sat <br/>14</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Sun <br/>15</CTableHeaderCell>                                           
+                                            <CTableHeaderCell scope="col">Mon <br/>16</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Tue <br/>17</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Wed <br/>18</CTableHeaderCell>
 
 
 
@@ -367,6 +385,7 @@ const PtClasses = () => {
                                     </CTableHead>
                                     <CTableBody>
                                         <CTableRow>
+                                            <CTableDataCell>1</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
@@ -377,10 +396,45 @@ const PtClasses = () => {
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                            
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                           
                                         </CTableRow>
                                         <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
@@ -393,7 +447,7 @@ const PtClasses = () => {
                                         
                                         </CTableRow>
                                         <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
+                                           <CTableDataCell>3</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
@@ -403,7 +457,24 @@ const PtClasses = () => {
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                            
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
                                         </CTableRow>
                                     </CTableBody>
                                 </CTable>

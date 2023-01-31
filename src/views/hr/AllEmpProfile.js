@@ -25,8 +25,10 @@ import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop, cilInfo } from '@coreui/icons'
 import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md';
 import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
+
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
@@ -330,7 +332,7 @@ const AllEmpProfile = () => {
                                             <CTableDataCell>{item.Department}</CTableDataCell>
                                             <CTableDataCell>{item.JobDesignation}</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell><CButton>View</CButton></CTableDataCell>
+                                            <CTableDataCell><CButton><Link to='/hr/view-staff-target'>View</Link></CButton></CTableDataCell>
                                             <CTableDataCell>{item.status ? <><CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton></> : <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>}</CTableDataCell>
                                             <CTableDataCell className='text-center'><a href={`tel:${item.ContactNumber}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.EmailAddress}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a></CTableDataCell>
                                             <CTableDataCell className='text-center'>
