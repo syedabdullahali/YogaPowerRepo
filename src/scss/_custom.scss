@@ -13,17 +13,30 @@
     background-color: #0B5345;
     color:white;
     text-align: center;
+    border-top: 1px solid black;
+    border-left: 1px solid  black;
+    .md{
+        border-bottom: none;
+        border-right:1px solid white;
+    }
+    .md2{
+        border-bottom: none;
+    }
+
   }
 
 .dsr_report_table >div{
     padding: 10px;
-    border: 1px solid white;
     border-collapse: collapse;
+     border-bottom: 1px solid  white;
+   border-right: 1px solid white;
 }
 
 #table_row{
     padding: 10px;
-    border: 1px solid black;
+    border-bottom: 1px solid  black;
+    border-right: 1px solid black;
+    border-collapse: collapse;
     background-color: white;
 }
 

@@ -127,6 +127,8 @@ const DSRreport = () => {
                         </CRow>
                     <div className='table_parent'>
                          <div className='dsr_report_table'>
+                            <div className="md"></div>
+                            <div className="md"></div>
                             <div className="table_header-1">Lead Analysis</div>
                             <div className="table_header-2">Trail Analysis</div>
                             <div className="table_header-3">Lead Analysis</div>
@@ -135,6 +137,9 @@ const DSRreport = () => {
                             <div className="table_header-6">Incremental Revenue</div>
                             <div className="table_header-7"></div>
                             <div className="table_header-8">Collection</div>
+                            
+                            <div className="md2">Date</div>
+                            <div className="md2">Day</div>
                             <div className="table_header2-1">Existing Leads</div>
                             <div className="table_header2-2">Added Today</div>
                             <div className="table_header2-3">Referral generated</div>
@@ -155,8 +160,9 @@ const DSRreport = () => {
                             <div className="table_header2-18">Due Recovered</div>
 
 
-                            <div className="table_header">Date</div>
-                            <div className="table_header">Day</div>
+
+                            <div className="table_header"></div>
+                            <div className="table_header"></div>
                             <div className="table_header">Count</div>
                             <div className="table_header">Count</div>
                             <div className="table_header">Count</div>
