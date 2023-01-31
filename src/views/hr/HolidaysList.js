@@ -128,13 +128,13 @@ const HolidaysList = () => {
             <CCol lg={12} sm={12}>
                 <CCard className="mb-3 border-success">
                     <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                        <CCardTitle className="mt-2">Holiday List Master</CCardTitle>
+                        <CCardTitle className="mt-2">Holiday List</CCardTitle>
                     </CCardHeader>
                     <CCardBody>
                         <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
-                                    <CTableHeaderCell>Sno.</CTableHeaderCell>
+                                <CTableHeaderCell>Sno.</CTableHeaderCell>
                                     <CTableHeaderCell>Date</CTableHeaderCell>
                                     <CTableHeaderCell>Holiday Name</CTableHeaderCell>
                                     <CTableHeaderCell>No of Holiday</CTableHeaderCell>
@@ -147,11 +147,7 @@ const HolidaysList = () => {
                                             <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
                                             <CTableDataCell>{moment(item.Date).format("MM-DD-YYYY")}</CTableDataCell>
                                             <CTableDataCell>{item.Holiday}</CTableDataCell>
-                                            <CTableDataCell className="text-center">
-                                                {/* <CFormSwitch size="xl" style={{ cursor: 'pointer' }} 
-                                                id={item._id} value={item.Status} checked={item.Status} 
-                                                onChange={() => updateStatus(item._id, !item.Status)} /> */}
-                                                </CTableDataCell>
+                                            <CTableDataCell className="text-center"><CFormSwitch size="xl" style={{ cursor: 'pointer' }} id={item._id} value={item.Status} checked={item.Status} onChange={() => updateStatus(item._id, !item.Status)} /></CTableDataCell>
                                         </CTableRow>
                                     )
                                 ))}

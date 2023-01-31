@@ -70,11 +70,7 @@ const _nav = [
             name: 'Service Calls',
             to: '/clients/service-call',
           },
-          {
-            component: CNavItem,
-            name: 'Calls Report',
-            to: '/base/cards',
-          }
+        
         ],
       },
 

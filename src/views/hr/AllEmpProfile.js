@@ -109,8 +109,6 @@ const AllEmpProfile = () => {
         })
     }
 
-    console.log(staff)
-
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -144,7 +142,7 @@ const AllEmpProfile = () => {
                         <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
-                                    <CTableHeaderCell>Sr.No</CTableHeaderCell>
+                                <CTableHeaderCell>Sr.No</CTableHeaderCell>
                                     <CTableHeaderCell>Name</CTableHeaderCell>
                                     <CTableHeaderCell>Mobile</CTableHeaderCell>
                                     <CTableHeaderCell>Email-ID</CTableHeaderCell>
@@ -311,8 +309,7 @@ const AllEmpProfile = () => {
                                             aria-describedby="exampleFormControlInputHelpInline"
                                         />
                                     </CTableDataCell>
-                                   
-                                   
+                                  
                                 </CTableRow>
                                 {staff.slice(paging * 10, paging * 10 + 10).filter((list) =>
                                     list.username === username && list.selected === 'Select' && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
@@ -333,32 +330,16 @@ const AllEmpProfile = () => {
                                             <CTableDataCell>{item.Department}</CTableDataCell>
                                             <CTableDataCell>{item.JobDesignation}</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='p-2'><CButton>View</CButton></CTableDataCell>
-                                            {/* <CTableDataCell>{
-                                            item.status ? 
-                                            <>
-                                            <CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton>
-                                            </> : 
-                                            <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>}
-                                            
-                                            </CTableDataCell> */}
-
-                                             <CTableDataCell>
-                                            <CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton>                                            
-                                            <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>
-                                             </CTableDataCell> 
-                                            
+                                            <CTableDataCell><CButton>View</CButton></CTableDataCell>
+                                            <CTableDataCell>{item.status ? <><CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton></> : <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>}</CTableDataCell>
                                             <CTableDataCell className='text-center'><a href={`tel:${item.ContactNumber}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.EmailAddress}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a></CTableDataCell>
-                                         
                                             <CTableDataCell className='text-center'>
-                                             <MdEdit style={{ cursor: 'pointer', markerStart: '10px', 
-                                                marginLeft: "5px" }} onClick={() =>
-                                                 deleteEnquiry(item._id)} size='20px' />
-                                                <MdDelete style={{ cursor: 'pointer', markerStart: '10px', 
-                                                marginLeft: "5px" }} onClick={() =>
-                                                 deleteEnquiry(item._id)} size='20px' />
-                                                
-                                                 </CTableDataCell>
+                                                 <MdEdit style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} 
+                                                onClick={() => deleteEnquiry(item._id)} size='20px' />
+                                                <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} 
+                                                onClick={() => deleteEnquiry(item._id)} size='20px' />
+                                             
+                                                </CTableDataCell>
                                         </CTableRow>
                                     )
                                 ))}

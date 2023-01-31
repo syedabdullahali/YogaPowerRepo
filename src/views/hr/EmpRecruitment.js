@@ -387,7 +387,7 @@ const EmpRecruitment = () => {
                                             
                                             <CTableDataCell>
                                             <CButton className='mt-1' color='success' onClick={()=>showEmpRecrumentFormFun(item)} >Accept</CButton>                                            
-                                            <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>reject</CButton>
+                                            <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Reject</CButton>
                                              </CTableDataCell> 
                                             <CTableDataCell><CButton>View</CButton></CTableDataCell>
                                             <CTableDataCell className='text-center'><a href={`tel:${item.ContactNumber}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.EmailAddress}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a></CTableDataCell>
