@@ -23,15 +23,18 @@ const EmployeeForm = ({showEmpRecrumentFormFun,token,userdata,data}) => {
     const [aadharNo, setAadharNo] = useState('')
     const [validation ,setFormValidation] = useState(true)
 
+var bodyElement = document.body
 
 const  formRenderParentObjeact = {  
-        minHeight:'150%', 
-        width: '99.6vw',
         background:'rgb(0,0,0,0.1)',
         position:'absolute',
         top:'0',
-        left:'0'
-        ,zIndex:'10000',
+        left:'0',
+        botom:'0',
+        right:'0'        ,
+        height:bodyElement.offsetHeight, 
+        width:bodyElement.offsetWidth,
+        zIndex:'10000',
 }
 const toggaleModel=(e)=>{
     if(e.target.className==='card Parent'){
@@ -97,11 +100,11 @@ showEmpRecrumentFormFun()
 
 
 return<CCard style={formRenderParentObjeact} className='Parent' onClick={toggaleModel}>
-     <CCard style={ {width:'90%',margin:'10% auto',background:'rgb(255,255,255)'}}>
+     <CCard style={ {width:'90%',margin:'5% auto',background:'rgb(255,255,255)'}}>
      <CCard color={'success'} style={{ padding: '10px', color: '#ffffff', width: '100px', margin: '15px', cursor: 'pointer' }}>
         Step-2
       </CCard> 
-      {validation || <p style={{color:'red',fontSize:'17px',margin:'0 10px',}}>Please Fill All Details </p>}
+      {validation || <p style={{color:'red',fontSize:'17px',margin:'0 25px',}}>Please Fill All Details </p>}
 
 
       <CCard>

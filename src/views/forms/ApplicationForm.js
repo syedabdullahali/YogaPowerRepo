@@ -20,17 +20,17 @@ const [empCategory,setEmpCategory] = useState('')
 const [payoutType,setPayouttype] = useState('')
 const [Grade,setGrade] = useState('')
 
-
+ var bodyElement = document.body
     const  formRenderParentObjeact = {  
-            minHeight:'100%', 
-            width: '98vw',
+            height:bodyElement.offsetHeight, 
+            width:bodyElement.offsetWidth,
             background:'rgb(255,255,255,0.5)',
             position:'absolute',
             width: '99.6vw',
             background:'rgb(0,0,0,0.1)',
             top:'0',
-            left:'0'
-            ,zIndex:'10000',
+            left:'0',
+            zIndex:'10000',
             display:'flex',
             justifyContent:'center',   
     }
@@ -57,7 +57,7 @@ const [Grade,setGrade] = useState('')
 
     return (
     <CCard style={renderOverTheCurrentPage} className='Parent' onClick={toggaleModel}>
-        <CCard style={ {width:'80%',margin:'10% auto'}}>
+        <CCard style={ {width:'80%',margin:'5% auto'}}>
             <CCardHeader>
                 <CCardTitle>Recruitment Application</CCardTitle>
             </CCardHeader>

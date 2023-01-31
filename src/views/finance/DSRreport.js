@@ -140,24 +140,24 @@ const DSRreport = () => {
                             
                             <div className="md2">Date</div>
                             <div className="md2">Day</div>
-                            <div className="table_header2-1">Existing Leads</div>
-                            <div className="table_header2-2">Added Today</div>
-                            <div className="table_header2-3">Referral generated</div>
-                            <div className="table_header2-4">Lead Converted</div>
-                            <div className="table_header2-5">Spot Coversion</div>
-                            <div className="table_header2-6">Total Closures</div>
-                            <div className="table_header2-7">Trial Scheduled</div>
-                            <div className="table_header2-8">Trial Completed</div>
-                            <div className="table_header2-9">Today's SALE </div>
-                            <div className="table_header2-10">Service Non-PT</div>
-                            <div className="table_header2-11">PT</div>
-                            <div className="table_header2-12">Service Non-PT</div>
-                            <div className="table_header2-13">PT</div>
-                            <div className="table_header2-14">Store</div>
-                            <div className="table_header2-15">Others(Admin Fee)</div>
-                            <div className="table_header2-16">Today Collection</div>
-                            <div className="table_header2-17">New Sales</div>
-                            <div className="table_header2-18">Due Recovered</div>
+                            <div className="table-1">Existing Leads</div>
+                            <div className="table-2">Added Today</div>
+                            <div className="table-3">Referral generated</div>
+                            <div className="table-4">Lead Converted</div>
+                            <div className="table-5">Spot Coversion</div>
+                            <div className="table-6">Total Closures</div>
+                            <div className="table-7">Trial Scheduled</div>
+                            <div className="table-8">Trial Completed</div>
+                            <div className="table-9">Today's SALE </div>
+                            <div className="table-10">Service Non-PT</div>
+                            <div className="table-11">PT</div>
+                            <div className="table-12">Service Non-PT</div>
+                            <div className="table-13">PT</div>
+                            <div className="table-14">Store</div>
+                            <div className="table-15">Others(Admin Fee)</div>
+                            <div className="table-16">Today Collection</div>
+                            <div className="table-17">New Sales</div>
+                            <div className="table-18">Due Recovered</div>
 
 
 
@@ -220,6 +220,7 @@ const DSRreport = () => {
                              <div id="table_row"></div>
                              <div id="table_row"></div>
                              <div id="table_row"></div>
+
 
 
                          </div>
