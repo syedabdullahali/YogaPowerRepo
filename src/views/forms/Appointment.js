@@ -151,52 +151,60 @@ const Appointment = () => {
                                 <CTableRow>
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Booking Date</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Staff</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Appointment Type</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Fees</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Client Name</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Client Number</CTableHeaderCell>
-                                    <CTableHeaderCell>Comments</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Appointment Type</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Appointment With</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Appointment Date</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Appointment Time</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Fees Status</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Status</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Action</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Staff</CTableHeaderCell>
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
                                 <CTableRow>
-                                    <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                    <CTableDataCell>12-09-22</CTableDataCell>
-                                    <CTableDataCell>Sonali</CTableDataCell>
-                                    <CTableDataCell>trail</CTableDataCell>
-                                    <CTableDataCell>200</CTableDataCell>
-                                    <CTableDataCell>suraj</CTableDataCell>
-                                    <CTableDataCell>7710957578</CTableDataCell>
-                                    <CTableDataCell>good fees paid</CTableDataCell>
-                                    <CTableDataCell>05-10-22</CTableDataCell>
-                                    <CTableDataCell>Confirm(Appointment update)</CTableDataCell>
-                                    <CTableDataCell>edit/delete/view profile/invoice</CTableDataCell>
+                                <CTableDataCell>1</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                                 <CTableRow>
-                                    <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
-                                    <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                <CTableDataCell>2</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                                 <CTableRow>
-                                    <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
-                                    <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
+                                <CTableDataCell>3</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                 </CTableRow>
                             </CTableBody>
                         </CTable>

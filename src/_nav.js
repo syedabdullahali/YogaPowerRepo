@@ -47,19 +47,15 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Employee Dashboard',
+        name: ' Dashboard',
         to: '/emp-dashboard',
       },
       {
         component: CNavItem,
         name: 'Employee Target',
-        to: '/employee/sales-target',
+        to: '/sales-target',
       },
-      {
-        component: CNavGroup,
-        name: 'Daily Task',
-        to: '/base',
-        items: [
+         
           {
             component: CNavItem,
             name: 'Member Calls',
@@ -67,14 +63,9 @@ const _nav = [
           },
           {
             component: CNavItem,
-            name: 'Service Calls',
-            to: '/clients/service-call',
-          },
-        
-        ],
-      },
-
-    ],
+            name: 'Sales Call',
+            to: '/clients/sales-call',
+          },],
   },
   {
     component: CNavGroup,

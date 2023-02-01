@@ -1,6 +1,6 @@
-
+import Calender from './Calender'
 import React,{useState} from 'react'
-import { CCol,CFormInput,CRow,CButton,CFormSelect } from '@coreui/react'
+import { CCol,CFormInput,CRow,CButton,CFormSelect,CCard,CForm } from '@coreui/react'
 
 
 
@@ -23,7 +23,8 @@ const [selectedTask,setSelectedTask] = useState()
 
 
 
-function CreateTask (){
+function sumbitTask (e){
+    consloe.log(e.preventDefault())
 
 }
 
@@ -31,9 +32,11 @@ function CreateTask (){
 
 
 return (
+    <>
+          <CCard className='p-4' onSubmit={sumbitTask}>
 
-
-<CCol lg={12} sm={12}>
+          <CForm>
+                <CCol lg={12} sm={12}>
                                      <CRow>
                                      <CCol xs={6}>
                                                 <CFormInput
@@ -82,10 +85,14 @@ return (
                                           </CCol> 
                                          
                                          <CCol xs={6}>
-                                         <CButton className="mt-2"onClick={() => CreateTask()}>Save</CButton>
+                                         <CButton type='submit' className="mt-2">Save</CButton>
                                          </CCol>
                                       </CRow>                                          
-</CCol>                                       
+                           </CCol>   
+                  </CForm>                    
+          </CCard> 
+    <Calender/>
+    </>                                  
   )
 }
 
