@@ -180,7 +180,7 @@ const AllSuppilerList = () => {
                 </CToast>
             </CCol>
             <CCol lg={3} sm={6} className='mb-2'>
-                <CButton className="float-end" onClick={() => { setAction(!action), clear() }}>{action ? 'Close' : 'Add Supplier List'}</CButton>
+                <CButton className="float-end" onClick={() => { setAction(!action), clear() }}>{action ? 'Close' : 'Add Clothes Product'}</CButton>
             </CCol>
             {action &&
 

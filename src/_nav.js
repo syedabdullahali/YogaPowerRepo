@@ -258,23 +258,13 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Task',
-    to: '/base',
+    to: '/task',
     icon: <CIcon icon={cilGraph} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
-        to: '/base/accordion',
-      },
-      {
-        component: CNavItem,
-        name: 'PT',
-        to: '/base/breadcrumbs',
-      },
-      {
-        component: CNavItem,
-        name: 'Classes',
-        to: '/base/cards',
+        name: 'Create a Task',
+        to: 'task/create-a-task',
       },
     ],
   },
@@ -289,16 +279,7 @@ const _nav = [
         name: 'IMP Call List',
         to: '/inventory/all-call-list',
       },
-      {
-        component: CNavItem,
-        name: 'All Supplier List',
-        to: '/inventory/all-suppiler1',
-      },
-      {
-        component: CNavItem,
-        name: 'Guest List',
-        to: '/inventory/guest-list1',
-      },
+
       {
         component: CNavItem,
         name: 'Stock Listing',
@@ -610,19 +591,19 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Center Setup',
+    name: 'Center Setup master',
     to: '/master/center-setup',
     icon: <CIcon icon={cilCenterFocus} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Support',
+    name: 'MarKeting',
     to: '/theme/colors',
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },
   {
     component: CNavGroup,
-    name: 'Marketing',
+    name: 'Client',
     to: '/master/marketing',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [

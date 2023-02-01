@@ -42,6 +42,11 @@ const SMSMarketing = React.lazy(() => import('./views/marketing/SMSMarketing'))
 const PushMarketing = React.lazy(() => import('./views/marketing/PushMarketing'))
 const OfferMaster = React.lazy(() => import('./views/marketing/OfferMarketing'))
 
+// Task
+const CreateTask = React.lazy(()=>import('./views/Task/CreateTask'))
+
+
+
 // Inventory
 const AllCallList = React.lazy(() => import('./views/Inventory/AllCallList'))
 const ImpCallList = React.lazy(() => import('./views/Inventory/ImpCallList'))
@@ -267,14 +272,13 @@ const routes = [
   { path: '/Marketing/sms-marketing', name: 'SMS Marketing', element: SMSMarketing },
   { path: '/Marketing/push-marketing', name: 'App Notification', element: PushMarketing },
   { path: '/Marketing/offers-master', name: 'Offer Master', element: OfferMaster },
+  {path:'task/create-a-task',name:'Create Task',element:CreateTask},
 
   //Inventory
   { path: '/inventory', name: 'Inventory', element: ImpCallList, exact: true },
   { path: '/inventory/all-call-list', name: 'All Call List', element: AllCallList },
   { path: '/inventory/imp-call', name: 'Imp Call List', element: ImpCallList },
   { path: '/inventory/all-suppiler', name: 'All Suppiler List', element: AllSuppilerList },
-  { path: '/inventory/all-suppiler1', name: 'All Suppiler List', element: AllSuppilerList1 },
-  { path: '/inventory/guest-list1', name: 'Guest List', element: GuestList },
   { path: '/inventory/stock-listing1', name: 'Stock Listing', element: StockListing1 },
   { path: '/inventory/stock-report', name: 'Stock Report', element: StockReport },
   { path: '/inventory/sales-report', name: 'PSales Report', element: ProductSalesReport },

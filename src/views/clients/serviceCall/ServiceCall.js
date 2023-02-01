@@ -1,5 +1,8 @@
 import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
+
+import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md';
+import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs';
 import {
     CButton,
     CButtonGroup,
@@ -71,7 +74,7 @@ const ServiceCall = () => {
                                     Irregular Member Call
                                 </CNavLink>
                             </CNavItem>
-                            <CNavItem>
+                            {/* <CNavItem>
                                 <CNavLink
                                     href="javascript:void(0);"
                                     active={activeKey === 5}
@@ -79,7 +82,7 @@ const ServiceCall = () => {
                                 >
                                     Courtesy Calls
                                 </CNavLink>
-                            </CNavItem>
+                            </CNavItem> */}
                             <CNavItem>
                                 <CNavLink
                                     href="javascript:void(0);"
@@ -157,53 +160,57 @@ const ServiceCall = () => {
                                     <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Date</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Timing</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Client_Id
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Contact</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Service
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Discussion</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Target</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">
-                                                Achieved/Collected
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">
-                                                Balance Collection
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Action</CTableHeaderCell>
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>3</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
                                         </CTableRow>
                                     </CTableBody>
                                 </CTable>
@@ -268,56 +275,62 @@ const ServiceCall = () => {
                                     </CCol>
                                 </CRow>
                                 <CTable bordered borderColor="primary" responsive>
-                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Date</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Timing</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Client_Id
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Contact</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                service
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Discussion</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Target</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">
-                                                Achieved/Collected
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">
-                                                Balance Collection
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Action</CTableHeaderCell>
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
+                                           
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
+                                            
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>3</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
                                         </CTableRow>
                                     </CTableBody>
                                 </CTable>
@@ -382,56 +395,76 @@ const ServiceCall = () => {
                                     </CCol>
                                 </CRow>
                                 <CTable bordered borderColor="primary" responsive>
-                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Date</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Timing</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Client-Id
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Contact</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Service
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Duration</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Total Amount</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Paid</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Balance</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Discussion</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Target</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">
-                                                Achieved/Collected
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">
-                                                Balance Collection
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Action</CTableHeaderCell>
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
                                         </CTableRow>
                                     </CTableBody>
                                 </CTable>
@@ -496,56 +529,194 @@ const ServiceCall = () => {
                                     </CCol>
                                 </CRow>
                                 <CTable bordered borderColor="primary" responsive>
-                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Date</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Timing</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Client-Id
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Contact</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Service
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Duration</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Expiry Date</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Discussion</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Target</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">
-                                                Achieved/Collected
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">
-                                                Balance Collection
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Action</CTableHeaderCell>
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
                                         </CTableRow>
                                         <CTableRow>
-                                            <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                            <CTableDataCell>Sejal</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>10000</CTableDataCell>
-                                            <CTableDataCell>5000</CTableDataCell>
-                                            <CTableDataCell>2000</CTableDataCell>
-                                            <CTableDataCell>3000</CTableDataCell>
-                                            <CTableDataCell>View</CTableDataCell>
-                                            <CTableDataCell>100%</CTableDataCell>
+                                        <CTableDataCell>3</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
+                                        </CTableRow>
+                                    </CTableBody>
+                                </CTable>
+                            </CTabPane>
+                            <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 6}>
+                                <CRow className='mb-3'>
+                                    <CCol xs={2}>
+                                        <CInputGroup>
+                                            <CInputGroupText
+                                                component="label"
+                                                htmlFor="inputGroupSelect01"
+                                            >
+                                                Month
+                                            </CInputGroupText>
+                                            <CFormSelect id="inputGroupSelect01">
+                                                <option>Sep</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </CFormSelect>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol xs={2}>
+                                        <CInputGroup>
+                                            <CInputGroupText
+                                                component="label"
+                                                htmlFor="inputGroupSelect01"
+                                            >
+                                                Year
+                                            </CInputGroupText>
+                                            <CFormSelect id="inputGroupSelect01">
+                                                <option>2022</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </CFormSelect>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol>
+                                        <CInputGroup className="left">
+                                            <CFormInput
+                                                placeholder="Staff Name"
+                                                aria-label="Recipient's username"
+                                                aria-describedby="button-addon2"
+                                            />
+                                            <CButton type="button" color="primary" id="button-addon2">
+                                                Go
+                                            </CButton>
+                                        </CInputGroup>
+                                    </CCol>
+                                    <CCol>
+                                        <CButtonGroup>
+                                            <CButton color="primary">
+                                                <CIcon icon={cilArrowCircleBottom} />
+                                                Import
+                                            </CButton>
+                                            <CButton color="primary">
+                                                <CIcon icon={cilArrowCircleTop} />
+                                                Export
+                                            </CButton>
+                                        </CButtonGroup>
+                                    </CCol>
+                                </CRow>
+                                <CTable bordered borderColor="primary" responsive>
+                                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
+                                        <CTableRow>
+                                            <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Date</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Timing</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Client Id
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Contact</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Service
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Expiry Date</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Date of Birth</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Discussion</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">Action</CTableHeaderCell>
+                                        </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                        <CTableRow>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
+                                        </CTableRow>
+                                        <CTableRow>
+                                        <CTableDataCell>2</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
+                                        </CTableRow>
+                                        <CTableRow>
+                                        <CTableDataCell>3</CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
                                         </CTableRow>
                                     </CTableBody>
                                 </CTable>
