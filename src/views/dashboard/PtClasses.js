@@ -360,16 +360,6 @@ const PtClasses = () => {
                                             <CTableHeaderCell scope="col">Days</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Start Date</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">End Date</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Sr.No</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Client Name</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Mobile</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Services</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Trainer Name</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Class Timing</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Package</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Days</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Start Date</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">End Date</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Sun<br/> 1</CTableHeaderCell>                                           
                                             <CTableHeaderCell scope="col">Mon<br/> 2</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Tue<br/> 3</CTableHeaderCell>
@@ -406,16 +396,7 @@ const PtClasses = () => {
                                     </CTableHead>
                                     <CTableBody>
                                         <CTableRow>
-                                            <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
+                                        
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
@@ -458,16 +439,7 @@ const PtClasses = () => {
                                            
                                         </CTableRow>
                                         <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
+                                        
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
@@ -509,16 +481,7 @@ const PtClasses = () => {
                                             <CTableDataCell></CTableDataCell>
                                         </CTableRow>
                                         <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
+                                       
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>

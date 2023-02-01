@@ -355,6 +355,7 @@ const LiveClasses = () => {
                                             <CTableHeaderCell scope="col">Package</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Days</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Start Date</CTableHeaderCell>
+                                            <CTableHeaderCell scope="col"> End Date</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Sun<br/> 1</CTableHeaderCell>                                           
                                             <CTableHeaderCell scope="col">Mon<br/> 2</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Tue<br/> 3</CTableHeaderCell>
@@ -433,6 +434,8 @@ const LiveClasses = () => {
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+
                                           
 
                             
@@ -476,6 +479,8 @@ const LiveClasses = () => {
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>
+
 
                                         </CTableRow>
                                         <CTableRow>
@@ -517,10 +522,7 @@ const LiveClasses = () => {
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                                            
-
-
-                                           
+                                            <CTableDataCell></CTableDataCell>
                             
                                         </CTableRow>
                                     </CTableBody>
