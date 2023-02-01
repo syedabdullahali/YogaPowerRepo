@@ -103,6 +103,11 @@ const _nav = [
         name: 'TTC CLASSES',
         to: '/trainer/ttc-classes',
       },
+      {
+        component: CNavItem,
+        name: 'ALL MEMBERS',
+        to: '/trainer/all-members',
+      },
     ],
   },
   {
