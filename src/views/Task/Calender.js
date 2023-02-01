@@ -28,57 +28,26 @@ function getDaysInMonth(month, year) {
 
 console.log(getDaysInMonth(1,2023))
 
-// const columns = ['sun','Mon','Tue','Wed','Thu','Fri','Sat']
-// const items = ['g','g','g','g']
 const footer = getDaysInMonth(1,2023)
 
 
 const daysInWeakPears = footer.map((el)=>footer.splice(0,7).filter((el)=>el)).filter((el)=>el)
 
 
-const columns = [
-    {
-      key: 'id',
-      label: 'Time',
-      _props: { scope: 'col' },
-    },
-    {
-      key: 'Jonas',
-      _props: { scope: 'col' },
-    },
-    {
-      key: 'heading_1',
-      label: 'Heading',
-      _props: { scope: 'col' },
-    },
-   {
-      key: 'heading_2',
-      label: 'Heading',
-      _props: { scope: 'col' },
-    },
-    {
-      key: 'heading_2',
-      label: 'Heading',
-      _props: { scope: 'col' },
-    },
-    {
-      key: 'heading_2',
-      label: 'Heading',
-      _props: { scope: 'col' },
-    },
-]
 
 
-const Time = ['7AM','8AM','9AM','10AM','11AM','1APM','1PM','2PM','3PM','4PM','5PM','6PM','7PM','8PM','9PM']
+const Time = ['7AM','8AM','9AM','10AM','11AM','12PM','1PM','2PM','3PM','4PM','5PM','6PM','7PM','8PM','9PM']
 
 const StyleCalenderHead ={
   background:'#0B5345',
-  height:'100px',
+  height:'70px',
   color:'white',
   fontSize:'20px', 
   textAlign:'center',
   padding:'10px',
   gap:'0px',
+  borderRight:'1px solid white',
+
 }
 
 const StyleCalenderHead2 ={
@@ -87,8 +56,8 @@ const StyleCalenderHead2 ={
   fontSize:'20px', 
   textAlign:'center',
   padding:'10px',
-  border:'1px solid black',
-  borderTop:'none',
+  borderLeft:'1px solid black',
+  borderBottom:'1px solid black',
   lineHeight:'100px',
   minWidth:'100px' 
 }
@@ -97,11 +66,14 @@ const StyleCalenderHead2 ={
 const Calender = () => {
   return (    
 <CCard className="p-4 mt-5" style={{overflowX:'scroll'}}> 
-    <CContainer style={{width:'1380px'}}>
-  <CRow>
-    <CCol >
-      <CCol style={StyleCalenderHead} >Time</CCol>
-      {Time.map((el)=> <CCol style={StyleCalenderHead2} >{el}</CCol>)}
+    <CContainer style={{width:'1200px',cuiGutterX:"0rem",border:'1px solid',padding:'0'}}>
+      <CRow xs={{ gutterX: 0 }}>
+      <CCol style={{...StyleCalenderHead,borderBottom:'1px solid white'}} ><h2>2 February 2023</h2></CCol>
+      </CRow>
+  <CRow xs={{ gutterX: 0 }}>
+    <CCol sm={1} >
+      <CCol style={{...StyleCalenderHead,borderBottom:'1px solid white'}} >Time</CCol>
+      {Time.map((el)=> <CCol style={{...StyleCalenderHead2,...{color:'white',background:'#0B5345',borderBottom:'1px solid white'}}} >{el}</CCol>)}
     </CCol>
 
     <CCol>
@@ -124,9 +96,7 @@ const Calender = () => {
     <CCol  style={StyleCalenderHead} >Jonas3</CCol>
       {Time.map((el)=> <CCol style={StyleCalenderHead2} ></CCol>)}
     </CCol>
-    
-  </CRow>
-  
+  </CRow>  
 </CContainer>
     
 </CCard>
