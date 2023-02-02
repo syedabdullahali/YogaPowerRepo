@@ -80,7 +80,7 @@ if(userName!==""&&selectedTask!==''&&date!==''&&Time!==''){
      if(val){
         console.log()
         prev.forEach((el,i)=>{
-          el.userInfo = prev.map((el)=>el.userInfo.filter((el)=>el.userName!==''))[i]
+          el.userInfo = prev.map((el)=>el.userInfo.filter((el)=>el.userName!=="Welcome! Back Let's Create a Task To Members"))[i]
         })
         return [...prev]
      }else{
@@ -179,7 +179,7 @@ return (
                   <CButton onClick={()=>toggaleFun()} className='p-2' style={{width:'300px',marginLeft:'auto'}} color='primary'> <h5> Add Your Task</h5></CButton>}                   
           </CCard> 
 
-          
+
 
     {TaskData.filter((el)=>el).map((el,i)=>{
     return <Calender 
