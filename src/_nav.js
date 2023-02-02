@@ -65,6 +65,11 @@ const _nav = [
             component: CNavItem,
             name: 'Sales Call',
             to: '/clients/sales-call',
+          },
+          {
+            component: CNavItem,
+            name: 'Services Rate Card',
+            to: '/clients/servicesrate-card',
           },],
   },
   {

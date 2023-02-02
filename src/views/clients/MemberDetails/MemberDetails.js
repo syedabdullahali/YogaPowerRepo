@@ -26,6 +26,7 @@ import {
 } from '@coreui/react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Attendence from './Attendence'
 import Appointment from './Appointment'
 import CallUpdate from './CallUpdate'
 import Documents from './Documents'
@@ -56,7 +57,7 @@ const MemberDetails = () => {
                                 { id: '1', heading: 'Profile' },
                                 { id: '2', heading: 'Services' },
                                 { id: '3', heading: 'Payments' },
-                                { id: '4', heading: 'Attendance' },
+                                { id: '4', heading: 'Attendence' },
                                 { id: '5', heading: 'Appointments' },
                                 { id: '6', heading: 'Refers' },
                                 { id: '7', heading: 'Shop' },
@@ -84,8 +85,8 @@ const MemberDetails = () => {
                                 { id: '1', heading: 'Profile', com: <ProfileDetails ids={id} deleteId={id} /> },
                                 { id: '2', heading: 'Services', com: <ServiceProfile id={id} /> },
                                 { id: '3', heading: 'Payments', com: <Payment id={id} /> },
-                                { id: '4', heading: 'Attendance' },
-                                { id: '5', heading: 'Appointments', com: <Appointment id={id} /> },
+                                { id: '4', heading: 'Attendence', com: <Attendence id={id} /> },
+                                { id: '5', heading: 'Appoinments', com: <Appointment id={id} /> },
                                 { id: '6', heading: 'Refers', com: <Referrals id={id} /> },
                                 { id: '7', heading: 'Shop' },
                                 { id: '8', heading: 'Calls', com: <CallUpdate id={id} /> },

@@ -439,11 +439,13 @@ const CallUpdate = ({ id }) => {
                         <CCardTitle>Call Log </CCardTitle>
                     </div>
                     <div className='justify-content-around'>
-                        <CButton style={{ margin: '5px' }}>Inter branch transfer</CButton>
-                        <CButton style={{ margin: '5px' }}>Print Profile</CButton>
+                        <CButton style={{ margin: '5px' }} onClick={() => navi("/leads/followups-scheduling")}>Followups Calls</CButton>
+                        <CButton style={{ margin: '5px' }} onClick={() => navi("/clients/service-call")}>Member Calls</CButton>
+                        <CButton style={{ margin: '5px' }} onClick={() => navi("/clients/sales-call")}>Sales Calls</CButton>
+                        {/* <CButton style={{ margin: '5px' }}>Print Profile</CButton> */}
                         <CButton style={{ margin: '5px' }} onClick={() => navi("/forms/invoice")}>New Invoice</CButton>
                         <CButton style={{ margin: '5px' }} onClick={() => { setCallReport(true), handleCallReport(id) }}>New Call</CButton>
-                        <CButton style={{ margin: '5px' }}>New Appointment</CButton>
+                        {/* <CButton style={{ margin: '5px' }}>New Appointment</CButton> */}
                     </div>
 
                 </div>

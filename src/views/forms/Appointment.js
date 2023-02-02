@@ -29,8 +29,8 @@ const Appointment = () => {
                         <strong className="mt-2">Appointment</strong>
                     </CCardHeader>
                     <CCardBody>
-                        <CRow className='d-flex justify-content-center mb-2'>
-                            <CCol lg={5} sm={12} className='mb-2'>
+                        <CRow >
+                            <CCol>
                                 <CInputGroup style={{ width: "500px" }}>
                                     <CInputGroupText
                                         component="label"
@@ -60,9 +60,32 @@ const Appointment = () => {
                                         Search
                                     </CButton>
                                 </CInputGroup>
+                              
                             </CCol>
+                            <CRow>
                             <CCol>
-                                <CButton className='float-end' onClick={() => setAppointment(!appointment)} >{appointment ? 'Close' : 'Add Appointment'}</CButton>
+                            <CInputGroup style={{ width: "500px" }}>
+                                    <CInputGroupText
+                                        component="label"
+                                        htmlFor="inputGroupSelect01"
+                                    >
+                                        Mobile Number
+                                    </CInputGroupText>
+                                    <CFormInput
+                                        placeholder="Search"
+                                        type='Number'
+                                        aria-label="Recipient's username"
+                                        aria-describedby="button-addon2"
+                                    />
+    
+                                    <CButton type="button" color="primary">
+                                        Search
+                                    </CButton>
+                                </CInputGroup>
+                            </CCol>
+                            </CRow>
+                            <CCol>
+                                <CButton className='float-end' onClick={() => setAppointment(!appointment)} >{appointment ? 'Close' : 'Book Appointment'}</CButton>
                             </CCol>
                         </CRow>
                         {appointment &&
@@ -147,7 +170,7 @@ const Appointment = () => {
                         }
 
                         <CTable bordered style={{ borderColor: "#106103" }} responsive>
-                            <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
+                            <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
                                 <CTableRow>
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Booking Date</CTableHeaderCell>
