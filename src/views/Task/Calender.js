@@ -14,24 +14,24 @@ document.write("The current month is " + monthNames[d.getMonth()]);
 //  * @return {Date[]} List with date objects for each day of the month
 //  */
 
-function getDaysInMonth(month, year) {
-  var date = new Date(year, month, 1);
-  var days = [];
-  while (date.getMonth() === month) {
-    // console.log(date.getDate())
-    days.push(date.getDate());
-    date.setDate(date.getDate() + 1);
-  }
-  return days;
-}
+// function getDaysInMonth(month, year) {
+//   var date = new Date(year, month, 1);
+//   var days = [];
+//   while (date.getMonth() === month) {
+//     // console.log(date.getDate())
+//     days.push(date.getDate());
+//     date.setDate(date.getDate() + 1);
+//   }
+//   return days;
+// }
 
 
-console.log(getDaysInMonth(1,2023))
+// console.log(getDaysInMonth(1,2023))
 
-const footer = getDaysInMonth(1,2023)
+// const footer = getDaysInMonth(1,2023)
 
 
-const daysInWeakPears = footer.map((el)=>footer.splice(0,7).filter((el)=>el)).filter((el)=>el)
+// const daysInWeakPears = footer.map((el)=>footer.splice(0,7).filter((el)=>el)).filter((el)=>el)
 
 
 
@@ -40,14 +40,14 @@ const Time = ['7AM','8AM','9AM','10AM','11AM','12PM','1PM','2PM','3PM','4PM','5P
 
 const StyleCalenderHead ={
   background:'#0B5345',
-  height:'70px',
+  minHeight:'70px',
   color:'white',
   fontSize:'20px', 
   textAlign:'center',
   padding:'10px',
   gap:'0px',
   borderRight:'1px solid white',
-
+  minWidth:'100px' 
 }
 
 const StyleCalenderHead2 ={
@@ -56,33 +56,39 @@ const StyleCalenderHead2 ={
   fontSize:'20px', 
   textAlign:'center',
   padding:'10px',
-  borderLeft:'1px solid black',
+  borderRight:'1px solid black',
   borderBottom:'1px solid black',
   lineHeight:'100px',
   minWidth:'100px' 
 }
 
+const Calender = ({CurrentDate,CurrentMonth,CurrentYear,userInfo}) => {
 
-const Calender = () => {
+  console.log(CurrentDate,CurrentMonth,CurrentYear,userInfo)
+
   return (    
-<CCard className="p-4 mt-5" style={{overflowX:'scroll'}}> 
-    <CContainer style={{width:'1200px',cuiGutterX:"0rem",border:'1px solid',padding:'0'}}>
+<CCard className="p-4 mt-5" style={{overflow:'scroll'}}> 
+    <CContainer style={{minWidth:'700px',width:'120%',cuiGutterX:"0rem",border:'1px solid',padding:'0'}}>
       <CRow xs={{ gutterX: 0 }}>
-      <CCol style={{...StyleCalenderHead,borderBottom:'1px solid white'}} ><h2>2 February 2023</h2></CCol>
+      <CCol style={{...StyleCalenderHead,borderBottom:'1px solid white'}} ><h2>{`${+CurrentDate} ${monthNames[+CurrentMonth]} ${CurrentYear} `}</h2></CCol>
       </CRow>
   <CRow xs={{ gutterX: 0 }}>
-    <CCol sm={1} >
+    <CCol style={{flex:"0"}} >
       <CCol style={{...StyleCalenderHead,borderBottom:'1px solid white'}} >Time</CCol>
-      {Time.map((el)=> <CCol style={{...StyleCalenderHead2,...{color:'white',background:'#0B5345',borderBottom:'1px solid white'}}} >{el}</CCol>)}
+      {Time.map((el)=> <CCol style={{...StyleCalenderHead2,...{color:'white',background:'#0B5345',borderBottom:'1px solid white',minWidth:'100px'}}} >{el}</CCol>)}
     </CCol>
 
-    <CCol>
-      <CCol style={StyleCalenderHead}>Jonas</CCol>
+     {userInfo.map((el)=>{
+      return <CCol >
+      <CCol style={StyleCalenderHead}>{el.userName}</CCol>
       {Time.map((el)=> <CCol  style={StyleCalenderHead2}></CCol>)}
     </CCol>
+     })}
+
     
     
-    <CCol>
+    
+    {/* <CCol>
     <CCol  style={StyleCalenderHead}>Jonas1</CCol>
       {Time.map((el)=> <CCol style={StyleCalenderHead2} ></CCol>)}
     </CCol>
@@ -95,7 +101,7 @@ const Calender = () => {
     <CCol>
     <CCol  style={StyleCalenderHead} >Jonas3</CCol>
       {Time.map((el)=> <CCol style={StyleCalenderHead2} ></CCol>)}
-    </CCol>
+    </CCol> */}
   </CRow>  
 </CContainer>
     

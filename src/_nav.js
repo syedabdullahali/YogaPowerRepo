@@ -684,6 +684,11 @@ const _nav = [
         name: 'Fitness Workout',
         to: '/base/cards',
       },
+      {
+        component: CNavItem,
+        name: 'Diet',
+        to: '/base/cards',
+      },
     ],
   },
   {

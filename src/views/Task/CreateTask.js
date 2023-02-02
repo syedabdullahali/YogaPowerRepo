@@ -7,33 +7,79 @@ import { CCol,CFormInput,CRow,CButton,CFormSelect,CCard,CForm } from '@coreui/re
 
 const CreateTask = () => {
 
-const user =[
-    {
-        name:'Jonas',
-        date:'2023-02-11',
-        task:'Hve to go',
-        time:'67:pm' 
-    }
-]
+
 
 const [userName,setUserName] = useState()
 const [ date,setDate] = useState()
 const [ Time,setTime] = useState()
 const [selectedTask,setSelectedTask] = useState()
 
+const CurrentDate = new Date()
+
+
+const [TaskData,setTaskData] = useState([
+    {
+        date:`${CurrentDate.getDate()}`, 
+        month:`${CurrentDate.getMonth()+1}`,
+        year:`${CurrentDate.getFullYear()}`, 
+        userInfo:[{userName:"Jonas",
+        userTime:'7:90 ',
+        selectedTask:'38'}]
+    }
+])
 
 
 function sumbitTask (e){
-    consloe.log(e.preventDefault())
+if(userName!==''&& date!==''&& Time!==''&&selectedTask!==''){
+
+    const TaskObjeact = {
+        userInfo:[{userName,
+        userTime:Time,
+        selectedTask}],
+        date:`${+date.split("-")[2]}`,
+        month:`${+date.split("-")[1]}`,
+        year:`${+date.split("-")[0]}`,       
+    }
+    console.log(e.preventDefault())
+
+    setTaskData((prev)=>{
+        console.log(prev)
+
+
+
+    const val =    prev.some((el)=>{
+            const value =(el.date ==TaskObjeact.date && el.month ===TaskObjeact.month && el.year ===TaskObjeact.year )
+             if(el.date ==TaskObjeact.date && el.month ===TaskObjeact.month && el.year ===TaskObjeact.year ){
+              el.userInfo.push(...TaskObjeact.userInfo)
+             }
+            return  value 
+           })
+    console.log(val)
+
+     if(val){
+        return [...prev]
+     }else{
+        return  [...prev,TaskObjeact]
+     }  
+
+})
+    console.log(TaskData)
+
+}
+
 
 }
 
 
 
 
+
+
+
 return (
+
     <>
-          <CCard className='p-4' onSubmit={sumbitTask}>
+          <CCard className='p-4' >
 
           <CForm>
                 <CCol lg={12} sm={12}>
@@ -85,13 +131,24 @@ return (
                                           </CCol> 
                                          
                                          <CCol xs={6}>
-                                         <CButton type='submit' className="mt-2">Save</CButton>
+                                         <CButton type='submit'  onClick={sumbitTask} className="mt-2">Save</CButton>
                                          </CCol>
                                       </CRow>                                          
                            </CCol>   
                   </CForm>                    
           </CCard> 
-    <Calender/>
+
+    {TaskData[0]&&TaskData.map((el)=>{
+    console.log(el)    
+    return <Calender 
+         CurrentDate ={el.date}
+         CurrentMonth={el.month-1}
+         CurrentYear={el.year} 
+         userInfo={el.userInfo}   
+         />
+    }
+    )}
+
     </>                                  
   )
 }
