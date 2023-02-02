@@ -36,7 +36,7 @@ document.write("The current month is " + monthNames[d.getMonth()]);
 
 
 
-const Time = ['7AM','8AM','9AM','10AM','11AM','12PM','1PM','2PM','3PM','4PM','5PM','6PM','7PM','8PM','9PM']
+const Time = ['7 AM','8 AM','9 AM','10 AM','11 AM','12 PM','1 PM','2 PM','3 PM','4 PM','5 PM','6 PM','7 PM','8 PM','9 PM']
 
 const StyleCalenderHead ={
   background:'#0B5345',
@@ -62,46 +62,43 @@ const StyleCalenderHead2 ={
   minWidth:'100px' 
 }
 
-const Calender = ({CurrentDate,CurrentMonth,CurrentYear,userInfo}) => {
+const Calender = ({CurrentDate,CurrentMonth,CurrentYear,userInfo,size}) => {
 
-  console.log(CurrentDate,CurrentMonth,CurrentYear,userInfo)
+  const width  = size>3?120+(size*10):100 
+
 
   return (    
-<CCard className="p-4 mt-5" style={{overflow:'scroll'}}> 
-    <CContainer style={{minWidth:'700px',width:'120%',cuiGutterX:"0rem",border:'1px solid',padding:'0'}}>
+ <CCard className="p-4 mt-5" style={{overflow:'scroll'}}> 
+    <CContainer style={{minWidth:'700px',maxWidth:'10000000000000000000000000000000px',width:`${width}%`,cuiGutterX:"0rem",border:'1px solid',padding:'0'}}>
       <CRow xs={{ gutterX: 0 }}>
       <CCol style={{...StyleCalenderHead,borderBottom:'1px solid white'}} ><h2>{`${+CurrentDate} ${monthNames[+CurrentMonth]} ${CurrentYear} `}</h2></CCol>
       </CRow>
   <CRow xs={{ gutterX: 0 }}>
     <CCol style={{flex:"0"}} >
       <CCol style={{...StyleCalenderHead,borderBottom:'1px solid white'}} >Time</CCol>
-      {Time.map((el)=> <CCol style={{...StyleCalenderHead2,...{color:'white',background:'#0B5345',borderBottom:'1px solid white',minWidth:'100px'}}} >{el}</CCol>)}
+      {Time.map((el)=> 
+      <CCol style={{...StyleCalenderHead2,...{color:'white',background:'#0B5345',borderBottom:'1px solid white',minWidth:'100px'}}} >{el.split(" ").join("")}</CCol>)}
     </CCol>
 
-     {userInfo.map((el)=>{
+     {userInfo.map((el,i)=>{
       return <CCol >
       <CCol style={StyleCalenderHead}>{el.userName}</CCol>
-      {Time.map((el)=> <CCol  style={StyleCalenderHead2}></CCol>)}
+      {Time.map((el2)=>{         
+        if(+el2.split(" ")[0]=== +el.userTime[0]  && el2.includes('AM')){
+          console.log(el.selectedTask)
+         return  <CCol  style={StyleCalenderHead2}>{  ("Time " + el.userTime[0] +":" + el.userTime[1]  +"AM" + " " +  el.selectedTask)}</CCol>
+        }
+        
+        if(+el2.split(" ")[0]+12=== +el.userTime[0] && el2.includes('PM')){
+          return  <CCol  style={StyleCalenderHead2}>{  ("Time " + (el.userTime[0]-12) + ":" + el.userTime[1] +"PM"  + " " + el.selectedTask)}</CCol>
+
+        }
+        return  <CCol  style={StyleCalenderHead2}></CCol>
+
+
+      })}
     </CCol>
      })}
-
-    
-    
-    
-    {/* <CCol>
-    <CCol  style={StyleCalenderHead}>Jonas1</CCol>
-      {Time.map((el)=> <CCol style={StyleCalenderHead2} ></CCol>)}
-    </CCol>
-    
-    <CCol>
-    <CCol  style={StyleCalenderHead} >Jonas2</CCol>
-      {Time.map((el)=> <CCol style={StyleCalenderHead2}  ></CCol>)}
-    </CCol>
-
-    <CCol>
-    <CCol  style={StyleCalenderHead} >Jonas3</CCol>
-      {Time.map((el)=> <CCol style={StyleCalenderHead2} ></CCol>)}
-    </CCol> */}
   </CRow>  
 </CContainer>
     

@@ -36,7 +36,7 @@ const ServiceCall = React.lazy(() => import('./views/clients/serviceCall/Service
 const AllService = React.lazy(() => import('./views/clients/allService/AllService'))
 const MemberDetails = React.lazy(() => import('./views/clients/MemberDetails/MemberDetails'))
 const SalesCall = React.lazy(() => import('./views/clients/salesCall/SalesCall'))
-
+const ServicesRateCard = React.lazy(() => import('./views/clients/ServicesRateCard/ServicesRateCard'))
 //Marketing
 const EmailMarketing = React.lazy(() => import('./views/marketing/EmailMarketing'))
 const SMSMarketing = React.lazy(() => import('./views/marketing/SMSMarketing'))
@@ -267,6 +267,7 @@ const routes = [
   { path: '/clients/all-service', name: 'All Service', element: AllService },
   { path: '/clients/member-details/:id/:i', name: 'Member Details', element: MemberDetails },
   { path: '/clients/sales-call', name: 'Sales Call', element: SalesCall },
+  { path: '/clients/servicesrate-card', name: 'ServicesRate Card', element: ServicesRateCard },
 
   //Marketing
   { path: '/Marketing', name: 'Marketing', element: EmailMarketing, exact: true },

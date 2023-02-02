@@ -7,7 +7,7 @@ const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
 
-const Payment = ({ id }) => {
+const Attendence = ({ id }) => {
 
     const [viewInvoice, setViewInvoice] = useState(false);
 
@@ -104,15 +104,15 @@ const Payment = ({ id }) => {
             <CCol xs={12}>
                 <div className='d-flex justify-content-between mb-2'>
                     <div className='mt-2 ms-2'>
-                        <CCardTitle>Payments </CCardTitle>
+                        <CCardTitle>Attendence </CCardTitle>
                     </div>
                     {/* <div className='justify-content-around'>
-                        <CButton style={{ margin: '5px' }}>Inter branch transfer</CButton>
-                        <CButton style={{ margin: '5px' }}>Print Profile</CButton>
-                        <CButton style={{ margin: '5px' }}>New Invoice</CButton>
-                        <CButton style={{ margin: '5px' }}>New Call</CButton>
-                        <CButton style={{ margin: '5px' }}>New Appointment</CButton>
-                    </div> */}
+                        {/* <CButton style={{ margin: '5px' }}>Inter branch transfer</CButton>
+                        <CButton style={{ margin: '5px' }}>Print Profile</CButton> */}
+                        {/* <CButton style={{ margin: '5px' }}>New Attendence</CButton> */}
+                        {/* <CButton style={{ margin: '5px' }}>New Call</CButton>
+                        <CButton style={{ margin: '5px' }}>New Appointment</CButton> */}
+                    {/* </div> */} 
 
                 </div>
             </CCol>
@@ -121,7 +121,7 @@ const Payment = ({ id }) => {
                     <div className='mt-2 ms-2'>
                     </div>
                     <div className='justify-content-around'>
-                        <CButton style={{ margin: '5px' }}>New Invoice</CButton>
+                        <CButton style={{ margin: '5px' }}>New Attendence</CButton>
                         {/* <CButton style={{ margin: '5px' }}>Product</CButton> */}
                     </div>
 
@@ -134,18 +134,17 @@ const Payment = ({ id }) => {
                 <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
                     <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                         <CTableRow>
-                            <CTableHeaderCell scope="col">Purchased</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Member Name</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Sr. No.</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Date</CTableHeaderCell>
                             <CTableHeaderCell scope="col">
-                                Invoice No
+                                Name
                             </CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Amonut</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Tax</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Paid</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Pending</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Mode</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Write Off</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Action</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Mobile</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Service</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Branch</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">CheckIn</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">CheckOut</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Alert</CTableHeaderCell>
                         </CTableRow>
                     </CTableHead>
                     <CTableBody>
@@ -169,4 +168,4 @@ const Payment = ({ id }) => {
     )
 }
 
-export default Payment
+export default Attendence

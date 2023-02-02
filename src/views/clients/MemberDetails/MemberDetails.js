@@ -34,6 +34,7 @@ import ProfileDetails from './ProfileDetails'
 import Referrals from './Referrals'
 import ServiceProfile from './ServiceProfile'
 import Teams from './Teams'
+import Attendence from './Attendence'
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 const MemberDetails = () => {
@@ -56,8 +57,8 @@ const MemberDetails = () => {
                                 { id: '1', heading: 'Profile' },
                                 { id: '2', heading: 'Services' },
                                 { id: '3', heading: 'Payments' },
-                                { id: '4', heading: 'Attendance' },
-                                { id: '5', heading: 'Appointments' },
+                                { id: '4', heading: 'Attendence' },
+                                { id: '5', heading: 'Appointments' },                                
                                 { id: '6', heading: 'Refers' },
                                 { id: '7', heading: 'Shop' },
                                 { id: '8', heading: 'Calls' },
@@ -84,8 +85,8 @@ const MemberDetails = () => {
                                 { id: '1', heading: 'Profile', com: <ProfileDetails ids={id} deleteId={id} /> },
                                 { id: '2', heading: 'Services', com: <ServiceProfile id={id} /> },
                                 { id: '3', heading: 'Payments', com: <Payment id={id} /> },
-                                { id: '4', heading: 'Attendance' },
-                                { id: '5', heading: 'Appointments', com: <Appointment id={id} /> },
+                                { id: '4', heading: 'Attendence', com: <Attendence id={id} /> },   
+                                { id: '5', heading: 'Appoinments', com: <Appointment id={id} /> },
                                 { id: '6', heading: 'Refers', com: <Referrals id={id} /> },
                                 { id: '7', heading: 'Shop' },
                                 { id: '8', heading: 'Calls', com: <CallUpdate id={id} /> },
