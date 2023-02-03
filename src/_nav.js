@@ -53,7 +53,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Employee Target',
-        to: '/sales-target',
+        to: '/employee/sales-target',
       },
          
           {
@@ -234,24 +234,14 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Fitness',
-    to: '/base',
+    to: '/fitness',
     icon: <CIcon icon={cilWeightlifitng} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
-        to: '/base/accordion',
-      },
-      {
-        component: CNavItem,
-        name: 'PT',
-        to: '/base/breadcrumbs',
-      },
-      {
-        component: CNavItem,
-        name: 'Classes',
-        to: '/base/cards',
-      },
+        name: 'Fitness Goal',
+        to: '/fitness/fitness-Goal',
+      }
     ],
   },
   {

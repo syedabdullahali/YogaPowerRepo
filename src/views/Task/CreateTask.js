@@ -1,6 +1,6 @@
 import Calender from './Calender'
 import React,{useState} from 'react'
-import { CCol,CFormInput,CRow,CButton,CFormSelect,CCard,CForm } from '@coreui/react'
+import { CCol,CFormInput,CRow,CButton,CFormSelect,CCard,CForm,CContainer } from '@coreui/react'
 
 
 
@@ -12,7 +12,7 @@ const [ date,setDate] = useState('')
 const [ Time,setTime] = useState('')
 const [selectedTask,setSelectedTask] = useState('')
 const [toggaleValue,setToggaleValue] = useState(false)
-const [filterDate,setFilterDate] = useState('')
+const [filterDate,setFilterDate] = useState(false)
 const [error, setError] = useState('')
 
 const CurrentDate = new Date()
@@ -59,7 +59,16 @@ if(userName!==""&&selectedTask!==''&&date!==''&&Time!==''){
         month:`${+date.split("-")[1]}`,
         year:`${+date.split("-")[0]}`,       
 }
- 
+console.log(+Time.split(":")[0]<=20)
+console.log(+Time.split(":")[0]>=7) 
+console.log(Time)
+
+ if(+Time.split(":")[0]>21  ||  +Time.split(":")[0]<7){
+     setError('Please Enter Task Time between 7AM and 10PM')
+    //  console.log(Time[0]) 
+    return 
+}
+
 
     e.preventDefault()
 
@@ -106,7 +115,7 @@ setError('')
 }
 
 
-
+console.log(TaskData)
 
 
 
@@ -116,7 +125,7 @@ return (
     <>
           <CCard className='p-4' >
 
-          { toggaleValue?<CForm>
+          { toggaleValue?<CContainer>
                <label style={{ color: 'red' }}>{error}</label>
 
                 <CCol lg={12} sm={12}>
@@ -187,7 +196,7 @@ return (
                                          </CCol>
                                       </CRow>                                          
                            </CCol>   
-                  </CForm> :
+                  </CContainer> :
                   <CButton onClick={()=>toggaleFun()} className='p-2' style={{width:'300px',marginLeft:'auto'}} color='primary'> <h5> Add Your Task</h5></CButton>}                   
           </CCard> 
                                              <CCol className='mt-4'>   
@@ -209,13 +218,16 @@ return (
 
       {console.log(filterDate)}                                                  
 
-    {TaskData.filter((el)=>{
+   { TaskData[0] ? TaskData.filter((el)=>{
     if(filterDate){
       return  el.date=== `${+filterDate.split("-")[2]}`&&
         el.month ===`${+filterDate.split("-")[1]}`&&
         el.year===`${+filterDate.split("-")[0]}`
     }
-    return el
+    if(!filterDate){
+      return el
+
+    }
 
     }
     ).map((el,i)=>{
@@ -228,7 +240,7 @@ return (
          key={i}
          />
     }
-    )[0] || <h4 className='m-2' style={{color:'#f9b115'}}>No task allocated to match this search  please enter different date</h4>  }
+    ): <h4 className='m-2' style={{color:'#f9b115'}}>No task allocated to match this search  please enter different date</h4>}
 
     </>                                  
   )

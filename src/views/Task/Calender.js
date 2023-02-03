@@ -5,37 +5,6 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 ];
 
 
-const d = new Date();
-document.write("The current month is " + monthNames[d.getMonth()]);
-
-// **
-//  * @param {int} The month number, 0 based
-//  * @param {int} The year, not zero based, required to account for leap years
-//  * @return {Date[]} List with date objects for each day of the month
-//  */
-
-// function getDaysInMonth(month, year) {
-//   var date = new Date(year, month, 1);
-//   var days = [];
-//   while (date.getMonth() === month) {
-//     // console.log(date.getDate())
-//     days.push(date.getDate());
-//     date.setDate(date.getDate() + 1);
-//   }
-//   return days;
-// }
-
-
-// console.log(getDaysInMonth(1,2023))
-
-// const footer = getDaysInMonth(1,2023)
-
-
-// const daysInWeakPears = footer.map((el)=>footer.splice(0,7).filter((el)=>el)).filter((el)=>el)
-
-
-
-
 const Time = ['7 AM','8 AM','9 AM','10 AM','11 AM','12 PM','1 PM','2 PM','3 PM','4 PM','5 PM','6 PM','7 PM','8 PM','9 PM']
 
 const StyleCalenderHead ={

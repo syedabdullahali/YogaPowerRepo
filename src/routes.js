@@ -43,6 +43,9 @@ const SMSMarketing = React.lazy(() => import('./views/marketing/SMSMarketing'))
 const PushMarketing = React.lazy(() => import('./views/marketing/PushMarketing'))
 const OfferMaster = React.lazy(() => import('./views/marketing/OfferMarketing'))
 
+// Fitness
+const Fitness = React.lazy(()=>import('./views/Fitness/Fitness'))
+
 // Task
 const CreateTask = React.lazy(()=>import('./views/Task/CreateTask'))
 
@@ -89,13 +92,13 @@ const AttendanceReport = React.lazy(() => import('./views/hr/AttendanceReport'))
 const BiometricEmp = React.lazy(() => import('./views/hr/BiometricEmp'))
 const EMPPayrolSetup = React.lazy(() => import('./views/hr/EMPPayrolSetup'))
 const EmpDocuments = React.lazy(() => import('./views/hr/EmpOfDocuments'))
-const HolidaysList = React.lazy(() => import('./views/hr/HolidaysList'))
+const HolidaysList = React.lazy(() => import('./HolidaysList'))
 const StaffCheckIns = React.lazy(() => import('./views/hr/StaffCheckIns'))
 const EmpDailyCheckIns = React.lazy(() => import('./views/hr/EmpCheck'))
 const EmpJoining = React.lazy(()=>import('./views/hr/EmpJoining'))
 const JobProfile = React.lazy(()=>import('./views/hr/JobProfile'))
 const HrPolicy = React.lazy(()=>import('./views/hr/HrPolicy'))
-const HolydaysList= React.lazy(()=>import('./views/hr/HolidaysList'))
+const HolydaysList= React.lazy(()=>import('./HolidaysList'))
 const LeaveSetUp = React.lazy(()=>import('./views/hr/LeaveSetUp'))
 const SalarySheet = React.lazy(()=>import('./views/hr/SalarySheet'))
 const EmpSalarySlip = React.lazy(()=>import('./views/hr/EmpSalarySlip'))
@@ -268,6 +271,9 @@ const routes = [
   { path: '/clients/member-details/:id/:i', name: 'Member Details', element: MemberDetails },
   { path: '/clients/sales-call', name: 'Sales Call', element: SalesCall },
   { path: '/clients/servicesrate-card', name: 'ServicesRate Card', element: ServicesRateCard },
+
+  // Fitness
+  {path:'/fitness/fitness-Goal',name:'Fitness Goal',element:Fitness},
 
   //Marketing
   { path: '/Marketing', name: 'Marketing', element: EmailMarketing, exact: true },
