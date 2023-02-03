@@ -49,8 +49,6 @@ const Fitness = React.lazy(()=>import('./views/Fitness/FitnessJs'))
 // Task
 const CreateTask = React.lazy(()=>import('./views/Task/CreateTask'))
 
-
-
 // Inventory
 const AllCallList = React.lazy(() => import('./views/Inventory/AllCallList'))
 const ImpCallList = React.lazy(() => import('./views/Inventory/ImpCallList'))
