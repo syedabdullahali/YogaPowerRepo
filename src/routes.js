@@ -44,7 +44,7 @@ const PushMarketing = React.lazy(() => import('./views/marketing/PushMarketing')
 const OfferMaster = React.lazy(() => import('./views/marketing/OfferMarketing'))
 
 // Fitness
-const Fitness = React.lazy(()=>import('./views/Fitness/Fitness'))
+const Fitness = React.lazy(()=>import('./views/Fitness/FitnessJs'))
 
 // Task
 const CreateTask = React.lazy(()=>import('./views/Task/CreateTask'))
