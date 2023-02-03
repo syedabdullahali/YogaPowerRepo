@@ -2,5 +2,5 @@
   "compilerOptions": {
     "baseUrl": "."
   },
-  "include": ["src", "src/HolidaysList.js"]
+  "include": ["src", "src/views/hr/HolidaysList.js"]
 }
