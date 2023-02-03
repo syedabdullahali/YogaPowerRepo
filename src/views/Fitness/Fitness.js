@@ -60,7 +60,7 @@ getAllmembersData()
 
 
   return (
-   <CCard >
+   <CCard style={{overflow:'hidden'}}>
     
     <CNav variant="pills" role="tablist" style={{background:'#0B5345'}}> 
         <CNavLink className='m-2 p-2' style={{color:'white'}}  active={active ===1} onClick={()=>setActiveButton(1)}>
@@ -86,7 +86,7 @@ getAllmembersData()
          <CButton style={{position:'absolute',right:'0'}} >Add New</CButton>
          </CCol>
 
-   { active ===1 &&  <CTable className='mt-4' align="middle" bordered style={{ borderColor: "#0B5345",width:'400%' }} hover responsive>
+   { active ===1 &&  <CTable className='m-3 ' align="middle" bordered style={{ borderColor: "#0B5345",width:'440%' }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
                                     <CTableHeaderCell>Measurement_Date</CTableHeaderCell>
@@ -299,7 +299,7 @@ getAllmembersData()
                                  
 
                                            <CTableRow>                       
-                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell>1</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
@@ -329,7 +329,7 @@ getAllmembersData()
                             </CTableBody>
       </CTable>}
 
-      { active ===2 &&  <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345",width:'180%' }} hover responsive>
+      { active ===2 &&  <CTable className='m-3 p-2' align="middle" bordered style={{ borderColor: "#0B5345",width:'180%' }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
                                     <CTableHeaderCell>Member ID</CTableHeaderCell>
@@ -443,7 +443,7 @@ getAllmembersData()
                             </CTableBody>
       </CTable>}   
 
-      { active ===3 &&  <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345",width:'120%' }} hover responsive>
+      { active ===3 &&  <CTable className='m-3 p-2' align="middle" bordered style={{ borderColor: "#0B5345",width:'120%' }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
                                     <CTableHeaderCell>Sr No</CTableHeaderCell>
@@ -524,7 +524,7 @@ getAllmembersData()
       
       </CTable>} 
          
-      { active ===4 &&  <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345",width:'180%' }} hover responsive>
+      { active ===4 &&  <CTable className='m-3 p-2' align="middle" bordered style={{ borderColor: "#0B5345",width:'180%' }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
                                     <CTableHeaderCell>Sr No</CTableHeaderCell>
@@ -618,7 +618,7 @@ getAllmembersData()
                                
                             </CTableBody>
       </CTable>}   
-      { active ===5 &&  <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345",width:'180%' }} hover responsive>
+      { active ===5 &&  <CTable className='m-3 p-2' align="middle" bordered style={{ borderColor: "#0B5345",width:'180%' }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
                                     <CTableHeaderCell>Sr No</CTableHeaderCell>
@@ -721,7 +721,7 @@ getAllmembersData()
                                
                             </CTableBody>
       </CTable>}  
-      { active ===6 &&  <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345",width:'150%' }} hover responsive>
+      { active ===6 &&  <CTable className='m-3 p-2' align="middle" bordered style={{ borderColor: "#0B5345",width:'150%' }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
                                     <CTableHeaderCell>Sr No</CTableHeaderCell>

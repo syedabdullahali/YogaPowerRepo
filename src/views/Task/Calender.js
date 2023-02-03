@@ -1,4 +1,4 @@
-import { CTable,CCard,CTableHead,CTableRow,CTableHeaderCell,CTableBody,CTableDataCell,CContainer,CRow,CCol} from "@coreui/react";
+import { CCard,CContainer,CRow,CCol} from "@coreui/react";
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -14,7 +14,6 @@ const StyleCalenderHead ={
   fontSize:'18px', 
   textAlign:'center',
   padding:'10px',
-  gap:'0px',
   borderRight:'1px solid white',
   minWidth:'100px' 
 }
@@ -22,7 +21,6 @@ const StyleCalenderHead ={
 const StyleCalenderHead2 ={
   height:'250px',
   color:'black',
-  fontSize:'18px', 
   textAlign:'center',
   padding:'10px',
   borderRight:'1px solid black',
@@ -38,7 +36,7 @@ const Calender = ({CurrentDate,CurrentMonth,CurrentYear,userInfo,size}) => {
 
   return (    
  <CCard className="p-4 mt-4" style={{overflow:'scroll'}}> 
-    <CContainer style={{minWidth:'700px',maxWidth:'10000000000000000000000000000000px',width:`${width}%`,cuiGutterX:"0rem",border:'1px solid',padding:'0'}}>
+    <CContainer style={{minWidth:'500px',maxWidth:'10000000000000000000000000000000px',width:`${width}%`,cuiGutterX:"0rem",border:'1px solid',padding:'0'}}>
       <CRow xs={{ gutterX: 0 }}>
       <CCol style={{...StyleCalenderHead,borderBottom:'1px solid white'}} ><h2>{`${+CurrentDate} ${monthNames[+CurrentMonth]} ${CurrentYear} `}</h2></CCol>
       </CRow>
@@ -66,10 +64,7 @@ const Calender = ({CurrentDate,CurrentMonth,CurrentYear,userInfo,size}) => {
 
         }
         return  <CCol  style={StyleCalenderHead2}></CCol>
-
-
-      })}
-      
+      })}      
     </CCol>
      })}
   </CRow>  
