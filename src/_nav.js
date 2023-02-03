@@ -266,7 +266,7 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Create a Task',
+        name: 'Task Calender',
         to: 'task/create-a-task',
       },
     ],
