@@ -12,6 +12,7 @@ const [ date,setDate] = useState('')
 const [ Time,setTime] = useState('')
 const [selectedTask,setSelectedTask] = useState('')
 const [toggaleValue,setToggaleValue] = useState(false)
+const [filterDate,setFilterDate] = useState('')
 const [error, setError] = useState('')
 
 const CurrentDate = new Date()
@@ -43,6 +44,9 @@ setUserName('')
 setError('')
 }
 
+function clearFilter(){
+    setFilterDate('')
+}
 
 function sumbitTask (e){
 if(userName!==""&&selectedTask!==''&&date!==''&&Time!==''){
@@ -71,7 +75,6 @@ if(userName!==""&&selectedTask!==''&&date!==''&&Time!==''){
              if(el.date ==TaskObjeact.date && el.month ===TaskObjeact.month && el.year ===TaskObjeact.year ){
               el.userInfo.push(...TaskObjeact.userInfo)
              }
-            //  console.log(el.userInfo)
            
             return  value 
            })      
@@ -124,10 +127,19 @@ return (
                                                  type="text"
                                                  value={userName}
                                                  onChange={(e) => setUserName(e.target.value)}
-                                                 id="exampleFormControlInput1"
+                                                 list="username"
                                                  label="Name"
                                                  placeholder="Enter Date"
+                                                 name="username" 
                                                 />
+                                                
+                                             <datalist id='username'>
+                                             <option value="Jonas"/>
+                                             <option value="Jonas1"/>
+                                             <option value="Jonas2"/>
+                                             <option value="Jonas3"/>
+                                             <option value="Jonas4"/>
+                                             </datalist>
                                          </CCol> 
 
                                           <CCol xs={6}>
@@ -178,10 +190,35 @@ return (
                   </CForm> :
                   <CButton onClick={()=>toggaleFun()} className='p-2' style={{width:'300px',marginLeft:'auto'}} color='primary'> <h5> Add Your Task</h5></CButton>}                   
           </CCard> 
+                                             <CCol className='mt-4'>   
+                                               <h5 >Filter Calender</h5>  
+                                             <CCol style={{display:'flex'}}>
+                                              <CFormInput
+                                               className=""
+                                               type="date"
+                                               format="MM-dd-yyyy"
+                                               value={filterDate}
+                                               onChange={(e) => setFilterDate(e.target.value)}
+                                               id="exampleFormControlInput1"
+                                               placeholder="Enter Date"
+                                               style={{width:'65%',fontSize:'20px'}}
+                                                             />
+                                              <CButton className='mx-2' onClick={clearFilter}>Clear Filter</CButton> 
+                                            </CCol>                
+                                             </CCol>      
 
+      {console.log(filterDate)}                                                  
 
+    {TaskData.filter((el)=>{
+    if(filterDate){
+      return  el.date=== `${+filterDate.split("-")[2]}`&&
+        el.month ===`${+filterDate.split("-")[1]}`&&
+        el.year===`${+filterDate.split("-")[0]}`
+    }
+    return el
 
-    {TaskData.filter((el)=>el).map((el,i)=>{
+    }
+    ).map((el,i)=>{
     return <Calender 
          CurrentDate ={el.date}
          CurrentMonth={el.month-1}
@@ -191,7 +228,7 @@ return (
          key={i}
          />
     }
-    )}
+    )[0] || <h4 className='m-2' style={{color:'#f9b115'}}>No task allocated to match this search  please enter different date</h4>  }
 
     </>                                  
   )

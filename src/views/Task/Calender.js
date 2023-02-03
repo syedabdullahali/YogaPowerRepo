@@ -68,7 +68,7 @@ const Calender = ({CurrentDate,CurrentMonth,CurrentYear,userInfo,size}) => {
 
 
   return (    
- <CCard className="p-4 mt-5" style={{overflow:'scroll'}}> 
+ <CCard className="p-4 mt-4" style={{overflow:'scroll'}}> 
     <CContainer style={{minWidth:'700px',maxWidth:'10000000000000000000000000000000px',width:`${width}%`,cuiGutterX:"0rem",border:'1px solid',padding:'0'}}>
       <CRow xs={{ gutterX: 0 }}>
       <CCol style={{...StyleCalenderHead,borderBottom:'1px solid white'}} ><h2>{`${+CurrentDate} ${monthNames[+CurrentMonth]} ${CurrentYear} `}</h2></CCol>
@@ -97,6 +97,7 @@ const Calender = ({CurrentDate,CurrentMonth,CurrentYear,userInfo,size}) => {
 
 
       })}
+      
     </CCol>
      })}
   </CRow>  
