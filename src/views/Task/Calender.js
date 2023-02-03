@@ -47,7 +47,7 @@ const StyleCalenderHead ={
   padding:'10px',
   gap:'0px',
   borderRight:'1px solid white',
-  minWidth:'150px' 
+  minWidth:'100px' 
 }
 
 const StyleCalenderHead2 ={
