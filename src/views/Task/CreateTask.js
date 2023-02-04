@@ -172,7 +172,7 @@ const CreateTask = () => {
             </CRow>
           </CCol>
         </CContainer> :
-          <CButton onClick={() => toggaleFun()} className='p-2' style={{ width: '300px', marginLeft: 'auto' }} color='primary'> <h5> Add Your Task</h5></CButton>}
+          <CButton onClick={() => toggaleFun()} className='py-2' style={{ maxWidth: '200px', marginLeft: 'auto' }} color='primary'> <h5> Add Your Task</h5></CButton>}
       </CCard>
       <CCol className='mt-4'>
         <h5 >Filter Calender</h5>
