@@ -63,22 +63,22 @@ getAllmembersData()
    <CCard style={{overflow:'hidden'}}>
     
     <CNav variant="pills" role="tablist" style={{background:'#0B5345'}}> 
-        <CNavLink className='m-2 p-2' style={{color:'white'}}  active={active ===1} onClick={()=>setActiveButton(1)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}}  active={active ===1} onClick={()=>setActiveButton(1)}>
          Measurment
         </CNavLink >
-        <CNavLink className='m-2 p-2' style={{color:'white'}} active={active ===2} onClick={()=>setActiveButton(2)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===2} onClick={()=>setActiveButton(2)}>
          ALL Diet Client 
         </CNavLink>
-        <CNavLink className='m-2 p-2' style={{color:'white'}} active={active ===3} onClick={()=>setActiveButton(3)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===3} onClick={()=>setActiveButton(3)}>
          Diet Plan Templet
         </CNavLink>
-        <CNavLink className='m-2 p-2' style={{color:'white'}} active={active ===4} onClick={()=>setActiveButton(4)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===4} onClick={()=>setActiveButton(4)}>
          Work out Templet 
         </CNavLink>
-        <CNavLink className='m-2 p-2' style={{color:'white'}} active={active ===5} onClick={()=>setActiveButton(5)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===5} onClick={()=>setActiveButton(5)}>
           Exercise Libiry
         </CNavLink>
-        <CNavLink className='m-2 p-2' style={{color:'white'}} active={active ===6} onClick={()=>setActiveButton(6)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===6} onClick={()=>setActiveButton(6)}>
          Daily Workout Scheduling
         </CNavLink>
     </CNav >
