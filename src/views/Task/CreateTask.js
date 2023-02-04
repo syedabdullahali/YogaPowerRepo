@@ -109,7 +109,7 @@ const CreateTask = () => {
 
           <CCol lg={12} sm={12}>
             <CRow>
-              <CCol xs={6}>
+              <CCol lg={6} md={6} sm={12}>
                 <CFormInput
                   className="mb-1"
                   type="text"
@@ -129,8 +129,9 @@ const CreateTask = () => {
                   <option value="Jonas4" />
                 </datalist>
               </CCol>
+              
 
-              <CCol xs={6}>
+              <CCol lg={6} md={6} sm={12}>
                 <CFormInput
                   className="mb-1"
                   type="date"
@@ -142,7 +143,10 @@ const CreateTask = () => {
                   placeholder="Enter Date"
                 />
               </CCol>
-              <CCol xs={6}>
+              </CRow>
+              <CRow>
+
+              <CCol lg={6} md={6} sm={12}>
                 <CFormInput
                   className="mb-1"
                   type='time'
@@ -153,7 +157,7 @@ const CreateTask = () => {
                   placeholder="Enter Date"
                 />
               </CCol>
-              <CCol xs={6} >
+              <CCol lg={6} md={6} sm={12}>
                 <CFormInput
                   className="mb-1"
                   type='text'
