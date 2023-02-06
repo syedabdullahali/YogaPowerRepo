@@ -25,12 +25,17 @@ import {
   CTabPane,
 } from '@coreui/react'
 
+import FitnessMeasurmentForm from './form/FitnessMeasurmentForm'
+
 const Token =`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQxMzZlNmJlMTBkMTdjZjRhMzQ4YWQiLCJlbWFpbCI6InlvZ3Bvd2VyaW50ZXJuYXRpb25hbEBnbWFpbC5jb20iLCJkYXNoYm9hcmRBY2Nlc3MiOiJhZG1pbiIsImNlbnRlciI6IlRoYWt1ci1WbWFsbCIsImNlbnRlckNvZGUiOiJWTSIsImlhdCI6MTY3NTQxNzI2NSwiZXhwIjoxNjc1NTc5MjY1fQ.tn6qYM3WPXaEk9wtLbyIi1YsYIIBjn6BGUViqVL1x4E`
 
 const Fitness = () => {
 
   const [active,setActiveButton] = useState(1)
   const [allMeasurmentMembers,setAllMeasurmentMembers] =useState([])
+
+  // Forms 
+  const [showMeasurmentForm,setMeasurmentForm]  =useState(false)
 
 
 
@@ -83,8 +88,9 @@ getAllmembersData()
         </CNavLink>
     </CNav >
          <CCol className='m-4 mt-1 p-4' style={{position:'relative'}}>   
-         <CButton style={{position:'absolute',right:'0'}} >Add New</CButton>
+         <CButton style={{position:'absolute',right:'0'}}  onClick={()=>setMeasurmentForm((value)=>!value)}>Add New</CButton>
          </CCol>
+    {showMeasurmentForm && active ===1?<FitnessMeasurmentForm/>:''}     
 
    { active ===1 &&  <CTable className='m-3 ' align="middle" bordered style={{ borderColor: "#0B5345",width:'440%' }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
