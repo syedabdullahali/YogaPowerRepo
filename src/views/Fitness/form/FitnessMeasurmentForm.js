@@ -24,9 +24,9 @@ function FitnessMeasurmentForm() {
                 <CCol className='d-flex justify-content-between my-2 ' lg={6} >
                     <h5 >Contact</h5>
                     <CFormInput
-                        type="text"
+                        type="number"
                         className="ms-4 w-50"
-                        placeholder="Enter Waist"
+                        placeholder="Enter your contact number"
                     />
                 </CCol>
             </CRow>
