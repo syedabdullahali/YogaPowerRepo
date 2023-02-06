@@ -87,7 +87,7 @@ const EMPPayrolSetup = () => {
             <CCol lg={12} sm={12}>
                 <CCard className="mb-3 border-success">
                     <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                        <CCardTitle className="mt-2">Staff Check Ins</CCardTitle>
+                        <CCardTitle className="mt-2">Payrol Setup</CCardTitle>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex mb-2'>
