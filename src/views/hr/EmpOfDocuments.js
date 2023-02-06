@@ -78,7 +78,7 @@ const EmpOfDocuments = () => {
             <CCol lg={12} sm={12}>
                 <CCard className="mb-3 border-success">
                     <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                        <CCardTitle className="mt-2">Employee Of Document </CCardTitle>
+                        <CCardTitle className="mt-2">Employee  Document </CCardTitle>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex mb-2'>
