@@ -1,19 +1,25 @@
 import { CForm, CCard, CNav, CCol, CFormInput, CRow, CButton } from "@coreui/react"
 
 
-function FitnessMeasurmentForm() {
-
+function FitnessMeasurmentForm({ closeFormFun }) {
+    console.log(closeFormFun)
     return <CCard className="m-3 overflow-hidden" >
         <CNav className="p-2 px-3" style={{ background: '#0B5345' }}>
             <h2 className="text-white"  >Measurment Form</h2>
         </CNav>
         <CForm className="p-3">
+            <CCol className="d-flex justify-content-end">
+                <CButton className="bg-danger  text-black " onClick={() => closeFormFun()}> close</CButton>
+            </CCol>
 
-          <h3 style={{ marginBottom: '2rem' }}>Info</h3>
+            <h3 style={{ marginBottom: '2rem' }}>Info
 
-          <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2'lg={6}>
-                <h5>Name</h5>
+
+            </h3>
+
+            <CRow className='mt-lg-4'>
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
+                    <h5>Name</h5>
                     <CFormInput
                         type="text"
                         className="w-50"
@@ -31,11 +37,10 @@ function FitnessMeasurmentForm() {
                 </CCol>
             </CRow>
 
-            <h3 style={{ margin:'2rem 0' }} >Body Measurment </h3>
 
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2'lg={6}>
-                <h5>Measurement Date</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
+                    <h5>Measurement Date</h5>
                     <CFormInput
                         type="date"
                         className="w-50"
@@ -53,8 +58,8 @@ function FitnessMeasurmentForm() {
 
 
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2'lg={6}>
-                   <h5 >Waist</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
+                    <h5 >Waist</h5>
                     <CFormInput
                         type="text"
                         className="ms-4 w-50"
@@ -63,7 +68,7 @@ function FitnessMeasurmentForm() {
                 </CCol>
 
                 <CCol className='d-flex justify-content-between my-2 ' lg={6} >
-                   <h5 >Weight</h5>
+                    <h5 >Weight</h5>
                     <CFormInput
                         type="number"
                         className="w-50"
@@ -72,10 +77,10 @@ function FitnessMeasurmentForm() {
                 </CCol>
             </CRow>
 
-            
+
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2'lg={6}>
-                   <h5 >Height</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
+                    <h5 >Height</h5>
                     <CFormInput
                         type="number"
                         className="ms-4 w-50"
@@ -84,7 +89,7 @@ function FitnessMeasurmentForm() {
                 </CCol>
 
                 <CCol className='d-flex justify-content-between my-2 ' lg={6} >
-                   <h5 >Age</h5>
+                    <h5 >Age</h5>
                     <CFormInput
                         type="number"
                         className="w-50"
@@ -94,8 +99,8 @@ function FitnessMeasurmentForm() {
             </CRow>
 
             <CRow className='mt-lg-4'>
-            <CCol className='d-flex justify-content-between my-2'lg={6}>
-                   <h5 >Right Calf</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
+                    <h5 >Right Calf</h5>
                     <CFormInput
                         type="number"
                         className="ms-4 w-50"
@@ -104,7 +109,7 @@ function FitnessMeasurmentForm() {
                 </CCol>
 
                 <CCol className='d-flex justify-content-between my-2 ' lg={6} >
-                   <h5 >Left Calf</h5>
+                    <h5 >Left Calf</h5>
                     <CFormInput
                         type="number"
                         className="w-50"
@@ -114,8 +119,8 @@ function FitnessMeasurmentForm() {
             </CRow>
 
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2 'lg={6} >
-                <h5 className="me-1">Lower Abs:</h5>
+                <CCol className='d-flex justify-content-between my-2 ' lg={6} >
+                    <h5 className="me-1">Lower Abs:</h5>
                     <CFormInput
                         type="text"
                         placeholder="Enter Lower Abs:"
@@ -123,8 +128,8 @@ function FitnessMeasurmentForm() {
                     />
                 </CCol>
 
-                <CCol className='d-flex justify-content-between my-2'lg={6}>
-                   <h5 >Neck</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
+                    <h5 >Neck</h5>
                     <CFormInput
                         type="text"
                         className="w-50"
@@ -134,8 +139,8 @@ function FitnessMeasurmentForm() {
             </CRow>
 
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2 'lg={6} >
-                <h5 className="me-1">Hips</h5>
+                <CCol className='d-flex justify-content-between my-2 ' lg={6} >
+                    <h5 className="me-1">Hips</h5>
                     <CFormInput
                         type="text"
                         placeholder="Enter Hips"
@@ -143,8 +148,8 @@ function FitnessMeasurmentForm() {
                     />
                 </CCol>
 
-                <CCol className='d-flex justify-content-between my-2'lg={6}  >
-                   <h5 >Shoulder</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6}  >
+                    <h5 >Shoulder</h5>
                     <CFormInput
                         type="text"
                         className="w-50"
@@ -154,8 +159,8 @@ function FitnessMeasurmentForm() {
             </CRow>
 
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2 'lg={6}>
-                 <h5 className="me-1">Left-Thigh</h5>
+                <CCol className='d-flex justify-content-between my-2 ' lg={6}>
+                    <h5 className="me-1">Left-Thigh</h5>
                     <CFormInput
                         type="text"
                         placeholder="Enter Left Thigh"
@@ -163,13 +168,13 @@ function FitnessMeasurmentForm() {
                     />
                 </CCol>
 
-                <CCol className='d-flex justify-content-between my-2'lg={6} >
-                   <h5 >Chest</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6} >
+                    <h5 >Chest</h5>
                     <CFormInput
                         type="text"
                         className="w-50"
                         placeholder="Enter Chest"
-                    /> 
+                    />
                 </CCol>
 
 
@@ -177,8 +182,8 @@ function FitnessMeasurmentForm() {
 
 
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2'lg={6}>
-                 <h5 className="me-1">Right-Thigh</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
+                    <h5 className="me-1">Right-Thigh</h5>
                     <CFormInput
                         type="text"
                         placeholder="Enter Right Thigh"
@@ -186,7 +191,7 @@ function FitnessMeasurmentForm() {
                     />
                 </CCol>
 
-                <CCol className='d-flex justify-content-between my-2'lg={6}>
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
                     <h5 >Upper Abs</h5>
                     <CFormInput
                         type="text"
@@ -198,8 +203,8 @@ function FitnessMeasurmentForm() {
             </CRow>
 
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2'lg={6} >
-                 <h5 className="me-1">Left-Arms</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6} >
+                    <h5 className="me-1">Left-Arms</h5>
                     <CFormInput
                         type="text"
                         placeholder="Enter Left Arms"
@@ -207,8 +212,8 @@ function FitnessMeasurmentForm() {
                     />
                 </CCol>
 
-                <CCol className='d-flex justify-content-between my-2 'lg={6} >
-                <h5 className="me-1">Right-Arms</h5>
+                <CCol className='d-flex justify-content-between my-2 ' lg={6} >
+                    <h5 className="me-1">Right-Arms</h5>
                     <CFormInput
                         type="text"
                         placeholder="Enter Right Arms"
@@ -220,8 +225,8 @@ function FitnessMeasurmentForm() {
             </CRow>
 
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2'lg={6}>
-                  <h5 className="me-1">Forarms</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
+                    <h5 className="me-1">Forarms</h5>
                     <CFormInput
                         type="text"
                         placeholder="Enter about Your Forarms"
@@ -229,14 +234,14 @@ function FitnessMeasurmentForm() {
                     />
                 </CCol>
 
-                <CCol className='d-flex justify-content-between my-2'lg={6}>
-                   
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
+
                 </CCol>
             </CRow>
 
             <h3 style={{ marginBottom: '2rem' }}>BMI</h3>
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2'lg={6}>
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
                     <h5 >Fat</h5>
                     <CFormInput
                         type="text"
@@ -245,7 +250,7 @@ function FitnessMeasurmentForm() {
                     />
                 </CCol>
 
-                <CCol className='d-flex justify-content-between my-2'lg={6} >
+                <CCol className='d-flex justify-content-between my-2' lg={6} >
                     <h5 className="me-1">RBM:</h5>
                     <CFormInput
                         type="text"
@@ -256,7 +261,7 @@ function FitnessMeasurmentForm() {
             </CRow>
 
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2'lg={6}>
+                <CCol className='d-flex justify-content-between my-2' lg={6}>
                     <h5 >Body Age</h5>
                     <CFormInput
                         type="text"
@@ -265,7 +270,7 @@ function FitnessMeasurmentForm() {
                     />
                 </CCol>
 
-                <CCol className='d-flex justify-content-between my-2'lg={6} >
+                <CCol className='d-flex justify-content-between my-2' lg={6} >
                     <h5 className="me-1">Vis. Fat:</h5>
                     <CFormInput
                         type="text"
@@ -276,7 +281,7 @@ function FitnessMeasurmentForm() {
             </CRow>
 
 
-            <CRow className='mt-lg-4'lg={6}>
+            <CRow className='mt-lg-4' lg={6}>
                 <CCol className='d-flex justify-content-between my-2' >
                     <h5 className="me-1" >BMI</h5>
                     <CFormInput
@@ -286,7 +291,7 @@ function FitnessMeasurmentForm() {
                     />
                 </CCol>
 
-                <CCol className='d-flex justify-content-between my-2 'lg={6} >
+                <CCol className='d-flex justify-content-between my-2 ' lg={6} >
                     <h5 className="me-1">Sub Fat:</h5>
                     <CFormInput
                         type="text"
@@ -298,7 +303,7 @@ function FitnessMeasurmentForm() {
 
 
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2'lg={6} >
+                <CCol className='d-flex justify-content-between my-2' lg={6} >
                     <h5 className="me-1">Muscle</h5>
                     <CFormInput
                         type="text"
@@ -308,8 +313,8 @@ function FitnessMeasurmentForm() {
 
                 </CCol>
 
-                <CCol className='d-flex justify-content-between my-2'lg={6} >
-                <h5 className="me-1">Counseller</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6} >
+                    <h5 className="me-1">Counseller</h5>
                     <CFormInput
                         type="text"
                         placeholder="Enter Counseller "
@@ -319,12 +324,12 @@ function FitnessMeasurmentForm() {
                 </CCol>
             </CRow>
             <CRow className='mt-lg-4'>
-                <CCol className='d-flex justify-content-between my-2'lg={6} >
+                <CCol className='d-flex justify-content-between my-2' lg={6} >
 
                 </CCol>
 
-                <CCol className='d-flex justify-content-between my-2'lg={6} >
-                <h5 className="me-1">Next Follow Up Date</h5>
+                <CCol className='d-flex justify-content-between my-2' lg={6} >
+                    <h5 className="me-1">Next Follow Up Date</h5>
                     <CFormInput
                         type="date"
                         className="w-50"
@@ -340,25 +345,7 @@ function FitnessMeasurmentForm() {
         </CCol>
 
         <CCol className="d-flex justify-content-around p-1 text-white " style={{ background: '#0B5345' }}>
-            <p className="m-2">S.No</p>
-            <p className="m-2">Date	Weight</p>
-            <p className="m-2">Neck</p>
-            <p className="m-2">Shoulder</p>
-            <p className="m-2">Chest</p>
-            <p className="m-2">Upper Abs</p>
-            <p className="m-2">Waist</p>
-            <p className="m-2">Lower Abs</p>
-            <p className="m-2">Hips</p>
-            <p className="m-2">Left-Thigh</p>
-            <p className="m-2">Right-Thigh</p>
-            <p className="m-2">Left-Arms</p>
-            <p className="m-2">Right-Arms</p>
-            <p className="m-2">Fat	Body Age</p>
-            <p className="m-2">BMI</p>
-            <p className="m-2"> Muscle</p>
-            <p className="m-2">RBM</p>
-            <p className="m-2">	Vis Fat.</p>
-            <p className="m-2"> Sub Fat</p>
+           
         </CCol>
 
 

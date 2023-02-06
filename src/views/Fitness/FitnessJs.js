@@ -25,7 +25,16 @@ import {
   CTabPane,
 } from '@coreui/react'
 
+
+// form 
 import FitnessMeasurmentForm from './form/FitnessMeasurmentForm'
+import AllDietClientForm from './form/AllDietClientForm';
+import DietPlanTempletForm from './form/DietPlanTempletForm';
+import WorkoutTempletForm from './form/WorkoutTempletForm';
+import ExerciseLbiiry from './form/ExerciseLibiry';
+import DailyWorkoutScheduling from './form/DailyWorkoutScheduling';
+
+
 
 const Token =`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQxMzZlNmJlMTBkMTdjZjRhMzQ4YWQiLCJlbWFpbCI6InlvZ3Bvd2VyaW50ZXJuYXRpb25hbEBnbWFpbC5jb20iLCJkYXNoYm9hcmRBY2Nlc3MiOiJhZG1pbiIsImNlbnRlciI6IlRoYWt1ci1WbWFsbCIsImNlbnRlckNvZGUiOiJWTSIsImlhdCI6MTY3NTQxNzI2NSwiZXhwIjoxNjc1NTc5MjY1fQ.tn6qYM3WPXaEk9wtLbyIi1YsYIIBjn6BGUViqVL1x4E`
 
@@ -35,8 +44,8 @@ const Fitness = () => {
   const [allMeasurmentMembers,setAllMeasurmentMembers] =useState([])
 
   // Forms 
-  const [showMeasurmentForm,setMeasurmentForm]  =useState(false)
-
+  const [showForm,setForm]  =useState(false)
+  
 
 
 
@@ -58,7 +67,9 @@ getAllmembersData()
 },[getAllmembersData])
 
 
-  
+const  closeFormFun =()=>{
+    setForm(()=>false)
+ }  
 
 
 
@@ -68,29 +79,39 @@ getAllmembersData()
    <CCard style={{overflow:'hidden'}}>
     
     <CNav variant="pills" role="tablist" style={{background:'#0B5345'}}> 
-        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}}  active={active ===1} onClick={()=>setActiveButton(1)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}}  active={active ===1} onClick={()=>{setActiveButton(1),closeFormFun()}}>
          Measurment
         </CNavLink >
-        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===2} onClick={()=>setActiveButton(2)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===2} onClick={()=>{setActiveButton(2),closeFormFun()}}>
          ALL Diet Client 
         </CNavLink>
-        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===3} onClick={()=>setActiveButton(3)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===3} onClick={()=>{setActiveButton(3),closeFormFun()}}>
          Diet Plan Templet
         </CNavLink>
-        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===4} onClick={()=>setActiveButton(4)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===4} onClick={()=>{setActiveButton(4),closeFormFun()}}>
          Work out Templet 
         </CNavLink>
-        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===5} onClick={()=>setActiveButton(5)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===5} onClick={()=>{setActiveButton(5),closeFormFun()}}>
           Exercise Libiry
         </CNavLink>
-        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===6} onClick={()=>setActiveButton(6)}>
+        <CNavLink className='m-2 p-2' style={{color:'white',cursor:'pointer'}} active={active ===6} onClick={()=>{setActiveButton(6),closeFormFun()}}>
          Daily Workout Scheduling
         </CNavLink>
     </CNav >
          <CCol className='m-4 mt-1 p-4' style={{position:'relative'}}>   
-         <CButton style={{position:'absolute',right:'0'}}  onClick={()=>setMeasurmentForm((value)=>!value)}>Add New</CButton>
+         <CButton style={{position:'absolute',right:'0'}}  onClick={()=>setForm((value)=>!value)}>Add New</CButton>
          </CCol>
-    {showMeasurmentForm && active ===1?<FitnessMeasurmentForm/>:''}     
+    {showForm && active ===1?<FitnessMeasurmentForm  closeFormFun={closeFormFun} />:''}    
+    {showForm && active ===2?<AllDietClientForm  closeFormFun={closeFormFun} />:''}  
+    {showForm && active ===3?<DietPlanTempletForm  closeFormFun={closeFormFun} />:''}  
+    {showForm && active ===4?<WorkoutTempletForm  closeFormFun={closeFormFun} />:''}   
+    {showForm && active ===5?<ExerciseLbiiry closeFormFun={closeFormFun} />:''}     
+    {showForm && active ===6?<DailyWorkoutScheduling closeFormFun={closeFormFun} />:''}     
+
+  
+   
+   
+ 
 
    { active ===1 &&  <CTable className='m-3 ' align="middle" bordered style={{ borderColor: "#0B5345",width:'440%' }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
