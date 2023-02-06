@@ -3,7 +3,7 @@ import { CForm,CCard,CNav,CCol,CFormInput,CRow,CButton} from "@coreui/react"
 
 function FitnessMeasurmentForm(){
 
-return <CCard className="mt-2 m-1 overflow-hidden" >
+return <CCard className="m-3 overflow-hidden" >
     <CNav className="p-2 px-3" style={{background:'#0B5345'}}>
      <h2 className="text-white"  >Measurment Form</h2>
     </CNav>    
