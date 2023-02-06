@@ -117,7 +117,7 @@ const CreateTask = () => {
                   onChange={(e) => setUserName(e.target.value)}
                   list="username"
                   label="Name"
-                  placeholder="Enter Date"
+                  placeholder="Enter Your Name"
                   name="username"
                 />
 
@@ -140,7 +140,6 @@ const CreateTask = () => {
                   onChange={(e) => setDate(e.target.value)}
                   id="exampleFormControlInput1"
                   label="Task Date"
-                  placeholder="Enter Date"
                 />
               </CCol>
               </CRow>
@@ -154,7 +153,6 @@ const CreateTask = () => {
                   onChange={(e) => setTime(e.target.value)}
                   id="exampleFormControlInput1"
                   label="Task Time"
-                  placeholder="Enter Date"
                 />
               </CCol>
               <CCol lg={6} md={6} sm={12}>
@@ -195,7 +193,6 @@ const CreateTask = () => {
         </CCol>
       </CCol>
 
-      {console.log(filterDate)}
 
       {TaskData[0] ? TaskData.filter((el) => {
         if (filterDate) {

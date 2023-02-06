@@ -51,7 +51,6 @@ const Calender = ({CurrentDate,CurrentMonth,CurrentYear,userInfo,size}) => {
       return <CCol >
       <CCol style={StyleCalenderHead}>{el.userName}</CCol>
       {Time.map((el2)=>{         
-                  console.log( +el2.split(" ")[0] ,el.selectedTask )
 
         if(+el2.split(" ")[0]=== +el.userTime[0]  && el2.includes('AM')){
          return  <CCol  style={StyleCalenderHead2}> <p ><b><u>{"Time " + el.userTime[0] +":" + el.userTime[1]  +" AM"  }</u></b> {el.selectedTask}</p></CCol>
