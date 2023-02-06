@@ -122,7 +122,7 @@ getAllmembersData()
                                     <CTableHeaderCell>Calf(L)</CTableHeaderCell>
 
                                     <CTableHeaderCell>Counseller</CTableHeaderCell>
-                                    <CTableHeaderCell>NextFollowup_</CTableHeaderCell>
+                                    <CTableHeaderCell>NextFollowup_Date</CTableHeaderCell>
                                     <CTableHeaderCell>Action</CTableHeaderCell>
 
                                 </CTableRow>
