@@ -8,7 +8,7 @@ return <CCard className="m-3 overflow-hidden" >
      <h2 className="text-white"  >Measurment Form</h2>
     </CNav>    
 <CForm className="p-3">
- <h3 style={{marginBottom:'2rem'}}>Body Measurement </h3>
+ <h3 style={{marginBottom:'2rem'}}>Body Measurment </h3>
 
 
 <CRow className='mt-4'>
