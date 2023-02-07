@@ -34,8 +34,8 @@ import ExerciseLbiiry from './form/ExerciseLibiry';
 import DailyWorkoutScheduling from './form/DailyWorkoutScheduling';
 
 // Tables
-const MeasurementTable = React.lazy(()=>import('./form/Tablels/MeasurmentTable'))
-const ClientDietTable  = React.lazy(()=>import('./form/Tablels/ClientDietTable'))
+const MeasurementTable = React.lazy(()=>import('./Tablels/MeasurmentTable'))
+const ClientDietTable  = React.lazy(()=>import('./Tablels/ClientDietTable'))
 
 
 

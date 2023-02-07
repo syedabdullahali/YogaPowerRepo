@@ -15,11 +15,6 @@ import {
 
 function MeasurementTable({Token}){
     const [allMeasurmentMembers,setAllMeasurmentMembers] =useState([])
-  
-  // to get barriar token 
- 
-
-  // header 
 
   const headers = {
     'Authorization': `Bearer ${Token}`

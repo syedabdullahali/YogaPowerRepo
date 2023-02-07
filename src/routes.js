@@ -107,6 +107,20 @@ const AllRightHr =  React.lazy(()=>import('./views/hr/AllRightHr'))
 const EmpPerformance = React.lazy(()=>import('./views/hr/EmpPerformance'))
 const Stafftarget = React.lazy(()=>import('./views/hr/staffTarget/Stafftarget'))
 
+// classes 
+const TtcClientDetails  = React.lazy(()=>import('./views/Courses/TtcClientDetails'))
+const TtcVideoDetails = React.lazy(()=>import('./views/Courses/TtcVideoDetails'))
+const TtcPdfDetails = React.lazy(()=>import('./views/Courses/TtcPdfDetails'))
+const ClientCertificateDetails = React.lazy(()=>import('./views/Courses/ClientCertificateDetails'))
+
+
+
+
+
+
+
+
+
 //Master
 const CenterSetup = React.lazy(() => import('./views/Master/centerSetup/CenterSetup'))
 const LogoSetup = React.lazy(() => import('./views/Master/centerSetup/LogoSetup'))
@@ -340,6 +354,18 @@ const routes = [
   { path:'/hr/all-righthr',name:'All Right',element:AllRightHr},
   { path:'/hr/emp-performance',name:'Emp Performance',element:EmpPerformance},
   { path:'/hr/view-staff-target',name:'View Staff Target',element:Stafftarget},
+
+  // Courses
+  {path:'/course' ,name:'TTC' ,element:TtcClientDetails,exact:true},
+  {path:'/course/ttc-client-details' ,name:'TTC Client Details' ,element:TtcClientDetails},
+  {path:'/course/ttc-videos-details' ,name:'TTC Videos Details' ,element:TtcVideoDetails},
+  {path:'/course/ttc-pdf-details' ,name:'TTC PDF Details' ,element:TtcPdfDetails},
+  {path:'/course/client-certificate-details' ,name:'TTC Client Certificate Details' ,element:ClientCertificateDetails},
+
+
+
+
+
 
   //Master
   { path: '/master', name: 'Master', element: CenterSetup, exact: true },

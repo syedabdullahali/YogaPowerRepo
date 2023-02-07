@@ -558,23 +558,28 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Courses',
-    to: '/base',
+    to: '/course',
     icon: <CIcon icon={cilBook} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
-        to: '/base/accordion',
+        name: 'TTC Clinet Details ',
+        to: '/course/ttc-client-details',
       },
       {
         component: CNavItem,
-        name: 'PT',
-        to: '/base/breadcrumbs',
+        name: 'TTC Videos Details',
+        to: '/course/ttc-videos-details',
       },
       {
         component: CNavItem,
-        name: 'Classes',
-        to: '/base/cards',
+        name: 'TTC PDF Details',
+        to: '/course/ttc-pdf-details',
+      },
+      {
+        component: CNavItem,
+        name: 'Client Certificate Details',
+        to: '/course/client-certificate-details',
       },
     ],
   },

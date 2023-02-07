@@ -1,8 +1,59 @@
 import { CForm, CCard, CNav, CCol, CFormInput, CRow, CButton } from "@coreui/react"
+import { useRef } from "react"
 
 
 function FitnessMeasurmentForm({ closeFormFun }) {
-    console.log(closeFormFun)
+    const Age = useRef('')
+    const ArmsL = useRef('')
+    const ArmsR = useRef('')
+    const BMI = useRef('')
+    const CalfL = useRef('')
+    const CalfR = useRef('')
+    const Chest = useRef('')
+    const ContactNumber =useRef('')
+    const Counseller = useRef('')
+    const Fat = useRef('')
+    const ForArms = useRef('')
+    const Fullname = useRef('')
+    const Height = useRef('')
+    const Hips = useRef('')
+    const Member_ID = useRef('')
+    
+    const Neck = useRef('')
+    const NextFollowup_Date = useRef('')
+    const Shoulder = useRef('')
+    const ThighL = useRef('')
+    const ThighR =useRef('')
+    const Waist = useRef('')
+    const Weight = useRef('')
+    const createdAt = useRef('')
+    const updatedAt = useRef('')
+    const username = useRef('')
+     
+    
+     
+    const ToValidation = 
+     [
+        Age,ArmsL,ArmsR,BMI,CalfL,CalfR,
+        Chest,ContactNumber,Counseller,Fat,
+        ForArms,Fullname,Height,Hips,Member_ID,
+        Neck,NextFollowup_Date,Shoulder,ThighL,
+        ThighR,Waist,Weight,createdAt,updatedAt,username
+    ]
+    
+    
+    
+    
+    
+    console.log(ToValidation.every((el)=>el.current===''))
+
+
+
+ const  sumbitFormInfoHandler = ()=>{
+
+ }
+
+
     return <CCard className="m-3 overflow-hidden" >
         <CNav className="p-2 px-3" style={{ background: '#0B5345' }}>
             <h2 className="text-white"  >Measurment Form</h2>
@@ -341,7 +392,7 @@ function FitnessMeasurmentForm({ closeFormFun }) {
 
         </CForm>
         <CCol className="p-3">
-            <CButton>Save Measurments</CButton>
+            <CButton onSubmit={sumbitFormInfoHandler}>Save Measurments</CButton>
         </CCol>
 
         <CCol className="d-flex justify-content-around p-1 text-white " style={{ background: '#0B5345' }}>
