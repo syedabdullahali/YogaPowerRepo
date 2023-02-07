@@ -183,8 +183,8 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Multi Service Clients',
-        to: '/client-management/multi-clients',
+        name: 'Client Support',
+        to: '/clients/client-management/multi-clients',
       },
     ],
   },
@@ -291,13 +291,18 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Stock Assigning',
-        to: '/base/cards',
+        to: '/inventory/stock-assgning',
       },
       {
         component: CNavItem,
         name: 'Stock Alert',
-        to: '/base/cards',
+        to: '/inventory/stock-alert',
       },
+      {
+        component: CNavItem,
+        name:'Stock Order List',
+        to:'/inventory/stock-order-list'
+      }
     ],
   },
   {

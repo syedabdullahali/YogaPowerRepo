@@ -59,7 +59,9 @@ const StockListing1 = React.lazy(() => import('./views/Inventory/StockListing1')
 const StockReport = React.lazy(() => import('./views/Inventory/StockReport'))
 const ProductSalesReport = React.lazy(() => import('./views/Inventory/ProductSalesReport'))
 const PurchaseReport = React.lazy(() => import('./views/Inventory/PurchaseReport'))
-
+const StockAssigning = React.lazy(()=>import('./views/Inventory/StockAssigning'))
+const StockAlert =  React.lazy(()=>import('./views/Inventory/StockAlert'))
+const StockOrderList = React.lazy(()=>import('./views/Inventory/StockOrderList'))
 //finance
 const TotalInvoices = React.lazy(() => import('./views/finance/TotalInvoice'))
 const PaidInvoices = React.lazy(() => import('./views/finance/PaidInvoice'))
@@ -112,15 +114,6 @@ const TtcClientDetails  = React.lazy(()=>import('./views/Courses/TtcClientDetail
 const TtcVideoDetails = React.lazy(()=>import('./views/Courses/TtcVideoDetails'))
 const TtcPdfDetails = React.lazy(()=>import('./views/Courses/TtcPdfDetails'))
 const ClientCertificateDetails = React.lazy(()=>import('./views/Courses/ClientCertificateDetails'))
-
-
-
-
-
-
-
-
-
 //Master
 const CenterSetup = React.lazy(() => import('./views/Master/centerSetup/CenterSetup'))
 const LogoSetup = React.lazy(() => import('./views/Master/centerSetup/LogoSetup'))
@@ -304,6 +297,12 @@ const routes = [
   { path: '/inventory/stock-report', name: 'Stock Report', element: StockReport },
   { path: '/inventory/sales-report', name: 'PSales Report', element: ProductSalesReport },
   { path: '/inventory/purchase-report', name: 'Purchase Report', element: PurchaseReport},
+  { path:'/inventory/stock-assgning', name: 'Stock Assigning', element: StockAssigning},
+  { path:'/inventory/stock-alert', name: 'Stock Alert', element: StockAlert},
+  { path:'/inventory/stock-order-list', name: 'Stock Order List', element: StockOrderList},
+
+
+
   //Finance
   { path: '/finance', name: 'Finance', element: TotalInvoices, exact: true },
   { path: '/finance/total-invoice', name: 'Total Invoice', element: TotalInvoices },

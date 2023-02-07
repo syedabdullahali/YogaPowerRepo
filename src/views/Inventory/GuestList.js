@@ -275,31 +275,12 @@ const GuestList = () => {
                         <CTableHeaderCell>Address</CTableHeaderCell>
                         <CTableHeaderCell>Category</CTableHeaderCell>
                         <CTableHeaderCell>Event</CTableHeaderCell>
-                        {/* <CTableHeaderCell>Action</CTableHeaderCell>
-                        <CTableHeaderCell>Edit</CTableHeaderCell> */}
+                     
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
                     <CTableRow>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "60px" }}
-                                type="text"
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                value={search1}
-                                onChange={(e) => setSearch1(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
+                    
                         <CTableDataCell>
                             <CFormInput
                                 className="mb-1"
@@ -369,6 +350,19 @@ const GuestList = () => {
                             />
                         </CTableDataCell>
                     </CTableRow>
+
+                     <CTableRow>
+                        <CTableDataCell></CTableDataCell>
+                        <CTableDataCell></CTableDataCell>
+                        <CTableDataCell></CTableDataCell>
+                        <CTableDataCell></CTableDataCell>
+                        <CTableDataCell></CTableDataCell>
+                        <CTableDataCell></CTableDataCell>
+                        <CTableDataCell></CTableDataCell>                        
+                     </CTableRow>   
+
+
+
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                         list.username === username && list.name.includes(search1) && list.mobile.toString().includes(search2.toString()) && list.email.includes(search3)
                         && list.address.includes(search4) && list.category.includes(search5) && list.event.includes(search6)

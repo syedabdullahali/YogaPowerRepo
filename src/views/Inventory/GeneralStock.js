@@ -408,25 +408,23 @@ const ClothesProduct = () => {
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
-                        {/* <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell> */}
+       
                     </CTableRow>
+                    <CTableRow>
+                     <CTableDataCell>1</CTableDataCell>    
+                     <CTableDataCell></CTableDataCell>    
+                     <CTableDataCell></CTableDataCell>    
+                     <CTableDataCell></CTableDataCell>    
+                     <CTableDataCell></CTableDataCell>    
+                     <CTableDataCell></CTableDataCell>    
+                     <CTableDataCell></CTableDataCell>    
+                     <CTableDataCell></CTableDataCell>    
+                     <CTableDataCell></CTableDataCell>    
+                     <CTableDataCell></CTableDataCell>    
+                     <CTableDataCell></CTableDataCell>    
+                       
+                        
+                    </CTableRow> 
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                         list.username === username && list.productName.includes(search2) && list.brandName.includes(search3) && list.category.includes(search4) && list.color.includes(search5) &&
                         list.productPrice.toString().includes(search6.toString())

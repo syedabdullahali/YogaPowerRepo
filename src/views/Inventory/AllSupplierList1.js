@@ -180,7 +180,7 @@ const AllSuppilerList = () => {
                 </CToast>
             </CCol>
             <CCol lg={3} sm={6} className='mb-2'>
-                <CButton className="float-end" onClick={() => { setAction(!action), clear() }}>{action ? 'Close' : 'Add Supplier List'}</CButton>
+                {/* <CButton className="float-end" onClick={() => { setAction(!action), clear() }}>{action ? 'Close' : 'Add Supplier List'}</CButton> */}
             </CCol>
             {action &&
 
@@ -285,22 +285,7 @@ const AllSuppilerList = () => {
                         <CTableHeaderCell>Address</CTableHeaderCell>
                         <CTableHeaderCell>Category</CTableHeaderCell>
                         <CTableHeaderCell>Company Name</CTableHeaderCell>
-                        {/* <CTableHeaderCell>Closing Stock</CTableHeaderCell> */}
-                        {/* <CTableHeaderCell>Sold By</CTableHeaderCell>
-                        <CTableHeaderCell>Total Invoice</CTableHeaderCell> */}
-                        {/* <CTableHeaderCell>Sr.No</CTableHeaderCell>
-                        <CTableHeaderCell>Name</CTableHeaderCell>
-                        <CTableHeaderCell>Mobile</CTableHeaderCell>
-                        <CTableHeaderCell>Email-Id</CTableHeaderCell>
-                        <CTableHeaderCell>Address</CTableHeaderCell>
-                        <CTableHeaderCell>Category</CTableHeaderCell>
-                        <CTableHeaderCell>Company Name</CTableHeaderCell> */}
-                        {/* <CTableHeaderCell></CTableHeaderCell>
-                        <CTableHeaderCell>Sold</CTableHeaderCell>
-                        <CTableHeaderCell>AVL Stock</CTableHeaderCell>
-                        <CTableHeaderCell>Sold By</CTableHeaderCell>
-                        <CTableHeaderCell>Action</CTableHeaderCell>
-                        <CTableHeaderCell>Edit</CTableHeaderCell> */}
+                       
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>

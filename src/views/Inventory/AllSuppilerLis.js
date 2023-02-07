@@ -275,8 +275,7 @@ const AllSuppilerList = () => {
                         <CTableHeaderCell>Address</CTableHeaderCell>
                         <CTableHeaderCell>Category</CTableHeaderCell>
                         <CTableHeaderCell>Company Name</CTableHeaderCell>
-                        {/* <CTableHeaderCell>Action</CTableHeaderCell>
-                        <CTableHeaderCell>Edit</CTableHeaderCell> */}
+                      
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -350,25 +349,20 @@ const AllSuppilerList = () => {
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                type="text"
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
+                        
                     </CTableRow>
+
+                   <CTableRow>
+                       <CTableDataCell></CTableDataCell>
+                       <CTableDataCell></CTableDataCell>
+                       <CTableDataCell></CTableDataCell>
+                       <CTableDataCell></CTableDataCell>
+                       <CTableDataCell></CTableDataCell>
+                       <CTableDataCell></CTableDataCell>
+                   </CTableRow>
+
+
+                    
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                         list.username === username && list.name.includes(search1) && list.mobile.toString().includes(search2.toString()) && list.email.includes(search3)
                         && list.address.includes(search4) && list.category.includes(search5) && list.company.includes(search6)
@@ -385,6 +379,8 @@ const AllSuppilerList = () => {
                             <CTableDataCell className='text-center'><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} onClick={() => handleUpdate(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} onClick={() => deleteCall(item._id)} size='20px' /></CTableDataCell>
                         </CTableRow>
                     ))}
+
+
                 </CTableBody>
             </CTable>
             <CPagination aria-label="Page navigation example" align="center" className='mt-2'>

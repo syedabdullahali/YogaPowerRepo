@@ -273,21 +273,12 @@ const ImpCallList = () => {
                         <CTableHeaderCell>Address</CTableHeaderCell>
                         <CTableHeaderCell>Category</CTableHeaderCell>
                         <CTableHeaderCell>Company Name</CTableHeaderCell>
-                        {/* <CTableHeaderCell>Action</CTableHeaderCell>
-                        <CTableHeaderCell>Edit</CTableHeaderCell> */}
+                     
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
                     <CTableRow>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "60px" }}
-                                type="number"
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
+                       
                         <CTableDataCell>
                             <CFormInput
                                 className="mb-1"
@@ -348,113 +339,41 @@ const ImpCallList = () => {
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
-                        {/* <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                type="text"
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
                         <CTableDataCell>
                             <CFormInput
                                 className="mb-1"
-                                type="text"
                                 style={{ minWidth: "120px" }}
-                                disabled
+                                value={search6}
+                                onChange={(e) => setSearch6(e.target.value)}
+                                type="text"
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
-                        </CTableDataCell> */}
+                        </CTableDataCell>
+                       
                     </CTableRow>
                     <CTableRow>
                         <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "60px" }}
-                                type="number"
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
+                            
                         </CTableDataCell>
                         <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                value={search1}
-                                onChange={(e) => setSearch1(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
+                            
                         </CTableDataCell>
                         <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                value={search2}
-                                onChange={(e) => setSearch2(e.target.value)}
-                                type="number"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
+                            
                         </CTableDataCell>
                         <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "100px" }}
-                                value={search3}
-                                onChange={(e) => setSearch3(e.target.value)}
-                                type="text"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
+                            
                         </CTableDataCell>
                         <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "200px" }}
-                                value={search4}
-                                onChange={(e) => setSearch4(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
+                          
                         </CTableDataCell>
                         <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                value={search5}
-                                onChange={(e) => setSearch5(e.target.value)}
-                                type="text"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
+                           
                         </CTableDataCell>
                         <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                value={search6}
-                                onChange={(e) => setSearch6(e.target.value)}
-                                type="text"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
+                            
                         </CTableDataCell>
-                        {/* <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                type="text"
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell> */}
+                        
                     </CTableRow>
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                         list.username === username && list.name.includes(search1) && list.mobile.toString().includes(search2.toString()) && list.email.includes(search3)
