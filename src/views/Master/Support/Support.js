@@ -48,11 +48,11 @@ function Support (){
                   <CTableDataCell></CTableDataCell>
                   <CTableDataCell></CTableDataCell>
                   <CTableDataCell className=''>
-                  <CFormSwitch size="xl"  id="formSwitchCheckDefaultXL" style={{margin:'auto'}}/>
+                  <CFormSwitch size="xl"  id="formSwitchCheckDefaultXL" style={{margin:'auto',cursor:'pointer'}}/>
                   </CTableDataCell>
                   <CTableDataCell className='text-center'>
-                    <MdEdit/>
-                    <MdDelete/>
+                    <MdEdit cursor='pointer'/>
+                    <MdDelete cursor='pointer'/>
                   </CTableDataCell>
                  
               </CTableRow>
