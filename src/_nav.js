@@ -763,53 +763,8 @@ const _nav = [
     ],
   },
 
-  {
-    component: CNavGroup,
-    name: 'Inverntory',
-    to: '/base',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'All Produst Listing Master',
-        to: '/base/accordion',
-      },
-      {
-        component: CNavItem,
-        name: 'All Product setting Master',
-        to: '/base/breadcrumbs',
-      },
+  
 
-    ],
-  },
-  {
-    component: CNavGroup,
-    name: 'Finance',
-    to: '/master/finance',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Expness Category',
-        to: '/master/finance/expness',
-      },
-      {
-        component: CNavItem,
-        name: 'Budgeting',
-        to: '/master/finance/budgeting',
-      },
-      {
-        component: CNavItem,
-        name: 'Invoice Setup Master',
-        to: '/master/finance/invoice',
-      },
-      {
-        component: CNavItem,
-        name: 'Tax Setup Master',
-        to: '/master/finance/tax',
-      },
-    ],
-  },
 
   {
     component: CNavGroup,
