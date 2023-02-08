@@ -19,13 +19,13 @@ function Support (){
               <h4>Empyolee Target Sheet</h4></CCardTitle>
        </CCardHeader>
   
-      
          <CCol className='d-flex p-4'>
+         <label className='me-4' ><h5>Request Type</h5></label>
+
           <CFormInput
             type="text"
             id="exampleFormControlInput1"
             placeholder="Enter Your Request Type"
-            label='Request'
              className='w-50'
           />
           <CButton className='mx-2 ' >Save</CButton>
