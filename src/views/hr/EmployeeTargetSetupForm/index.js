@@ -102,7 +102,7 @@ return <CCard>
           </CTableBody>
      </CTable>
      <CCol >
-       <CButton onClick={()=>setActiveForm((value)=>!value)} >Add New</CButton>
+       <CButton onClick={()=>setActiveForm((value)=>!value)} >Save</CButton>
      </CCol>
     </CForm>
       </CCard>
