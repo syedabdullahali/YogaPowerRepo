@@ -184,7 +184,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Client Support',
-        to: '/clients/client-management/multi-clients',
+        to: '/clients/client-management/client-support',
       },
     ],
   },

@@ -37,6 +37,7 @@ const AllService = React.lazy(() => import('./views/clients/allService/AllServic
 const MemberDetails = React.lazy(() => import('./views/clients/MemberDetails/MemberDetails'))
 const SalesCall = React.lazy(() => import('./views/clients/salesCall/SalesCall'))
 const ServicesRateCard = React.lazy(() => import('./views/clients/ServicesRateCard/ServicesRateCard'))
+const ClientSupport = React.lazy(()=>import('./views/clients/ClientSupport'))
 //Marketing
 const EmailMarketing = React.lazy(() => import('./views/marketing/EmailMarketing'))
 const SMSMarketing = React.lazy(() => import('./views/marketing/SMSMarketing'))
@@ -276,6 +277,7 @@ const routes = [
   { path: '/clients/member-details/:id/:i', name: 'Member Details', element: MemberDetails },
   { path: '/clients/sales-call', name: 'Sales Call', element: SalesCall },
   { path: '/clients/servicesrate-card', name: 'ServicesRate Card', element: ServicesRateCard },
+  { path:'/clients/client-management/client-support',name:'Client Support',element:ClientSupport},
 
   // Fitness
   {path:'/fitness/fitness-Goal',name:'Fitness Goal',element:Fitness},
@@ -300,6 +302,7 @@ const routes = [
   { path:'/inventory/stock-assgning', name: 'Stock Assigning', element: StockAssigning},
   { path:'/inventory/stock-alert', name: 'Stock Alert', element: StockAlert},
   { path:'/inventory/stock-order-list', name: 'Stock Order List', element: StockOrderList},
+  
 
 
 
