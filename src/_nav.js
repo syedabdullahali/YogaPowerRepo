@@ -460,6 +460,7 @@ const _nav = [
     to: '/hr',
     icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
     items: [
+     
       {
         component: CNavItem,
         name: 'Recuritment',
@@ -470,6 +471,11 @@ const _nav = [
         name: 'Employee Profile',
         to: '/hr/all-emp',
       },
+      {
+        component: CNavItem,
+        name: 'Emp Target Sheet',
+        to: '/hr/emp-target-sheet'
+      }, 
       {
         component: CNavItem,
         name: 'Biometric Emp',
@@ -557,7 +563,7 @@ const _nav = [
         name: 'Emp Performance',
         to: '/hr/emp-performance',
       },
-      
+         
     ],
   },
   {

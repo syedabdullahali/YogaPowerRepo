@@ -10,6 +10,7 @@ const PTTarget = React.lazy(() => import('./views/dashboard/PTTarget'))
 const SalesTarget = React.lazy(() => import('./views/dashboard/SalesTarget'))
 const CorporateTarget = React.lazy(() => import('./views/dashboard/CorporateTarget'))
 
+
 // Trainer
 const LiveClasses = React.lazy(()=>import('./views/dashboard/LiveClasses'))
 const AllBatches = React.lazy(()=>import('./views/dashboard/AllBatches'))
@@ -109,6 +110,7 @@ const ShiftTimingManagment = React.lazy(()=>import('./views/hr/ShiftTimingManagm
 const AllRightHr =  React.lazy(()=>import('./views/hr/AllRightHr')) 
 const EmpPerformance = React.lazy(()=>import('./views/hr/EmpPerformance'))
 const Stafftarget = React.lazy(()=>import('./views/hr/staffTarget/Stafftarget'))
+const EmployeeTargetSheet =React.lazy(()=>import('./views/hr/EmployeeTargetSheet'))
 
 // classes 
 const TtcClientDetails  = React.lazy(()=>import('./views/Courses/TtcClientDetails'))
@@ -356,6 +358,7 @@ const routes = [
   { path:'/hr/all-righthr',name:'All Right',element:AllRightHr},
   { path:'/hr/emp-performance',name:'Emp Performance',element:EmpPerformance},
   { path:'/hr/view-staff-target',name:'View Staff Target',element:Stafftarget},
+  { path:'/hr/emp-target-sheet',name:'Employee Target Sheet',element:EmployeeTargetSheet},
 
   // Courses
   {path:'/course' ,name:'TTC' ,element:TtcClientDetails,exact:true},

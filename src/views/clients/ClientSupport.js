@@ -1226,11 +1226,12 @@ const ClientSupport = () => {
                         {viewInvoice &&
                             <ViewInvoice add={viewInvoice} clickfun={() => setViewInvoice(false)} invoiceId={invId} clientId={cliId} />
                         }
-                        <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
+                        <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345",width:'120%' }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
                                     <CTableHeaderCell>Sr.No</CTableHeaderCell>
                                     <CTableHeaderCell>Name</CTableHeaderCell>
+                                    <CTableHeaderCell>Reg Mobile</CTableHeaderCell>
                                     <CTableHeaderCell>Type of Request</CTableHeaderCell>
                                     <CTableHeaderCell>Request Date</CTableHeaderCell>
                                     <CTableHeaderCell>Request</CTableHeaderCell>
@@ -1310,6 +1311,17 @@ const ClientSupport = () => {
                                             style={{ minWidth: "100px" }}
                                             value={Search5}
                                             onChange={(e) => setSearch5(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            disabled
+                                            style={{ minWidth: "100px" }}
+                                            value={Search6}
+                                            onChange={(e) => setSearch6(e.target.value)}
                                             aria-describedby="exampleFormControlInputHelpInline"
                                         />
                                     </CTableDataCell>
