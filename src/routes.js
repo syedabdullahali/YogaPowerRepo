@@ -3,7 +3,6 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Login = React.lazy(() => import('./views/pages/login/Login'))
 const EmployeeDashboard = React.lazy(() => import('./views/dashboard/EmployeeDashboard'))
 const TrainerDashboard = React.lazy(() => import('./views/dashboard/TrainerDashboard'))
-const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 //Empolyee
 const PTTarget = React.lazy(() => import('./views/dashboard/PTTarget'))
@@ -136,6 +135,7 @@ const ExpressCategoryMaster = React.lazy(() => import('./views/Master/finance/Ex
 const InvoiceMaster = React.lazy(() => import('./views/Master/finance/InvoiceMaster'))
 const TaxSetupMaster = React.lazy(() => import('./views/Master/finance/TaxSetupMaster'))
 const ClientTransferMaster = React.lazy(() => import('./views/Master/client/ClientTransferMaster'))
+const Support = React.lazy(()=>import('./views/Master/Support/Support'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -401,9 +401,8 @@ const routes = [
   { path: '/master/finance/budgeting', name: 'Budgeting', element: BudgetingMaster, exact: true },
   { path: '/master/finance/invoice', name: 'Invoice', element: InvoiceMaster, exact: true },
   { path: '/master/finance/tax', name: 'Tax', element: TaxSetupMaster, exact: true },
+  { path:'/master/support',name:'Support',element:Support },
 
-  { path: '/theme', name: 'Theme', element: Colors, exact: true },
-  { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
   { path: '/base', name: 'Base', element: Cards, exact: true },
   { path: '/base/accordion', name: 'Accordion', element: Accordion },

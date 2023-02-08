@@ -607,7 +607,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Support',
-    to: '/theme/colors',
+    to: '/master/support',
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },
   {
