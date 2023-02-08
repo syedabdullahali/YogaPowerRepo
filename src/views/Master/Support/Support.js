@@ -23,9 +23,9 @@ function Support (){
          <CCol className='d-flex p-4'>
           <CFormInput
             type="text"
-            format="MM-dd-yyyy"
             id="exampleFormControlInput1"
-            placeholder="Enter Date"
+            placeholder="Enter Your Request Type"
+            label='Request'
              className='w-50'
           />
           <CButton className='mx-2 ' >Save</CButton>
