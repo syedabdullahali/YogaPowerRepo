@@ -29,7 +29,7 @@ return <CCard>
 
      <div className='p-4'>
      <CCol className='pb-4 mt-3  d-flex justify-content-end '>
-  <CButton onClick={()=>setActiveForm((value)=>!value)} >Add New</CButton>
+  {activeForm ||<CButton onClick={()=>setActiveForm((value)=>!value)} >Add New</CButton>}
   </CCol>
   {activeForm && <EmployeeTargetSetupForm closeForm={closeForm}/>}
 
