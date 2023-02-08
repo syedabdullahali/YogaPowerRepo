@@ -175,7 +175,7 @@ const AllSuppilerList = () => {
         <CCard >
 
      <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                        <CCardTitle className="mt-2">Purchase Report</CCardTitle>
+                        <CCardTitle className="mt-2 mb-4">Purchase Report</CCardTitle>
                     </CCardHeader>
         <CRow className='d-flex mb-2'>
             <CCol lg={9} sm={6} className='mb-2'>
@@ -186,9 +186,7 @@ const AllSuppilerList = () => {
                     </div>
                 </CToast>
             </CCol>
-            <CCol  className='pt-4'>
-                <CButton className="float-end m-2 me-4" onClick={() => { setAction(!action), clear() }}>{action ? 'Close' : 'Add Supplier List'}</CButton>
-            </CCol>
+            
             {action &&
 
                 <CCard className="mt-2 mb-2" >

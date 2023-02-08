@@ -95,7 +95,7 @@ const StockListing1 = () => {
                                         active={activeKey === 1}
                                         onClick={() => setActiveKey(1)}
                                     >
-                                        clothes product
+                                        Clothes product
                                     </CNavLink>
                                 </CNavItem>
                                 <CNavItem>

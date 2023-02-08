@@ -10,7 +10,7 @@ return <CCard >
             </CCardHeader>
 
             <CCol className='mt-2 p-4'>
-                <CButton className="float-end" onClick={() => { setAction(!action), clear() }}> Add Supplier List</CButton>
+                <CButton className="float-end" onClick={() => { setAction(!action), clear() }}> Add Stock Assigning</CButton>
             </CCol>
 
 

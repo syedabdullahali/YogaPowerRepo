@@ -174,7 +174,7 @@ const AllSuppilerList = () => {
     return (
         <CCard className="overflow-hidden" >
            <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                        <CCardTitle className="mt-2">Sales Report</CCardTitle>
+                        <CCardTitle className="mt-2 mb-4">Stock Report</CCardTitle>
                     </CCardHeader>
         <CRow className=' mb-2'>
             <CCol lg={9} sm={6} className='mb-2'>
@@ -186,7 +186,6 @@ const AllSuppilerList = () => {
                 </CToast>
             </CCol>
             <CCol lg={3} sm={6} className='mb-2'>
-                <CButton className="float-end m-4" onClick={() => { setAction(!action), clear() }}>{action ? 'Close' : 'Add Cloth Product'}</CButton>
             </CCol>
             {action &&
 
