@@ -1,6 +1,8 @@
 import {CCard,CCardTitle,CCardHeader,CTable,CTableHead,
     CTableHeaderCell,CTableBody,CTableRow,CTableDataCell, 
     CButton,CCol,CFormInput,CFormSwitch}from '@coreui/react'
+    import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md';
+
 
 
 function Support (){
@@ -36,9 +38,8 @@ function Support (){
                <CTableHeaderCell className='p-3'>Sr No</CTableHeaderCell>
                <CTableHeaderCell className='p-3'>Date</CTableHeaderCell>
                <CTableHeaderCell className='p-3'>Request Type</CTableHeaderCell>
-               <CTableHeaderCell className='p-3'>ON/OFF</CTableHeaderCell>
+               <CTableHeaderCell className='p-3 '>ON/OFF</CTableHeaderCell>
                <CTableHeaderCell className='p-3'>Action</CTableHeaderCell>
-               <CTableHeaderCell className='p-3'>Edit/Delete</CTableHeaderCell>
                
             </CTableHead>
             <CTableBody>
@@ -49,8 +50,10 @@ function Support (){
                   <CTableDataCell className=''>
                   <CFormSwitch size="xl"  id="formSwitchCheckDefaultXL" style={{margin:'auto'}}/>
                   </CTableDataCell>
-                  <CTableDataCell></CTableDataCell>
-                  <CTableDataCell></CTableDataCell>
+                  <CTableDataCell className='text-center'>
+                    <MdEdit/>
+                    <MdDelete/>
+                  </CTableDataCell>
                  
               </CTableRow>
             </CTableBody>
