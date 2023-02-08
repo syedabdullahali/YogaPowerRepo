@@ -5,18 +5,13 @@ import {CCard,CCardTitle,CCardHeader,CTable,CTableHead,
 
 function Support (){
 
-    // const [activeForm,setActiveForm] = useState(false)
-
-    // const closeForm  = ()=>{
-    //   setActiveForm(false)
-    // }
-  
+ 
   
   return <CCard>
 
        <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
            <CCardTitle className='p-2'>
-              <h4>Empyolee Target Sheet</h4></CCardTitle>
+              <h4>Support Request</h4></CCardTitle>
        </CCardHeader>
   
          <CCol className='d-flex p-4'>
