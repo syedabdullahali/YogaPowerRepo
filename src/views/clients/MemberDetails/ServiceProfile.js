@@ -8,6 +8,8 @@ const url2 = 'https://yog-seven.vercel.app'
 const ServiceProfile = ({ id }) => {
     console.log(id)
     const [result, setResult] = useState()
+    const [active,setActive] = useState(false)
+
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
     const token = user.token;
@@ -107,9 +109,9 @@ data.then((resp)=>{
             <CCol xs={12} className='mt-4'>
                 <CRow >
                     <CCol xs={2}>
-                        <CButton className='ml-1' size='sm' >Resync To Device</CButton></CCol>
+                        <CButton className='ml-1' size='sm' color='dark'  >Resync To Device</CButton></CCol>
                     <CCol xs={2}>
-                        <CButton className='ml-1'  size='sm'>Delete Member</CButton></CCol>
+                        <CButton className='ml-1'  size='sm' color='dark' >Delete Member</CButton></CCol>
                     <CCol xs={2}>
                         <CFormSelect 
                             aria-label="Select Currency"
@@ -120,38 +122,66 @@ data.then((resp)=>{
                         
                         </CCol>
                     <CCol xs={2}>
-                        <CButton className='ml-1'  size='sm'>Add Fingerprint</CButton>
+                        <CButton className='ml-1' color='dark'  size='sm'>Add Fingerprint</CButton>
                     </CCol>
 
+                </CRow>
+            </CCol>
+            <CCol  className='mt-4'>
+                <CRow >
+                    <CCol sm={4} >
+                        <CButton className='w-100' color="dark" variant="outline" onClick={()=>setActive((val)=>val==1?false:1)} >Singal  Center Membership</CButton>
+                         {active ==1 &&<CCard className='p-2 text-center' >Only one Center Services
+                        </CCard>}  
+                        </CCol>
+                    <CCol sm={4}>
+                        <CButton className='w-100' color="dark" variant="outline" 
+                         onClick={()=>setActive((val)=>val==2?false:2)} >Multiple Center Membership</CButton>
+                         {active ==2 &&<CCard className='p-2 text-center' >Multiclub Access Services
+                        </CCard>}  
+                         </CCol>
+                    <CCol sm={4}>
+                        <CButton className='w-100 ' color="dark" variant="outline" onClick={()=>setActive((val)=>val==3?false:3)} >
+                            Postpaid Membership</CButton>
+                            {active ==3 &&<CCard  className='p-2 text-center'>Postpaid Services
+
+                        </CCard>}  
+                            </CCol>                    
                 </CRow>
             </CCol>
 
             <CCol xs={12}>
                 <CCard style={{ padding: '15px' }} className='mt-2'>
                     <CRow>
-                         <CCol className='d-flex me-4 ps-2'>
+                         <CCol className='d-flex '>
 
                         <CCol>
-                            Service Id : 2068115
+                            <b>Service Id</b> : <br/> 2068115
                         </CCol>
                         <CCol>
-                            Service Name : Yoga {result?.ServiceName}
+                            <b>Service Name</b> :<br/>
+                             Yoga {result?.ServiceName}
                         </CCol>
                         <CCol>
-                            Duration: {result?.PackageName}
+                            <b>Duration:</b><br/> {result?.PackageName}
+                        </CCol>
+                        <CCol>
+                             <b>Packages:</b> <br/>3 days a week
                         </CCol>
                         </CCol>
 
-                        <CCol className='d-flex ms-4 pe-2'>
+                        <CCol className='d-flex '>
+                       
                         <CCol>
-                             TOTAL DAYS
+                             <b>TOTAL DAYS</b> <br/>12 days
                         </CCol>
                         <CCol>
-                              START DATE
+                              <b>START DATE</b> <br/>01/02/2022
                         </CCol>
                         <CCol>
-                              EXPIRY DATE
+                              <b>EXPIRY DATE</b> <br/>30/03/22
                         </CCol>
+                              <b>Status</b> <br/>active
                         </CCol>    
  
                     </CRow>
