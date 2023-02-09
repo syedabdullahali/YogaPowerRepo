@@ -1,4 +1,4 @@
-import { CButton, CCard, CCardTitle, CCol, CFormSelect, CImage, CRow } from '@coreui/react'
+import { CButton, CCard, CCardTitle, CCol, CFormSelect, CImage, CRow,CTable,CTableHead,CTableHeaderCell,CTableBody,CTableRow,CTableDataCell } from '@coreui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
@@ -47,7 +47,7 @@ data.then((resp)=>{
             <CCol xs={12}>
                 <div className='d-flex justify-content-between mb-2'>
                     <div className='mt-2 ms-2'>
-                        <CCardTitle>Service Card - {result?.MemberName}</CCardTitle>
+                        <CCardTitle>Service {result?.MemberName}</CCardTitle>
                     </div>
                     
                 </div>
@@ -128,26 +128,26 @@ data.then((resp)=>{
                 </CRow>
             </CCol>
             <CCol  className='mt-4'>
-                <CRow >
-                    <CCol sm={4} >
-                        <CButton className='w-100' color="dark" variant="outline" onClick={()=>setActive((val)=>val==1?false:1)} >Singal  Center Membership</CButton>
-                         {active ==1 &&<CCard className='p-2 text-center' >Only one Center Services
-                        </CCard>}  
-                        </CCol>
-                    <CCol sm={4}>
-                        <CButton className='w-100' color="dark" variant="outline" 
-                         onClick={()=>setActive((val)=>val==2?false:2)} >Multiple Center Membership</CButton>
-                         {active ==2 &&<CCard className='p-2 text-center' >Multiclub Access Services
-                        </CCard>}  
-                         </CCol>
-                    <CCol sm={4}>
-                        <CButton className='w-100 ' color="dark" variant="outline" onClick={()=>setActive((val)=>val==3?false:3)} >
-                            Postpaid Membership</CButton>
-                            {active ==3 &&<CCard  className='p-2 text-center'>Postpaid Services
+          
 
-                        </CCard>}  
-                            </CCol>                    
-                </CRow>
+                <div style={{overflowX:'scroll',boxSizing:'border-box'}} >
+    
+    <CTable  >
+         <CTableHead >
+            <CTableHeaderCell className='p-3'>Singal  Center Membership</CTableHeaderCell>
+            <CTableHeaderCell className='p-3'>Multiple Center Membership</CTableHeaderCell>
+            <CTableHeaderCell className='p-3'>Postpaid Membership</CTableHeaderCell>
+      
+         </CTableHead>
+         <CTableBody>
+           <CTableRow className='text-center'>
+               <CTableDataCell>Only one Center Services</CTableDataCell>
+               <CTableDataCell>Multiclub Access Services</CTableDataCell>
+               <CTableDataCell>Postpaid Services</CTableDataCell>
+           </CTableRow>
+         </CTableBody>
+    </CTable>
+    </div>
             </CCol>
 
             <CCol xs={12}>
