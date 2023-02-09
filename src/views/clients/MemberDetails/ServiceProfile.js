@@ -181,8 +181,12 @@ data.then((resp)=>{
                         <CCol>
                               <b>EXPIRY DATE</b> <br/>30/03/22
                         </CCol>
-                              <b>Status</b> <br/>active
+                        <CCol>
+                              <b>Status </b><br/>active
+                        </CCol>  
                         </CCol>    
+  
+                        
  
                     </CRow>
                     <CRow>
