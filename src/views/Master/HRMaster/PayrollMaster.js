@@ -265,7 +265,7 @@ const PayrollMaster = () =>{
           <CButton color="success mt-4 px-4" onClick={(()=>{
             setVisible(value=>!value) 
             setForm(value=>!value) 
-            })} >Svae</CButton>
+            })} >Save</CButton>
 
          </CForm>
     </div>
