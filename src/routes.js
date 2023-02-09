@@ -43,7 +43,9 @@ const EmailMarketing = React.lazy(() => import('./views/marketing/EmailMarketing
 const SMSMarketing = React.lazy(() => import('./views/marketing/SMSMarketing'))
 const PushMarketing = React.lazy(() => import('./views/marketing/PushMarketing'))
 const OfferMaster = React.lazy(() => import('./views/marketing/OfferMarketing'))
-
+const BulkMaller = React.lazy(()=>import('./views/marketing/BulkMailer'))
+const BulkCalling = React.lazy(()=>import('./views/marketing/BulkCalling'))
+const  CustomerReview  =React.lazy(()=>import('./views/marketing/CustomerReview'))
 // Fitness
 const Fitness = React.lazy(()=>import('./views/Fitness/FitnessJs'))
 
@@ -290,7 +292,11 @@ const routes = [
   { path: '/Marketing/sms-marketing', name: 'SMS Marketing', element: SMSMarketing },
   { path: '/Marketing/push-marketing', name: 'App Notification', element: PushMarketing },
   { path: '/Marketing/offers-master', name: 'Offer Master', element: OfferMaster },
-  {path:'task/create-a-task',name:'Create Task',element:CreateTask},
+  { path: '/Marketing/bulk-mailer-data',name:'Bulk Mailer ',element:BulkMaller },
+  { path: '/Marketing/bulk-calling-data',name:'Bulk Calling',element:BulkCalling},
+  { path:'/Marketing/customer-review',name:'Customer Review',element:CustomerReview},
+  { path:'task/create-a-task',name:'Create Task',element:CreateTask},
+
 
   //Inventory
   { path: '/inventory', name: 'Inventory', element: ImpCallList, exact: true },
@@ -366,10 +372,6 @@ const routes = [
   {path:'/course/ttc-videos-details' ,name:'TTC Videos Details' ,element:TtcVideoDetails},
   {path:'/course/ttc-pdf-details' ,name:'TTC PDF Details' ,element:TtcPdfDetails},
   {path:'/course/client-certificate-details' ,name:'TTC Client Certificate Details' ,element:ClientCertificateDetails},
-
-
-
-
 
 
   //Master

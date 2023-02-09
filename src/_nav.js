@@ -217,17 +217,17 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Bulk Mailer Data',
-        to: '/base/cards',
+        to: '/Marketing/bulk-mailer-data',
       },
       {
         component: CNavItem,
         name: 'Bulk Calling Data',
-        to: '/base/cards',
+        to: '/Marketing/bulk-calling-data',
       },
       {
         component: CNavItem,
-        name: 'Data From App',
-        to: '/base/cards',
+        name: 'Customer Review',
+        to: '/Marketing/customer-review',
       },
     ],
   },
