@@ -39,7 +39,7 @@ function BulkCalling(){
     return <CCard>
 
     <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-        <CCardTitle className='p-2'>
+        <CCardTitle className='p-2 '>
            <h4>Bulk Calling</h4></CCardTitle>
     </CCardHeader>
 
@@ -47,6 +47,7 @@ function BulkCalling(){
       <CCol className='p-4 d-flex justify-content-end'>
 
         <CButton className='me-4' onClick={HandaleImportClick} > <CIcon icon={cilArrowCircleBottom} />Import</CButton> 
+
         <CFormInput type='file'
          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  
          ref={ hiddenXLimportFileInput}  
@@ -58,12 +59,7 @@ function BulkCalling(){
          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  
          ref={hiddenXLExportFileInput}  
          onChange={HandaleExportChange}  hidden />
-
-
       </CCol>
-
-      
-
 
 
     <div style={{overflowX:'scroll',boxSizing:'border-box'}} className='p-4'>
