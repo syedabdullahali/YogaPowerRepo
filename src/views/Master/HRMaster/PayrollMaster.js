@@ -5,7 +5,6 @@ import {
     CCardHeader,
     CCardTitle,
     CCol,
-    CForm,
     CFormInput,
     CFormSwitch,
     CRow,
@@ -15,194 +14,279 @@ import {
     CTableHead,
     CTableHeaderCell,
     CTableRow,
+    CForm,
+    CFormSelect,
+    CCallout,
+    CButtonGroup,
+    CModal,
+    CModalHeader,
+    CModalTitle,
+    CModalBody,
+    CModalFooter
+
+
 } from "@coreui/react";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { MdDelete } from "react-icons/md";
-const url = 'https://yog-seven.vercel.app'
-const url2 = 'https://yog-seven.vercel.app'
-
-const PayrollMaster = () => {
-    const [action1, setAction1] = useState(false)
-    const [sub_Service_Name, setSub_Service_Name] = useState("")
-    const [selected_service, setSelected_service] = useState("")
-    const [fees, setFees] = useState("")
-    const [status, setStatus] = useState(false)
-    const [packages, setPackages] = useState("")
-    const [duration, setDuration] = useState("")
-
-    let user = JSON.parse(localStorage.getItem('user-info'))
-    const token = user.token;
-    const username = user.user.username;
-    const [result1, setResult1] = useState([]);
-    useEffect(() => {
-        getSubService()
-    }, []);
-
-    function getSubService() {
-        axios.get(`${url}/subservice/all`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                setResult1(res.data)
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
-    function deleteSubService(id) {
-
-        if (confirm('Do you want to delete this')) {
-            fetch(`${url}/subservice/delete/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-            }).then((result) => {
-                result.json().then((resp) => {
-                    console.warn(resp)
-                    getSubService()
-                })
-            })
-        }
-    }
+import DataTable from "src/components/DataTable";
+import CIcon from '@coreui/icons-react';
+import * as icon from '@coreui/icons';
 
 
-    const updateStatus2 = (id, status) => {
-        let item = { status: status }
-        fetch(`${url}/subservice/update/${id}`, {
-            method: 'POST',
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item)
-        }).then((result) => {
-            result.json().then((resp) => {
-                getSubService()
-            })
-        })
-    }
-
-    const saveSubservice = () => {
-        let data = { username: username, sub_Service_Name, selected_service: selected_service, fees, packages, duration, status }
-        // console.warn(data);
-        fetch(`${url}/subservice/create`, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        }).then((resp) => {
-            // console.warn("resp",resp);;
-            resp.json().then(() => {
-                setSelected_service('')
-                setFees("")
-                setDuration('')
-                setStatus(false)
-                getSubService()
-                alert("successfully submitted")
-            })
-        })
-    }
-
-    const subserviceClose = () => {
-        setAction1(!action1)
-        setSelected_service('')
-        setSub_Service_Name('')
-        setFees("")
-        setDuration('')
-        setStatus(false)
-    }
+import React, { useState } from "react";
 
 
-    return (
-        <CCard className="mb-3 border-success">
-            <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                <CCardTitle>Express Category Master</CCardTitle>
-            </CCardHeader>
-            <CCardBody>
-                <CForm className="mb-2">
-                    <div className="d-flex justify-content-between">
-                        <div></div>
-                        <div>
-                            <CRow>
-                                <CCol>
-                                    <CButton className="ms-1 mt-2" onClick={subserviceClose}>{action1 ? 'close' : 'Add Template'}</CButton>
-                                </CCol>
-                            </CRow>
-                        </div>
-                    </div>
-                    {action1 &&
-                        <div>
-                            <CRow className='mt-3'>
-                                <CCol lg={6} md={6} sm={12}>
-                                    <CFormInput
-                                        className="mb-1"
-                                        type="text"
-                                        id="exampleFormControlInput1"
-                                        label="Category"
-                                        value={selected_service}
-                                        onChange={(e) => setSelected_service(e.target.value)}
-                                        placeholder="Enter Tax Name"
-                                    />
-                                </CCol>
-                                <CCol lg={6} md={6} sm={12}>
-                                    <CFormInput
-                                        className="mb-1"
-                                        type="number"
-                                        id="exampleFormControlInput1"
-                                        label="Year"
-                                        value={sub_Service_Name}
-                                        onChange={(e) => setSub_Service_Name(e.target.value)}
-                                        placeholder="Enter Year"
-                                    />
-                                </CCol>
-                                <CCol className="mt-2" lg={6} md={6} sm={12}>
-                                    <CRow>
-                                        <CCol>
-                                            <CFormSwitch size="xl" label="Status" value={status} onChange={() => setStatus(!status)} style={{ defaultChecked: 'false' }} />
-                                        </CCol>
-                                    </CRow>
+const PayrollMaster = () =>{
 
-                                    <CButton className="mt-2" onClick={saveSubservice}>Save</CButton>
-                                </CCol>
-                            </CRow>
-                        </div>
-                    }
-                </CForm>
-                <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
-                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
-                        <CTableRow >
-                            <CTableHeaderCell>Sr.No</CTableHeaderCell>
-                            <CTableHeaderCell>Template Name</CTableHeaderCell>
-                            <CTableHeaderCell>SMS Content</CTableHeaderCell>
-                            <CTableHeaderCell>Action</CTableHeaderCell>
-                        </CTableRow>
-                    </CTableHead>
-                    <CTableBody>
-                        {result1.map((item, index) => (
-                            item.username === username && (
-                                <CTableRow key={index}>
-                                    <CTableDataCell>{index + 1}</CTableDataCell>
-                                    <CTableDataCell>{item.selected_service}</CTableDataCell>
-                                    <CTableDataCell className="text-center">{item.sub_Service_Name ? item.sub_Service_Name : '-'}</CTableDataCell>
-                                    <CTableDataCell> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteSubService(item._id)} size='20px' /> </CTableDataCell>
-                                </CTableRow>
-                            )
-                        ))}
-                    </CTableBody>
-                </CTable>
-            </CCardBody>
-        </CCard>
-    );
-};
+    const [showForm,setForm] = useState(true)
+    const [visible, setVisible] = useState(false)
+
+    const header = [
+
+        { heading: 'Sr.No', value: 'id' },
+        { heading: 'Name', value: 'id' },
+        { heading: 'Joining Date', value: '959414744' },
+        { heading: 'EMP ID', value: '155' },
+        { heading: 'Gender', value: 'mobile' },
+        { heading: 'Location', value: 'service_name' },
+        { heading: 'Full/Part Time', value: 'variation_name' },
+        { heading: 'Department', value: 'expiry_date' },
+        { heading: 'Made of Payment', value: 'renew' },
+        { heading: 'Late Mark', value: '0' },
+        { heading: 'Leave', value:'' },
+        { heading: 'TWD',value:''},
+        { heading:'TPD',value:''},
+        { heading:'Basic Salary',value:''},
+        { heading:'Incentive',value:''},
+        { heading:'Gross Salary',value:''},
+        { heading:'PT',value:''},
+        { heading:'Adev Dec',value:''},
+        { heading:'Net Salary Remark',value:''},
+        { heading:'Remark',value:''}
+    ]
+
+    const Users = [
+        {
+            id: 1,
+            date_time: "25-08-2022 03:00 PM",
+            member_name: "Nayana Nagrecha",
+            mobile: "9136123476",
+            service_name: "Yoga",
+            variation_name: "3 Months",
+            expiry_date: "31-08-2022",
+            sales_rep: "Sejal Ganatra",
+            pt_trainer: "-",
+            trainer: "Prabha Yadav",
+            staff_name: "Sejal Ganatra",
+        },
+        {
+            id: 2,
+            date_time: "25-08-2022 03:00 PM",
+            member_name: "Nayana Nagrecha",
+            mobile: "9136123476",
+            service_name: "Yoga",
+            variation_name: "3 Months",
+            expiry_date: "31-08-2022",
+            sales_rep: "Sejal Ganatra",
+            pt_trainer: "-",
+            trainer: "Prabha Yadav",
+            staff_name: "Sejal Ganatra",
+        },
+    ];
+
+
+    return <div>
+    <CModal visible={visible} onClose={() => setVisible(false)}>
+       <CModalHeader>
+        <CModalTitle>Successfully Save   <CIcon icon={icon.cilCheckAlt} size="xl" color="success"/></CModalTitle>
+        </CModalHeader> 
+    </CModal>
+
+    {showForm?<CCallout color="primary" className="bg-body d-flex justify-content-end">
+            <CButton onClick={()=>setForm((value)=>!value)}>Add New Payrol Setup</CButton>
+    </CCallout>:
+
+    <CCard className="overflow-hidden"   >
+        <CCardHeader className="p-4" style={{ backgroundColor: '#0B5345', color: 'white' }}>
+                 <CCardTitle> <h4>Payrol Setup</h4></CCardTitle>
+        </CCardHeader>
+    <div className="p-4">
+         <CForm>
+            <CCol className="d-flex justify-content-end">
+                <CButton color='danger' onClick={()=>setForm(()=>true)}>Close</CButton>
+            </CCol>
+            <CRow>
+              <CCol md={6}>
+                <CFormInput
+                  type="text"
+                  placeholder="Enter Your Name"
+                  label='Name'
+                />
+              </CCol>
+              <CCol md={6}>
+                <CFormInput
+                  type="date"
+                  placeholder="Enter Your Name"
+                  label='Joining Date'
+                />
+              </CCol>
+            </CRow> 
+            <CRow >
+              <CCol md={6}>
+              <CFormSelect
+                  label='Select Your Gender'
+                  options={[
+                    { label: 'Male', value: 'Male' },
+                    { label: 'Female', value: 'Female' }
+
+                  ]}
+              />
+             
+              </CCol>
+            <CCol md={6}>
+              <CFormInput
+              label='Location'
+              placeholder="Enter Your Location"
+              />
+            </CCol>
+
+            </CRow>    
+
+            <CRow>
+              <CCol md={6}>
+              <CFormSelect
+                  label='Full/Part Time'
+                  options={[
+                    { label: 'Ful Time', value: 'Ful Time' },
+                    { label: 'Part Time', value: 'Part Time' }
+                  ]}
+              />
+                </CCol>   
+                <CCol md={6}>
+              <CFormSelect
+                  label='Department'
+                  options={[
+                   "Select Dpartment"
+                  ]}
+              />
+                </CCol>    
+            </CRow>
+
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='Made of Payment'
+                  type="number"
+                  
+              />
+                </CCol>
+                <CCol md={6}>
+              <CFormInput
+                  label='Late Mark'
+                  type="number"
+                  
+              />
+                </CCol>
+            </CRow>
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='TWD'
+                  type="text"
+                  
+              />
+                </CCol>
+                <CCol md={6}>
+              <CFormInput
+                  label='TPD'
+                  type="text"
+                  
+              />
+                </CCol>
+            </CRow>
+
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='Basic Salary'
+                  type="text"
+                  
+              />
+                </CCol>
+                <CCol md={6}>
+              <CFormInput
+                  label='Incentive'
+                  type="text"
+                  
+              />
+                </CCol>
+            </CRow>
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='Gross Salary'
+                  type="number"
+                  
+              />
+                </CCol>
+                <CCol md={6}>
+              <CFormInput
+                  label='PT'
+                  type="text"
+                  
+              />
+                </CCol>
+            </CRow>
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='Adev Dec'
+                  type="number"
+                  
+              />
+                </CCol>
+                <CCol md={6}>
+              <CFormInput
+                  label='Net Salary Remark'
+                  type="number"
+                  
+              />
+                </CCol>
+            </CRow>
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='Remark'
+                  type="number"
+                  
+              />
+                </CCol>
+              
+            </CRow>
+          
+          <CButton color="success mt-4 px-4" onClick={(()=>{
+            setVisible(value=>!value) 
+            setForm(value=>!value) 
+            })} >Svae</CButton>
+
+         </CForm>
+    </div>
+    <CCol style={{ backgroundColor: '#0B5345'}} className='p-1'>
+
+    </CCol>
+      </CCard>}
+
+
+
+
+      <CCard className="mb-3 border-success mt-4">
+                    <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
+                        <CCardTitle className="mt-2">Payrol Setup </CCardTitle>
+                    </CCardHeader>
+                    <CCardBody>
+                        
+                        <DataTable heading={header} data={Users} size={"200%"}  />
+                    </CCardBody>
+                </CCard>
+      </div>
+}
 
 export default PayrollMaster;

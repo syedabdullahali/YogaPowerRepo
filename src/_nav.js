@@ -712,54 +712,51 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Holidays Master',
-        to: '/master/hr/holiday',
-      },
-      {
-        component: CNavItem,
-        name: 'Payroll Master',
-        to: '/master/hr/ho',
-      },
-      {
-        component: CNavItem,
-        name: 'Job Profile  JD Master',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'EMP Documents Check List ',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
         name: 'HR Policy',
         to: '/master/hr/hrPolicy',
       },
       {
         component: CNavItem,
-        name: 'daily Task ( note paid )',
-        to: '/base/cards',
+        name: 'Holidays List',
+        to: '/master/hr/holiday',
       },
       {
         component: CNavItem,
-        name: 'Employee Profile  ',
-        to: '/base/cards',
+        name: 'Payrol Setup',
+        to: '/master/hr/payrol-setup',
       },
+     
       {
         component: CNavItem,
-        name: 'All Access Rights Master  ',
-        to: '/base/cards',
+        name: 'Job Profile',
+        to: '/master/hr/job-profile',
       },
-      {
-        component: CNavItem,
-        name: 'Shift Master',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Bio matric',
-        to: '/base/cards',
-      },
+      
+      // {
+      //   component: CNavItem,
+      //   name: 'daily Task ( note paid )',
+      //   to: '/base/cards',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Employee Profile  ',
+      //   to: '/base/cards',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'All Access Rights Master  ',
+      //   to: '/base/cards',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Shift Master',
+      //   to: '/base/cards',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Bio matric',
+      //   to: '/base/cards',
+      // },
     ],
   },
 

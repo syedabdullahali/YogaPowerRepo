@@ -22,14 +22,6 @@ const EMPPayrolSetup = () => {
 
     const header = [
 
-        /* 
-        value: keyword for normal value passing
-        btn: keyword for button
-        btn1 to btn4: keyword for component passing
-        lebel: keyword for anchor tag
-        Note: please don't pass empty values or perameters
-        */
-
         { heading: 'Sr.No', value: 'id' },
         { heading: 'Name', value: 'id' },
         { heading: 'Joining Date', value: '959414744' },
@@ -87,7 +79,7 @@ const EMPPayrolSetup = () => {
             <CCol lg={12} sm={12}>
                 <CCard className="mb-3 border-success">
                     <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                        <CCardTitle className="mt-2">Payrol Setup</CCardTitle>
+                        <CCardTitle className="mt-2">Payrol </CCardTitle>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex mb-2'>

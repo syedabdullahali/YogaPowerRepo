@@ -138,6 +138,9 @@ const InvoiceMaster = React.lazy(() => import('./views/Master/finance/InvoiceMas
 const TaxSetupMaster = React.lazy(() => import('./views/Master/finance/TaxSetupMaster'))
 const ClientTransferMaster = React.lazy(() => import('./views/Master/client/ClientTransferMaster'))
 const Support = React.lazy(()=>import('./views/Master/Support/Support'))
+const PayrollMaster = React.lazy(()=>import('./views/Master/HRMaster/PayrollMaster'))
+const JobProfileMaster  = React.lazy(()=>import('./views/Master/HRMaster/JobProfile'))
+
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -347,7 +350,7 @@ const routes = [
   { path: '/hr/attendance-report', name: 'Attendance Report', element: AttendanceReport, exact: true },
   { path: '/hr/biometric-emp', name: 'Biometric Staff', element: BiometricEmp, exact: true },
   { path: '/hr/emp-document', name: 'Employee Document', element: EmpDocuments, exact: true },
-  { path: '/hr/emp-payrollSetup', name: 'Employee Payroll Setup', element: EMPPayrolSetup, exact: true },
+  { path: '/hr/emp-payrollSetup', name: 'Employee Payroll ', element: EMPPayrolSetup, exact: true },
   { path: '/hr/holiday-list', name: 'Holiday List', element: HolidaysList, exact: true },
   { path: '/hr/staff-checkin', name: 'Staff CheckIn', element: StaffCheckIns, exact: true },
   { path:'/hr/daily-emp-check',name:'Emp Check Ins',element:EmpDailyCheckIns},
@@ -404,6 +407,8 @@ const routes = [
   { path: '/master/finance/invoice', name: 'Invoice', element: InvoiceMaster, exact: true },
   { path: '/master/finance/tax', name: 'Tax', element: TaxSetupMaster, exact: true },
   { path:'/master/support',name:'Support',element:Support },
+  { path:'/master/hr/payrol-setup',name:'Payrol Setup',element:PayrollMaster},
+  { path:'/master/hr/job-profile',name:'Job Profile',element:JobProfileMaster},
 
   { path: '/theme/typography', name: 'Typography', element: Typography },
   { path: '/base', name: 'Base', element: Cards, exact: true },
@@ -430,6 +435,7 @@ const routes = [
     element: ButtonGroups,
   },
   { path: '/charts', name: 'Charts', element: Charts },
+
 
   //Form
   { path: '/forms', name: 'Forms', element: FormControl, exact: true },

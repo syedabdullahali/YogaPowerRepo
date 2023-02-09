@@ -20,6 +20,7 @@ import {
     CTableHead,
     CTableHeaderCell,
     CTableRow,
+    CForm
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop, cilInfo } from '@coreui/icons'
@@ -43,6 +44,8 @@ const SalarySheet = () => {
     const [Search8, setSearch8] = useState('')
     const [Search9, setSearch9] = useState('')
     const [Search10, setSearch10] = useState('')
+    const [showForm,setForm] = useState(true)
+
 
 
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -115,6 +118,116 @@ const SalarySheet = () => {
                     <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
                         <CCardTitle className="mt-2">Salary Sheet</CCardTitle>
                     </CCardHeader>
+
+
+
+
+
+
+
+    {showForm?<CCol  className="bg-body d-flex justify-content-end pe-4 my-4">
+            <CButton onClick={()=>setForm((value)=>!value)}>Add New </CButton>
+    </CCol>:
+
+<div className='p-2'>
+    <CCard className="overflow-hidden mt-4"   >
+        <CCardHeader className="p-3 py-2 " style={{ backgroundColor: '#0B5345', color: 'white' }}>
+                 <CCardTitle> <h5>Salary Sheet Form</h5></CCardTitle>
+        </CCardHeader>
+    <div className="p-4">
+         <CForm>
+            <CCol className="d-flex justify-content-end">
+                <CButton color='danger' onClick={()=>setForm(()=>true)}>Close</CButton>
+            </CCol>
+            <CRow>
+              <CCol md={6}>
+                <CFormInput
+                  type="month"
+                 
+                  label='Month'
+                />
+              </CCol>
+              <CCol md={6}>
+                <CFormInput
+                  type="text"
+                  placeholder="Enter Center Id"
+                  label='Center Id'
+                />
+              </CCol>
+            </CRow> 
+            <CRow >
+              <CCol md={6}>
+              <CFormInput
+              label='Emp Id'
+              placeholder="Enter Emp Id"
+              />
+             
+              </CCol>
+            <CCol md={6}>
+              <CFormInput
+              label='Emp Name'
+              placeholder="Enter Emp Name"
+              />
+            </CCol>
+
+            </CRow>    
+
+            <CRow>
+              <CCol md={6}>
+              <CFormSelect
+                  label='Designations'
+                  options={[""
+                    
+                  ]}
+              />
+                </CCol>   
+                <CCol md={6}>
+              <CFormInput
+                  label='Basic Slarry'
+                  type='number'                
+              />
+                </CCol>    
+            </CRow>
+
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='Incentive'
+                  type="number"
+                  
+              />
+                </CCol>
+                <CCol md={6}>
+              <CFormInput
+                  label='Net Salary'
+                  type="number"
+                  
+              />
+                </CCol>
+            </CRow>
+            
+
+            
+          
+            
+          
+          <CButton color="success mt-4 px-4"  >Svae</CButton>
+
+         </CForm>
+    </div>
+
+
+
+    <CCol style={{ backgroundColor: '#0B5345'}} className='p-1'>
+
+    </CCol>
+      </CCard>
+</div>     
+      
+      }
+
+
+
                     <CCardBody>
                         <CRow className='d-flex mb-2'>
                             <CCol lg={6} sm={12} className='mb-2'>
@@ -144,10 +257,9 @@ const SalarySheet = () => {
                                     <CTableHeaderCell>Sr.No</CTableHeaderCell>
                                     <CTableHeaderCell>Month</CTableHeaderCell>
                                     <CTableHeaderCell>Center Id</CTableHeaderCell>
-                                    <CTableHeaderCell>Email-ID</CTableHeaderCell>
+                                    <CTableHeaderCell>Emp Id</CTableHeaderCell>
                                     <CTableHeaderCell>Emp Name</CTableHeaderCell>
                                     <CTableHeaderCell>Designations</CTableHeaderCell>
-                                    <CTableHeaderCell>Emp Id</CTableHeaderCell>
                                     <CTableHeaderCell>Basic Slarry</CTableHeaderCell>
                                     <CTableHeaderCell>Incentive</CTableHeaderCell>
                                     <CTableHeaderCell>Net Salary</CTableHeaderCell>
@@ -243,16 +355,7 @@ const SalarySheet = () => {
                                             aria-describedby="exampleFormControlInputHelpInline"
                                         />
                                     </CTableDataCell>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            type="text"
-                                            style={{ minWidth: "100px" }}
-                                            value={Search6}
-                                            onChange={(e) => setSearch6(e.target.value)}
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
+                                    
                                     
                                    
                                    

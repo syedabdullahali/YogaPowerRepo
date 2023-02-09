@@ -12,10 +12,10 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
-const DataTable = ({ heading, data }) => {
+const DataTable = ({ heading, data,size }) => {
 
     return (
-        <CTable align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
+        <CTable align="middle" bordered style={{ borderColor: "#0B5345",minWidth:size}} hover responsive>
             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                 <CTableRow >
                     {heading.map((item, index) => (
