@@ -262,7 +262,7 @@ const PayrollMaster = () =>{
               
             </CRow>
           
-          <CButton color="success mt-4 px-4" onClick={(()=>{
+          <CButton color="primary mt-4 px-4" onClick={(()=>{
             setVisible(value=>!value) 
             setForm(value=>!value) 
             })} >Save</CButton>

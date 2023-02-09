@@ -211,7 +211,7 @@ const SalarySheet = () => {
           
             
           
-          <CButton color="success mt-4 px-4"  >Save</CButton>
+          <CButton color="primary mt-4 px-4"  >Save</CButton>
 
          </CForm>
     </div>

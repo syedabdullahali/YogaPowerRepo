@@ -515,7 +515,7 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'EMP of Documents',
+        name: 'Employee Documents',
         to: '/hr/emp-document',
       },
       {
@@ -725,38 +725,18 @@ const _nav = [
         name: 'Payrol Setup',
         to: '/master/hr/payrol-setup',
       },
-     
       {
         component: CNavItem,
         name: 'Job Profile',
         to: '/master/hr/job-profile',
       },
+      {
+        component: CNavItem,
+        name: 'Leave Setup',
+        to: '/master/hr/leave-setup',
+      },
       
-      // {
-      //   component: CNavItem,
-      //   name: 'daily Task ( note paid )',
-      //   to: '/base/cards',
-      // },
-      // {
-      //   component: CNavItem,
-      //   name: 'Employee Profile  ',
-      //   to: '/base/cards',
-      // },
-      // {
-      //   component: CNavItem,
-      //   name: 'All Access Rights Master  ',
-      //   to: '/base/cards',
-      // },
-      // {
-      //   component: CNavItem,
-      //   name: 'Shift Master',
-      //   to: '/base/cards',
-      // },
-      // {
-      //   component: CNavItem,
-      //   name: 'Bio matric',
-      //   to: '/base/cards',
-      // },
+
     ],
   },
 

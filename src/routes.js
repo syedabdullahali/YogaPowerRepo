@@ -140,8 +140,7 @@ const ClientTransferMaster = React.lazy(() => import('./views/Master/client/Clie
 const Support = React.lazy(()=>import('./views/Master/Support/Support'))
 const PayrollMaster = React.lazy(()=>import('./views/Master/HRMaster/PayrollMaster'))
 const JobProfileMaster  = React.lazy(()=>import('./views/Master/HRMaster/JobProfile'))
-
-
+const LeaveSetupMaster   = React.lazy(()=>import('./views/Master/HRMaster/LeaveSetup'))
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
@@ -409,6 +408,8 @@ const routes = [
   { path:'/master/support',name:'Support',element:Support },
   { path:'/master/hr/payrol-setup',name:'Payrol Setup',element:PayrollMaster},
   { path:'/master/hr/job-profile',name:'Job Profile',element:JobProfileMaster},
+  { path:'/master/hr/leave-setup',name:'Leave Setup',element:LeaveSetupMaster},
+
 
   { path: '/theme/typography', name: 'Typography', element: Typography },
   { path: '/base', name: 'Base', element: Cards, exact: true },

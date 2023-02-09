@@ -21,7 +21,6 @@ import {
     CTableDataCell
 
 } from "@coreui/react";
-import DataTable from "src/components/DataTable";
 import CIcon from '@coreui/icons-react';
 import * as icon from '@coreui/icons';
 
@@ -85,7 +84,7 @@ const JobProfile = () =>{
            
             
           
-          <CButton color="success mt-4 px-4" onClick={(()=>{
+          <CButton color="primary mt-4 px-4" onClick={(()=>{
             setVisible(value=>!value) 
             setForm(value=>!value) 
             })} >Save</CButton>
