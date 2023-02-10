@@ -14,12 +14,13 @@ return <CCard className="overflow-hidden">
              </CCardTitle>     
          <CForm>
            <CRow>
-            <CCol md={6}>
+           <CCol md={6}>
                 <CFormInput
-                type="date"
-                label='Date'                
+                type="number"
+                label='Voucher No'                
                 />
             </CCol>
+
             <CCol md={6}>
                 <CFormInput
                 type="text"
@@ -30,10 +31,12 @@ return <CCard className="overflow-hidden">
           </CRow>   
 
           <CRow>
+           
+
             <CCol md={6}>
                 <CFormInput
-                type="number"
-                label='Voucher No'                
+                type="date"
+                label='Voucher Date'                
                 />
             </CCol>
             <CCol md={6}>
