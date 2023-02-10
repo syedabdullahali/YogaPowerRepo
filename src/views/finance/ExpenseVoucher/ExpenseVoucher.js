@@ -33,7 +33,7 @@ return <CCard className="overflow-hidden">
             <CCol md={6}>
                 <CFormInput
                 type="number"
-                label='No'                
+                label='Voucher No'                
                 />
             </CCol>
             <CCol md={6}>
