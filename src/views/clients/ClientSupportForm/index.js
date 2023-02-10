@@ -14,9 +14,7 @@ return <CCard className="overflow-hidden my-4"   >
     </CCardHeader>
 <div className="p-4">
      <CForm>
-        <CCol className="d-flex justify-content-end">
-            <CButton color='danger' onClick={()=>setForm(()=>true)}>Close</CButton>
-        </CCol>
+       
         <CRow>
           <CCol md={6}>
             <CFormInput
