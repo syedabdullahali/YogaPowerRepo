@@ -87,6 +87,7 @@ const CenterExpenses = React.lazy(() => import('./views/finance/CenterExpenses')
 const PettyCash = React.lazy(() => import('./views/finance/PettyCash'))
 const DSRreport = React.lazy(() => import('./views/finance/DSRreport'))
 const TargetvsAchievment = React.lazy(() => import('./views/finance/TargetvsAchievment.js'))
+const  ExpenseVoucher = React.lazy(()=>import( './views/finance/ExpenseVoucher/ExpenseVoucher'))
 // Hr
 const AllEmpProfile = React.lazy(() => import('./views/hr/AllEmpProfile'))
 const CreateEmployee = React.lazy(() => import('./views/hr/EmpRecruitment'))
@@ -341,7 +342,7 @@ const routes = [
   { path: '/finance/dsr-report', name: 'Petty Cash', element: DSRreport},
   { path: '/finance/targetvs-achievment', name: 'Target vs Achievment', element: TargetvsAchievment},  
   { path: '/finance/center-expense', name: 'Center Expense', element: CenterExpenses },
-
+  { path:'/voucher/expense',name:'Expense Voucher ',element:ExpenseVoucher },
   //HR
   { path: '/hr', name: 'HR Management', element: AllEmpProfile, exact: true },
   { path: '/hr/all-emp', name: 'All Employee Profile', element: AllEmpProfile, exact: true },

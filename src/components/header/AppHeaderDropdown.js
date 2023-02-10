@@ -103,9 +103,13 @@ const AppHeaderDropdownForm = () => {
           <CIcon icon={cilCommentSquare} className="me-2" />
           Product
         </CDropdownItem>
-        <CDropdownItem href="#">
+        <CDropdownItem>
+            
+          <Link style={{ textDecoration: 'none' }} to='/voucher/expense' >
           <CIcon icon={cilUser} className="me-2" />
           Expense
+          </Link>
+
         </CDropdownItem>
         <CDropdownItem href="#">
           <Link style={{ textDecoration: 'none' }} to="/forms/invoice">
