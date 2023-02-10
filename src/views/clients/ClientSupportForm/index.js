@@ -2,21 +2,13 @@ import { CCard,CCol,CRow,CButton,CForm,
     CCardHeader,CCardTitle,CFormInput,CCallout,CModal,
  } from "@coreui/react"
 
- import React,{useState} from 'react'
 
 
 function ClientSupportForm (){
 
-    const [showForm,setForm] = useState(true)
 
 
-return <>
-
-    {showForm?<CCol color="primary" className="bg-body d-flex justify-content-end p-4">
-    <CButton onClick={()=>setForm((value)=>!value)}>Add New </CButton>
-</CCol>:
-
-<CCard className="overflow-hidden my-4"   >
+return <CCard className="overflow-hidden my-4"   >
     <CCardHeader className="p-4" style={{ backgroundColor: '#0B5345', color: 'white' }}>
              <CCardTitle> <h4>Client Support Form</h4></CCardTitle>
     </CCardHeader>
@@ -87,9 +79,9 @@ return <>
      </CForm>
 </div>
 
-  </CCard>}
+  </CCard>
 
-</>
+
 }
 
 

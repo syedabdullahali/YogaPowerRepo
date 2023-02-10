@@ -118,8 +118,10 @@ const AppHeaderDropdownForm = () => {
           </Link>
         </CDropdownItem>
         <CDropdownItem href="#">
+        <Link style={{ textDecoration: 'none' }} to="/forms/support">
           <CIcon icon={cilFile} className="me-2" />
           Support
+        </Link>
         </CDropdownItem>
         <CDropdownDivider />
       </CDropdownMenu>

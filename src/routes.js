@@ -38,6 +38,7 @@ const MemberDetails = React.lazy(() => import('./views/clients/MemberDetails/Mem
 const SalesCall = React.lazy(() => import('./views/clients/salesCall/SalesCall'))
 const ServicesRateCard = React.lazy(() => import('./views/clients/ServicesRateCard/ServicesRateCard'))
 const ClientSupport = React.lazy(()=>import('./views/clients/ClientSupport'))
+const ClientSupportForm =  React.lazy(()=>import('./views/clients/ClientSupportForm')) 
 //Marketing
 const EmailMarketing = React.lazy(() => import('./views/marketing/EmailMarketing'))
 const SMSMarketing = React.lazy(() => import('./views/marketing/SMSMarketing'))
@@ -286,8 +287,10 @@ const routes = [
   { path: '/clients/sales-call', name: 'Sales Call', element: SalesCall },
   { path: '/clients/servicesrate-card', name: 'ServicesRate Card', element: ServicesRateCard },
   { path:'/clients/client-management/client-support',name:'Client Support',element:ClientSupport},
+  { path:'/forms/support',name:'Support',element: ClientSupportForm  },
 
   // Fitness
+
   {path:'/fitness/fitness-Goal',name:'Fitness Goal',element:Fitness},
 
   //Marketing

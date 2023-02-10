@@ -37,7 +37,6 @@ import moment from 'moment/moment'
 import ViewInvoice from 'src/components/ViewInvoice'
 import CallUpdate from 'src/components/CallUpdate'
 import { Link } from 'react-router-dom'
-import ClientSupportForm from './ClientSupportForm'
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
@@ -520,16 +519,7 @@ const ClientSupport = () => {
                                 </CInputGroup>
                             </CCol>
                             <CCol lg={6} sm={6} md={6}>
-                                <CButtonGroup className=' mb-2 float-end'>
-                                    <CButton color="primary">
-                                        <CIcon icon={cilArrowCircleBottom} />
-                                        {' '}Import
-                                    </CButton>
-                                    <CButton color="primary">
-                                        <CIcon icon={cilArrowCircleTop} />
-                                        {' '}Export
-                                    </CButton>
-                                </CButtonGroup>
+                                
                             </CCol>
                             <CCol xs={3}>
                                 <CFormSelect
@@ -1228,7 +1218,6 @@ const ClientSupport = () => {
                         {viewInvoice &&
                             <ViewInvoice add={viewInvoice} clickfun={() => setViewInvoice(false)} invoiceId={invId} clientId={cliId} />
                         }
-                              <ClientSupportForm/>
 
 
                         <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345",width:'120%' }} hover responsive>
