@@ -89,6 +89,10 @@ const PettyCash = React.lazy(() => import('./views/finance/PettyCash'))
 const DSRreport = React.lazy(() => import('./views/finance/DSRreport'))
 const TargetvsAchievment = React.lazy(() => import('./views/finance/TargetvsAchievment.js'))
 const  ExpenseVoucher = React.lazy(()=>import( './views/finance/ExpenseVoucher/ExpenseVoucher'))
+// const  ClientInvoice  = React.lazy(()=>import('./components/ClientInvoice'))
+const  ClientInvoice = React.lazy(()=>import('./views/finance/ClientInvoice/ClientInvoice'))
+
+
 // Hr
 const AllEmpProfile = React.lazy(() => import('./views/hr/AllEmpProfile'))
 const CreateEmployee = React.lazy(() => import('./views/hr/EmpRecruitment'))
@@ -337,6 +341,8 @@ const routes = [
   { path: '/finance/revenue-report', name: 'Revenue Report', element: RevenueReport },
   { path: '/finance/total-c', name: 'Total Collection', element: TotalCollection },
   { path: '/finance/payment-mode', name: 'Payment Mode', element: PaymentMode },
+  { path: '/card/invoice', name: 'Client Invoice', element:ClientInvoice},
+
   
   { path: '/finance/cash-report', name: 'Cash Report', element: CashReport },
   { path: '/finance/cheque-report', name: 'Cheque Report', element: ChequeReport },

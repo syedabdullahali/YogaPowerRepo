@@ -26,6 +26,8 @@ import {
   cilCalendarCheck,
   cilFingerprint,
   cilLinkAlt,
+  cilEnvelopeClosed,
+  cilBasket
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 
@@ -120,6 +122,20 @@ const AppHeaderDropdownForm = () => {
           Support
         </Link>
         </CDropdownItem>
+
+
+        <CDropdownItem href="#">
+
+          {console.log(window.location.pathname)}
+
+       <Link style={{ textDecoration: 'none' }} to="/message/reminder" >
+
+          <CIcon icon={cilEnvelopeClosed} className="me-2" />
+            Reminder Message
+        </Link>
+ 
+        </CDropdownItem>
+
         <CDropdownDivider />
       </CDropdownMenu>
     </CDropdown>
@@ -204,6 +220,20 @@ const AppHeaderDropdownCheckIn = () => {
     </CDropdown>
   )
 }
+const AppHeaderDropdownBasket= () => {
+  return (
+    <CDropdown variant="nav-item">
+
+ 
+      <CDropdownItem >
+  <Link style={{ textDecoration: 'none',color:'GrayText' }} to="/card/invoice">
+  <CIcon icon={cilBasket} size="lg" />
+  </Link>
+      </CDropdownItem>
+      
+    </CDropdown>
+  )
+}
 
 const AppHeaderDropdownLink = () => {
   return (
@@ -245,4 +275,4 @@ const AppHeaderDropdownLink = () => {
   )
 }
 
-export { AppHeaderDropdown, AppHeaderDropdownForm, AppHeaderDropdownBook, AppHeaderDropdownCheckIn, AppHeaderDropdownLink }
+export { AppHeaderDropdown, AppHeaderDropdownForm, AppHeaderDropdownBook, AppHeaderDropdownCheckIn, AppHeaderDropdownLink,AppHeaderDropdownBasket }
