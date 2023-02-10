@@ -736,6 +736,11 @@ const _nav = [
         name: 'Shift Timing Management ',
         to: '/master/hr/shift-timing-management ',
       },
+      {
+        component: CNavItem,
+        name: 'All right',
+        to: '/master/hr/all-right',
+      },
     ],
   },
 

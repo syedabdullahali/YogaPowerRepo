@@ -141,6 +141,7 @@ const Support = React.lazy(()=>import('./views/Master/Support/Support'))
 const JobProfileMaster  = React.lazy(()=>import('./views/Master/HRMaster/JobProfile'))
 const LeaveSetupMaster   = React.lazy(()=>import('./views/Master/HRMaster/LeaveSetup'))
 const ShiftTimingManagmentMastr = React.lazy(()=>import('./views/Master/HRMaster/ShiftTimingManagement'))
+const AllRightMaster = React.lazy(()=>import('./views/Master/HRMaster/AllRights'))
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
@@ -409,6 +410,7 @@ const routes = [
   { path:'/master/hr/job-profile',name:'Job Profile',element:JobProfileMaster},
   { path:'/master/hr/leave-setup',name:'Leave Setup',element:LeaveSetupMaster},
   { path:'/master/hr/shift-timing-management',name:'Shift Timing Management',element:ShiftTimingManagmentMastr},
+  { path:'/master/hr/all-right',name:'All Right',element:AllRightMaster },
 
 
   { path: '/theme/typography', name: 'Typography', element: Typography },
