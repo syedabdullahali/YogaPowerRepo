@@ -125,7 +125,7 @@ const DailyExpense = () => {
                                     <CTableHeaderCell scope="col">
                                         Expense Category
                                     </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Details of Experiment</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Details of Expense</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">PaymentMode</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Approved By</CTableHeaderCell>

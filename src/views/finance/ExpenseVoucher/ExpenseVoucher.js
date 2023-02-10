@@ -23,69 +23,64 @@ return <CCard className="overflow-hidden">
 
             <CCol md={6}>
                 <CFormInput
-                type="text"
-                label='Source'                
+                type="date"
+                label='Voucher Date'                
                 />
             </CCol>
          
           </CRow>   
 
           <CRow>
-           
-
+                      
             <CCol md={6}>
-                <CFormInput
-                type="date"
-                label='Voucher Date'                
+               
+                <CFormSelect 
+                label='Mode of payment' 
+                options={['a','b','c','d']}               
                 />
             </CCol>
-            <CCol md={6}>
-                <CFormInput
-                type="text"
-                label='Mode of payment'                
-                />
-            </CCol>
-         
-          </CRow>      
 
-          <CRow>
             <CCol md={6}>
                 <CFormSelect 
                 label='Category' 
                 options={['a','b','c','d']}               
                 />
             </CCol>
+         
+          </CRow>      
+
+          <CRow>
+           
             <CCol md={6}>
                 <CFormInput
                 type="text"
                 label='Paid To'                
                 />
             </CCol>
-          </CRow>   
 
-           <CRow>
             <CCol md={6}>
                 <CFormInput 
                 type="text"
                 label='Towards' 
                 />
             </CCol>
+          </CRow>   
+
+           <CRow>
+           
             <CCol md={6}>
                 <CFormInput
                 type="number"
                 label='Rs ₹'                
                 />
             </CCol>
-          </CRow>  
 
-          <CRow>
             <CCol md={6}>
                 <CFormInput 
                 type="text"
                 label='Words in ₹' 
                 />
             </CCol>
-           
           </CRow>  
 
           <CCol className="p-2 d-flex justify-content-center mt-2">
