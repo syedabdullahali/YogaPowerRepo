@@ -77,8 +77,7 @@ function ShiftTimingManagment (){
 
     </CCol>
       </CCard>}
-
-
+      
 <CCard className="p-4">
 <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >

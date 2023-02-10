@@ -37,6 +37,7 @@ import moment from 'moment/moment'
 import ViewInvoice from 'src/components/ViewInvoice'
 import CallUpdate from 'src/components/CallUpdate'
 import { Link } from 'react-router-dom'
+import ClientSupportForm from './ClientSupportForm'
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
@@ -1222,10 +1223,14 @@ const ClientSupport = () => {
                             </CModalFooter>
                         </CModal>
 
+
                         <CallUpdate add={Calls} clickfun={() => setCalls(false)} ids={CallUpdateID} />
                         {viewInvoice &&
                             <ViewInvoice add={viewInvoice} clickfun={() => setViewInvoice(false)} invoiceId={invId} clientId={cliId} />
                         }
+                              <ClientSupportForm/>
+
+
                         <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345",width:'120%' }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
@@ -1234,7 +1239,7 @@ const ClientSupport = () => {
                                     <CTableHeaderCell>Reg Mobile</CTableHeaderCell>
                                     <CTableHeaderCell>Type of Request</CTableHeaderCell>
                                     <CTableHeaderCell>Request Date</CTableHeaderCell>
-                                    <CTableHeaderCell>Request</CTableHeaderCell>
+                                    <CTableHeaderCell>Request details</CTableHeaderCell>
                                     <CTableHeaderCell>Status</CTableHeaderCell>
                                     <CTableHeaderCell>Medium</CTableHeaderCell>
                                     <CTableHeaderCell>Delete</CTableHeaderCell>
@@ -1370,7 +1375,10 @@ const ClientSupport = () => {
                                 ))}
                             </CTableBody>
                         </CTable>
+
                     </CCardBody>
+
+
                     <CPagination aria-label="Page navigation example" align="center" className='mt-2'>
                         <CPaginationItem aria-label="Previous" disabled={paging != 0 ? false : true} onClick={() => paging > 0 && setPaging(paging - 1)}>
                             <span aria-hidden="true">&laquo;</span>
