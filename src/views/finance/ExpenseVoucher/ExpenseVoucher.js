@@ -93,7 +93,6 @@ return <CCard className="overflow-hidden">
  
          </CForm>    
        </CCardBody>
-       <CCol style={{ backgroundColor: '#0B5345'}} className='py-1'></CCol>
 
     </CCard>
 }
