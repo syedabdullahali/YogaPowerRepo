@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useState} from 'react'
 import {
     CButton,
     CButtonGroup,
@@ -10,6 +10,7 @@ import {
     CFormInput,
     CFormSelect,
     CRow,
+    CForm,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleTop, cilFile } from '@coreui/icons'
@@ -19,6 +20,7 @@ import DataTable from 'src/components/DataTable'
 
 const EMPPayrolSetup = () => {
 
+    const [showForm,setForm] = useState(true)
 
     const header = [
 
@@ -104,9 +106,7 @@ const EMPPayrolSetup = () => {
                                     aria-label="Recipient's username"
                                     aria-describedby="button-addon2"
                                 />
-                                {/* <CButton type="button" color="primary">
-                                    Search
-                                </CButton> */}
+                              
                             </CCol>
                             <CCol lg={4} sm={6} className='mb-2' >
                                 <CButtonGroup className='float-end'>
@@ -121,7 +121,184 @@ const EMPPayrolSetup = () => {
                                 </CButtonGroup>
                             </CCol>
                         </CRow>
-                        <DataTable heading={header} data={Users} />
+
+{showForm?<CCol color="primary" className="bg-body d-flex justify-content-end my-4">
+        <CButton onClick={()=>setForm((value)=>!value)}>Add New </CButton>
+</CCol>:
+
+<CCard className="overflow-hidden my-4"   >
+        <CCardHeader className="p-4" style={{ backgroundColor: '#0B5345', color: 'white' }}>
+                 <CCardTitle> <h4>Payrol Setup</h4></CCardTitle>
+        </CCardHeader>
+    <div className="p-4">
+         <CForm>
+            <CCol className="d-flex justify-content-end">
+                <CButton color='danger' onClick={()=>setForm(()=>true)}>Close</CButton>
+            </CCol>
+            <CRow>
+              <CCol md={6}>
+                <CFormInput
+                  type="text"
+                  placeholder="Enter Your Name"
+                  label='Name'
+                />
+              </CCol>
+              <CCol md={6}>
+                <CFormInput
+                  type="date"
+                  placeholder="Enter Your Name"
+                  label='Joining Date'
+                />
+              </CCol>
+            </CRow> 
+            <CRow >
+              <CCol md={6}>
+              <CFormSelect
+                  label='Select Your Gender'
+                  options={[
+                    { label: 'Male', value: 'Male' },
+                    { label: 'Female', value: 'Female' }
+
+                  ]}
+              />
+             
+              </CCol>
+            <CCol md={6}>
+              <CFormInput
+              label='Location'
+              placeholder="Enter Your Location"
+              />
+            </CCol>
+
+            </CRow>    
+
+            <CRow>
+              <CCol md={6}>
+              <CFormSelect
+                  label='Full/Part Time'
+                  options={[
+                    { label: 'Ful Time', value: 'Ful Time' },
+                    { label: 'Part Time', value: 'Part Time' }
+                  ]}
+              />
+                </CCol>   
+                <CCol md={6}>
+              <CFormSelect
+                  label='Department'
+                  options={[
+                   "Select Dpartment"
+                  ]}
+              />
+                </CCol>    
+            </CRow>
+
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='Made of Payment'
+                  type="number"
+                  
+              />
+                </CCol>
+                <CCol md={6}>
+              <CFormInput
+                  label='Late Mark'
+                  type="number"
+                  
+              />
+                </CCol>
+            </CRow>
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='TWD'
+                  type="text"
+                  
+              />
+                </CCol>
+                <CCol md={6}>
+              <CFormInput
+                  label='TPD'
+                  type="text"
+                  
+              />
+                </CCol>
+            </CRow>
+
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='Basic Salary'
+                  type="text"
+                  
+              />
+                </CCol>
+                <CCol md={6}>
+              <CFormInput
+                  label='Incentive'
+                  type="text"
+                  
+              />
+                </CCol>
+            </CRow>
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='Gross Salary'
+                  type="number"
+                  
+              />
+                </CCol>
+                <CCol md={6}>
+              <CFormInput
+                  label='PT'
+                  type="text"
+                  
+              />
+                </CCol>
+            </CRow>
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='Adev Dec'
+                  type="number"
+                  
+              />
+                </CCol>
+                <CCol md={6}>
+              <CFormInput
+                  label='Net Salary Remark'
+                  type="number"
+                  
+              />
+                </CCol>
+            </CRow>
+            <CRow>
+              <CCol md={6}>
+              <CFormInput
+                  label='Remark'
+                  type="number"
+                  
+              />
+                </CCol>
+              
+            </CRow>
+          
+          <CButton color="primary mt-4 px-4" onClick={(()=>{
+            setVisible(value=>!value) 
+            setForm(value=>!value) 
+            })} >Save</CButton>
+
+         </CForm>
+    </div>
+    <CCol style={{ backgroundColor: '#0B5345'}} className='p-1'>
+
+    </CCol>
+      </CCard>}
+
+
+
+                        <DataTable  heading={header} data={Users} />
                     </CCardBody>
                 </CCard>
             </CCol>

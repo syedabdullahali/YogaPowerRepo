@@ -49,7 +49,7 @@ return <div>
 
 <CCard className="overflow-hidden"   >
     <CCardHeader className="p-4" style={{ backgroundColor: '#0B5345', color: 'white' }}>
-             <CCardTitle> <h4>Job Profile </h4></CCardTitle>
+             <CCardTitle> <h4>Leave Setup</h4></CCardTitle>
     </CCardHeader>
 <div className="p-4">
      <CForm>
@@ -60,19 +60,29 @@ return <div>
 
         <CRow>
           <CCol md={6}>
-          <CFormSelect
-              label='Department'
-              options={[
-                "Select Dpartment"
-              ]}
+          <CFormInput
+              label='No of Leave'
+               type='number'
           />
             </CCol>   
             <CCol md={6}>
-          <CFormSelect
-              label='Designation'
-              options={[
-               "Select Designation"
-              ]}
+            <CFormInput
+              label='No of Sl'
+               type='number'
+          />
+            </CCol>    
+        </CRow>
+        <CRow>
+          <CCol md={6}>
+          <CFormInput
+              label='No of CL'
+               type='number'
+          />
+            </CCol>   
+            <CCol md={6}>
+            <CFormInput
+              label='No of PL'
+               type='number'
           />
             </CCol>    
         </CRow>      
@@ -101,13 +111,12 @@ return <div>
                         <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                             <CTableRow >
                                 <CTableHeaderCell>Sr.No</CTableHeaderCell>
-                                <CTableHeaderCell>Department</CTableHeaderCell>
+                                <CTableHeaderCell>No of Leave</CTableHeaderCell>
 
-                                <CTableHeaderCell>Designation</CTableHeaderCell>
-                                <CTableHeaderCell>Job Profile</CTableHeaderCell>
+                                <CTableHeaderCell>No of Sl</CTableHeaderCell>
+                                <CTableHeaderCell>No of CL</CTableHeaderCell>
 
-                                <CTableHeaderCell>Action</CTableHeaderCell>
-                                <CTableHeaderCell>Edit/Delete </CTableHeaderCell>
+                                <CTableHeaderCell>No of PL</CTableHeaderCell>
                              
                             </CTableRow>
                         </CTableHead>
@@ -127,16 +136,8 @@ return <div>
                                 </CTableDataCell>
                                 <CTableDataCell>
                                    
-                                </CTableDataCell>
-                                <CTableDataCell>
-                                   
-                                </CTableDataCell>
-                               
-                                
-                                
-                               
-                            </CTableRow>
-                      
+                                </CTableDataCell>                               
+                            </CTableRow>                      
                         </CTableBody>
                     </CTable>
                 </CCardBody>

@@ -138,9 +138,9 @@ const InvoiceMaster = React.lazy(() => import('./views/Master/finance/InvoiceMas
 const TaxSetupMaster = React.lazy(() => import('./views/Master/finance/TaxSetupMaster'))
 const ClientTransferMaster = React.lazy(() => import('./views/Master/client/ClientTransferMaster'))
 const Support = React.lazy(()=>import('./views/Master/Support/Support'))
-const PayrollMaster = React.lazy(()=>import('./views/Master/HRMaster/PayrollMaster'))
 const JobProfileMaster  = React.lazy(()=>import('./views/Master/HRMaster/JobProfile'))
 const LeaveSetupMaster   = React.lazy(()=>import('./views/Master/HRMaster/LeaveSetup'))
+const ShiftTimingManagmentMastr = React.lazy(()=>import('./views/Master/HRMaster/ShiftTimingManagement'))
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
@@ -406,9 +406,9 @@ const routes = [
   { path: '/master/finance/invoice', name: 'Invoice', element: InvoiceMaster, exact: true },
   { path: '/master/finance/tax', name: 'Tax', element: TaxSetupMaster, exact: true },
   { path:'/master/support',name:'Support',element:Support },
-  { path:'/master/hr/payrol-setup',name:'Payrol Setup',element:PayrollMaster},
   { path:'/master/hr/job-profile',name:'Job Profile',element:JobProfileMaster},
   { path:'/master/hr/leave-setup',name:'Leave Setup',element:LeaveSetupMaster},
+  { path:'/master/hr/shift-timing-management',name:'Shift Timing Management',element:ShiftTimingManagmentMastr},
 
 
   { path: '/theme/typography', name: 'Typography', element: Typography },

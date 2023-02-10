@@ -720,11 +720,7 @@ const _nav = [
         name: 'Holidays List',
         to: '/master/hr/holiday',
       },
-      {
-        component: CNavItem,
-        name: 'Payrol Setup',
-        to: '/master/hr/payrol-setup',
-      },
+      
       {
         component: CNavItem,
         name: 'Job Profile',
@@ -735,8 +731,11 @@ const _nav = [
         name: 'Leave Setup',
         to: '/master/hr/leave-setup',
       },
-      
-
+      {
+        component: CNavItem,
+        name: 'Shift Timing Management ',
+        to: '/master/hr/shift-timing-management ',
+      },
     ],
   },
 
