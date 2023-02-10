@@ -128,6 +128,7 @@ const DailyExpense = () => {
                                     <CTableHeaderCell scope="col">Details of Expense</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">PaymentMode</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Paid To</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Approved By</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Created By</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Status</CTableHeaderCell>
@@ -141,7 +142,7 @@ const DailyExpense = () => {
                             </CTableHead>
                             <CTableBody>
                                 <CTableRow>
-                                <CTableDataCell>1</CTableDataCell>
+                                    <CTableDataCell>1</CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
@@ -151,9 +152,11 @@ const DailyExpense = () => {
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+
                                 </CTableRow>
                                 <CTableRow>
-                                <CTableDataCell>2</CTableDataCell>
+                                    <CTableDataCell>2</CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
@@ -163,9 +166,11 @@ const DailyExpense = () => {
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+
                                 </CTableRow>
                                 <CTableRow>
-                                <CTableDataCell>3</CTableDataCell>
+                                    <CTableDataCell>3</CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
@@ -175,6 +180,8 @@ const DailyExpense = () => {
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+
                                 </CTableRow>
                             </CTableBody>
                         </CTable>

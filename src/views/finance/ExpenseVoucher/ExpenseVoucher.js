@@ -31,23 +31,41 @@ return <CCard className="overflow-hidden">
           </CRow>   
 
           <CRow>
-                      
-            <CCol md={6}>
-               
-                <CFormSelect 
-                label='Mode of payment' 
-                options={['a','b','c','d']}               
-                />
-            </CCol>
 
-            <CCol md={6}>
+          <CCol md={6}>
                 <CFormSelect 
-                label='Category' 
+                label='Expense Category' 
                 options={['a','b','c','d']}               
                 />
             </CCol>
+                      
+           
+            <CCol md={6}>
+               <CFormInput
+                type="text"
+                label='Details of Expense'                
+                />
+               </CCol>
+            
          
-          </CRow>      
+          </CRow> 
+
+          <CRow>
+          <CCol md={6}>
+                <CFormInput
+                type="number"
+                label='Amount Rs ₹'                
+                />
+          </CCol>
+
+          <CCol md={6}>
+               
+               <CFormSelect 
+               label='Payment Mode' 
+               options={['a','b','c','d']}               
+               />
+           </CCol>
+            </CRow>
 
           <CRow>
            
@@ -57,30 +75,25 @@ return <CCard className="overflow-hidden">
                 label='Paid To'                
                 />
             </CCol>
-
             <CCol md={6}>
-                <CFormInput 
+                <CFormInput
                 type="text"
-                label='Towards' 
+                label='Approved By'                
                 />
             </CCol>
+           
           </CRow>   
 
            <CRow>
-           
-            <CCol md={6}>
+           <CCol md={6}>
                 <CFormInput
-                type="number"
-                label='Rs ₹'                
-                />
-            </CCol>
-
-            <CCol md={6}>
-                <CFormInput 
                 type="text"
-                label='Words in ₹' 
+                label='Created By'                
                 />
             </CCol>
+         
+
+            
           </CRow>  
 
           <CCol className="p-2 d-flex justify-content-center mt-2">
