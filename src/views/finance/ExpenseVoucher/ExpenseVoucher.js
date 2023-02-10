@@ -9,7 +9,7 @@ return <CCard className="overflow-hidden">
        </CCardHeader>
        <CCardBody>
               <CCardTitle className="p-4 " >
-                <h5 className="w-25 p-2 text-center  mx-auto outline"  style={{borderBottom: " 2px solid #0B5345"}}>
+                <h5 className=" p-2 text-center  mx-auto outline"  >
                     Expense Voucher</h5>
              </CCardTitle>     
          <CForm>
