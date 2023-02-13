@@ -225,11 +225,9 @@ const AppHeaderDropdownBasket= () => {
     <CDropdown variant="nav-item">
 
  
-      <CDropdownItem >
   <Link style={{ textDecoration: 'none',color:'GrayText' }} to="/card/invoice">
   <CIcon icon={cilBasket} size="lg" />
   </Link>
-      </CDropdownItem>
       
     </CDropdown>
   )

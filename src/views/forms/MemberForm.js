@@ -1436,7 +1436,7 @@ const MemberForm = () => {
                             </CModalFooter>
                         </CModal>
 
-                        <CModal size="xl" alignment="center" scrollable visible={true} onClose={() => setVisi1(false)}>
+                        <CModal size="xl" alignment="center" scrollable visible={visi1} onClose={() => setVisi1(false)}>
                             <CModalHeader>
                                 <CModalTitle>Invoice Preview</CModalTitle>
                             </CModalHeader>

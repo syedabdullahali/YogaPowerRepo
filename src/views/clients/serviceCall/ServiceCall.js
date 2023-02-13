@@ -35,13 +35,14 @@ const ServiceCall = () => {
         <CRow>
             <CCol xs={12}>
                 <CCard>
-                    <CCardHeader>
+                    <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
                         <CNav responsive variant="pills" role="tablist">
                             <CNavItem>
                                 <CNavLink
                                     href="javascript:void(0);"
                                     active={activeKey === 1}
                                     onClick={() => setActiveKey(1)}
+                                    className="text-white"
                                 >
                                     Welcome Calls
                                 </CNavLink>
@@ -51,6 +52,8 @@ const ServiceCall = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 2}
                                     onClick={() => setActiveKey(2)}
+                                    className="text-white"
+
                                 >
 
                                     Feedback Calls
@@ -61,6 +64,8 @@ const ServiceCall = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 3}
                                     onClick={() => setActiveKey(3)}
+                                    className="text-white"
+
                                 >
                                     Payment Calls
                                 </CNavLink>
@@ -70,24 +75,20 @@ const ServiceCall = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 4}
                                     onClick={() => setActiveKey(4)}
+                                    className="text-white"
+
                                 >
                                     Irregular Member Call
                                 </CNavLink>
                             </CNavItem>
-                            {/* <CNavItem>
-                                <CNavLink
-                                    href="javascript:void(0);"
-                                    active={activeKey === 5}
-                                    onClick={() => setActiveKey(5)}
-                                >
-                                    Courtesy Calls
-                                </CNavLink>
-                            </CNavItem> */}
+                           
                             <CNavItem>
                                 <CNavLink
                                     href="javascript:void(0);"
                                     active={activeKey === 6}
                                     onClick={() => setActiveKey(6)}
+                                    className="text-white"
+
                                 >
                                     Greeting Calls
                                 </CNavLink>

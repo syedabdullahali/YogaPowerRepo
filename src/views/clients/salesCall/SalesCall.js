@@ -35,13 +35,14 @@ const SalesCall = () => {
         <CRow>
             <CCol xs={12}>
                 <CCard>
-                    <CCardHeader>
+                    <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
                         <CNav responsive variant="pills" role="tablist">
                             <CNavItem>
                                 <CNavLink
                                     href="javascript:void(0);"
                                     active={activeKey === 1}
                                     onClick={() => setActiveKey(1)}
+                                    className="text-white"
                                 >
                                     Upgrade Calls
                                 </CNavLink>
@@ -51,6 +52,7 @@ const SalesCall = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 2}
                                     onClick={() => setActiveKey(2)}
+                                    className="text-white"
                                 >
 
                                     Renewals Calls
@@ -61,6 +63,8 @@ const SalesCall = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 3}
                                     onClick={() => setActiveKey(3)}
+                                    className="text-white"
+
                                 >
                                     Cross-Cell Calls
                                 </CNavLink>

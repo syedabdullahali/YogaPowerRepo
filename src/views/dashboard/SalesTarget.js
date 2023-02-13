@@ -32,13 +32,14 @@ const SalesTarget = () => {
         <CRow>
             <CCol xs={12}>
                 <CCard>
-                    <CCardHeader >
+                    <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
                         <CNav variant="pills" role="tablist">
                             <CNavItem>
                                 <CNavLink
                                     href="javascript:void(0);"
                                     active={activeKey === 1}
                                     onClick={() => setActiveKey(1)}
+                                    className='text-white'
                                 >
                                     Sales Target
                                 </CNavLink>
@@ -48,6 +49,8 @@ const SalesTarget = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 2}
                                     onClick={() => setActiveKey(2)}
+                                    className='text-white'
+
                                 >
 
                                     Client Target
@@ -58,6 +61,8 @@ const SalesTarget = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 3}
                                     onClick={() => setActiveKey(3)}
+                                    className='text-white'
+
                                 >
                                     Calls Target
                                 </CNavLink>
@@ -67,6 +72,7 @@ const SalesTarget = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 4}
                                     onClick={() => setActiveKey(4)}
+                                    className='text-white'
                                 >
                                     Lead Target
                                 </CNavLink>
@@ -76,6 +82,7 @@ const SalesTarget = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 5}
                                     onClick={() => setActiveKey(5)}
+                                    className='text-white'
                                 >
                                     Renewals
                                 </CNavLink>
@@ -85,6 +92,7 @@ const SalesTarget = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 6}
                                     onClick={() => setActiveKey(6)}
+                                    className='text-white'
                                 >
                                     Referral Leads
                                 </CNavLink>
@@ -94,6 +102,7 @@ const SalesTarget = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 7}
                                     onClick={() => setActiveKey(7)}
+                                    className='text-white'
                                 >
                                     Media Target
                                 </CNavLink>

@@ -35,7 +35,7 @@ const ServicesRateCard = () => {
         <CRow>
             <CCol xs={12}>
                 <CCard>
-                    <CCardHeader>
+                    <CCardHeader  style={{ backgroundColor: '#0B5345', color: 'white' }}>
                         <CNav responsive variant="pills" role="tablist">
                             <CNavItem>
                                 <CNavLink
