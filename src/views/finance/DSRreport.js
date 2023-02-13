@@ -28,7 +28,7 @@ const DSRreport = () => {
                 <CCard className='mb-3 border-top-success border-top-3'>
 
                     <CCardHeader>
-                        <strong className="mt-2">Target vs Achievment</strong>
+                        <strong className="mt-2">DSR Report</strong>
                     </CCardHeader>
 
                     <CCardBody>

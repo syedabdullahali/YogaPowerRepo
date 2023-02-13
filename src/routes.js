@@ -348,7 +348,7 @@ const routes = [
   { path: '/finance/cheque-report', name: 'Cheque Report', element: ChequeReport },
   { path: '/finance/daily-expense', name: 'Daily Expense', element: DailyExpense },
   { path: '/finance/petty-cash', name: 'Petty Cash', element: PettyCash},
-  { path: '/finance/dsr-report', name: 'Petty Cash', element: DSRreport},
+  { path: '/finance/dsr-report', name: 'DSR Report', element: DSRreport},
   { path: '/finance/targetvs-achievment', name: 'Target vs Achievment', element: TargetvsAchievment},  
   { path: '/finance/center-expense', name: 'Center Expense', element: CenterExpenses },
   { path:'/voucher/expense',name:'Expense Voucher ',element:ExpenseVoucher },

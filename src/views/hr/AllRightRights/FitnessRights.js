@@ -8,10 +8,14 @@ import {
 function FitnessRights(){
 
 return <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={true} >
-     <h4 className='mb-4'>Fitness Goal <span><CFormSwitch size="lg"/></span></h4>
-
+    
 
 <CRow >
+      <h4 className='mb-4 p-2 d-flex ' style={{background:'#0B5345',color:'white'}}>
+                    Fitness Goal<span className='mx-2'>
+       <CFormSwitch size="lg"/></span>
+      </h4>
+
     <CCol>
         <h5>Measurment</h5>
         <CFormSwitch size="xl" label="Measurment" />

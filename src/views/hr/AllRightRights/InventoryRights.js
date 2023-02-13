@@ -3,18 +3,24 @@ import {
     CFormSwitch,
     CRow,
     CTabPane,
+    
 } from '@coreui/react'
 
 function InventoryRights(){
 
 
     return <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={true} >
-    <h3 className='mb-4'>IMP Call List <span><CFormSwitch size="lg"/></span></h3>
 
+
+
+     
 <CRow >
+<h4 className='mb-4 p-2 d-flex ' style={{background:'#0B5345',color:'white'}}>
+        IMP Call List <span className='mx-2'><CFormSwitch size="lg"/></span></h4>
+
    <CCol>
        <h5>IMP Call List</h5>
-       <CFormSwitch size="xl" label="IMP Call lsit" />
+       <CFormSwitch  size="xl" label="IMP Call lsit" />
        <CFormSwitch size="xl" label="Add IMP Call" />
        <CFormSwitch size="xl" label="Edit IMP Call" />
        <CFormSwitch size="xl" label="Delete IMP Call" />
@@ -38,7 +44,10 @@ function InventoryRights(){
 </CRow>
 
 <CRow className='mt-5' >
-<h3 className='mb-4 mt-2'>Stock Listing <span><CFormSwitch size="lg"/></span></h3>
+  
+<h4 className='mb-4 p-2 d-flex ' style={{background:'#0B5345',color:'white'}}>
+Stock Listing  <span className='mx-2'><CFormSwitch size="lg"/></span></h4>
+
 
    <CCol>
        <h5>Clothes Product </h5>
@@ -88,17 +97,17 @@ function InventoryRights(){
 
 <CRow className='mt-4 pt-5'>
 <CCol>
-<h3>Stock Report</h3>
+<h4 className='p-2' style={{background:'#0B5345',color:'white'}}>Stock Report</h4>
 <CFormSwitch size="xl" label="Stock Report"  />
 </CCol>
 
 <CCol>
-<h3>Purchase Report</h3>
+<h4 className='p-2' style={{background:'#0B5345',color:'white'}}>Purchase Report</h4>
 <CFormSwitch size="xl" label="Purchase Report"  />
 </CCol>
 
 <CCol>
-<h3>Stock Assigning</h3>
+<h4 className='p-2' style={{background:'#0B5345',color:'white'}}>Stock Assigning</h4>
 <CFormSwitch size="xl" label="Stock Assigning"  />
 <CFormSwitch size="xl" label="Add Stock Assigning"  />
 
@@ -107,12 +116,12 @@ function InventoryRights(){
 
 <CRow className='mt-4 '>
     <CCol>
-        <h3>Stock Alert</h3>
+        <h4 className='p-2' style={{background:'#0B5345',color:'white'}}>Stock Alert</h4>
         <CFormSwitch size="xl" label="Stock Alert"/>
         <CFormSwitch size="xl" label="Add Stock Alert"/>
     </CCol>
     <CCol>
-        <h3>Stock Order List</h3>
+        <h4  className='p-2'style={{background:'#0B5345',color:'white'}}>Stock Order List</h4>
         <CFormSwitch size="xl" label="Stock Order List"/>
         <CFormSwitch size="xl" label="Add Stock Order List"/>
     </CCol>

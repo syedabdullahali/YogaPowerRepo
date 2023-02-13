@@ -30,6 +30,8 @@ import React, { useState } from 'react'
 
 const FitnessRights = React.lazy(()=>import('./AllRightRights/FitnessRights'))
 const InventoryRights = React.lazy(()=>import('./AllRightRights/InventoryRights'))
+const HrRights = React.lazy(()=>import('./AllRightRights/HrRights'))
+const FinanceRights = React.lazy(()=>import('./AllRightRights/FinanceRights'))
 
 const AllRight = () => {
     const [activeKey, setActiveKey] = useState(1)
@@ -38,13 +40,14 @@ const AllRight = () => {
         <CRow>
             <CCol xs={12}>
                 <CCard>
-                    <CCardHeader>
+                    <CCardHeader style={{background:'#0B5345',color:'white'}}>
                         <CNav variant="pills" role="tablist">
                             <CNavItem>
                                 <CNavLink
                                     href="javascript:void(0);"
                                     active={activeKey === 1}
                                     onClick={() => setActiveKey(1)}
+                                    className="text-white"
                                 >
                                     Dashboard
                                 </CNavLink>
@@ -54,6 +57,7 @@ const AllRight = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 2}
                                     onClick={() => setActiveKey(2)}
+                                    className="text-white"
                                 >
 
                                     Lead
@@ -64,6 +68,7 @@ const AllRight = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 3}
                                     onClick={() => setActiveKey(3)}
+                                    className="text-white"
                                 >
                                     Clients
                                 </CNavLink>
@@ -73,6 +78,7 @@ const AllRight = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 4}
                                     onClick={() => setActiveKey(4)}
+                                    className="text-white"
                                 >
                                     Marketing
                                 </CNavLink>
@@ -82,6 +88,7 @@ const AllRight = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 5}
                                     onClick={() => setActiveKey(5)}
+                                    className="text-white"
                                 >
                                     Fitness
                                 </CNavLink>
@@ -92,6 +99,7 @@ const AllRight = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 6}
                                     onClick={() => setActiveKey(6)}
+                                    className="text-white"
                                 >
                                     Inventory
                                 </CNavLink>
@@ -101,8 +109,9 @@ const AllRight = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 7}
                                     onClick={() => setActiveKey(7)}
+                                    className="text-white"
                                 >
-                                    HR
+                                Finance
                                 </CNavLink>
                             </CNavItem>
 
@@ -111,9 +120,9 @@ const AllRight = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 8}
                                     onClick={() => setActiveKey(8)}
+                                    className="text-white"
                                 >
-                                Finance
-
+                                HR
                                 </CNavLink>
                             </CNavItem>
                             <CNavItem>
@@ -121,6 +130,7 @@ const AllRight = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 9}
                                     onClick={() => setActiveKey(9)}
+                                    className="text-white"
                                 >
                                     Export
                                 </CNavLink>
@@ -130,6 +140,7 @@ const AllRight = () => {
                                     href="javascript:void(0);"
                                     active={activeKey === 10}
                                     onClick={() => setActiveKey(10)}
+                                    className="text-white"
                                 >
                                     Master
                                 </CNavLink>
@@ -320,7 +331,8 @@ const AllRight = () => {
                             </CTabPane>
                             {activeKey===5 &&<FitnessRights/> }
                             {activeKey===6 &&<InventoryRights/> }
-
+                            {activeKey ===7&& <FinanceRights/>}
+                            {activeKey===8 && <HrRights/>}
                         </CTabContent>
                     </CCardBody>
                 </CCard>
