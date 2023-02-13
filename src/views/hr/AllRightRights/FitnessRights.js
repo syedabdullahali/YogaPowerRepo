@@ -37,40 +37,30 @@ return <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={true} >
 </CRow>
 
 <CRow className='mt-5' >
-     <h4 className='mb-4'>Stock Listing  <span><CFormSwitch size="lg"/></span></h4>
-
+    
     <CCol>
-        <h5>Clothes Product</h5>
-        <CFormSwitch size="xl" label="Clothes Product" />
-        <CFormSwitch size="xl" label="Add Clothes Product" />
-        <CFormSwitch size="xl" label="Edit Clothes Product" />
-        <CFormSwitch size="xl" label="Delete Clothes Product" />
+        <h5>Work out Templet</h5>
+        <CFormSwitch size="xl" label="Work out Templet" />
+        <CFormSwitch size="xl" label="Add Work out" />
+        <CFormSwitch size="xl" label="Edit Work out" />
+        <CFormSwitch size="xl" label="Delete Work out " />
     </CCol>
     <CCol>
-        <h5>Ayurveda Medicine</h5>
-        <CFormSwitch size="xl" label="Ayurveda Medicine"  />
-        <CFormSwitch size="xl" label="Add Ayurveda Medicine" />
-        <CFormSwitch size="xl" label="Edit Ayurveda Medicine" />
-        <CFormSwitch size="xl" label="Delete Ayurveda Medicine" />
+        <h5>Exercise Libiry</h5>
+        <CFormSwitch size="xl" label="Exercise Libiry"  />
+        <CFormSwitch size="xl" label="Add Exercise" />
+        <CFormSwitch size="xl" label="Edit Exercise" />
+        <CFormSwitch size="xl" label="Delete Exercise" />
     </CCol>
     <CCol>
-        <h5>Fitness Product</h5>
-        <CFormSwitch size="xl" label="Fitness Product"  />
-        <CFormSwitch size="xl" label="Add Fitness Product" />
-        <CFormSwitch size="xl" label="Edit Fitness Product" />
-        <CFormSwitch size="xl" label="Delete Fitness Product" />
+        <h5>Daily Workout Scheduling</h5>
+        <CFormSwitch size="xl" label="Daily Workout Scheduling"  />
+        <CFormSwitch size="xl" label="Add Daily Workout" />
+        <CFormSwitch size="xl" label="Edit Daily Workout" />
+        <CFormSwitch size="xl" label="Delete Daily Workout" />
     </CCol>
+  
 </CRow>
-
-<CRow className='mt-5' > 
-   <CCol>
-   <h5>Foods Product</h5>
-
-   </CCol>
-
-
-</CRow>
-
 
 
 
