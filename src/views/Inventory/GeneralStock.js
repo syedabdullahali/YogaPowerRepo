@@ -23,7 +23,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BsWhatsapp } from "react-icons/bs";
 import { MdCall, MdDelete, MdEdit, MdMail } from "react-icons/md";
-const url = 'https://yog-api.herokuapp.com'
+const url = 'https://yog-seven.vercel.app'
 
 const ClothesProduct = () => {
     const [action, setAction] = useState(false)
@@ -288,6 +288,8 @@ const ClothesProduct = () => {
                         <CTableHeaderCell>AVL Stock</CTableHeaderCell>
                         <CTableHeaderCell>Allot By</CTableHeaderCell>
                         <CTableHeaderCell>Action</CTableHeaderCell>
+                        <CTableHeaderCell>Edit/Delete</CTableHeaderCell>
+
                         {/* <CTableHeaderCell>Action</CTableHeaderCell>
                         <CTableHeaderCell>Edit</CTableHeaderCell> */}
                     </CTableRow>
@@ -408,23 +410,20 @@ const ClothesProduct = () => {
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
+                        <CTableDataCell>
+                            <CFormInput
+                                className="mb-1"
+                                type="text"
+                                style={{ minWidth: "120px" }}
+                                disabled
+                                value={search10}
+                                onChange={(e) => setSearch10(e.target.value)}
+                                aria-describedby="exampleFormControlInputHelpInline"
+                            />
+                        </CTableDataCell>
        
                     </CTableRow>
-                    <CTableRow>
-                     <CTableDataCell>1</CTableDataCell>    
-                     <CTableDataCell></CTableDataCell>    
-                     <CTableDataCell></CTableDataCell>    
-                     <CTableDataCell></CTableDataCell>    
-                     <CTableDataCell></CTableDataCell>    
-                     <CTableDataCell></CTableDataCell>    
-                     <CTableDataCell></CTableDataCell>    
-                     <CTableDataCell></CTableDataCell>    
-                     <CTableDataCell></CTableDataCell>    
-                     <CTableDataCell></CTableDataCell>    
-                     <CTableDataCell></CTableDataCell>    
-                       
-                        
-                    </CTableRow> 
+                    
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                         list.username === username && list.productName.includes(search2) && list.brandName.includes(search3) && list.category.includes(search4) && list.color.includes(search5) &&
                         list.productPrice.toString().includes(search6.toString())
@@ -440,7 +439,6 @@ const ClothesProduct = () => {
                             <CTableDataCell>{item.totalStock}</CTableDataCell>
                             <CTableDataCell>{item.sold}</CTableDataCell>
                             <CTableDataCell>{item.available}</CTableDataCell>
-                            <CTableDataCell>{item.soldBy}</CTableDataCell>
                             <CTableDataCell className='text-center'><a href={`tel:${item.mobile}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.mobile}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.email}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a> </CTableDataCell>
                             <CTableDataCell className='text-center'><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} onClick={() => handleUpdate(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} onClick={() => deleteCall(item._id)} size='20px' /></CTableDataCell>
                         </CTableRow>

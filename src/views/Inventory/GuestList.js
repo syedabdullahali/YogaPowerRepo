@@ -167,6 +167,7 @@ const GuestList = () => {
             .catch((error) => {
                 console.error(error)
             })
+            getImpCall()
     }
     return (
         <CRow className='d-flex mb-2'>

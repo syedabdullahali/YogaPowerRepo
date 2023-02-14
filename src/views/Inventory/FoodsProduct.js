@@ -22,7 +22,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BsWhatsapp } from "react-icons/bs";
 import { MdCall, MdDelete, MdEdit, MdMail } from "react-icons/md";
-const url = 'https://yog-api.herokuapp.com'
+const url = 'https://yog-seven.vercel.app'
 
 const ClothesProduct = () => {
     const [action, setAction] = useState(false)
