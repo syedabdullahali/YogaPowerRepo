@@ -23,7 +23,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BsWhatsapp } from "react-icons/bs";
 import { MdCall, MdDelete, MdEdit, MdMail } from "react-icons/md";
-const url = 'https://yog-api.herokuapp.com'
+const url = 'https://yog-seven.vercel.app'
 
 const GuestList = () => {
     const [action, setAction] = useState(false)
@@ -108,9 +108,12 @@ const GuestList = () => {
         }).then((resp) => {
             resp.json().then(() => {
                 alert("successfully submitted")
-                setVisible(false)
+                setAction(false)
+
             })
         })
+        getImpCall()
+
     }
 
     function deleteCall(id) {
@@ -153,12 +156,13 @@ const GuestList = () => {
         })
             .then((res) => {
                 setName(res.data.name)
-                setPhone(res.data.phone)
+                setPhone(res.data.mobile)
                 setEmail(res.data.email)
                 setCategory(res.data.category)
                 setAddress(res.data.address)
                 setCompany(res.data.event)
                 setAction(true)
+
             })
             .catch((error) => {
                 console.error(error)
@@ -275,6 +279,8 @@ const GuestList = () => {
                         <CTableHeaderCell>Address</CTableHeaderCell>
                         <CTableHeaderCell>Category</CTableHeaderCell>
                         <CTableHeaderCell>Event</CTableHeaderCell>
+                        <CTableHeaderCell>Action</CTableHeaderCell>
+                        <CTableHeaderCell>Edit/delete</CTableHeaderCell>
                      
                     </CTableRow>
                 </CTableHead>
@@ -349,19 +355,26 @@ const GuestList = () => {
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
+                        <CTableDataCell>
+                            <CFormInput
+                                className="mb-1"
+                                type="text"
+                                style={{ minWidth: "120px" }}
+                                disabled
+                                aria-describedby="exampleFormControlInputHelpInline"
+                            />
+                        </CTableDataCell>
+                        <CTableDataCell>
+                            <CFormInput
+                                className="mb-1"
+                                type="text"
+                                style={{ minWidth: "120px" }}
+                                disabled
+                                aria-describedby="exampleFormControlInputHelpInline"
+                            />
+                        </CTableDataCell>
+                        
                     </CTableRow>
-
-                     <CTableRow>
-                        <CTableDataCell></CTableDataCell>
-                        <CTableDataCell></CTableDataCell>
-                        <CTableDataCell></CTableDataCell>
-                        <CTableDataCell></CTableDataCell>
-                        <CTableDataCell></CTableDataCell>
-                        <CTableDataCell></CTableDataCell>
-                        <CTableDataCell></CTableDataCell>                        
-                     </CTableRow>   
-
-
 
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                         list.username === username && list.name.includes(search1) && list.mobile.toString().includes(search2.toString()) && list.email.includes(search3)

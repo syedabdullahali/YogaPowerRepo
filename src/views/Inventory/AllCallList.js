@@ -11,7 +11,7 @@ import {
     CTabPane,
 } from '@coreui/react'
 import React, { useState } from 'react'
-import AllSuppilerList from './AllSuppilerLis'
+import AllSuppilerList from './AllSupplierList'
 import GuestList from './GuestList'
 import ImpCallList from './ImpCallList'
 const AllCallList = () => {
@@ -59,7 +59,7 @@ const AllCallList = () => {
                     <CCardBody>
                         <CTabContent>
                             <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 1}>
-                                <ImpCallList />
+                                <ImpCallList /> 
                             </CTabPane>
                             <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 2}>
                                 <AllSuppilerList />

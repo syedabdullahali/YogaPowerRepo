@@ -20,10 +20,10 @@ import {
     CToastClose,
 } from "@coreui/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { BsWhatsapp } from "react-icons/bs";
 import { MdCall, MdDelete, MdEdit, MdMail } from "react-icons/md";
-const url = 'https://yog-api.herokuapp.com'
+const url = 'https://yog-seven.vercel.app'
 
 const ImpCallList = () => {
     const [action, setAction] = useState(false)
@@ -50,11 +50,11 @@ const ImpCallList = () => {
     const token = user.token;
     const username = user.user.username;
     const centerCode = user.user.centerCode;
-    useEffect(() => {
-        getImpCall()
-    }, [])
 
-    function getImpCall() {
+
+   
+
+   const  getImpCall = useCallback(function() {
         axios.get(`${url}/impCallList/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -67,7 +67,11 @@ const ImpCallList = () => {
             .catch((error) => {
                 console.error(error)
             })
-    }
+    },[])
+
+    useEffect(() => {
+        getImpCall()
+    },[getImpCall])   
 
     const saveImpCall = () => {
         let data = {
@@ -87,6 +91,7 @@ const ImpCallList = () => {
             resp.json().then(() => {
                 setToast(true)
                 setAction(false)
+                getImpCall()                
             })
         })
     }
@@ -97,6 +102,7 @@ const ImpCallList = () => {
             name: name, mobile: phone, email: email, category: category, address: address, company: company,
         }
 
+        
         fetch(`${url}/impCallList/update/${id}`, {
             method: "POST",
             headers: {
@@ -107,8 +113,10 @@ const ImpCallList = () => {
             body: JSON.stringify(data1)
         }).then((resp) => {
             resp.json().then(() => {
+                getImpCall()
                 alert("successfully submitted")
                 setVisible(false)
+
             })
         })
     }
@@ -173,7 +181,7 @@ const ImpCallList = () => {
                 </CToast>
             </CCol>
             <CCol lg={3} sm={6} className='mb-2'>
-                <CButton className="float-end" onClick={() => { setAction(!action), clear() }}>{action ? 'Close' : 'Add Call List'}</CButton>
+                <CButton className="float-end" onClick={() => { setAction(!action), clear() }}>{action ? 'Close' : 'Add Importent Number'}</CButton>
             </CCol>
             {action &&
 
@@ -266,19 +274,28 @@ const ImpCallList = () => {
             <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
                 <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                     <CTableRow >
-                        <CTableHeaderCell>Sr.No</CTableHeaderCell>
+                     <CTableHeaderCell>Sr.No</CTableHeaderCell>
                         <CTableHeaderCell>Name</CTableHeaderCell>
                         <CTableHeaderCell>Mobile</CTableHeaderCell>
                         <CTableHeaderCell>Email</CTableHeaderCell>
                         <CTableHeaderCell>Address</CTableHeaderCell>
                         <CTableHeaderCell>Category</CTableHeaderCell>
                         <CTableHeaderCell>Company Name</CTableHeaderCell>
-                     
+                        <CTableHeaderCell>Action</CTableHeaderCell>
+                        <CTableHeaderCell>Edit/Delete </CTableHeaderCell>
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
                     <CTableRow>
-                       
+                        <CTableDataCell>
+                            <CFormInput
+                                className="mb-1"
+                                style={{ minWidth: "60px" }}
+                                type="text"
+                                disabled
+                                aria-describedby="exampleFormControlInputHelpInline"
+                            />
+                        </CTableDataCell>
                         <CTableDataCell>
                             <CFormInput
                                 className="mb-1"
@@ -343,37 +360,21 @@ const ImpCallList = () => {
                             <CFormInput
                                 className="mb-1"
                                 style={{ minWidth: "120px" }}
-                                value={search6}
-                                onChange={(e) => setSearch6(e.target.value)}
                                 type="text"
+                                disabled
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
-                       
-                    </CTableRow>
-                    <CTableRow>
                         <CTableDataCell>
+                            <CFormInput
+                                className="mb-1"
+                                type="text"
+                                style={{ minWidth: "120px" }}
+                                disabled
+                                aria-describedby="exampleFormControlInputHelpInline"
+                            />
+                        </CTableDataCell>
                             
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            
-                        </CTableDataCell>
-                        <CTableDataCell>
-                          
-                        </CTableDataCell>
-                        <CTableDataCell>
-                           
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            
-                        </CTableDataCell>
-                        
                     </CTableRow>
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                         list.username === username && list.name.includes(search1) && list.mobile.toString().includes(search2.toString()) && list.email.includes(search3)
