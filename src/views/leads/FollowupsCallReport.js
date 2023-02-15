@@ -967,8 +967,7 @@ const FollowupCallReport = () => {
                                     <CTableHeaderCell>Mobile</CTableHeaderCell>
                                     <CTableHeaderCell>Service</CTableHeaderCell>
                                     <CTableHeaderCell>Call Status</CTableHeaderCell>
-                                    <CTableHeaderCell>NextFollowup Date</CTableHeaderCell>
-                                    <CTableHeaderCell>Time</CTableHeaderCell>
+                                 
                                     <CTableHeaderCell>Discussion</CTableHeaderCell>
                                     <CTableHeaderCell>Counseller</CTableHeaderCell>
                                 </CTableRow>
@@ -1084,25 +1083,7 @@ const FollowupCallReport = () => {
                                             aria-describedby="exampleFormControlInputHelpInline"
                                         />
                                     </CTableDataCell>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            style={{ minWidth: "100px" }}
-                                            type="text"
-                                            disabled
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            type="text"
-                                            style={{ minWidth: "100px" }}
-                                            value={Search9}
-                                            onChange={(e) => setSearch9(e.target.value)}
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
+                                   
                                 </CTableRow>
                                 {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                                     list.username === username && list.status === 'CallReport'
@@ -1117,8 +1098,7 @@ const FollowupCallReport = () => {
                                         <CTableDataCell>{item.Contact}</CTableDataCell>
                                         <CTableDataCell>{item.ServiceName}</CTableDataCell>
                                         <CTableDataCell>{item.CallStatus}</CTableDataCell>
-                                        <CTableDataCell>{item.FollowupDate && moment(item.FollowupDate).format("DD-MM-YYYY")}</CTableDataCell>
-                                        <CTableDataCell>{item.TimeFollowp && moment(item.TimeFollowp, "HH:mm").format("hh:mm A")}</CTableDataCell>
+                                        
                                         <CTableDataCell>{item.Discussion}</CTableDataCell>
                                         <CTableDataCell>{item.Counseller}</CTableDataCell>
                                     </CTableRow>

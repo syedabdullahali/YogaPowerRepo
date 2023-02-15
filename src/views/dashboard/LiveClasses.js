@@ -24,9 +24,51 @@ import {
     CTableRow,
     CTabPane,
 } from '@coreui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState,useCallback } from 'react'
+import axios from 'axios'
 const LiveClasses = () => {
     const [activeKey, setActiveKey] = useState(1)
+     const url = 'http://13.235.115.57:3000'   
+     let user = JSON.parse(localStorage.getItem('user-info'))
+     const token = user.token;
+
+
+    // const getLiveClassesData = async ()=>{
+    // const data = await axios.get(`http://13.235.115.57:3000/dailyattendence`, {
+    //     headers: {
+    //         'Authorization': `Bearer ${token}`
+    //     }
+    // })
+    // consloe.log(data)
+
+    // }
+
+    // useEffect(()=>{
+    //     getLiveClassesData()
+    // },[])
+   
+
+    const  getImpCall = useCallback(function() {
+        axios.get(`http://13.235.115.57:3000/dailyattendence`, {
+            headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin":true,
+            "Access-Control-Request-Headers": 'Content-Type, Authorization'
+
+            }           
+        })
+            .then((res) => {
+                setResult1(res.data.reverse())
+                console.log(res.data);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    },[])
+
+    useEffect(() => {
+        getImpCall()
+    },[getImpCall]) 
 
     return (
         <CRow>
