@@ -1114,7 +1114,6 @@ const FollowupScheduling = () => {
                                     <CTableHeaderCell>Service</CTableHeaderCell>
                                     <CTableHeaderCell>Call Status</CTableHeaderCell>
                                     <CTableHeaderCell>FollowUp Details</CTableHeaderCell>
-                                    <CTableHeaderCell>Appointment Details</CTableHeaderCell>
                                     <CTableHeaderCell>Enquiry Stage</CTableHeaderCell>
                                     <CTableHeaderCell>Discussion</CTableHeaderCell>
                                     <CTableHeaderCell>Counseller</CTableHeaderCell>
@@ -1124,15 +1123,7 @@ const FollowupScheduling = () => {
                             </CTableHead>
                             <CTableBody>
                                 <CTableRow>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            style={{ minWidth: "60px" }}
-                                            type="text"
-                                            disabled
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
+                                   
                                     <CTableDataCell>
                                         <CFormInput
                                             className="mb-1"
@@ -1297,7 +1288,6 @@ const FollowupScheduling = () => {
                                         <CTableDataCell>{item.FollowupDate && moment(item.FollowupDate).format("DD-MM-YYYY")}<br />{item.TimeFollowp && moment(item.TimeFollowp, "HH:mm").format("hh:mm A")}</CTableDataCell>
                                         <CTableDataCell>{item.AppointmentDate && moment(item.AppointmentDate).format("DD-MM-YYYY")}<br />{item.AppointmentTime && moment(item.AppointmentTime, "HH:mm").format("hh:mm A")}</CTableDataCell>
                                         <CTableDataCell>{item.enquiryStage}</CTableDataCell>
-                                        <CTableDataCell>{item.Discussion}</CTableDataCell>
                                         <CTableDataCell>{item.Counseller}</CTableDataCell>
                                         <CTableDataCell className='text-center'><a href={`tel:+91${item.Contact}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item.EnquiryID) }} size='20px' /></a><a href={`https://wa.me/${item.Contact}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item.EnquiryID) }} size='20px' /></a><a href={`mailto: ${item.Email}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => { setCallReport(true), handleCallReport(item.EnquiryID) }} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => handleFollowup(item.EnquiryID)} /></CTableDataCell>
                                         <CTableDataCell className='text-center'><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} onClick={() => handleEnquiry(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} onClick={() => deleteProspect(item._id)} size='20px' /></CTableDataCell>

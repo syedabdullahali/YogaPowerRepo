@@ -1445,7 +1445,7 @@ const ColdEnquires = () => {
                                     <CTableHeaderCell>Source</CTableHeaderCell>
                                     <CTableHeaderCell>Enquiry stage</CTableHeaderCell>
                                     <CTableHeaderCell>Call Status</CTableHeaderCell>
-                                    <CTableHeaderCell>Last Call</CTableHeaderCell>
+                                    <CTableHeaderCell>Discussion</CTableHeaderCell>
                                     <CTableHeaderCell>Add</CTableHeaderCell>
                                     <CTableHeaderCell>Assigned by</CTableHeaderCell>
                                     <CTableHeaderCell>Counseller</CTableHeaderCell>

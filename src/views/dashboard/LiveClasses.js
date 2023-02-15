@@ -27,48 +27,41 @@ import {
 import React, { useEffect, useState,useCallback } from 'react'
 import axios from 'axios'
 const LiveClasses = () => {
-    const [activeKey, setActiveKey] = useState(1)
+    
+     const  [DailyAttended,setDailyAttended] = useState([])
+     const  [MonthlyReport,setMonthlyReport] = useState([])
+     const  [clientAttendenceReg,setClientAttendenceReg] = useState([])
+
+     const [activeKey, setActiveKey] = useState(1)
      const url = 'http://13.235.115.57:3000'   
      let user = JSON.parse(localStorage.getItem('user-info'))
      const token = user.token;
 
+    const  getLiveClasses = useCallback(async function() {
+        try{
+        const response1 = await axios.get(`${url}/dailyattendence`)
+        const response2 = await axios.get(`${url}/monthlyreport`)
+        const response3 = await axios.get(`${url}/clientattendencereg`)
 
-    // const getLiveClassesData = async ()=>{
-    // const data = await axios.get(`http://13.235.115.57:3000/dailyattendence`, {
-    //     headers: {
-    //         'Authorization': `Bearer ${token}`
-    //     }
-    // })
-    // consloe.log(data)
+        console.log(response3.data)  
 
-    // }
+        setDailyAttended(response1.data)
+        setMonthlyReport(response2.data)
+        setClientAttendenceReg(response3.data)
+            
 
-    // useEffect(()=>{
-    //     getLiveClassesData()
-    // },[])
-   
-
-    const  getImpCall = useCallback(function() {
-        axios.get(`http://13.235.115.57:3000/dailyattendence`, {
-            headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin":true,
-            "Access-Control-Request-Headers": 'Content-Type, Authorization'
-
-            }           
-        })
-            .then((res) => {
-                setResult1(res.data.reverse())
-                console.log(res.data);
-            })
-            .catch((error) => {
+        }catch(error) {
                 console.error(error)
-            })
+        }
     },[])
 
     useEffect(() => {
-        getImpCall()
-    },[getImpCall]) 
+        getLiveClasses()
+    },[ getLiveClasses]) 
+
+
+
+
 
     return (
         <CRow>
@@ -183,34 +176,17 @@ const LiveClasses = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
+
+                                       {DailyAttended.map((el,i)=>
                                         <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                           
-                                        
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                         
-                                            
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            
-                                        </CTableRow>
+                                        <CTableDataCell>{i+1}</CTableDataCell>
+                                            <CTableDataCell>{el.Trainer_Name}</CTableDataCell>
+                                            <CTableDataCell>{el.Services}</CTableDataCell>
+                                            <CTableDataCell>{el.Batch_Timing}</CTableDataCell>
+                                            <CTableDataCell>{el.No_Of_Clients}</CTableDataCell>
+                                            <CTableDataCell>{el.Attended}</CTableDataCell>      
+                                        </CTableRow>)}
+
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -291,38 +267,20 @@ const LiveClasses = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                          
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                        </CTableRow>
+                                        {MonthlyReport.map((el,i)=>
+                                         <CTableRow>
+                                             <CTableDataCell>{i+1}</CTableDataCell>
+                                             <CTableDataCell>{el.Trainer_Name}</CTableDataCell>
+                                             <CTableDataCell>{el.Services}</CTableDataCell>
+                                             <CTableDataCell>{el.Batch_Timing}</CTableDataCell>
+ 
+                                             <CTableDataCell>{el.No_Of_Clients}</CTableDataCell>
+                                             <CTableDataCell>{el.New_Clients}</CTableDataCell>
+                                             <CTableDataCell>{el.Left_Clients}</CTableDataCell>
+                                             <CTableDataCell>{el.Batch_Timing}</CTableDataCell>                                          
+                                         </CTableRow>)}
+                                       
+                                     
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -426,20 +384,23 @@ const LiveClasses = () => {
                                             <CTableHeaderCell scope="col">Fri <br/>27</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Sat <br/>28</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Sun <br/>29</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Mon<br/>30</CTableHeaderCell>
-                                         
-
-                                            
-                                            
-
-
-
+                                            <CTableHeaderCell scope="col">Mon<br/>30</CTableHeaderCell>                                         
                                         </CTableRow>
                                     </CTableHead>
-                                    <CTableBody>
+                                    
+                                    <CTableBody className='text-center'>
+                                        {clientAttendenceReg.map((el,i)=>
                                         <CTableRow>
-                                           <CTableDataCell>1</CTableDataCell>
-                                           <CTableDataCell></CTableDataCell>
+                                           <CTableDataCell>{i+1}</CTableDataCell>
+                                           <CTableDataCell>{el.Client_Name}</CTableDataCell>
+                                            <CTableDataCell>{el.Mobile}</CTableDataCell>
+                                            <CTableDataCell>{el.Services}</CTableDataCell>
+                                            <CTableDataCell>{el.Trainer_Name}</CTableDataCell>
+                                            <CTableDataCell>{el.Class_Timing}</CTableDataCell>
+                                            <CTableDataCell>{el.Package}</CTableDataCell>
+                                            <CTableDataCell>{el.Days}</CTableDataCell>
+                                            <CTableDataCell>{el.StartDate}</CTableDataCell>
+                                            <CTableDataCell>{el.EndDate}</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
@@ -468,105 +429,9 @@ const LiveClasses = () => {
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
+                                            <CTableDataCell></CTableDataCell>                
+                                        </CTableRow>)}
 
-                                          
-
-                            
-                                        </CTableRow>
-                                        <CTableRow>
-                                            <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-
-
-                                        </CTableRow>
-                                        <CTableRow>
-                                          <CTableDataCell>3</CTableDataCell>
-                                           <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                            
-                                        </CTableRow>
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
