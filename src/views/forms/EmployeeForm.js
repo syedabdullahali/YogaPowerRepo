@@ -75,8 +75,8 @@ console.log(dataWithSelectedData)
 
 
 const sendDatawithSlectedData = async ()=>{
-fetch(`${url}/employeeForm/all`, {
-        method: "PUT",
+fetch(`${url}/employeeForm/update/${userdata._id}`, {
+        method: "POST",
         headers: {
             "Authorization": `Bearer ${token}`,
             'Accept': 'application/json',
@@ -104,11 +104,17 @@ return<CCard style={formRenderParentObjeact} className='Parent' onClick={toggale
      <CCard color={'success'} style={{ padding: '10px', color: '#ffffff', width: '100px', margin: '15px', cursor: 'pointer' }}>
         Step-2
       </CCard> 
+      
+      
+      <CButton color="danger" className='Parent' onClick={toggaleModel}>Close</CButton>
       {validation || <p style={{color:'red',fontSize:'17px',margin:'0 25px',}}>Please Fill All Details </p>}
 
 
-      <CCard>
-                    <CCardHeader>
+      <CCard>r
+
+                          
+
+                                         <CCardHeader>
                         <CCardTitle>Employee Application</CCardTitle>
                     </CCardHeader>
                     <CCardBody>

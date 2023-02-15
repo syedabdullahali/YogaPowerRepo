@@ -506,28 +506,7 @@ const EnquiryForm = () => {
                                         ))}</CFormSelect>
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
-                                    <CFormInput
-                                        className="mb-1"
-                                        label='Appointment Date'
-                                        type="date"
-                                        value={appointmentDate}
-                                        onChange={(e) => setappointmentDate(e.target.value)}
-                                        id="exampleFormControlInput1"
-                                    />
-                                </CCol>
-                                <CCol lg={6} md={6} sm={12}>
-                                    <CFormInput
-                                        className="mb-1"
-                                        label='Appointment Time'
-                                        type="time"
-                                        id="exampleFormControlInput1"
-                                        value={appointmentTime}
-                                        onChange={(e) => setappointmentTime(e.target.value)}
-
-                                    />
-                                </CCol>
-                                <CCol lg={6} md={6} sm={12}>
-                                    <CFormSelect
+                                <CFormSelect
                                         className="mb-1"
                                         label='Enquiry Stage'
                                         aria-label="Select"
@@ -540,6 +519,29 @@ const EnquiryForm = () => {
                                             { label: "Join", value: "Join" },
                                             { label: "Enquiry", value: "Enquiry" },
                                         ]}
+                                    />
+                                </CCol>
+                                <CCol lg={6} md={6} sm={12}>
+
+                               <CFormInput
+                                        className="mb-1"
+                                        label='Appointment Date'
+                                        type="date"
+                                        value={appointmentDate}
+                                        onChange={(e) => setappointmentDate(e.target.value)}
+                                        id="exampleFormControlInput1"
+                                    />
+                                </CCol>
+                                <CCol lg={6} md={6} sm={12}>
+                                    
+                                <CFormInput
+                                        className="mb-1"
+                                        label='Appointment Time'
+                                        type="time"
+                                        id="exampleFormControlInput1"
+                                        value={appointmentTime}
+                                        onChange={(e) => setappointmentTime(e.target.value)}
+
                                     />
                                 </CCol>
                                 {appointmentfor === 'Trial Session' && (

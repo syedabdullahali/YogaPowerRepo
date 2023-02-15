@@ -26,7 +26,6 @@ import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs';
 import axios from 'axios';
 import moment from 'moment';
 const url = 'https://yog-seven.vercel.app'
-const url2 = 'https://yog-seven.vercel.app'
 
 
 const EmpDocuments = () => {
