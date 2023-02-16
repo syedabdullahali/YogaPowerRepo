@@ -24,9 +24,57 @@ import {
     CTableRow,
     CTabPane,
 } from '@coreui/react'
-import React, { useState } from 'react'
+import React, { useState,useCallback,useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
+
 const SalesTarget = () => {
     const [activeKey, setActiveKey] = useState(1)
+    const url = useSelector((el)=>el.domainOfApi) 
+
+    const [salesTargetData,setSalesTarget] = useState([])
+    const [clientTargetData,setClientTarget] = useState([])
+    const [callsTargetData,setCallsTarget] = useState([])
+    const [leadTargetData,setLeadTarget] = useState([])
+    const [renevalsData,setRenewals] = useState([])
+    const [referralLeadsData,setReferralLeadsData] = useState([])
+    const [mediaTarget,setMediaTarget] = useState([])
+
+    const  getLiveClasses = useCallback(async function() {
+        try{
+
+    // get Data 
+    const response1 = await axios.get(`${url}/salestarget`)
+    const response2 = await axios.get(`${url}/clienttarget`)
+    const response3 = await axios.get(`${url}/callstarget`)
+    const response4 = await axios.get(`${url}/leadstarget`)
+    const response5 = await axios.get(`${url}/renewalstarget`)
+    const response6 = await axios.get(`${url}/referralsleadstarget`)
+    const response7 = await axios.get(`${url}/mediatarget`)
+
+    console.log(response7.data)
+    // set Data
+
+
+
+    setSalesTarget(response1.data)
+    setClientTarget(response2.data)
+    setCallsTarget(response3.data)
+    setLeadTarget(response4.data)
+    setRenewals(response5.data) 
+    setReferralLeadsData(response6.data)
+    setMediaTarget(response7.data) 
+      
+        }catch(error) {
+                console.error(error)
+        }
+    },[])
+
+    useEffect(() => {
+        getLiveClasses()
+    },[ getLiveClasses]) 
+
+
 
     return (
         <CRow>
@@ -197,45 +245,23 @@ const SalesTarget = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                        
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            
-                                        </CTableRow>
+                                       
+                                            {salesTargetData.map((el,i)=>
+                                             <CTableRow>
+                                           <CTableDataCell>{i+1}</CTableDataCell>
+                                            <CTableDataCell>{el.Employee}</CTableDataCell>
+                                            <CTableDataCell>{el.Target}</CTableDataCell>
+                                            <CTableDataCell>{el.New_Sales}</CTableDataCell>
+                                            <CTableDataCell>{el.Renewals}</CTableDataCell>
+                                            <CTableDataCell>{el.Upgrade_Sales}</CTableDataCell>
+                                            <CTableDataCell>{el.Cross_Sales}</CTableDataCell>
+                                            <CTableDataCell>{el.Balance_Collection}</CTableDataCell>
+                                            <CTableDataCell>{el.Total_Collected}</CTableDataCell>
+                                            <CTableDataCell>{el.Achived}</CTableDataCell>
+                                            </CTableRow>
+                                            )}
+                                      
+                                    
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -319,42 +345,20 @@ const SalesTarget = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                        </CTableRow>
+                                    {clientTargetData.map((el,i)=>
+                                             <CTableRow>
+                                           <CTableDataCell>{i+1}</CTableDataCell>
+                                            <CTableDataCell>{el.Employee}</CTableDataCell>
+                                            <CTableDataCell>{el.Target}</CTableDataCell>
+                                            <CTableDataCell>{el.New_Sales}</CTableDataCell>
+                                            <CTableDataCell>{el.Reference}</CTableDataCell>
+                                            <CTableDataCell>{el.Renewals}</CTableDataCell>
+                                            <CTableDataCell>{el.Upgrade_Sales}</CTableDataCell>
+                                            <CTableDataCell>{el.Cross_Selling}</CTableDataCell>
+                                            <CTableDataCell>{el.Total_Collected}</CTableDataCell>
+                                            <CTableDataCell>{el.Achived}</CTableDataCell>
+                                            </CTableRow>
+                                    )}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -434,36 +438,19 @@ const SalesTarget = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                            
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
+                                       
                                         
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                            
-                                        </CTableRow>
+                                    {callsTargetData.map((el,i)=>
+                                     <CTableRow>
+                                            <CTableDataCell>{i+1}</CTableDataCell>
+                                            <CTableDataCell>{el.Employee}</CTableDataCell>
+                                            <CTableDataCell>{el.Call_Target}</CTableDataCell>
+                                            <CTableDataCell>{el.Follow_Ups}</CTableDataCell>
+                                            <CTableDataCell>{el.Members_Call}</CTableDataCell>
+                                            <CTableDataCell>{el.Total_Completed}</CTableDataCell>
+                                            <CTableDataCell>{el.Achived}</CTableDataCell>                                            
+                                    </CTableRow>
+                                    )}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -544,36 +531,17 @@ const SalesTarget = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                           
-                                        </CTableRow>
+                                    {leadTargetData.map((el,i)=>
+                                     <CTableRow>
+                                            <CTableDataCell>{i+1}</CTableDataCell>
+                                            <CTableDataCell>{el.Employee}</CTableDataCell>
+                                            <CTableDataCell>{el.Lead_Assign}</CTableDataCell>
+                                            <CTableDataCell>{el.Spot_Conversions}</CTableDataCell>
+                                            <CTableDataCell>{el.Total_Leads_Conversion}</CTableDataCell>
+                                            <CTableDataCell>{el.Total_Amount}</CTableDataCell>
+                                            <CTableDataCell>{el.Achived}</CTableDataCell>                                            
+                                    </CTableRow>
+                                    )}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -656,36 +624,17 @@ const SalesTarget = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                           
-                                        </CTableRow>
+                                    {renevalsData.map((el,i)=>
+                                     <CTableRow>
+                                            <CTableDataCell>{i+1}</CTableDataCell>
+                                            <CTableDataCell>{el.Employee}</CTableDataCell>
+                                            <CTableDataCell>{el.Target}</CTableDataCell>
+                                            <CTableDataCell>{el.No_Of_Renewals}</CTableDataCell>
+                                            <CTableDataCell>{el.Conversion}</CTableDataCell>
+                                            <CTableDataCell>{el.Total_Amount}</CTableDataCell>
+                                            <CTableDataCell>{el.Achived}</CTableDataCell>                                            
+                                    </CTableRow>
+                                    )}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -766,36 +715,17 @@ const SalesTarget = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                           
-                                        </CTableRow>
+                                    {referralLeadsData.map((el,i)=>
+                                     <CTableRow>
+                                            <CTableDataCell>{i+1}</CTableDataCell>
+                                            <CTableDataCell>{el.Employee}</CTableDataCell>
+                                            <CTableDataCell>{el.No_Of_Referrals_Target}</CTableDataCell>
+                                            <CTableDataCell>{el.No_Of_Referrals_Leads}</CTableDataCell>
+                                            <CTableDataCell>{el.Convert_To_Member}</CTableDataCell>
+                                            <CTableDataCell>{el.Total_Amount}</CTableDataCell>
+                                            <CTableDataCell>{el.Achived}</CTableDataCell>                                            
+                                    </CTableRow>
+                                    )}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -877,36 +807,18 @@ const SalesTarget = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                        </CTableRow>
+                                    {mediaTarget.map((el,i)=>
+                                     <CTableRow>
+                                            <CTableDataCell>{i+1}</CTableDataCell>
+                                            <CTableDataCell>{el.Employee}</CTableDataCell>
+                                            <CTableDataCell>{el.Google_Reviews}</CTableDataCell>
+                                            <CTableDataCell>{el.Facebook}</CTableDataCell>
+                                            <CTableDataCell>{el.Instagram}</CTableDataCell>
+                                            <CTableDataCell>{el.Linkedin}</CTableDataCell>
+                                            <CTableDataCell>{el.Justdial}</CTableDataCell>                                            
+                                            <CTableDataCell>{el.Achived}</CTableDataCell>                                            
+                                    </CTableRow>
+                                    )}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>

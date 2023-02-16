@@ -24,9 +24,39 @@ import {
     CTableRow,
     CTabPane,
 } from '@coreui/react'
-import React, { useState } from 'react'
+import React, { useState,useCallback,useEffect } from 'react'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+
+
 const TtcClasses = () => {
     const [activeKey, setActiveKey] = useState(1)
+    const url = useSelector((el)=>el.domainOfApi) 
+
+    const  [DailyAttendence,setDailyAttendence] = useState([])
+    const  [monthlyReport,setMonthlyReport] = useState([])
+    const  [clientsAttendencereg,setClientsAttendencereg] = useState([])
+
+    const  getTCC_Classes = useCallback(async function() {
+        try{
+        const response1 = await axios.get(`${url}/ttclasses/dailyattendence`)
+        const response2 = await axios.get(`${url}/ttcclasses/monthlyreport`)
+        const response3 = await axios.get(`${url}/ttcclasses/clientattendencereg`)
+ 
+ 
+        console.log(response1.data)  
+        setDailyAttendence(response1.data)        
+        setMonthlyReport(response2.data)
+        setClientsAttendencereg(response3.data)
+        }catch(error) {
+                console.error(error)
+        }
+    },[])
+ 
+    useEffect(() => {
+        getTCC_Classes()
+    },[ getTCC_Classes]) 
+
 
     return (
         <CRow>
@@ -143,36 +173,18 @@ const TtcClasses = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-
-                                           
-                                        
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                         
-                                            
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            
-                                        </CTableRow>
+                                      
+                                    {DailyAttendence.map((el,i)=>(
+                                           <CTableRow>
+                                             <CTableDataCell>{i+1}</CTableDataCell>
+                                             <CTableDataCell>{el.Trainer_Name}</CTableDataCell>
+                                             <CTableDataCell>{el.Services}</CTableDataCell>
+                                             <CTableDataCell>{el.Batch_Timing}</CTableDataCell>
+                                             <CTableDataCell>{el.Total_Classes}</CTableDataCell>
+                                             <CTableDataCell>{el.Attended}</CTableDataCell>
+                                             <CTableDataCell>{el.Left_Class}</CTableDataCell>                                                                     
+                                         </CTableRow>
+                                        ))}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -252,39 +264,18 @@ const TtcClasses = () => {
 
                                         </CTableRow>
                                     </CTableHead>
-                                    <CTableBody>
+                                    <CTableBody>                                      
+                                      {monthlyReport.map((el,i)=>
                                         <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                          
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                        </CTableRow>
+                                          <CTableDataCell>{i+1}</CTableDataCell>
+                                            <CTableDataCell>{el.Trainer_Name}</CTableDataCell>
+                                            <CTableDataCell>{el.Services}</CTableDataCell>
+                                            <CTableDataCell>{el.Batch_Timing}</CTableDataCell>
+                                            <CTableDataCell>{el.No_Of_Clients}</CTableDataCell>
+                                            <CTableDataCell>{el.New_Clients}</CTableDataCell>
+                                            <CTableDataCell>{el.Left_Clients}</CTableDataCell>  
+                                            <CTableDataCell>{el.Total_Clients}</CTableDataCell>                                                                                  
+                                        </CTableRow>)}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -397,135 +388,49 @@ const TtcClasses = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                         <CTableRow>
-                                            <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            
-                            
-                                        </CTableRow>
-                                        <CTableRow>
-                                            <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                           
-                                            
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            
-                                           
-                                        </CTableRow>
+                                    {clientsAttendencereg.map((el,i)=>
+                                    <CTableRow>                                          
+                                        <CTableDataCell>{i+1}</CTableDataCell>
+                                        <CTableDataCell>{el.Client_Name}</CTableDataCell>
+                                        <CTableDataCell>{el.Mobile}</CTableDataCell>
+                                        <CTableDataCell>{el.Services}</CTableDataCell>
+                                        <CTableDataCell>{el.Trainer_Name}</CTableDataCell>
+                                        <CTableDataCell>{el.Class_Timing}</CTableDataCell>
+                                        <CTableDataCell>{el.Package}</CTableDataCell>
+                                        <CTableDataCell>{el.Days}</CTableDataCell>
+                                        <CTableDataCell>{el.StartDate}</CTableDataCell>
+                                        <CTableDataCell>{el.EndDate}</CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell> 
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>
+                                        <CTableDataCell></CTableDataCell>                        
+                                    </CTableRow>
+                                        )}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>

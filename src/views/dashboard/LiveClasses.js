@@ -25,15 +25,17 @@ import {
     CTabPane,
 } from '@coreui/react'
 import React, { useEffect, useState,useCallback } from 'react'
+import { useSelector } from 'react-redux'
+
 import axios from 'axios'
 const LiveClasses = () => {
-    
+     const url = useSelector((el)=>el.domainOfApi) 
      const  [DailyAttended,setDailyAttended] = useState([])
      const  [MonthlyReport,setMonthlyReport] = useState([])
      const  [clientAttendenceReg,setClientAttendenceReg] = useState([])
+     console.log(url)
 
      const [activeKey, setActiveKey] = useState(1)
-     const url = 'http://13.235.115.57:3000'   
      let user = JSON.parse(localStorage.getItem('user-info'))
      const token = user.token;
 
@@ -43,13 +45,11 @@ const LiveClasses = () => {
         const response2 = await axios.get(`${url}/monthlyreport`)
         const response3 = await axios.get(`${url}/clientattendencereg`)
 
-        console.log(response3.data)  
+       
 
         setDailyAttended(response1.data)
         setMonthlyReport(response2.data)
         setClientAttendenceReg(response3.data)
-            
-
         }catch(error) {
                 console.error(error)
         }

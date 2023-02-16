@@ -26,13 +26,15 @@ import {
 } from '@coreui/react'
 import React, { useState,useCallback,useEffect } from 'react'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
+
 const AllBatches = () => {
+     const url = useSelector((el)=>el.domainOfApi) 
      const [activeKey, setActiveKey] = useState(1)
      const  [DailyAttendence,setDailyAttendence] = useState([])
      const  [monthlyReport,setMonthlyReport] = useState([])
      const  [clientsAttendencereg,setClientsAttendencereg] = useState([])
 
-     const url = 'http://13.235.115.57:3000'   
      let user = JSON.parse(localStorage.getItem('user-info'))
      const token = user.token;
 
@@ -42,7 +44,6 @@ const AllBatches = () => {
         const response2 = await axios.get(`${url}/allbatchesmonthlyreport`)
         const response3 = await axios.get(`${url}/allbatchesclientattendencereg`)
 
-        //  console.log(response3)
 
         console.log(response3.data)  
         setDailyAttendence(response1.data)        

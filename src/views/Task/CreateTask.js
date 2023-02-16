@@ -1,9 +1,11 @@
 import Calender from './Calender'
-import React, { useState } from 'react'
 import { CCol, CFormInput, CRow, CButton, CCard,CContainer } from '@coreui/react'
+import React, { useState,useCallback,useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 const CreateTask = () => {
-
+  const url = useSelector((el)=>el.domainOfApi) 
   const [userName, setUserName] = useState()
   const [date, setDate] = useState('')
   const [Time, setTime] = useState('')
@@ -13,6 +15,9 @@ const CreateTask = () => {
   const [error, setError] = useState('')
 
   const CurrentDate = new Date()
+
+
+
   const [TaskData, setTaskData] = useState([
     {
       date: `${ CurrentDate.getDate() }`,
@@ -25,6 +30,40 @@ const CreateTask = () => {
       }]
     }
   ])
+
+
+  const  getCalenderData = useCallback(async function() {
+      try{
+
+       const response = 
+       await axios.get(`${url}/calender`)
+       console.log(response)
+  
+       setTaskData(response.data)
+      }catch(error) {
+                console.error(error)
+        }
+    },[])
+
+    useEffect(() => {
+        getCalenderData()
+    },[ getCalenderData]) 
+
+
+const  sendCalenderData =   useCallback(async function(data) {
+  try{
+   const response = await axios.post(`${url}/calender`,data)
+   console.log(response)
+   if(response.statusText==="OK")
+   getCalenderData()
+  }catch(error) {
+      console.error(error)
+    }
+},[])
+
+  console.log(TaskData)
+
+
   const toggaleFun = () => {
     setToggaleValue((value) => !value)
   }
@@ -83,7 +122,7 @@ const CreateTask = () => {
           })
           return [...prev]
         } else {
-
+          sendCalenderData(TaskObjeact)
           return [...prev, TaskObjeact]
         }
 
@@ -94,6 +133,8 @@ const CreateTask = () => {
       setDate('')
       setUserName('')
       setError('')
+
+
     } else {
       setError('Please Fill All Details')
     }
