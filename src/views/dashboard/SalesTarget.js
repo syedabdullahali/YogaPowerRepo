@@ -42,7 +42,6 @@ const SalesTarget = () => {
 
     const  getLiveClasses = useCallback(async function() {
         try{
-
     // get Data 
     const response1 = await axios.get(`${url}/salestarget`)
     const response2 = await axios.get(`${url}/clienttarget`)
@@ -55,19 +54,16 @@ const SalesTarget = () => {
     console.log(response7.data)
     // set Data
 
-
-
     setSalesTarget(response1.data)
     setClientTarget(response2.data)
     setCallsTarget(response3.data)
     setLeadTarget(response4.data)
     setRenewals(response5.data) 
     setReferralLeadsData(response6.data)
-    setMediaTarget(response7.data) 
-      
-        }catch(error) {
-                console.error(error)
-        }
+    setMediaTarget(response7.data)   
+    }catch(error) {
+          console.error(error)
+    }
     },[])
 
     useEffect(() => {

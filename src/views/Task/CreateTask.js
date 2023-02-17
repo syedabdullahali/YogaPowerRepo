@@ -53,15 +53,13 @@ const CreateTask = () => {
 const  sendCalenderData =   useCallback(async function(data) {
   try{
    const response = await axios.post(`${url}/calender`,data)
-   console.log(response)
-   if(response.statusText==="OK")
    getCalenderData()
   }catch(error) {
       console.error(error)
     }
 },[])
 
-  console.log(TaskData)
+console.log(TaskData)
 
 
   const toggaleFun = () => {

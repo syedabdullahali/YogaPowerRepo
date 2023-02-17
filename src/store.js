@@ -2,7 +2,7 @@ import { createStore } from 'redux'
 
 const initialState = {
   sidebarShow: true,
-  domainOfApi:'http://13.233.125.227:3000'
+  domainOfApi:'https://yoga-power-api.vercel.app'
 }
 
 const changeState = (state = initialState, { type, ...rest }) => {
