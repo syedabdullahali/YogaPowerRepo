@@ -27,9 +27,52 @@ import {
     CTableRow,
     CTabPane,
 } from '@coreui/react'
-import React, { useState } from 'react'
+import React, { useState,useCallback,useEffect } from 'react'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+
 const ServiceCall = () => {
     const [activeKey, setActiveKey] = useState(1)
+    const url = useSelector((el)=>el.domainOfApi) 
+    const [welcomecallsData,setWelcomeCallsData] = useState([])
+    const [feedbackCallsData,setFeedBackCallsData] = useState([])
+    const [paymentCalssData,setPaymentCallsData] = useState([])
+    const [irregularCallData,setIrregularCallData] = useState([])
+    const [greetingCallsData,setgreeTingCallsData] = useState([])
+
+
+    const  getLiveClasses = useCallback(async function() {
+        try{
+        const response1 = await axios.get(`${url}/welcomecalls`)
+        const response2 = await axios.get(`${url}/feedbackcalls`)
+        const response3 = await axios.get(`${url}/paymentcalls`)
+        const response4 = await axios.get(`${url}/irregularcall`)
+        const response5 = await axios.get(`${url}/greetingcalls`)
+
+
+
+        console.log(response5.data)  
+        setWelcomeCallsData(response1.data)   
+        setFeedBackCallsData(response2.data)     
+        setPaymentCallsData(response3.data)
+        setIrregularCallData(response4.data)
+        setgreeTingCallsData(response5.data)
+       
+        }catch(error) {
+                console.error(error)
+        }
+    },[])
+
+    useEffect(() => {
+        getLiveClasses()
+    },[ getLiveClasses]) 
+   
+
+
+
+
+
+
 
     return (
         <CRow>
@@ -177,42 +220,31 @@ const ServiceCall = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                        </CTableRow>
+                                    {welcomecallsData.map((el,i)=>
+                                     <CTableRow key={i}>
+                                         <CTableDataCell>{i+1}</CTableDataCell>
+                                         <CTableDataCell>{el.Date}</CTableDataCell>
+                                         <CTableDataCell>{el.Timing}</CTableDataCell>
+                                         <CTableDataCell>{el.Client_Id}</CTableDataCell>
+                                         <CTableDataCell>{el.Name}</CTableDataCell>
+                                         <CTableDataCell>{el.Contact}</CTableDataCell>
+                                         <CTableDataCell>{el.Service}</CTableDataCell>
+                                         <CTableDataCell>{el.Discussion}</CTableDataCell>
+                                         <CTableDataCell>{el.Counseller}</CTableDataCell>
+                                         <CTableDataCell className='text-center'>
+                                            <a href={`tel`} target="_black">
+                                                <MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' />
+                                                </a><a href={`https://wa.me/${el.Contact}}`} target="_black">
+                                                <BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' />
+                                                </a><a href={`mailto`} target="_black"> 
+                                                <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' />
+                                                </a><a href={`https://wa.me/`} target="_black">
+                                                <BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a>
+                                        </CTableDataCell>
+                                     </CTableRow>
+                                    )}
+                                      
+                                        
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -295,44 +327,30 @@ const ServiceCall = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                           
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                            
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                        </CTableRow>
+                                       
+                                    {feedbackCallsData.map((el,i)=>
+                                     <CTableRow key={i}>
+                                         <CTableDataCell>{i+1}</CTableDataCell>
+                                         <CTableDataCell>{el.Date}</CTableDataCell>
+                                         <CTableDataCell>{el.Timing}</CTableDataCell>
+                                         <CTableDataCell>{el.Client_Id}</CTableDataCell>
+                                         <CTableDataCell>{el.Name}</CTableDataCell>
+                                         <CTableDataCell>{el.Contact}</CTableDataCell>
+                                         <CTableDataCell>{el.Service}</CTableDataCell>
+                                         <CTableDataCell>{el.Discussion}</CTableDataCell>
+                                         <CTableDataCell>{el.Counseller}</CTableDataCell>
+                                         <CTableDataCell className='text-center'>
+                                            <a href={`tel`} target="_black">
+                                                <MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' />
+                                                </a><a href={`https://wa.me/${el.Contact}}`} target="_black">
+                                                <BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' />
+                                                </a><a href={`mailto`} target="_black"> 
+                                                <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' />
+                                                </a><a href={`https://wa.me/`} target="_black">
+                                                <BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a>
+                                        </CTableDataCell>
+                                     </CTableRow>
+                                    )}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -419,54 +437,34 @@ const ServiceCall = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                        </CTableRow>
+                                    {paymentCalssData.map((el,i)=>
+                                     <CTableRow key={i}>
+                                         <CTableDataCell>{i+1}</CTableDataCell>
+                                         <CTableDataCell>{el.Date}</CTableDataCell>
+                                         <CTableDataCell>{el.Timing}</CTableDataCell>
+                                         <CTableDataCell>{el.Client_Id}</CTableDataCell>
+                                         <CTableDataCell>{el.Name}</CTableDataCell>
+                                         <CTableDataCell>{el.Contact}</CTableDataCell>
+                                         <CTableDataCell>{el.Service}</CTableDataCell>
+                                         <CTableDataCell>{el.Duration}</CTableDataCell>
+                                         <CTableDataCell>{el.Total_Amount}</CTableDataCell>
+                                         <CTableDataCell>{el.Paid}</CTableDataCell>
+                                         <CTableDataCell>{el.Balance}</CTableDataCell>
+                                         <CTableDataCell>{el.Discussion}</CTableDataCell>
+                                         <CTableDataCell>{el.Counseller}</CTableDataCell>
+
+                                         <CTableDataCell className='text-center'>
+                                            <a href={`tel`} target="_black">
+                                                <MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' />
+                                                </a><a href={`https://wa.me/${el.Contact}}`} target="_black">
+                                                <BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' />
+                                                </a><a href={`mailto`} target="_black"> 
+                                                <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' />
+                                                </a><a href={`https://wa.me/`} target="_black">
+                                                <BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a>
+                                        </CTableDataCell>
+                                     </CTableRow>
+                                    )}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -551,48 +549,33 @@ const ServiceCall = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                        </CTableRow>
+                                    {irregularCallData.map((el,i)=>
+                                     <CTableRow key={i}>
+                                         <CTableDataCell>{i+1}</CTableDataCell>
+                                         <CTableDataCell>{el.Date}</CTableDataCell>
+                                         <CTableDataCell>{el.Timing}</CTableDataCell>
+                                         <CTableDataCell>{el.Client_Id}</CTableDataCell>
+                                         <CTableDataCell>{el.Name}</CTableDataCell>
+                                         <CTableDataCell>{el.Contact}</CTableDataCell>
+                                         <CTableDataCell>{el.Service}</CTableDataCell>
+                                         <CTableDataCell>{el.Duration}</CTableDataCell>
+                                         <CTableDataCell>{el.Expiry_Date}</CTableDataCell>
+                                         <CTableDataCell>{el.Discussion}</CTableDataCell>
+                                         <CTableDataCell>{el.Counseller}</CTableDataCell>
+                                        
+
+                                         <CTableDataCell className='text-center'>
+                                            <a href={`tel`} target="_black">
+                                                <MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' />
+                                                </a><a href={`https://wa.me/${el.Contact}}`} target="_black">
+                                                <BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' />
+                                                </a><a href={`mailto`} target="_black"> 
+                                                <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' />
+                                                </a><a href={`https://wa.me/`} target="_black">
+                                                <BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a>
+                                        </CTableDataCell>
+                                     </CTableRow>
+                                    )}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
@@ -677,7 +660,35 @@ const ServiceCall = () => {
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
+                                    {greetingCallsData.map((el,i)=>
+                                     <CTableRow key={i}>
+                                         <CTableDataCell>{i+1}</CTableDataCell>
+                                         <CTableDataCell>{el.Date}</CTableDataCell>
+                                         <CTableDataCell>{el.Timing}</CTableDataCell>
+                                         <CTableDataCell>{el.Client_Id}</CTableDataCell>
+                                         <CTableDataCell>{el.Name}</CTableDataCell>
+                                         <CTableDataCell>{el.Contact}</CTableDataCell>
+                                         <CTableDataCell>{el.Service}</CTableDataCell>
+                                         <CTableDataCell>{el.Expiry_Date}</CTableDataCell>
+                                         <CTableDataCell>{el.Date_Of_Birth}</CTableDataCell>
+                                         <CTableDataCell>{el.Discussion}</CTableDataCell>
+                                         <CTableDataCell>{el.Counseller}</CTableDataCell>
+                                        
+                                         <CTableDataCell className='text-center'>
+                                            <a href={`tel`} target="_black">
+                                                <MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' />
+                                                </a><a href={`https://wa.me/${el.Contact}}`} target="_black">
+                                                <BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' />
+                                                </a><a href={`mailto`} target="_black"> 
+                                                <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' />
+                                                </a><a href={`https://wa.me/`} target="_black">
+                                                <BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a>
+                                        </CTableDataCell>
+                                     </CTableRow>
+                                    )}
+
+
+                                        {/* <CTableRow>
                                         <CTableDataCell>1</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
@@ -718,7 +729,7 @@ const ServiceCall = () => {
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
-                                        </CTableRow>
+                                        </CTableRow> */}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>

@@ -50,9 +50,26 @@ const CreateTask = () => {
     },[ getCalenderData]) 
 
 
-const  sendCalenderData =   useCallback(async function(data) {
+const  sendUpdatedCalenderData =   useCallback(async function(obj,id) {
+  console.log("sendApi", obj,id)
   try{
-   const response = await axios.post(`${url}/calender`,data)
+   const response = await axios.put(`${url}/calenders/${id}`,obj)
+   console.log(response)
+   if(response.statusText==="OK")
+   getCalenderData()
+  }catch(error) {
+      console.error(error)
+    }
+},[])
+
+
+
+const  postCalenderData =   useCallback(async function(obj,id) {
+  console.log("sendApi", obj,id)
+  try{
+   const response = await axios.put(`${url}/calenders/${id}`,obj)
+   console.log(response)
+   if(response.statusText==="OK")
    getCalenderData()
   }catch(error) {
       console.error(error)
@@ -107,9 +124,11 @@ console.log(TaskData)
           const value = (el.date == TaskObjeact.date && el.month === TaskObjeact.month && el.year === TaskObjeact.year)
           if (el.date == TaskObjeact.date && el.month === TaskObjeact.month && el.year === TaskObjeact.year) {
             el.userInfo.push(...TaskObjeact.userInfo)
+            sendUpdatedCalenderData(el,el._id)
           }
           return value
         })
+
 
         if (val) {
           prev.forEach((el, i) => {
@@ -120,7 +139,7 @@ console.log(TaskData)
           })
           return [...prev]
         } else {
-          sendCalenderData(TaskObjeact)
+            postCalenderData(TaskObjeact)
           return [...prev, TaskObjeact]
         }
 
