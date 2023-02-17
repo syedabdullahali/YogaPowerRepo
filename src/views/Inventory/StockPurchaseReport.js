@@ -18,17 +18,10 @@ import DataTable from "src/components/DataTable";
 
 const StockReport = () => {
     const [action, setAction] = useState(false)
+    
 
 
     const header = [
-
-        /* 
-        value: keyword for normal value passing
-        btn: keyword for button
-        btn1 to btn4: keyword for component passing
-        lebel: keyword for anchor tag
-        Note: please don't pass empty values or perameters
-        */
 
         { heading: 'Sr. No', value: 'id' },
         { heading: 'Name', value: 'service_name' },

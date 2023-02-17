@@ -23,9 +23,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BsWhatsapp } from "react-icons/bs";
 import { MdCall, MdDelete, MdEdit, MdMail } from "react-icons/md";
-const url = 'https://yog-api.herokuapp.com'
+import { useSelector } from 'react-redux'
+
 
 const AllSuppilerList = () => {
+
+    const url = useSelector((el)=>el.domainOfApi)  
+
+    
     const [action, setAction] = useState(false)
     const [toast, setToast] = useState(false)
     const [id, setId] = useState()
@@ -53,14 +58,17 @@ const AllSuppilerList = () => {
     console.log(user);
     const token = user.token;
     const username = user.user.username;
-    const centerCode = user.user.centerCode;
     const [paging, setPaging] = useState(0);
     useEffect(() => {
         getImpCall()
     }, [])
 
+
+
+
+
     function getImpCall() {
-        axios.get(`${url}/stockListing/all`, {
+        axios.get(`${url}/clothes`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -80,7 +88,7 @@ const AllSuppilerList = () => {
             productName: name, brandName: phone, category: email, color: category, productPrice: address, totalStock: company, available: company,
         }
 
-        fetch(`${url}/stockListing/create`, {
+        fetch(`${url}/clothes`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -98,12 +106,22 @@ const AllSuppilerList = () => {
 
     const saveUpdate = () => {
         let data1 = {
-            username: username, productCode: result1.length,
-            productName: name, brandName: phone, category: email, color: category, productPrice: address, totalStock: company, available: company, sold: 0,
+            username: username, 
+            productCode: result1.length,
+            productName: name,
+            brandName: phone,
+            category: email, 
+            color: category,
+            productPrice: address,
+            totalStock: company,
+            available: company,
+            sold: 0,
+
+            
         }
 
-        fetch(`${url}/stockListing/update/${id}`, {
-            method: "POST",
+        fetch(`${url}/clothes/${id}`, {
+            method: "PUT",
             headers: {
                 "Authorization": `Bearer ${token}`,
                 'Accept': 'application/json',
@@ -121,7 +139,7 @@ const AllSuppilerList = () => {
     function deleteCall(id) {
 
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/stockListing/delete/${id}`, {
+            fetch(`${url}/clothes/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -151,18 +169,18 @@ const AllSuppilerList = () => {
     }
 
     function getUpdate(id) {
-        axios.get(`${url}/stockListing/${id}`, {
+        axios.get(`${url}/clothes/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
             .then((res) => {
-                setName(res.data.productName)
-                setPhone(res.data.brandName)
-                setEmail(res.data.category)
-                setCategory(res.data.color)
-                setAddress(res.data.productPrice)
-                setCompany(res.data.totalStock)
+                setName(res.data.Product_Name)
+                setPhone(res.data.Brand_Name)
+                setEmail(res.data.Category)
+                setCategory(res.data.Color)
+                setAddress(res.data.Price)
+                setCompany(res.data.Total_Stock)
                 setAction(true)
             })
             .catch((error) => {
@@ -259,6 +277,8 @@ const AllSuppilerList = () => {
                                         placeholder="Enter Total Stock"
                                     />
                                 </CCol>
+                                
+
 
 
 
@@ -290,7 +310,7 @@ const AllSuppilerList = () => {
                         <CTableHeaderCell>AVL Stock</CTableHeaderCell>
                         <CTableHeaderCell>Sold By</CTableHeaderCell>
                         <CTableHeaderCell>Action</CTableHeaderCell>
-                        {/* <CTableHeaderCell>Edit</CTableHeaderCell> */}
+                        <CTableHeaderCell>Edit/Delete</CTableHeaderCell>
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -418,7 +438,7 @@ const AllSuppilerList = () => {
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
                         </CTableDataCell>
-                        {/* <CTableDataCell>
+                        <CTableDataCell>
                             <CFormInput
                                 className="mb-1"
                                 type="text"
@@ -426,158 +446,23 @@ const AllSuppilerList = () => {
                                 disabled
                                 aria-describedby="exampleFormControlInputHelpInline"
                             />
-                        </CTableDataCell>  */}
+                        </CTableDataCell>
+                   
                     </CTableRow>
-                    <CTableRow>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "60px" }}
-                                type="text"
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                value={search1}
-                                disabled
-                                onChange={(e) => setSearch1(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                value={search2}
-                                onChange={(e) => setSearch2(e.target.value)}
-                                type="text"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "100px" }}
-                                value={search3}
-                                onChange={(e) => setSearch3(e.target.value)}
-                                type="text"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "200px" }}
-                                value={search4}
-                                onChange={(e) => setSearch4(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                value={search5}
-                                onChange={(e) => setSearch5(e.target.value)}
-                                type="text"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                value={search6}
-                                onChange={(e) => setSearch6(e.target.value)}
-                                type="number"
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                style={{ minWidth: "120px" }}
-                                type="number"
-                                disabled
-                                value={search7}
-                                onChange={(e) => setSearch7(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="number"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                value={search8}
-                                onChange={(e) => setSearch8(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="number"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                value={search9}
-                                onChange={(e) => setSearch9(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                value={search10}
-                                onChange={(e) => setSearch10(e.target.value)}
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>
-                        {/* <CTableDataCell>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                style={{ minWidth: "120px" }}
-                                disabled
-                                aria-describedby="exampleFormControlInputHelpInline"
-                            />
-                        </CTableDataCell>  */}
-                    </CTableRow>
-                    {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                        list.username === username && list.productName.includes(search2) && list.brandName.includes(search3) && list.category.includes(search4) && list.color.includes(search5) &&
-                        list.productPrice.toString().includes(search6.toString())
-                    ).map((item, index) => (
+                 
+                    {result1.slice(paging * 10, paging * 10 + 10).map((item, index) => (
                         <CTableRow key={index}>
                             <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
-                            <CTableDataCell>{item.productCode}</CTableDataCell>
-                            <CTableDataCell>{item.productName}</CTableDataCell>
-                            <CTableDataCell>{item.brandName}</CTableDataCell>
-                            <CTableDataCell>{item.category}</CTableDataCell>
-                            <CTableDataCell>{item.color}</CTableDataCell>
-                            <CTableDataCell>{item.productPrice}</CTableDataCell>
-                            <CTableDataCell>{item.totalStock}</CTableDataCell>
-                            <CTableDataCell>{item.sold}</CTableDataCell>
-                            <CTableDataCell>{item.available}</CTableDataCell>
-                            <CTableDataCell>{item.soldBy}</CTableDataCell>
+                            <CTableDataCell>{item.Product_Code}</CTableDataCell>
+                            <CTableDataCell>{item.Product_Name}</CTableDataCell>
+                            <CTableDataCell>{item.Brand_Name}</CTableDataCell>
+                            <CTableDataCell>{item.Category}</CTableDataCell>
+                            <CTableDataCell>{item.Color}</CTableDataCell>
+                            <CTableDataCell>{item.Price}</CTableDataCell>
+                            <CTableDataCell>{item.Total_Stock}</CTableDataCell>
+                            <CTableDataCell>{item.Sold}</CTableDataCell>
+                            <CTableDataCell>{item.Available_Stock}</CTableDataCell>
+                            <CTableDataCell>{item.Sold_By}</CTableDataCell>
                             <CTableDataCell className='text-center'><a href={`tel:${item.mobile}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.mobile}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.email}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a> </CTableDataCell>
                             <CTableDataCell className='text-center'><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} onClick={() => handleUpdate(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} onClick={() => deleteCall(item._id)} size='20px' /></CTableDataCell>
                         </CTableRow>
@@ -585,32 +470,6 @@ const AllSuppilerList = () => {
                 </CTableBody>
             </CTable>
 
-            <CPagination aria-label="Page navigation example" align="center" className='mt-2'>
-                <CPaginationItem aria-label="Previous" disabled={paging != 0 ? false : true} onClick={() => paging > 0 && setPaging(paging - 1)}>
-                    <span aria-hidden="true">&laquo;</span>
-                </CPaginationItem>
-                <CPaginationItem active onClick={() => setPaging(0)}>{paging + 1}</CPaginationItem>
-                {result1.filter((list) =>
-                    list.username === username && list.productName.includes(search2) && list.brandName.includes(search3) && list.category.includes(search4) && list.color.includes(search5) &&
-                    list.productPrice.toString().includes(search6.toString())
-                ).length > (paging + 1) * 10 && <CPaginationItem onClick={() => setPaging(paging + 1)} >{paging + 2}</CPaginationItem>}
-
-                {result1.filter((list) =>
-                    list.username === username && list.productName.includes(search2) && list.brandName.includes(search3) && list.category.includes(search4) && list.color.includes(search5) &&
-                    list.productPrice.toString().includes(search6.toString())
-                ).length > (paging + 2) * 10 && <CPaginationItem onClick={() => setPaging(paging + 2)}>{paging + 3}</CPaginationItem>}
-                {result1.filter((list) =>
-                    list.username === username && list.productName.includes(search2) && list.brandName.includes(search3) && list.category.includes(search4) && list.color.includes(search5) &&
-                    list.productPrice.toString().includes(search6.toString())
-                ).length > (paging + 1) * 10 ?
-                    <CPaginationItem aria-label="Next" onClick={() => setPaging(paging + 1)}>
-                        <span aria-hidden="true">&raquo;</span>
-                    </CPaginationItem>
-                    : <CPaginationItem disabled aria-label="Next" onClick={() => setPaging(paging + 1)}>
-                        <span aria-hidden="true">&raquo;</span>
-                    </CPaginationItem>
-                }
-            </CPagination>
         </CRow>
 
     );

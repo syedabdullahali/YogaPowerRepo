@@ -428,22 +428,7 @@ const ClothesProduct = () => {
                         </CTableDataCell>
                     </CTableRow>
 
-                    <CTableRow>
-                     <CTableDataCell>1</CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                     <CTableDataCell></CTableDataCell>
-                   
-                    </CTableRow>
+              
 
 
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>

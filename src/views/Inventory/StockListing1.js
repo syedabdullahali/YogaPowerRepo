@@ -22,8 +22,8 @@ import React, { useState } from "react";
 import { FaBeer } from "react-icons/fa";
 
 import DataTable from "src/components/DataTable";
-import AllSuppilerList from "./AllSupplierList";
-import ClothesProduct from "./AllSupplierList";
+
+import ClothesProduct from "./ClothesProduct";
 import AyurvedaMedicine from "./AyurvedaMedicine";
 import FitnessProduct from "./FitnessProduct";
 import FoodsProduct from "./FoodsProduct";

@@ -2,7 +2,31 @@ import {CCard,CTable,CCol,CTableHead,CTableRow,CTableHeaderCell,
     CTableBody,CTableDataCell,CFormInput,CCardHeader,CCardTitle,CButton
  } from '@coreui/react'
 
+ import { useSelector } from 'react-redux'
+ import {useState,useEffect} from "react"
+ import axios from 'axios'
+
 function StockAlert(){
+ const url = useSelector((el)=>el.domainOfApi) 
+    const [result1, setResult1] = useState([])
+    
+
+    useEffect(() => {
+        getStockAssigning()
+    }, [])
+
+    function getStockAssigning() {
+        axios.get(`${url}/stockalert`)
+            .then((res) => {
+                setResult1(res.data.reverse())
+                console.log(res.data);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+
+    
 
 return (
 <CCard >
@@ -11,7 +35,7 @@ return (
             </CCardHeader>
 
             <CCol className='mt-2 p-4'>
-                <CButton className="float-end" onClick={() => { setAction(!action), clear() }}> Add Stock Alert</CButton>
+                <CButton className="float-end" > Add Stock Alert</CButton>
             </CCol>
 
 
@@ -110,37 +134,19 @@ return (
                     
                         
                     </CTableRow>
-                    <CTableRow>
-                        <CTableDataCell>1
-                            
-                        </CTableDataCell>
-                        
-                        <CTableDataCell>
-                           
-                        </CTableDataCell>
-                        <CTableDataCell>
-                          
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            
-                        </CTableDataCell>
-                        <CTableDataCell>
-                           
-                        </CTableDataCell>
-                         <CTableDataCell>
-                            
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            
-                        </CTableDataCell>
-                       
-                    </CTableRow>
+                    {result1.map((item, index) => (
+                        <CTableRow key={index}>
+                            <CTableDataCell>{index + 1 }</CTableDataCell>
+                            <CTableDataCell>{item.Category}</CTableDataCell>
+                            <CTableDataCell>{item.Product_Name}</CTableDataCell>
+                            <CTableDataCell>{item.No_Of_Products}</CTableDataCell>
+                            <CTableDataCell>{item.Brand_Name}</CTableDataCell>
+                            <CTableDataCell>{item.Total_Stock}</CTableDataCell>
+                            <CTableDataCell>{item.Use_Stock}</CTableDataCell>
+                            <CTableDataCell>{item.Available_Stock}</CTableDataCell>    
+                            <CTableDataCell>{item.Alert_Stock}</CTableDataCell>                                                   
+                        </CTableRow>
+                    ))}
                   
                 </CTableBody>
             </CTable>

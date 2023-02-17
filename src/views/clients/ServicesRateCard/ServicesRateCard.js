@@ -27,9 +27,31 @@ import {
     CTableRow,
     CTabPane,
 } from '@coreui/react'
-import React, { useState } from 'react'
+import React, { useState,useCallback,useEffect } from 'react'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+
 const ServicesRateCard = () => {
     const [activeKey, setActiveKey] = useState(1)
+    const url = useSelector((el)=>el.domainOfApi)  
+    const [servicesRateCard,setServicesRateCard] = useState([])
+
+    const  getSalesCallData = useCallback(async function() {
+        try{
+        const response1 = await axios.get(`${url}/servicesratecard`)
+        setServicesRateCard(response1.data)
+        console.log(response1.data)
+
+        }catch(error) {
+                console.error(error)
+        }
+    },[])
+
+    useEffect(() => {
+        getSalesCallData()
+    },[ getSalesCallData]) 
+   
+
 
     return (
         <CRow>
@@ -125,52 +147,26 @@ const ServicesRateCard = () => {
                                             <CTableHeaderCell scope="col">
                                                 Offer
                                             </CTableHeaderCell>
-                                            {/* <CTableHeaderCell scope="col">Type of Calls</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Discussion</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col">Action</CTableHeaderCell> */}
+                                            <CTableHeaderCell scope="col">
+                                                Action
+                                            </CTableHeaderCell>
+                                          
                                         </CTableRow>
                                     </CTableHead>
                                     <CTableBody>
-                                        <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            {/* <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell> */}
-                                            {/* <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell> */}
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>2</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            {/* <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell> */}
-                                            {/* <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell> */}
-                                        </CTableRow>
-                                        <CTableRow>
-                                        <CTableDataCell>3</CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            {/* <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell></CTableDataCell> */}
-                                            {/* <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell> */}
-                                        </CTableRow>
+                                    {servicesRateCard.map((el,i)=>
+                                         <CTableRow key={i}>
+                                             <CTableDataCell>{i+1}</CTableDataCell>
+                                             <CTableDataCell>{el.Services_Name}</CTableDataCell>
+                                             <CTableDataCell>{el.No_Of_Sessions}</CTableDataCell>
+                                             <CTableDataCell>{el.Duration}</CTableDataCell>
+                                             <CTableDataCell>{el.Package}</CTableDataCell>
+                                             <CTableDataCell>{el.Price}</CTableDataCell>
+                                             <CTableDataCell>{el.Offer}</CTableDataCell>
+                                           
+                                             <CTableDataCell className='text-center'><a href={`tel`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/$}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a><a href={`https://wa.me/`} target="_black"><BsPlusCircle style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a></CTableDataCell>
+                                         </CTableRow>                                        
+                                        )}
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>

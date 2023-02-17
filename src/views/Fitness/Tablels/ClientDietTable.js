@@ -11,24 +11,29 @@ import {
     CTableRow,
   } from '@coreui/react'
 
+  import { useSelector } from 'react-redux'
+  import { MdCall, MdMail } from "react-icons/md";
+  import { BsWhatsapp } from "react-icons/bs";
+
+
+
 function ClientDietTable ({Token}){
+    const url = useSelector((el)=>el.domainOfApi) 
+
 
 const [clientDite,setClientDite] =useState([])
 
-  const headers = {
-    'Authorization': `Bearer ${Token}`
-}
 
-// MeasurmentApi Fetch Data
-  const getAllmembersData = useCallback(async ()=>{
-    const {data} = await axios.get(`https://yog-seven.vercel.app/dietDetail/all`,{headers})
+
+  const getClientDietData = useCallback(async ()=>{
+    const {data} = await axios.get(`${url}/alldietclient`)
     setClientDite(data)
   console.log(data)
    },[])
   
 useEffect(()=>{
-getAllmembersData()
-},[getAllmembersData])
+getClientDietData()
+},[getClientDietData])
 
 
 
@@ -138,16 +143,22 @@ return<CTable className='m-3 p-2' align="middle" bordered style={{ borderColor: 
     {clientDite.map((el)=>
 
     <CTableRow>                               
-      <CTableDataCell>{el['Member_ID']}</CTableDataCell>
-      <CTableDataCell>{new Date(el.DietStartDate).toLocaleDateString()}</CTableDataCell>
-      <CTableDataCell>{el.Fullname}</CTableDataCell>
-      <CTableDataCell>{el.ContactNumber}</CTableDataCell>
+      <CTableDataCell>{el._id}</CTableDataCell>
+      <CTableDataCell>{el.Start_Date}</CTableDataCell>
+      <CTableDataCell>{el.Name}</CTableDataCell>
+      <CTableDataCell>{el.Mobile_No}</CTableDataCell>
       <CTableDataCell>{el.Gender}</CTableDataCell>
       <CTableDataCell>{el.Purpose}</CTableDataCell>
-      <CTableDataCell>{new Date(el.DietEndDate).toLocaleDateString()} </CTableDataCell>
-      <CTableDataCell></CTableDataCell>
-      <CTableDataCell>{el.DietitianName }</CTableDataCell>
-      <CTableDataCell></CTableDataCell>                        
+      <CTableDataCell>{el.EndDate} </CTableDataCell>
+      <CTableDataCell>{el.Package}</CTableDataCell>
+      <CTableDataCell>{el.DietitianName}</CTableDataCell>
+      <CTableDataCell className='text-center'><a href={`tel:${el.Mobile_No}`} 
+      target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a>
+      <a href={`https://wa.me/${el.Mobile_No}`} target="_black">
+            <BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a>
+            <a href={`mailto`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' />
+            </a> </CTableDataCell>
+                    
    </CTableRow>
 
 

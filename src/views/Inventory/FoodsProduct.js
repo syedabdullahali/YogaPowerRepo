@@ -402,23 +402,7 @@ const ClothesProduct = () => {
                         </CTableDataCell>
                     </CTableRow>
 
-                   <CTableRow>
-                      <CTableDataCell>1</CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                      <CTableDataCell></CTableDataCell>
-                     
-                      
-                    </CTableRow> 
+                 
 
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                         list.username === username && list.productName.includes(search2) && list.brandName.includes(search3) && list.category.includes(search4) && list.color.includes(search5) &&

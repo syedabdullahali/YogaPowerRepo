@@ -41,7 +41,7 @@ const ServiceCall = () => {
     const [greetingCallsData,setgreeTingCallsData] = useState([])
 
 
-    const  getLiveClasses = useCallback(async function() {
+    const  getServiseCallData = useCallback(async function() {
         try{
         const response1 = await axios.get(`${url}/welcomecalls`)
         const response2 = await axios.get(`${url}/feedbackcalls`)
@@ -64,8 +64,8 @@ const ServiceCall = () => {
     },[])
 
     useEffect(() => {
-        getLiveClasses()
-    },[ getLiveClasses]) 
+        getServiseCallData()
+    },[ getServiseCallData]) 
    
 
 

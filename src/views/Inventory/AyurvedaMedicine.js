@@ -26,6 +26,7 @@ import { MdCall, MdDelete, MdEdit, MdMail } from "react-icons/md";
 const url = 'https://yog-seven.vercel.app'
 
 const ClothesProduct = () => {
+
     const [action, setAction] = useState(false)
     const [toast, setToast] = useState(false)
     const [id, setId] = useState()
@@ -428,22 +429,7 @@ const ClothesProduct = () => {
                             />
                         </CTableDataCell>
                     </CTableRow>
-                    <CTableRow>
-                       <CTableDataCell>1</CTableDataCell>
-                       <CTableDataCell></CTableDataCell>
-                       <CTableDataCell></CTableDataCell>
-                       <CTableDataCell></CTableDataCell>
-                       <CTableDataCell></CTableDataCell>
-                       <CTableDataCell></CTableDataCell>
-                       <CTableDataCell></CTableDataCell>
-                       <CTableDataCell></CTableDataCell>
-                       <CTableDataCell></CTableDataCell>
-                       <CTableDataCell></CTableDataCell>
-                       <CTableDataCell></CTableDataCell>
-                       <CTableDataCell></CTableDataCell>
-
-                    </CTableRow>     
-
+           
                     {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                         list.username === username && list.productName.includes(search2) && list.brandName.includes(search3) && list.category.includes(search4) && list.qty.includes(search5) &&
                         list.productPrice.toString().includes(search6.toString())
