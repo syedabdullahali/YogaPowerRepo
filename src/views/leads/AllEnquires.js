@@ -621,6 +621,11 @@ const AllEnquires = () => {
             setSelect(year)
         }
     }
+
+    result1.map((el)=>{
+      console.log(el.status)
+    })
+
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -698,7 +703,8 @@ const AllEnquires = () => {
                                         <CCard style={{ margin: "2px" }}>
                                             <CCardBody style={{ padding: "5px" }}>
                                                 Enquiries: {result1.filter((list) =>
-                                                    list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select) && list.status === 'all_enquiry'
+                                                    list.username === username && 
+                                                    moment(list.createdAt).format("MM-DD-YYYY").includes(select) && list.status === 'all_enquiry'
                                                 ).length}
                                             </CCardBody>
                                         </CCard>
@@ -758,7 +764,7 @@ const AllEnquires = () => {
                                         <CCard style={{ margin: "2px" }}>
                                             <CCardBody style={{ padding: "5px" }}>
                                                 Trial Scheduled: {result1.filter((list) =>
-                                                    list.username === username && list.status === 'trailScheduled'
+                                                    list.username === username && list.appointmentfor === 'Trial Session'
                                                 ).length}
                                             </CCardBody>
                                         </CCard>
@@ -1607,7 +1613,7 @@ const AllEnquires = () => {
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Call Status</CTableHeaderCell>
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Last Call</CTableHeaderCell>
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Add</CTableHeaderCell>
-                                    <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Appointment Date & Time</CTableHeaderCell>
+                                    <CTableHeaderCell style={{ position: 'sticky', top: '0px',minWidth:'100px' }} > Date/Time</CTableHeaderCell>
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Assigned by</CTableHeaderCell>
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Counseller</CTableHeaderCell>
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Action</CTableHeaderCell>
@@ -1782,12 +1788,13 @@ const AllEnquires = () => {
                                         />
                                     </CTableDataCell>
                                 </CTableRow>
+
                                 {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                                     list.username === username && moment(list.createdAt).format(dateFormat).includes(select) && moment(list.createdAt).format("DD-MM-YYYY").includes(Search1) && list.Fullname.toLowerCase().includes(Search3.toLowerCase()) && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
                                     list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
-                                ).map((item, index) => (
+                                ).map((item,index) => (
                                     <CTableRow key={index}>
-                                        <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
+                                        <CTableDataCell>{((result1.length -index) )-(paging * 10)}</CTableDataCell>
                                         <CTableDataCell>{item.EnquiryId}</CTableDataCell>
                                         <CTableDataCell className='text-center'>{moment(item.createdAt).format("DD-MM-YYYY")}</CTableDataCell>
                                         <CTableDataCell>{moment(item.createdAt, "HH:mm").format("hh:mm A")}</CTableDataCell>
@@ -1798,8 +1805,19 @@ const AllEnquires = () => {
                                         <CTableDataCell>{item.appointmentfor}</CTableDataCell>
                                         <CTableDataCell>{item.CallStatus}</CTableDataCell>
                                         <CTableDataCell>{item.Message}</CTableDataCell>
-                                        <CTableDataCell><BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => { addForm(item._id), setEdit(item._id), handleAdmission(item._id) }} /></CTableDataCell>
-                                        <CTableDataCell>{moment(item.appointmentDate).format("DD-MM-YYYY") != 'Invalid date' && moment(item.appointmentDate).format("DD-MM-YYYY")}<br />{moment(item.appointmentTime, "HH:mm").format("hh:mm A") != 'Invalid date' ? moment(item.appointmentTime, "HH:mm").format("hh:mm A") : '-'}</CTableDataCell>
+                                        <CTableDataCell><BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }}
+                                         onClick={() => { addForm(item._id), setEdit(item._id), handleAdmission(item._id) }} /></CTableDataCell>
+
+                                        <CTableDataCell>
+                                            
+                                            {moment(item.appointmentDate).format("DD-MM-YYYY")
+                                         != 'Invalid date' && moment(item.appointmentDate).format("DD-MM-YYYY")}
+                                         <br />{moment(item.appointmentTime, "HH:mm").format("hh:mm A") != 
+                                         'Invalid date' ? moment(item.appointmentTime, "HH:mm").format("hh:mm A") : '-'}
+
+
+                                         </CTableDataCell>
+
                                         <CTableDataCell>{item.StaffName}</CTableDataCell>
                                         <CTableDataCell>{item.Counseller}</CTableDataCell>
                                         <CTableDataCell className='text-center'><a href={`tel:+${item.CountryCode}${item.ContactNumber}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a><a href={`mailto: ${item.Emailaddress}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => handleFollowup(item._id)} /></CTableDataCell>

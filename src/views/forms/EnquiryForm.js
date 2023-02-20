@@ -21,15 +21,17 @@ const url2 = 'https://yog-seven.vercel.app'
 
 
 const EnquiryForm = () => {
-    const [Fullname, setFullName] = useState("");
-    const [Emailaddress, setEmailAddress] = useState("");
-    const [CountryCode, setCountryCode] = useState("");
-    const [ContactNumber, setContactNumber] = useState("");
-    const [Gander, setGander] = useState("");
-    const [DateofBirth, setDateofBirth] = useState("");
+    const [Fullname, setFullName] = useState("");  // 
+    const [Emailaddress, setEmailAddress] = useState(""); //
+
+    const [CountryCode, setCountryCode] = useState("");//
+    const [ContactNumber, setContactNumber] = useState(""); //
+    const [Gander, setGander] = useState(""); //
+
+    const [DateofBirth, setDateofBirth] = useState(""); 
     const [address, setAddress] = useState("");
-    const [Area, setArea] = useState("");
-    const [city, setCity] = useState("");
+    const [Area, setArea] = useState(""); // 
+    const [city, setCity] = useState(""); //
     const [Profession, setProfession] = useState("");
     const [StaffName, setStaffName] = useState("");
     const [CenterName, setCenterName] = useState("");
@@ -45,12 +47,23 @@ const EnquiryForm = () => {
     const [Customertype, setCustomertype] = useState("");
     const [enquirytype, setEnquirytype] = useState("");
     const [trialDate, setTrialDate] = useState("");
+    const [trialTime, setTrialTime] = useState("");
     const [appointmentDate, setappointmentDate] = useState("");
     const [appointmentTime, setappointmentTime] = useState("");
-    const [appointmentfor, setappointmentfor] = useState("");
+    const [appointmentfor, setappointmentfor] = useState("Appointment");
     const [counseller, setCounseller] = useState("");
 
+console.log(trialDate)
+
     const navigate = useNavigate()
+
+
+     const changeRoute =()=>{
+        navigate('/leads/all-enquires')
+     }
+
+
+
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
     const token = user.token;
@@ -130,7 +143,8 @@ const EnquiryForm = () => {
             Fullname, Emailaddress, CountryCode, ContactNumber, Gander, DateofBirth, address, Area, city, Profession,
             StaffName, CenterName, CallStatus, Message,
             person_Name, Relation, CountryCode2: CountryCode2, ContactNumber2: ContactNumber2,
-            EnquiryDate, ServiceName, ServiceVariation, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, Counseller: counseller, trialDate: trialDate, status: "all_enquiry",
+            EnquiryDate, ServiceName, ServiceVariation, Customertype, enquirytype, appointmentDate,
+            appointmentTime, appointmentfor: appointmentfor, Counseller: counseller,trialDate, trialDate, status: "all_enquiry",
         }
 
         const headers = {
@@ -514,18 +528,20 @@ const EnquiryForm = () => {
                                         onChange={(e) => setappointmentfor(e.target.value)}
                                         options={[
                                             "Select",
+                                            { label: "Enquiry", value: "Follow Up Time" },
                                             { label: "Appointment", value: "Appointment" },
-                                            { label: "Trial Session", value: "Trial Session" },
-                                            { label: "Join", value: "Join" },
-                                            { label: "Enquiry", value: "Enquiry" },
+                                            { label: "Trial Session", value: 'Trial Session' },
+                                            { label: "Join", value: "Admission" },
                                         ]}
                                     />
                                 </CCol>
-                                <CCol lg={6} md={6} sm={12}>
+                              
 
+                              
+                                  <CCol lg={6} md={6} sm={12}>
                                <CFormInput
                                         className="mb-1"
-                                        label='Appointment Date'
+                                        label={`${(appointmentfor ==="Select"?"Appointment" :appointmentfor)} Date`}
                                         type="date"
                                         value={appointmentDate}
                                         onChange={(e) => setappointmentDate(e.target.value)}
@@ -536,7 +552,7 @@ const EnquiryForm = () => {
                                     
                                 <CFormInput
                                         className="mb-1"
-                                        label='Appointment Time'
+                                        label={`${(appointmentfor ==="Select"?"Appointment" :appointmentfor)} Time`}
                                         type="time"
                                         id="exampleFormControlInput1"
                                         value={appointmentTime}
@@ -544,19 +560,14 @@ const EnquiryForm = () => {
 
                                     />
                                 </CCol>
-                                {appointmentfor === 'Trial Session' && (
-                                    <CCol lg={6} md={6} sm={12}>
-                                        <CFormInput
-                                            className="mb-1"
-                                            label='Trial Date'
-                                            type="date"
-                                            value={trialDate}
-                                            onChange={(e) => setTrialDate(e.target.value)}
-                                            id="exampleFormControlInput1"
-                                        />
-                                    </CCol>
-                                )}
-                                <CCol lg={6} md={6} sm={12}>
+
+                          
+                               
+
+
+
+                                <CCol lg={
+                                    6} md={6} sm={12}>
 
                                     <CFormSelect
                                         className="mb-1"
@@ -575,7 +586,10 @@ const EnquiryForm = () => {
                             </CRow>
                         </CCol>
                     </CRow>
-                    <CButton className="mt-2" onClick={() => saveEnquiry()}>Save</CButton>
+                    <CButton className="mt-2" onClick={() =>{
+                        saveEnquiry()
+                          changeRoute() 
+                     }} >Save</CButton>
                 </CForm>
             </CCardBody>
         </CCard>

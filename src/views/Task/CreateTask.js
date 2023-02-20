@@ -51,10 +51,8 @@ const CreateTask = () => {
 
 
 const  sendUpdatedCalenderData =   useCallback(async function(obj,id) {
-  console.log("sendApi", obj,id)
   try{
    const response = await axios.put(`${url}/calenders/${id}`,obj)
-   console.log(response)
    if(response.statusText==="OK")
    getCalenderData()
   }catch(error) {
@@ -64,10 +62,10 @@ const  sendUpdatedCalenderData =   useCallback(async function(obj,id) {
 
 
 
-const  postCalenderData =   useCallback(async function(obj,id) {
-  console.log("sendApi", obj,id)
+const  postCalenderData =   useCallback(async function(obj) {
+  console.log("sendApi", obj)
   try{
-   const response = await axios.put(`${url}/calenders/${id}`,obj)
+   const response = await axios.post(`${url}/calender`,obj)
    console.log(response)
    if(response.statusText==="OK")
    getCalenderData()

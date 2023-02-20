@@ -1505,7 +1505,7 @@ const TrialEnquires = () => {
                                     <CTableHeaderCell>Source</CTableHeaderCell>
                                     <CTableHeaderCell>Enquiry stage</CTableHeaderCell>
                                     <CTableHeaderCell>Call Status</CTableHeaderCell>
-                                    <CTableHeaderCell>Trial Timeing/Trial Timeing</CTableHeaderCell>
+                                    <CTableHeaderCell style={{minWidth:'100px'}}>Trial Date/Time</CTableHeaderCell>
                                     <CTableHeaderCell>Dicussion</CTableHeaderCell>
                                     <CTableHeaderCell>Add</CTableHeaderCell>
                                     <CTableHeaderCell>Assigned by</CTableHeaderCell>
