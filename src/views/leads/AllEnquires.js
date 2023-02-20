@@ -129,7 +129,6 @@ const AllEnquires = () => {
   
   
     // Import 
-  
      const HandaleImportClick = () =>{
          hiddenXLimportFileInput.current.click()
      }
@@ -137,9 +136,9 @@ const AllEnquires = () => {
       const importXlFile = event.target.files[0];
       // console.log("Import",importXlFile)
      }
-    
+
+     
     // Export 
-  
      const HandaleExportClick = () =>{
       hiddenXLExportFileInput.current.click()
      }

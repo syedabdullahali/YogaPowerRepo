@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import {
     CButton,
     CButtonGroup,
@@ -47,6 +47,33 @@ const AllEmpProfile = () => {
     const [Search8, setSearch8] = useState('')
     const [Search9, setSearch9] = useState('')
     const [Search10, setSearch10] = useState('')
+
+
+    const hiddenXLExportFileInput = useRef('')
+    const hiddenXLimportFileInput = useRef('')
+
+  
+  
+    // Import 
+  
+     const HandaleImportClick = () =>{
+         hiddenXLimportFileInput.current.click()
+     }
+     const HandaleImportChange = (event)=>{
+      const importXlFile = event.target.files[0];
+      // console.log("Import",importXlFile)
+     }
+    
+    // Export 
+  
+     const HandaleExportClick = () =>{
+      hiddenXLExportFileInput.current.click()
+     }
+     const HandaleExportChange = (event)=>{
+      const importXlFile = event.target.files[0];
+      // console.log("Export",importXlFile)
+     }
+  
 
 
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -107,6 +134,10 @@ const AllEmpProfile = () => {
         })
     }
 
+
+
+    
+
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -125,16 +156,27 @@ const AllEmpProfile = () => {
                             </CCol>
                             <CCol lg={3}></CCol>
                             <CCol lg={3} sm={12}>
-                                <CButtonGroup className='float-end'>
-                                    <CButton color="primary">
+
+                             <CButtonGroup className=' mb-2 float-end'>
+                                    <CButton onClick={HandaleImportClick}  color="primary">
                                         <CIcon icon={cilArrowCircleBottom} />
                                         {' '}Import
                                     </CButton>
-                                    <CButton color="primary">
-                                        <CIcon icon={cilArrowCircleTop} />
+                                    <CFormInput type='file'
+                                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                        ref={hiddenXLimportFileInput}
+                                        onChange={HandaleImportChange} hidden />
+                                    
+                                    <CButton   onClick={HandaleExportClick}color="primary">
+                                        <CIcon  icon={cilArrowCircleTop} />
                                         {' '}Export
                                     </CButton>
-                                </CButtonGroup>
+                                    <CFormInput type='file'
+                                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                        ref={hiddenXLExportFileInput}
+                                        onChange={HandaleExportChange} hidden />
+                            </CButtonGroup>
+
                             </CCol>
                         </CRow>
                         <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
@@ -328,7 +370,7 @@ const AllEmpProfile = () => {
                                             <CTableDataCell>{item.Department}</CTableDataCell>
                                             <CTableDataCell>{item.JobDesignation}</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
-                                            <CTableDataCell><CButton><Link to='/hr/view-staff-target'>View</Link></CButton></CTableDataCell>
+                                            <CTableDataCell><CButton ><Link className='text-white' style={{textDecoration:"none"}} to='/hr/view-staff-target'>View</Link></CButton></CTableDataCell>
                                             <CTableDataCell>{item.status ? <>
                                             <CButton className='mt-1' color='success' onClick={() => updateRec(item, false)} >Active</CButton></>
                                                  : <CButton className='mt-1' color='danger' onClick={() => updateRec(item, true)}>Inactive</CButton>}</CTableDataCell>
