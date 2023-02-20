@@ -1829,28 +1829,41 @@ const AllEnquires = () => {
 
                     </CCardBody>
 
-                    <CPagination aria-label="Page navigation example" align="center" className='mt-2'>
-                        <CPaginationItem aria-label="Previous" disabled={paging != 0 ? false : true} onClick={() => paging > 0 && setPaging(paging - 1)}>
+                    <CPagination    aria-label="Page navigation example" align="center" className='mt-2'>
+                        <CPaginationItem style={{cursor:'pointer'}}  aria-label="Previous" disabled={paging != 0 ? false : true} 
+                        onClick={() => paging > 0 && setPaging(paging - 1)}>
                             <span aria-hidden="true">&laquo;</span>
                         </CPaginationItem>
-                        <CPaginationItem active onClick={() => setPaging(0)}>{paging + 1}</CPaginationItem>
+                        <CPaginationItem style={{cursor:'pointer'}}  active onClick={()  => setPaging(0)}>{paging + 1}</CPaginationItem>
                         {result1.filter((list) =>
                             list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select) && moment(list.createdAt).format("MM-DD-YYYY").includes(Search1) && list.Fullname.toLowerCase().includes(Search3.toLowerCase()) && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
                             list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
-                        ).length > (paging + 1) * 10 && <CPaginationItem onClick={() => setPaging(paging + 1)} >{paging + 2}</CPaginationItem>}
+                        ).length > (paging + 1) * 10 && <CPaginationItem style={{cursor:'pointer'}} 
+                         onClick={() => setPaging(paging + 1)} >{paging + 2}</CPaginationItem>}
 
                         {result1.filter((list) =>
-                            list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select) && moment(list.createdAt).format("MM-DD-YYYY").includes(Search1) && list.Fullname.toLowerCase().includes(Search3.toLowerCase()) && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
-                            list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
-                        ).length > (paging + 2) * 10 && <CPaginationItem onClick={() => setPaging(paging + 2)}>{paging + 3}</CPaginationItem>}
+                            list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select)
+                             && moment(list.createdAt).format("MM-DD-YYYY").includes(Search1) && 
+                             list.Fullname.toLowerCase().includes(Search3.toLowerCase()) && 
+                             list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
+                            list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) &&
+                             list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) &&
+                              list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
+                        ).length > (paging + 2) * 10 && <CPaginationItem style={{cursor:'pointer'}}  
+                        onClick={() => setPaging(paging + 2)}>{paging + 3}</CPaginationItem>}
                         {result1.filter((list) =>
-                            list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select) && moment(list.createdAt).format("MM-DD-YYYY").includes(Search1) && list.Fullname.toLowerCase().includes(Search3.toLowerCase()) && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
-                            list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
+                            list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select)
+                             && moment(list.createdAt).format("MM-DD-YYYY").includes(Search1) &&
+                              list.Fullname.toLowerCase().includes(Search3.toLowerCase()) && 
+                              list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
+                            list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && 
+                            list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) &&
+                            list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
                         ).length > (paging + 1) * 10 ?
-                            <CPaginationItem aria-label="Next" onClick={() => setPaging(paging + 1)}>
+                            <CPaginationItem aria-label="Next" style={{cursor:'pointer'}}  onClick={() => setPaging(paging + 1)}>
                                 <span aria-hidden="true">&raquo;</span>
                             </CPaginationItem>
-                            : <CPaginationItem disabled aria-label="Next" onClick={() => setPaging(paging + 1)}>
+                            : <CPaginationItem disabled aria-label="Next"  style={{cursor:'pointer'}} onClick={() => setPaging(paging + 1)}>
                                 <span aria-hidden="true">&raquo;</span>
                             </CPaginationItem>
                         }
