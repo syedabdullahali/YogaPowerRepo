@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
 import { storage } from 'src/firebase'
 import { v4 } from 'uuid'
+import { useSelector } from 'react-redux';
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
@@ -34,6 +35,7 @@ const Recruitment = () => {
     const [comment, setComment] = useState('')
 
  
+    const url1 = useSelector((el)=>el.domainOfApi) 
 
     const navigate = useNavigate()
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -47,6 +49,7 @@ const Recruitment = () => {
         getStaff()
     }, [])
     const [leadArr, setLeadArr] = useState([]);
+    
     function getLeadSource() {
         axios.get(`${url2}/leadSourceMaster/all`, {
             headers: {
@@ -63,7 +66,7 @@ const Recruitment = () => {
     }
     const [staff, setStaff] = useState([])
     function getStaff() {
-        axios.get(`${url2}/employeeForm/all`, {
+        axios.get(`${url1}/employeeform/`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -95,17 +98,22 @@ const Recruitment = () => {
         if (imageUrl !== '' && resumeUrl !== ''  &&  Fullname !== '' && Salary !== '' &&
             Email !== ''  && pincode !== '' && state !== ''  && Gender !== '' && Address !== '') {
             let data = {
-                username: username,
+                username: username ,
                 image: imageUrl,
                 FullName: Fullname, EmailAddress: Email, ContactNumber,                
-                Gander: Gender, address: Address, Area, city, 
+                Gender: Gender, address: Address, Area, city, 
                 resume: resumeUrl, PinCode: pincode, State: state,
                 PayoutType: Source, Grade: grade, Comment: comment, 
                 JobDesignation: Designation, Department: Department, Salary: Salary,
-                status: false
+                status: false,CountryCode: 0,whatsappNumber: 0,
+                DateofBirth:"",EmployeeCategory: "",loginAccess: false,
+                Anniversary: new Date(),AdminRights: "",joiningDate:"",EmployeeID: "",AttendanceID: "",
+                AccountNo: "",IFSC: "",PANCardNumber:"",AadharNumber: 0,PANCard:"",AadharCard: "",
+                Comment: "",selected: "",status:false,OfferLetter: "",AppoinmentLetter:"",Indexion: ""
+    
             }
 
-            fetch(`${url}/employeeForm/create`, {
+            fetch(`${url1}/employeeform`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`,

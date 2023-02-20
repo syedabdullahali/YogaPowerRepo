@@ -28,12 +28,14 @@ import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
+import { useSelector } from 'react-redux'
 
-const url = 'https://yog-seven.vercel.app'
+
 const url2 = 'https://yog-seven.vercel.app'
 
 
 const AllEmpProfile = () => {
+    const url = useSelector((el)=>el.domainOfApi) 
 
     const [Search1, setSearch1] = useState('')
     const [Search2, setSearch2] = useState('')
@@ -61,11 +63,7 @@ const AllEmpProfile = () => {
 
     const [staff, setStaff] = useState([])
     function getStaff() {
-        axios.get(`${url}/employeeForm/all`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        axios.get(`${url}/employeeform`)
             .then((res) => {
                 setStaff(res.data.reverse())
             })
@@ -78,10 +76,9 @@ const AllEmpProfile = () => {
     function deleteEnquiry(id) {
 
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/employeeForm/delete/${id}`, {
+            fetch(`${url}/employeeform/${id}`, {
                 method: 'DELETE',
                 headers: {
-                    "Authorization": `Bearer ${token}`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -94,12 +91,11 @@ const AllEmpProfile = () => {
         }
     }
 
-    function updateRec(id, status) {
-        const data1 = { status: status }
-        fetch(`${url}/employeeForm/update/${id}`, {
-            method: "POST",
+    function updateRec(data, status) {
+        const data1 =  {...data,...{ status: status }}
+        fetch(`${url}/employeeform/${data._id}`, {
+            method: "PUT",
             headers: {
-                "Authorization": `Bearer ${token}`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -315,7 +311,7 @@ const AllEmpProfile = () => {
                                 </CTableRow>
                                 {staff.slice(paging * 10, paging * 10 + 10).filter((list) =>
                                     list.username === username && list.selected === 'Select' && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                                    && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
+                                    && list.Gender.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
                                     && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
                                     && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
                                 ).map((item, index) => (
@@ -326,14 +322,16 @@ const AllEmpProfile = () => {
                                             <CTableDataCell>{item.ContactNumber}</CTableDataCell>
                                             <CTableDataCell>{item.EmailAddress}</CTableDataCell>
                                             <CTableDataCell>{moment(item.DateofBirth).format("MM-DD-YYYY")}</CTableDataCell>
-                                            <CTableDataCell>{item.Gander}</CTableDataCell>
+                                            <CTableDataCell>{item.Gender}</CTableDataCell>
                                             <CTableDataCell>{centerCode}E{index + 1 + (paging * 10)}</CTableDataCell>
                                             <CTableDataCell>{item.address}</CTableDataCell>
                                             <CTableDataCell>{item.Department}</CTableDataCell>
                                             <CTableDataCell>{item.JobDesignation}</CTableDataCell>
                                             <CTableDataCell></CTableDataCell>
                                             <CTableDataCell><CButton><Link to='/hr/view-staff-target'>View</Link></CButton></CTableDataCell>
-                                            <CTableDataCell>{item.status ? <><CButton className='mt-1' color='success' onClick={() => updateRec(item._id, false)} >Active</CButton></> : <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, true)}>Inactive</CButton>}</CTableDataCell>
+                                            <CTableDataCell>{item.status ? <>
+                                            <CButton className='mt-1' color='success' onClick={() => updateRec(item, false)} >Active</CButton></>
+                                                 : <CButton className='mt-1' color='danger' onClick={() => updateRec(item, true)}>Inactive</CButton>}</CTableDataCell>
                                             <CTableDataCell className='text-center'><a href={`tel:${item.ContactNumber}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.EmailAddress}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a></CTableDataCell>
                                             <CTableDataCell className='text-center'>
                                                  <MdEdit style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} 
@@ -355,20 +353,20 @@ const AllEmpProfile = () => {
                         <CPaginationItem active onClick={() => setPaging(0)}>{paging + 1}</CPaginationItem>
                         {staff.filter((list) =>
                             list.username === username && list.selected === 'Select' && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                            && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
+                            && list.Gender.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
                             && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
                             && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
                         ).length > (paging + 1) * 10 && <CPaginationItem onClick={() => setPaging(paging + 1)} >{paging + 2}</CPaginationItem>}
 
                         {staff.filter((list) =>
                             list.username === username && list.selected === 'Select' && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                            && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
+                            && list.Gender.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
                             && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
                             && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
                         ).length > (paging + 2) * 10 && <CPaginationItem onClick={() => setPaging(paging + 2)}>{paging + 3}</CPaginationItem>}
                         {staff.filter((list) =>
                             list.username === username && list.selected === 'Select' && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                            && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
+                            && list.Gender.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
                             && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
                             && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
                         ).length > (paging + 1) * 10 ?

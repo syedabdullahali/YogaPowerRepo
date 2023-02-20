@@ -431,12 +431,7 @@ const AllBatches = () => {
                                     </CTableBody>
                                 </CTable>
                             </CTabPane>
-                            
-                           
-                           
-                         
-                           
-                          
+                                                    
                         </CTabContent>
                     </CCardBody>
                 </CCard>

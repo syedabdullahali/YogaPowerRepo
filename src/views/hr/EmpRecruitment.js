@@ -29,11 +29,9 @@ import ApplicationForm from '../forms/ApplicationForm';
 import EmployeeForm from '../forms/EmployeeForm';
 import axios from 'axios';
 import moment from 'moment';
-const url = 'https://yog-seven.vercel.app'
-const url2 = 'https://yog-seven.vercel.app'
-
 
 const EmpRecruitment = () => {
+    const url = useSelector((el)=>el.domainOfApi) 
 
     const [Search1, setSearch1] = useState('')
     const [Search2, setSearch2] = useState('')
@@ -50,36 +48,29 @@ const EmpRecruitment = () => {
     const [userdata,setUserData] = useState([])
   
     let user = JSON.parse(localStorage.getItem('user-info'))
-    console.log(user);
     const token = user.token;
     const username = user.user.username;
     const centerCode = user.user.centerCode;
     const [result1, setResult1] = useState([]);
     const [paging, setPaging] = useState(0);
-    console.log(token);
     useEffect(() => {
         getStaff()
     }, [])
 
-    console.log(user.token);
 
     const [staff, setStaff] = useState([])
 
 
     function getStaff() {
-        axios.get(`${url}/employeeForm/all`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        axios.get(`${url}/employeeform`)
             .then((res) => {
                 setStaff(res.data.reverse())
+               
             })
             .catch((error) => {
                 console.error(error)
             })
     }
-    console.log(staff);
 
     function deleteEnquiry(id) {
         if (confirm('Do you want to delete this')) {
@@ -357,9 +348,11 @@ const EmpRecruitment = () => {
                                     </CTableDataCell>
                                 </CTableRow>
                                 {staff.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                                    list.username === username && list.FullName.toLowerCase().includes(Search1.toLowerCase())
-                                     && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                                    && list.Gander.toLowerCase().includes(Search3.toLowerCase())
+
+                                   list.username === username &&
+                                   list.FullName.toLowerCase().includes(Search1.toLowerCase())&&list.EmailAddress
+                                     .toLowerCase().includes(Search2.toLowerCase())
+                                    && list?.Gender?.toLowerCase().includes(Search3.toLowerCase())
                                      && list.address.toLowerCase().includes(Search4.toLowerCase()) 
                                      && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
                                     && list.Department.toLowerCase().includes(Search6.toLowerCase()) 
@@ -367,7 +360,8 @@ const EmpRecruitment = () => {
                                      && list.Grade.toLowerCase().includes(Search8.toLowerCase())
                                     && list.Salary.toString().includes(Search9.toString()) 
                                     && list.ContactNumber.toString().includes(Search10.toString())
-                                ).map((item, index) => (
+                         
+                                  ).map((item, index) => (
                                     item.username === username && (
                                         <CTableRow key={index}>
                                             <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
@@ -376,7 +370,7 @@ const EmpRecruitment = () => {
                                             <CTableDataCell>{item.FullName}</CTableDataCell>
                                             <CTableDataCell>{item.ContactNumber}</CTableDataCell>
                                             <CTableDataCell>{item.EmailAddress}</CTableDataCell>
-                                            <CTableDataCell>{item.Gander}</CTableDataCell>
+                                            <CTableDataCell>{item.Gender}</CTableDataCell>
                                             <CTableDataCell>{item.address}</CTableDataCell>
                                             <CTableDataCell>{item.PayoutType}</CTableDataCell>
                                             <CTableDataCell>{item.Department}</CTableDataCell>
@@ -415,21 +409,21 @@ const EmpRecruitment = () => {
                         </CPaginationItem>
                         <CPaginationItem active onClick={() => setPaging(0)}>{paging + 1}</CPaginationItem>
                         {staff.filter((list) =>
-                            list.username === username && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                            && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
+                            list.username === username && list?.FullName?.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
+                            && list?.Gender?.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
                             && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
                             && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
                         ).length > (paging + 1) * 10 && <CPaginationItem onClick={() => setPaging(paging + 1)} >{paging + 2}</CPaginationItem>}
 
                         {staff.filter((list) =>
                             list.username === username && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                            && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
+                            && list?.Gender?.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
                             && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
                             && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
                         ).length > (paging + 2) * 10 && <CPaginationItem onClick={() => setPaging(paging + 2)}>{paging + 3}</CPaginationItem>}
                         {staff.filter((list) =>
                             list.username === username && list.FullName.toLowerCase().includes(Search1.toLowerCase()) && list.EmailAddress.toLowerCase().includes(Search2.toLowerCase())
-                            && list.Gander.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
+                            && list?.Gender?.toLowerCase().includes(Search3.toLowerCase()) && list.address.toLowerCase().includes(Search4.toLowerCase()) && list.PayoutType.toLowerCase().includes(Search5.toLowerCase())
                             && list.Department.toLowerCase().includes(Search6.toLowerCase()) && list.JobDesignation.toLowerCase().includes(Search7.toLowerCase()) && list.Grade.toLowerCase().includes(Search8.toLowerCase())
                             && list.Salary.toString().includes(Search9.toString()) && list.ContactNumber.toString().includes(Search10.toString())
                         ).length > (paging + 1) * 10 ?

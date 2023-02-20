@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import {
     CButton,
     CButtonGroup,
@@ -122,6 +122,34 @@ const AllEnquires = () => {
     const [updateItem, setUpdateItem] = useState([]);
 
     const [pros, setPros] = useState([])
+
+
+    const hiddenXLimportFileInput = useRef('')
+    const hiddenXLExportFileInput = useRef('')
+  
+  
+    // Import 
+  
+     const HandaleImportClick = () =>{
+         hiddenXLimportFileInput.current.click()
+     }
+     const HandaleImportChange = (event)=>{
+      const importXlFile = event.target.files[0];
+      // console.log("Import",importXlFile)
+     }
+    
+    // Export 
+  
+     const HandaleExportClick = () =>{
+      hiddenXLExportFileInput.current.click()
+     }
+     const HandaleExportChange = (event)=>{
+      const importXlFile = event.target.files[0];
+      // console.log("Export",importXlFile)
+     }
+  
+
+
     useEffect(() => {
         getEnquiry()
         getStaff()
@@ -608,6 +636,7 @@ const AllEnquires = () => {
     }
     console.log(ogList, result1)
     const [dateFormat, setDateFormat] = useState('DD-MM-YYYY')
+
     const dateFilter = (e) => {
         const { value } = e.target
         if (value === day) {
@@ -625,6 +654,7 @@ const AllEnquires = () => {
     result1.map((el)=>{
       console.log(el.status)
     })
+    console.log(select,"select")
 
     return (
         <CRow>
@@ -682,14 +712,23 @@ const AllEnquires = () => {
                             </CCol>
                             <CCol lg={6} sm={6} md={6}>
                                 <CButtonGroup className=' mb-2 float-end'>
-                                    <CButton color="primary">
+                                    <CButton onClick={HandaleImportClick}  color="primary">
                                         <CIcon icon={cilArrowCircleBottom} />
                                         {' '}Import
                                     </CButton>
-                                    <CButton color="primary">
-                                        <CIcon icon={cilArrowCircleTop} />
+                                    <CFormInput type='file'
+                                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                        ref={hiddenXLimportFileInput}
+                                        onChange={HandaleImportChange} hidden />
+                                    
+                                    <CButton   onClick={HandaleExportClick}color="primary">
+                                        <CIcon  icon={cilArrowCircleTop} />
                                         {' '}Export
                                     </CButton>
+                                    <CFormInput type='file'
+                                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                        ref={hiddenXLExportFileInput}
+                                        onChange={HandaleExportChange} hidden />
                                 </CButtonGroup>
                             </CCol>
                         </CRow>
@@ -1790,8 +1829,13 @@ const AllEnquires = () => {
                                 </CTableRow>
 
                                 {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                                    list.username === username && moment(list.createdAt).format(dateFormat).includes(select) && moment(list.createdAt).format("DD-MM-YYYY").includes(Search1) && list.Fullname.toLowerCase().includes(Search3.toLowerCase()) && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
-                                    list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
+                                    list.username === username &&
+                                     moment(list.createdAt).format(dateFormat).includes(select) 
+                                     && moment(list.createdAt).format("DD-MM-YYYY").includes(Search1)
+                                      && list.Fullname.toLowerCase().includes(Search3.toLowerCase())
+                                       && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
+                                    list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && 
+                                    list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
                                 ).map((item,index) => (
                                     <CTableRow key={index}>
                                         <CTableDataCell>{((result1.length -index) )-(paging * 10)}</CTableDataCell>

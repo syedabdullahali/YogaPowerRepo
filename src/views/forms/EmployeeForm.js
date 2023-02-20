@@ -7,9 +7,12 @@ import React, { useEffect, useRef, useState } from 'react'
 // import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
 import { storage } from 'src/firebase'
 import { v4 } from 'uuid'   
-
+import { useSelector } from 'react-redux'
+import { Filler } from 'chart.js'
 
 const EmployeeForm = ({showEmpRecrumentFormFun,token,userdata,data}) => {
+    const url = useSelector((el)=>el.domainOfApi) 
+
 
     const [dateOfBirth, setDateOfBirth] = useState('')
     const [Anniversary, setAnniversary] = useState('')
@@ -41,48 +44,47 @@ const toggaleModel=(e)=>{
         showEmpRecrumentFormFun()
 }
 }
+
+const CloseButton = ()=>{
+    showEmpRecrumentFormFun()
+}
  
-const url = 'https://yog-seven.vercel.app'
+
 
 
 const getEmployeeDataFun =  ()=>{
 
+
     if (dateOfBirth !== '' && Anniversary !== ''  &&  joiningDate !== '' && empCategory !== '' && EmployeeID !== '' 
      && AttendanceID !== '' && accountNo !== ''  && IFSCCode !== '' && aadharNo !== '' &&PANNo !== '') {
-            let Step2data = {
-                DateOfBirth:dateOfBirth,
-                Anniversary: Anniversary,
-                joiningDate: joiningDate,                
-                EmployeeCategory: empCategory, 
-                EmployeeID: EmployeeID,
-                AttendanceID: AttendanceID, 
-                AccountNo: accountNo,
-                IFSC: IFSCCode,
-                AdharNumber:aadharNo,
-                PANCardNumber:PANNo
+            let Step2data = {    
+                "DateofBirth": dateOfBirth,
+                "EmployeeCategory":  empCategory,
+                "Anniversary":  Anniversary,
+                "joiningDate": joiningDate,
+                "EmployeeID": EmployeeID,
+                "AttendanceID": AttendanceID,
+                "AccountNo":  accountNo,
+                "IFSC": IFSCCode,
+                "AadharNumber": aadharNo,
+                "PANCard": PANNo,
+                "selected": "Select",
+                "status":true
             }
-
- const FilterData = data.filter((el)=>el._id === userdata._id)
- const dataWithSelectedData =  data.map((el)=>{
-        if(el._id === userdata._id){
-            Step2data.selected = "Select"
-            return {...FilterData[0],...Step2data}
-        }
-        return el
-})    
- 
-console.log(dataWithSelectedData)
+            
+    console.log(userdata._id)      
+const obj ={...userdata,...Step2data}
+console.log(obj)  
 
 
 const sendDatawithSlectedData = async ()=>{
-fetch(`${url}/employeeForm/update/${userdata._id}`, {
-        method: "POST",
+fetch(`${url}/employeeform/${userdata._id}`, {
+        method: "PUT",
         headers: {
-            "Authorization": `Bearer ${token}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(dataWithSelectedData)
+        body: JSON.stringify(obj)
     }).then((res)=>{
      console.log(res)
     })
@@ -105,12 +107,13 @@ return<CCard style={formRenderParentObjeact} className='Parent' onClick={toggale
         Step-2
       </CCard> 
       
-      
-      <CButton color="danger" className='Parent' onClick={toggaleModel}>Close</CButton>
+      <CCol className='mb-1 d-flex justify-content-end p-2'>
+      <CButton color="danger"  onClick={CloseButton}>Close</CButton>
+      </CCol>
       {validation || <p style={{color:'red',fontSize:'17px',margin:'0 25px',}}>Please Fill All Details </p>}
 
 
-      <CCard>r
+      <CCard>
 
                           
 

@@ -16,11 +16,15 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CountryList } from "src/components/CountryList";
+import { useSelector } from 'react-redux'
+
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
 
 const EnquiryForm = () => {
+    const url1 = useSelector((el)=>el.domainOfApi) 
+
     const [Fullname, setFullName] = useState("");  // 
     const [Emailaddress, setEmailAddress] = useState(""); //
 
@@ -52,6 +56,7 @@ const EnquiryForm = () => {
     const [appointmentTime, setappointmentTime] = useState("");
     const [appointmentfor, setappointmentfor] = useState("Appointment");
     const [counseller, setCounseller] = useState("");
+    
 
 console.log(trialDate)
 
@@ -121,12 +126,13 @@ console.log(trialDate)
     }
     const [staff, setStaff] = useState([])
     function getStaff() {
-        axios.get(`${url2}/employeeForm/all`, {
+        axios.get(`${url1}/employeeform`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
             .then((res) => {
+                
                 setStaff(res.data)
             })
             .catch((error) => {
