@@ -569,7 +569,7 @@ const FollowupScheduling = () => {
 
                         </div>
                         <div className='d-flex justify-content-between mb-2'>
-                            <div className='d-flex justify-content-between float-end'>
+                            {/* <div className='d-flex justify-content-between float-end'>
                                 <CButtonGroup style={{ fontSize: '11px' }} role="group" aria-label="Basic example">
                                     <CButton style={{ fontSize: '11px' }} color="dark" variant="outline">Scheduled: 0</CButton>
                                     <CButton style={{ fontSize: '11px' }} color="dark" variant="outline">Attented: 0</CButton>
@@ -577,7 +577,7 @@ const FollowupScheduling = () => {
                                     <CButton style={{ fontSize: '11px' }} color="dark" variant="outline">Prospect: 0</CButton>
                                     <CButton style={{ fontSize: '11px' }} color="dark" variant="outline">Missed: 0</CButton>
                                 </CButtonGroup>
-                            </div>
+                            </div> */}
                         </div>
                         <CModal size='lg' style={{ border: '2px solid #0B5345' }} visible={callReport} color='' onClose={() => setCallReport(false)} >
                             <CModalHeader  >
@@ -1271,10 +1271,19 @@ const FollowupScheduling = () => {
                                         />
                                     </CTableDataCell>
                                 </CTableRow>
-                                {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                                    list.username === username && list.status === 'prospect' && list.CallDate.toString().includes(Search1) && list.Name.toLowerCase().includes(Search3.toLowerCase()) && list.Email.toLowerCase().includes(Search4.toLowerCase())
-                                    && list.Contact.toString().includes(Search5.toString()) && list.ServiceName.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus !== 'Cold'
-                                ).map((item, index) => (
+                                {result1.slice(paging * 10, paging * 10 + 10)
+                                .filter((list) =>
+                                    list.username === username && list.status === 'prospect'
+                                     && list?.CallDate?.toString()?.includes(Search1) 
+                                     && list?.Name?.toLowerCase()?.includes(Search3.toLowerCase())
+                                      && list?.Email?.toLowerCase()?.includes(Search4.toLowerCase())
+                                    && list?.Contact?.toString()?.includes(Search5.toString()) &&
+                                    list?.ServiceName?.toLowerCase()?.includes(Search6.toLowerCase())
+
+                                     && list?.CallStatus !== 'Cold'
+                                //     list
+                                )
+                                .map((item, index) => (
                                     <CTableRow key={index}>
                                         <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
                                         <CTableDataCell>{centerCode}Q{index + 10 + (paging * 10)}</CTableDataCell>
@@ -1296,14 +1305,20 @@ const FollowupScheduling = () => {
                             </CTableBody>
                         </CTable>
                     </CCardBody>
-                    <CPagination aria-label="Page navigation example" align="center" className='mt-2'>
+                    {/* <CPagination aria-label="Page navigation example" align="center" className='mt-2'>
                         <CPaginationItem aria-label="Previous" disabled={paging != 0 ? false : true} onClick={() => paging > 0 && setPaging(paging - 1)}>
                             <span aria-hidden="true">&laquo;</span>
                         </CPaginationItem>
                         <CPaginationItem active onClick={() => setPaging(0)}>{paging + 1}</CPaginationItem>
                         {result1.filter((list) =>
-                            list.username === username && list.status === 'prospect' && list.CallDate.toString().includes(Search1) && list.Name.toLowerCase().includes(Search3.toLowerCase()) && list.Email.toLowerCase().includes(Search4.toLowerCase())
-                            && list.Contact.toString().includes(Search5.toString()) && list.ServiceName.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search7.toLowerCase())
+                            list.username === username &&
+                             list.status === 'prospect' && 
+                             list?.CallDate?.toString().includes(Search1)
+                            && list?.Name?.toLowerCase().includes(Search3.toLowerCase())
+                             && list?.Email?.toLowerCase().includes(Search4.toLowerCase())
+                            && list?.Contact?.toString().includes(Search5.toString()) 
+                            && list?.ServiceName?.toLowerCase().includes(Search6.toLowerCase())
+                             && list?.CallStatus?.toLowerCase().includes(Search7.toLowerCase())
                         ).length > (paging + 1) * 10 && <CPaginationItem onClick={() => setPaging(paging + 1)} >{paging + 2}</CPaginationItem>}
 
                         {result1.filter((list) =>
@@ -1321,7 +1336,7 @@ const FollowupScheduling = () => {
                                 <span aria-hidden="true">&raquo;</span>
                             </CPaginationItem>
                         }
-                    </CPagination>
+                    </CPagination> */}
                 </CCard>
             </CCol>
         </CRow>

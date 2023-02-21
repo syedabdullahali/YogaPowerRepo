@@ -469,7 +469,7 @@ const FollowupCallReport = () => {
 
                         </div>
                         <div className='d-flex justify-content-between mb-2'>
-                            <div className='d-flex justify-content-between float-end'>
+                            {/* <div className='d-flex justify-content-between float-end'>
                                 <CButtonGroup style={{ fontSize: '11px' }} role="group" aria-label="Basic example">
                                     <CButton style={{ fontSize: '11px' }} color="dark" variant="outline">Scheduled: 0</CButton>
                                     <CButton style={{ fontSize: '11px' }} color="dark" variant="outline">Attented: 0</CButton>
@@ -477,7 +477,7 @@ const FollowupCallReport = () => {
                                     <CButton style={{ fontSize: '11px' }} color="dark" variant="outline">Prospect: 0</CButton>
                                     <CButton style={{ fontSize: '11px' }} color="dark" variant="outline">Missed: 0</CButton>
                                 </CButtonGroup>
-                            </div>
+                            </div> */}
                         </div>
                         <CModal size='lg' style={{ border: '2px solid #0B5345' }} visible={callReport} color='' onClose={() => setCallReport(false)} >
                             <CModalHeader  >

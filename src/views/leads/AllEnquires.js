@@ -662,6 +662,8 @@ const AllEnquires = () => {
     })
     console.log(select,"select")
 
+    console.log(select)
+
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -679,6 +681,7 @@ const AllEnquires = () => {
                                         value={select}
                                         onChange={(e) => dateFilter(e)}
                                     >
+                                        <option value=''>All Year</option>
                                         <option value={day}>Today</option>
                                         <option value={month}>Last Month</option>
                                         <option value={year}>This Year</option>
@@ -1847,15 +1850,22 @@ const AllEnquires = () => {
                                     </CTableDataCell>
                                 </CTableRow>
 
-                                {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                                    list.username === username &&
-                                     moment(list.createdAt).format(dateFormat).includes(select) 
-                                     && moment(list.createdAt).format("DD-MM-YYYY").includes(Search1)
-                                      && list.Fullname.toLowerCase().includes(Search3.toLowerCase())
+                                {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>{
+                                                console.log(new Date(list.createdAt).getFullYear())
+                                                console.log(new Date(list.createdAt).getMonth())
+                                                console.log(new Date(list.createdAt).getDay())
+
+
+
+                                  return   list.username === username &&
+                                    //  moment(list.createdAt).format(dateFormat).includes(select) 
+                                    //  && moment(list.createdAt).format("DD-MM-YYYY").includes(Search1)
+
+                                       list.Fullname.toLowerCase().includes(Search3.toLowerCase())
                                        && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
                                     list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && 
                                     list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
-                                ).map((item,index) => (
+}).map((item,index) => (
                                     <CTableRow key={index}>
                                         <CTableDataCell>{((result1.length -index) )-(paging * 10)}</CTableDataCell>
                                         <CTableDataCell>{item.EnquiryId}</CTableDataCell>

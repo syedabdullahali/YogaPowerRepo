@@ -16,7 +16,7 @@ const url2 = 'https://yog-seven.vercel.app'
 const Recruitment = () => {
     const [error, setError] = useState('')
     const [step, setStep] = useState(1)
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState('')
     const [imageUrl, setImageUrl] = useState('')
     const [Fullname, setFullname] = useState('')
     const [age, setAge] = useState('')
@@ -49,7 +49,7 @@ const Recruitment = () => {
   
 
  
-    const url1 = useSelector((el)=>el.domainOfApi) 
+    const url = useSelector((el)=>el.domainOfApi) 
 
     const navigate = useNavigate()
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -109,14 +109,18 @@ const Recruitment = () => {
     }
 
     const saveRecruitment = (e) => {
-        if (image !== '' && resume !== ''  &&  Fullname !== '' && Salary !== '' &&
+        if (image !== null && resume !== null  &&  Fullname !== '' && Salary !== '' &&
             Email !== ''  && pincode !== '' && state !== ''  && Gender !== '' && Address !== '') {
+
+                console.log(imageUrl,'img')
+                console.log(resumeUrl,'img')
+
             let data = {
                 username: username ,
                 image: imageUrl,
                 FullName: Fullname, EmailAddress: Email, ContactNumber,                
                 Gender: Gender, address: Address, Area, city, 
-                resume: resumeUrl, PinCode: pincode, State: state,
+                resume:  resumeUrl, PinCode: pincode, State: state,
                 PayoutType: Source, Grade: grade, Comment: comment, 
                 JobDesignation: Designation, Department: Department, Salary: Salary,
                 status: false,CountryCode: 0,whatsappNumber: 0,
@@ -126,6 +130,7 @@ const Recruitment = () => {
                 Comment: "",selected: "",status:false,OfferLetter: "",AppoinmentLetter:"",Indexion: ""
     
             }
+            console.log(data)
 
             fetch(`${url1}/employeeform`, {
                 method: "POST",
@@ -138,7 +143,7 @@ const Recruitment = () => {
             }).then((resp) => {
                 resp.json().then(() => {
                     alert("successfully submitted")
-                    e.preventDefault();
+                    e?.preventDefault();
                     console.log("refresh prevented");
                     navigate('/forms/staff-form')
                 })
@@ -149,6 +154,7 @@ const Recruitment = () => {
     }
 
 
+
     const imgRef = useRef(null)
 
     const HandaleImageClick = () =>{
@@ -157,6 +163,7 @@ const Recruitment = () => {
 
     const handleImage = (e) => {
         setImage(e.target.files[0])
+        console.log(e.target.result,"new image")
         const file = e.target.files[0]
         if (!file.type.startsWith('image/')) return;
 
@@ -178,6 +185,7 @@ const Recruitment = () => {
         // uploadBytes(imageRef, image).then(() => {
         //     alert('image uploaded')
         // })
+        
     }
     console.log(imageUrl);
     console.log(resumeUrl);
@@ -186,8 +194,8 @@ const Recruitment = () => {
     const UploadResume = () => {
         if (resume == null) return ;
         const resumeRef = ref(storage, `resume/${resume.name + v4()}`)
+        console.log(resumeRef.fullPath,"hello")
         setResumeUrl(resumeRef.fullPath)
-
     }
 
     const HandaleResumeInputClick = () =>{
@@ -196,7 +204,9 @@ const Recruitment = () => {
      }
      const HandaleResumeInputChange = (event)=>{
       const importresume = event.target.files[0];
+    
       setResume(importresume)
+      UploadResume()
       UploadResume()
      }
 

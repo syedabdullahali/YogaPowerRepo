@@ -74,10 +74,9 @@ const EmpRecruitment = () => {
 
     function deleteEnquiry(id) {
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/employeeForm/delete/${id}`, {
+            fetch(`${url}/employeeform/${id}`, {
                 method: 'DELETE',
                 headers: {
-                    "Authorization": `Bearer ${token}`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -122,7 +121,7 @@ const EmpRecruitment = () => {
     return (
         <CRow>
             <CCol lg={12} sm={12}>
-                {showEditFrom[0]&&<ApplicationForm  shouldEdit ={true} data={showEditFrom[1]} editEnquiry={editEnquiry} />}
+                {showEditFrom[0]&&<ApplicationForm getStaff={getStaff}  shouldEdit ={true} data={showEditFrom[1]} editEnquiry={editEnquiry} />}
                 { showEmpRecrument[0]&& <EmployeeForm token={token} userdata={userdata} data={staff} showEmpRecrumentFormFun={showEmpRecrumentFormFun}/>}
                 <CCard className="mb-3 border-success">
                     <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>

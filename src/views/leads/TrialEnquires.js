@@ -1506,8 +1506,10 @@ const TrialEnquires = () => {
                                     <CTableHeaderCell>Enquiry stage</CTableHeaderCell>
                                     <CTableHeaderCell>Call Status</CTableHeaderCell>
                                     <CTableHeaderCell style={{minWidth:'100px'}}>Trial Date/Time</CTableHeaderCell>
+
+                                    <CTableHeaderCell>Trial Status</CTableHeaderCell>
                                     <CTableHeaderCell>Dicussion</CTableHeaderCell>
-                                    <CTableHeaderCell>Add</CTableHeaderCell>
+
                                     <CTableHeaderCell>Assigned by</CTableHeaderCell>
                                     <CTableHeaderCell>Counseller</CTableHeaderCell>
                                     <CTableHeaderCell>Action</CTableHeaderCell>
@@ -1699,9 +1701,15 @@ const TrialEnquires = () => {
                                             <CTableDataCell>{item.appointmentfor}</CTableDataCell>
                                             <CTableDataCell>{item.CallStatus}</CTableDataCell>
                                             <CTableDataCell>{moment(item.appointmentDate).format("DD-MM-YYYY") != 'Invalid date' && moment(item.appointmentDate).format("DD-MM-YYYY")}<br />{moment(item.appointmentTime, "HH:mm").format("hh:mm A") != 'Invalid date' && moment(item.appointmentTime, "HH:mm").format("hh:mm A")}</CTableDataCell>
+                                            <CTableDataCell>
+                                            <CButton color='success'>Done</CButton>  
+                                            <CButton color='warning' >Pending...</CButton>    
+  
+                                            </CTableDataCell>
                                             <CTableDataCell>{item.Message}</CTableDataCell>
-                                            <CTableDataCell><BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => { addForm(item._id), setEdit(item._id), setDelete(item._id), handleAdmission(item._id) }} /></CTableDataCell>
-                                            <CTableDataCell>{item.StaffName}</CTableDataCell>
+                                           
+                                          
+ <CTableDataCell>{item.StaffName}</CTableDataCell>
                                             <CTableDataCell>{item.Counseller}</CTableDataCell>
                                             <CTableDataCell className='text-center'><a href={`tel:+${item.CountryCode}${item.ContactNumber}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a><a href={`mailto: ${item.Emailaddress}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => handleFollowup(item._id)} /></CTableDataCell>
                                             <CTableDataCell className='text-center'><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} onClick={() => handleEnquiry(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>

@@ -2,10 +2,15 @@ import { CButton, CCard, CCardBody, CCardHeader, CCardTitle, CCol,
     CForm, CFormInput, CFormSelect, CFormSwitch, CFormTextarea, CImage, CRow} from '@coreui/react'
 import React from 'react'
 import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
-import { useState } from 'react'
+import { storage } from 'src/firebase'
+import { useSelector } from 'react-redux';
 
-const ApplicationForm = ({shouldEdit,data,editEnquiry}) => {
+import { useState,useEffect,useRef } from 'react'
 
+const ApplicationForm = ({shouldEdit,data,editEnquiry,getStaff}) => {
+    console.log(data)
+
+const imgRef = useRef(null)
 const [fullName,setFullName] = useState('')
 const [contactNumber,setContactNumber] = useState('')
 const [emailAddress,setEmailAddress] = useState('')
@@ -19,6 +24,8 @@ const [expSalary,setExpSalary] = useState('')
 const [empCategory,setEmpCategory] = useState('')
 const [payoutType,setPayouttype] = useState('')
 const [Grade,setGrade] = useState('')
+const [imageUrl,setImageUrl] = useState('')
+const [comment,setComment]  = useState('')
 
  var bodyElement = document.body
     const  formRenderParentObjeact = {  
@@ -34,15 +41,10 @@ const [Grade,setGrade] = useState('')
             display:'flex',
             justifyContent:'center',   
     }
-    
 
     const renderOverTheCurrentPage = shouldEdit ?formRenderParentObjeact:{display:'none'}
 
-    const resumeChangeHandler = (e)=>{
-        
-        setResume(e.target.files[0])
-        
-    }
+
      
     const toggaleModel=(e)=>{
         console.log(e)
@@ -51,7 +53,73 @@ const [Grade,setGrade] = useState('')
     }
 }
 
+
+
+
+
+
+const AllowEditHandler = ()=>{
+    setFullName(data.FullName)
+    setContactNumber(data.ContactNumber)
+    setEmailAddress(data.EmailAddress)
+    setGender(data.Gender)
+    setAddress(data.address)
+    setAge(data.Age)
+    setJobDesignation(data.JobDesignation)
+    setDepartment(data.Department)
+    setExpSalary(data.Salary )
+    setEmpCategory(data.EmployeeCategory)
+    setPayouttype(data.PayoutType)
+    setGrade(data.Grade)
+    setResume(data.resume)
+    setImageUrl(data.image)
+    setComment(data.Comment)
+    imgRef.current.src = data.image
+}
+
+useEffect(()=>{
+AllowEditHandler(data)
+},[data])
     
+
+let obj = {
+FullName:fullName, 
+ContactNumber:contactNumber,
+EmailAddress:emailAddress,  
+Gender:Gender,
+address:address,
+// Age:age,
+JobDesignation:jobDesignation,
+department:department,
+Salary:expSalary,
+EmployeeCategory:empCategory,
+PayoutType:payoutType,
+Grade:Grade,
+image:imageUrl,
+Comment:comment,
+resume:resume
+}
+const url = useSelector((el)=>el.domainOfApi) 
+
+
+function Edit() {
+        fetch(`${url}/employeeform/${data._id}`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify({...data,...obj})
+        }).then((result) => {
+            result.json().then((resp) => {
+                console.log(resp,'ejhf')
+                navigate('/forms/staff-form')
+            })
+        })
+    getStaff()    
+}
+
+
 
     
 
@@ -65,7 +133,7 @@ const [Grade,setGrade] = useState('')
                 <CForm>
                     <CRow>
                         <CCol lg={3} sm={6} className='mt-2 mb-1' >
-                            <CImage className="mb-1" style={{ borderRadius: "100px" }} width={'200px'} src={ProfileIcon} />
+                           <CImage ref={imgRef} className="mb-1" style={{ borderRadius: "100px" }} width={'200px'} src={ProfileIcon} />
                         </CCol>
                         <CCol lg={8} sm={6} className='mt-5'>
                             <CRow>
@@ -256,11 +324,13 @@ const [Grade,setGrade] = useState('')
                                 id="exampleFormControlInput1"
                                 label="Comments"
                                 placeholder="Add Comments"
+                                value={comment}
+                                onChange={(e)=>setComment(e.target.value)}
                             />
                         </CCol>
                     </CRow>
 
-                    <CButton className="mt-2">Save</CButton>
+                    <CButton className="mt-2" onClick={Edit}>Save</CButton>
                 </CForm>
             </CCardBody>
         </CCard>
