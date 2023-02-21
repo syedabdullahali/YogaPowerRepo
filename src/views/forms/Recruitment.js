@@ -109,7 +109,7 @@ const Recruitment = () => {
     }
 
     const saveRecruitment = (e) => {
-        if (imageUrl !== '' && resumeUrl !== ''  &&  Fullname !== '' && Salary !== '' &&
+        if (image !== '' && resume !== ''  &&  Fullname !== '' && Salary !== '' &&
             Email !== ''  && pincode !== '' && state !== ''  && Gender !== '' && Address !== '') {
             let data = {
                 username: username ,
@@ -153,7 +153,6 @@ const Recruitment = () => {
 
     const HandaleImageClick = () =>{
         imageInput.current.click()
-        UploadImage()
        }
 
     const handleImage = (e) => {
@@ -167,6 +166,7 @@ const Recruitment = () => {
         }
         reader.readAsDataURL(file)
         console.log(file, image);
+        UploadImage()
     }
 
     const UploadImage = () => {
@@ -180,24 +180,24 @@ const Recruitment = () => {
         // })
     }
     console.log(imageUrl);
+    console.log(resumeUrl);
+
 
     const UploadResume = () => {
         if (resume == null) return ;
         const resumeRef = ref(storage, `resume/${resume.name + v4()}`)
         setResumeUrl(resumeRef.fullPath)
-        // uploadBytes(resumeRef, resume).then(() => {
-        //     // alert('Resume uploaded')
-        // })
+
     }
 
     const HandaleResumeInputClick = () =>{
         resumeInput.current.click()
-        UploadResume()
+     
      }
      const HandaleResumeInputChange = (event)=>{
       const importresume = event.target.files[0];
       setResume(importresume)
-
+      UploadResume()
      }
 
  
