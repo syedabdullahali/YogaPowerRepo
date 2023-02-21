@@ -1072,7 +1072,7 @@ const MemberForm = () => {
                             <CModalBody>
                                 <CRow>
                                     <CCol lg={12} className='text-center'><CImage src={logo} width="100px" height='100px' /></CCol>
-                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International</h5></CCol>
+                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International </h5></CCol>
 
                                 </CRow>
                                 <CRow className="mt-2">

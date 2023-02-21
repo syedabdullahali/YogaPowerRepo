@@ -1277,7 +1277,8 @@ const AllEnquires = () => {
                                 <CButton color="secondary" onClick={() => setVisible(false)}>
                                     Close
                                 </CButton>
-                                <CButton type='submit' color="primary" onClick={() => saveProspect()}>{enquiryStage === 'Join' ? 'Open Admission Form' : 'Save Prospect'}</CButton>
+                                <CButton type='submit' color="primary" onClick={() => saveProspect()}>{
+                                enquiryStage === 'Join' ? 'Open Admission Form' : 'Save Prospect'}</CButton>
                             </CModalFooter>
                         </CModal>
 
@@ -1893,7 +1894,20 @@ const AllEnquires = () => {
 
                                         <CTableDataCell>{item.StaffName}</CTableDataCell>
                                         <CTableDataCell>{item.Counseller}</CTableDataCell>
-                                        <CTableDataCell className='text-center'><a href={`tel:+${item.CountryCode}${item.ContactNumber}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a><a href={`mailto: ${item.Emailaddress}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => handleFollowup(item._id)} /></CTableDataCell>
+                                        <CTableDataCell className='text-center'>
+                                            <a href={`tel:+${item.CountryCode}${item.ContactNumber}`} target="_black">
+                                                <MdCall style={{ cursor: 'pointer', markerStart: '10px' }} o
+                                                nClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' />
+                                                </a><a href={`https://wa.me/${item.ContactNumber}`} target="_black">
+                                                    <BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }}
+                                                     onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a>
+                                                     <a href={`mailto: ${item.Emailaddress}`} target="_black">
+                                                         <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }}
+                                                          onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a> 
+                                                          <BsPlusCircle id={item._id} style={{ cursor: 'pointer',
+                                                           markerStart: '10px', marginLeft: "4px" }} onClick={() => handleFollowup(item._id)} />
+                                                           </CTableDataCell>
+                                        
                                         <CTableDataCell className='text-center'>{
                                         dashboardAccess === 'admin' &&
                                          <MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} 

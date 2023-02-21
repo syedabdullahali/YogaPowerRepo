@@ -34,7 +34,7 @@ const PackageMaster = () => {
     const [packages, setPackages] = useState("")
     const [status, setStatus] = useState(false);
     const [duration, setDuration] = useState("");
-    const [subService,setService] = useState('')
+    const [subService,setService] = useState([])
 
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
@@ -172,7 +172,7 @@ const PackageMaster = () => {
                                     <option>Select Service</option>
                                     {[...subService.filter((el)=>{
                                         return el.username === username                                  
-                                    })].map((el)=><option>{el.selected_service}</option>)
+                                    })].map((el,i)=><option key={i}>{el.selected_service}</option>)
                                     }
                                     </CFormSelect>
                      </CCol>
@@ -188,7 +188,7 @@ const PackageMaster = () => {
                                    <option>Select Variation</option>
                                     {[...subService.filter((el)=>{
                                         return el.username === username                                   
-                                    })].map((el)=><option>{el.sub_Service_Name}</option>)
+                                    })].map((el,i)=><option key={i}>{el.sub_Service_Name}</option>)
                                     }                                                         
                                     </CFormSelect>
                                   
@@ -209,9 +209,7 @@ const PackageMaster = () => {
                                     />
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12} >
-                                    
-                                 
-                                       
+                                                                           
                                         <CFormSelect id="month"
                                             label='Duration'
                                             value={duration}

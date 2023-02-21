@@ -20,7 +20,7 @@ function ClientInvoice({Fullname,ContactNumber,AttendanceID,Email,datetime,ser5}
 return <CCard className="p-4">
 <CRow>
 <CCol lg={12} className='text-center'><CImage src={logo} width="100px" height='100px' /></CCol>
-<CCol lg={12} className='text-center mt-2'><h5>Yog Power International</h5></CCol>
+<CCol lg={12} className='text-center mt-2'><h5>Yog Power International    </h5></CCol>
 <CCol className='mt-2' style={{ marginLeft: '10px' }}>
     <h6>Client Name: {Fullname}</h6>
     <div>Client Number: {ContactNumber}</div>

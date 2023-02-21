@@ -42,7 +42,7 @@ const ViewInvoice = ({ add, clickfun, invoiceId, clientId }) => {
         <CRow>
 
           <CCol lg={12} className='text-center'><CImage src={logo} width="80px" height='80px' /></CCol>
-          <CCol lg={12} className='text-center mt-2'><h5>Yog Power International</h5></CCol>
+          <CCol lg={12} className='text-center mt-2'><h5>Yog Power International  </h5></CCol>
 
           <CCol className='mt-2' style={{ marginLeft: '10px' }}>
             <h6>Client Name: {clientArr.Fullname}</h6>

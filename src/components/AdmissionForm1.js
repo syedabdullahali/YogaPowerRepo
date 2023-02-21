@@ -117,6 +117,8 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
     const [idealWeight, setidealWeight] = useState('')
     const [suggestion, setsuggestion] = useState('')
     const [comments, setcomments] = useState('')
+    const [subService,setService] = useState([])
+
 
     var currentdate = new Date();
     var datetime = currentdate.getDay() + "/" + currentdate.getMonth()
@@ -170,6 +172,9 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
         setAssignStaff(data.StaffName)
 
     }
+
+
+    
 
     function getPackage() {
         axios.get(`${url}/Package/all`, {
@@ -231,12 +236,14 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
             }
         })
             .then((res) => {
-                setResult1(res.data)
+                setService(res.data)
+                console.log(res.data)
             })
             .catch((error) => {
                 console.error(error)
             })
     }
+    
     function getMem() {
         axios.get(`${url}/memberForm/all`, {
             headers: {
@@ -755,14 +762,12 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                         onChange={(e) => setserviceName(e.target.value)}
                                                         label="Service Name"
                                                     >
-                                                        <option>Select Service</option>
-                                                        {result1.map((item, index) => (
-                                                            item.username === username && (
-
-                                                                <option key={index}>{item.selected_service}</option>
-
-                                                            )
-                                                        ))}</CFormSelect>
+                                                        <option>Select Name</option>
+                                            {result1.filter((el)=>{
+                                        return el.username === username                                  
+                                    }).map((el,i)=><option key={i}>{el.selected_service}</option>)
+                                    
+                                    }</CFormSelect>
                                                 </CCol>
                                                 <CCol xs={6}>
                                                     <CFormSelect
@@ -772,14 +777,10 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                         onChange={(e) => setserviceVariation(e.target.value)}
                                                         label="Service Variation"
                                                     >
-                                                        <option>Select Service</option>
-                                                        {result1.filter((list) => list.selected_service === serviceName).map((item, index) => (
-                                                            item.username === username && (
-
-                                                                <option key={index}>{item.sub_Service_Name}</option>
-
-                                                            )
-                                                        ))}</CFormSelect>
+                                                        <option>Service Variation</option>
+                                                        {result1.filter((el)=>{
+                                        return el.username === username                                   
+                                    }).map((el,i)=><option key={i}>{el.sub_Service_Name}</option>)}</CFormSelect>
                                                 </CCol>
 
                                                 <CCol xs={6}>
@@ -1129,7 +1130,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                             <CModalBody>
                                 <CRow>
                                     <CCol lg={12} className='text-center'><CImage src={logo} width="100px" height='100px' /></CCol>
-                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International</h5></CCol>
+                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International 44</h5></CCol>
 
                                 </CRow>
                                 <CRow className="mt-2">
@@ -1187,11 +1188,10 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                             label='Service Name'
                                                         >
                                                             <option>Select Service</option>
-                                                            {result1.filter((list) =>
-                                                                list.username === username &&
-                                                                list.status === true).map((item, index) => (
-                                                                    <option key={index} value={item.sub_Service_Name}> {item.selected_service} {item.sub_Service_Name}</option>
-                                                                ))}
+                                                            {[...subService.filter((el)=>{
+                                        return el.username === username                                  
+                                    })].map((el,i)=><option key={i}>{el.selected_service}</option>)
+                                    }
                                                         </CFormSelect>
                                                     </CCol>
                                                     <CCol>
@@ -1203,11 +1203,12 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                             onChange={(e) => setSer6(e.target.value)}
                                                         >
                                                             <option>Select Package</option>
-                                                            {packageArr.filter((list) =>
-                                                                list.username === username &&
-                                                                list.status === true).map((item, index) => (
-                                                                    <option key={index} value={item.Package_Name}>{item.Package_Name}</option>
-                                                                ))}
+                                                            {[...subService.filter((el)=>{
+                                        return el.username === username                                   
+                                    })].map((el,i)=><option key={i}>{el.sub_Service_Name}</option>)
+                                    }   //packages  //duration
+
+
                                                         </CFormSelect>
                                                     </CCol>
                                                 </CRow>
@@ -1258,11 +1259,33 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                     onChange={(e) => setSer2(e.target.value)}
                                                 >
                                                     <option>Select Duration</option>
-                                                    {result1.filter((list) =>
-                                                        list.username === username &&
-                                                        list.status === true && list.duration !== '' && list.sub_Service_Name === ser1).map((item, index) => (
-                                                            <option key={index} value={item.duration}>{item.duration}</option>
-                                                        ))}
+                                                    <option value="">Select</option>
+                                            <option value=' 1 Week'>1 Week</option>
+                                            <option value=" 2 Week">2 Week</option>
+                                            <option value=" 3 Week">3 Week</option>
+                                            <option value=" 4 Week">4 Week</option>
+                                            <option value=" 5 Week">5 Week</option>
+                                            <option value=" 6 Week">6 Week</option>
+                                            <option value="1 Month">1 Month</option>
+                                            <option value="2 Month">2 Month</option>
+                                            <option value="3 Month">3 Month</option>
+                                            <option value="4 Month">4 Month</option>
+                                            <option value="5 Month">5 Month</option>
+                                            <option value="6 Month">6 Month</option>
+                                            <option value="7 Month">7 Month</option>
+                                            <option value="8 Month">8 Month</option>
+                                            <option value="9 Month">9 Month</option>
+                                            <option value="10 Month">10 Month</option>
+                                            <option value="11 Month">11 Month</option>
+                                            <option value="12 Month">12 Month</option>
+                                            <option value="13 Month">13 Month</option>
+                                            <option value="14 Month">14 Month</option>
+                                            <option value="15 Month">15 Month</option>
+                                            <option value="1 Year">1 Year</option>
+                                            <option value="2 Year">2 Year</option>
+                                            <option value="3 Year">3 Year</option>
+                                            <option value="4 Year">4 Year</option>
+                                            <option value="5 Year">5 Year</option>
                                                 </CFormSelect>
 
 
