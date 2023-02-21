@@ -34,6 +34,7 @@ const PackageMaster = () => {
     const [packages, setPackages] = useState("")
     const [status, setStatus] = useState(false);
     const [duration, setDuration] = useState("");
+    const [subService,setService] = useState('')
 
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
@@ -43,7 +44,23 @@ const PackageMaster = () => {
     const [result, setResult] = useState([]);
     useEffect(() => {
         getPackage()
+        getSubService()
     }, []);
+
+    function getSubService() {
+        axios.get(`${url}/subservice/all`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                setService(res.data)
+                console.log(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
 
     function getPackage() {
         axios.get(`${url}/Package/all`, {
@@ -139,7 +156,47 @@ const PackageMaster = () => {
                     </div>
                     {action &&
                         <div>
-                            <CRow className='mt-3'>
+                      <CRow className='mt-3'>
+                      <CCol lg={6} md={6} sm={12}>
+
+                                  
+                                    <CFormSelect
+                                        className="mb-1"
+                                        type="text"
+                                        id="exampleFormControlInput1"
+                                        label="Service"
+                                        placeholder="Enter Package Name"
+                                       
+                                    >
+                                    
+                                    <option>Select Service</option>
+                                    {[...subService.filter((el)=>{
+                                        return el.username === username                                  
+                                    })].map((el)=><option>{el.selected_service}</option>)
+                                    }
+                                    </CFormSelect>
+                     </CCol>
+                        <CCol lg={6} md={6} sm={12}>
+                               <CFormSelect
+                                        className="mb-1"
+                                        type="text"
+                                        id="exampleFormControlInput1"
+                                        label="Variation"
+                                        placeholder="Enter Package Name"
+                                       
+                                    >
+                                   <option>Select Variation</option>
+                                    {[...subService.filter((el)=>{
+                                        return el.username === username                                   
+                                    })].map((el)=><option>{el.sub_Service_Name}</option>)
+                                    }                                                         
+                                    </CFormSelect>
+                                  
+                     </CCol>
+
+                      </CRow>
+
+                            <CRow className='mt'>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
                                         className="mb-1"
@@ -151,49 +208,12 @@ const PackageMaster = () => {
                                         placeholder="Enter Package Name"
                                     />
                                 </CCol>
-                                <CCol lg={6} md={6} sm={12}>
-                                    <CFormInput
-                                        className="mb-1"
-                                        type="number"
-                                        id="exampleFormControlInput1"
-                                        label="Fees"
-                                        value={fees}
-                                        onChange={(e) => setFees(e.target.value)}
-                                        placeholder="Enter Fees"
-                                    />
-                                </CCol>
-                                <CCol lg={6} md={6} sm={12} className="mt-2">
-                                    <CInputGroup>
-                                        <CInputGroupText
-                                            component="label"
-                                            htmlFor="inputGroupSelect01"
-                                        >
-                                            Package
-                                        </CInputGroupText>
-                                        <CFormSelect id="day"
-                                            value={packages}
-                                            onChange={(e) => setPackages(e.target.value)}>
-                                            <option value="">Select</option>
-                                            <option value='1 Day in week'>1 Day per week</option>
-                                            <option value='2 Day in week'>2 Day per week</option>
-                                            <option value='3 Day in week'>3 Day per week</option>
-                                            <option value='4 Day in week'>4 Day per week</option>
-                                            <option value='5 Day in week'>5 Day per week</option>
-                                            <option value='6 Day in week'>6 Day per week</option>
-                                            <option value='7 Day in week'>7 Day per week</option>
-                                        </CFormSelect>
-                                    </CInputGroup>
-                                </CCol>
-                                <CCol lg={6} md={6} sm={12} className="mt-2">
-                                    <CInputGroup
-                                    >
-                                        <CInputGroupText
-                                            component="label"
-                                            htmlFor="inputGroupSelect01"
-                                        >
-                                            Duration
-                                        </CInputGroupText>
+                                <CCol lg={6} md={6} sm={12} >
+                                    
+                                 
+                                       
                                         <CFormSelect id="month"
+                                            label='Duration'
                                             value={duration}
                                             onChange={(e) => setDuration(e.target.value)}>
                                             <option value="">Select</option>
@@ -224,7 +244,18 @@ const PackageMaster = () => {
                                             <option value="4 Year">4 Year</option>
                                             <option value="5 Year">5 Year</option>
                                         </CFormSelect>
-                                    </CInputGroup>
+                                </CCol>
+                                <CCol lg={6} md={6} sm={12} className="mt-2">
+                                                       
+                                <CFormInput
+                                        className="mb-1"
+                                        type="number"
+                                        id="exampleFormControlInput1"
+                                        label="Fees"
+                                        value={fees}
+                                        onChange={(e) => setFees(e.target.value)}
+                                        placeholder="Enter Fees"
+                                    />
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12} className='mt-1'>
                                     <CFormSwitch size="xl" label="Status" style={{ defaultChecked: 'false' }}
@@ -240,6 +271,8 @@ const PackageMaster = () => {
                     <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                         <CTableRow >
                             <CTableHeaderCell>Sr.No</CTableHeaderCell>
+                            <CTableHeaderCell>Service</CTableHeaderCell>
+                            <CTableHeaderCell>Variation</CTableHeaderCell>
                             <CTableHeaderCell>Package Name</CTableHeaderCell>
                             <CTableHeaderCell>Duration</CTableHeaderCell>
                             <CTableHeaderCell>Fees</CTableHeaderCell>
@@ -252,6 +285,8 @@ const PackageMaster = () => {
                             item.username === username && (
                                 <CTableRow key={index}>
                                     <CTableDataCell>{index + 1}</CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell></CTableDataCell>
                                     <CTableDataCell>{item.Package_Name}</CTableDataCell>
                                     <CTableDataCell>{item.packages} {item.duration}</CTableDataCell>
                                     <CTableDataCell>{item.fees}</CTableDataCell>

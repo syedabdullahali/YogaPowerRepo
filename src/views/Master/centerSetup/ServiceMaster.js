@@ -146,6 +146,7 @@ const ServiceMaster = () => {
                     {action1 &&
                         <div>
                             <CRow className='mt-3'>
+                                
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
                                         className="mb-1"
@@ -169,31 +170,12 @@ const ServiceMaster = () => {
                                     />
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12} className="mt-2">
-                                    <CInputGroup>
-                                        <CInputGroupText
-                                            component="label"
-                                            htmlFor="inputGroupSelect01"
-                                        >
-                                            Package
-                                        </CInputGroupText>
-                                        <CFormSelect id="day"
-                                            value={packages}
-                                            onChange={(e) => setPackages(e.target.value)}>
-                                            <option value="">Select</option>
-                                            <option value='1 Day in week'>1 Day per week</option>
-                                            <option value='2 Day in week'>2 Day per week</option>
-                                            <option value='3 Day in week'>3 Day per week</option>
-                                            <option value='4 Day in week'>4 Day per week</option>
-                                            <option value='5 Day in week'>5 Day per week</option>
-                                            <option value='6 Day in week'>6 Day per week</option>
-                                            <option value='7 Day in week'>7 Day per week</option>
-                                        </CFormSelect>
-                                    </CInputGroup>
+                                    
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12} className="mt-2">
                                     <CInputGroup
                                     >
-                                        <CInputGroupText
+                                        {/* <CInputGroupText
                                             component="label"
                                             htmlFor="inputGroupSelect01"
                                         >
@@ -229,7 +211,7 @@ const ServiceMaster = () => {
                                             <option value="3 Year">3 Year</option>
                                             <option value="4 Year">4 Year</option>
                                             <option value="5 Year">5 Year</option>
-                                        </CFormSelect>
+                                        </CFormSelect> */}
                                     </CInputGroup>
                                 </CCol>
                                 <CCol className="mt-2" lg={6} md={6} sm={12}>
@@ -275,8 +257,8 @@ const ServiceMaster = () => {
                             <CTableHeaderCell>Sr.No</CTableHeaderCell>
                             <CTableHeaderCell>Service Name</CTableHeaderCell>
                             <CTableHeaderCell>Service Variation</CTableHeaderCell>
-                            <CTableHeaderCell>Package</CTableHeaderCell>
-                            <CTableHeaderCell>Duration</CTableHeaderCell>
+                            {/* <CTableHeaderCell>Package</CTableHeaderCell>
+                            <CTableHeaderCell>Duration</CTableHeaderCell> */}
                             <CTableHeaderCell>Fees</CTableHeaderCell>
                             <CTableHeaderCell>Status</CTableHeaderCell>
                             <CTableHeaderCell>Action</CTableHeaderCell>
@@ -289,8 +271,8 @@ const ServiceMaster = () => {
                                     <CTableDataCell>{index + 1}</CTableDataCell>
                                     <CTableDataCell>{item.selected_service}</CTableDataCell>
                                     <CTableDataCell className="text-center">{item.sub_Service_Name ? item.sub_Service_Name : '-'}</CTableDataCell>
-                                    <CTableDataCell>{item.packages}</CTableDataCell>
-                                    <CTableDataCell>{item.duration}</CTableDataCell>
+                                    {/* <CTableDataCell>{item.packages}</CTableDataCell>
+                                    <CTableDataCell>{item.duration}</CTableDataCell> */}
                                     <CTableDataCell>{item.fees}</CTableDataCell>
                                     <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} id={item._id} value={item.status} checked={item.status} onChange={() => updateStatus2(item._id, !item.status)} /></CTableDataCell>
                                     <CTableDataCell> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteSubService(item._id)} size='20px' /> </CTableDataCell>

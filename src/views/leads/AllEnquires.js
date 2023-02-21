@@ -1853,7 +1853,7 @@ const AllEnquires = () => {
                                 {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>{
                                                 console.log(new Date(list.createdAt).getFullYear())
                                                 console.log(new Date(list.createdAt).getMonth())
-                                                console.log(new Date(list.createdAt).getDay())
+                                                console.log(new Date(list.createdAt).getMonth())
 
 
 

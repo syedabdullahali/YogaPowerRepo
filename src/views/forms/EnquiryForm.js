@@ -476,10 +476,10 @@ console.log(trialDate)
                                         aria-label="Select Service Name"
                                         value={ServiceVariation}
                                         onChange={(e) => setServiceVariation(e.target.value)}
-                                        label="Service Variation"
+                                        label="Service Package"
 
                                     >
-                                        <option>Select Variation</option>
+                                        <option>Service Package</option>
                                         {result.filter((list) =>
                                             list.selected_service === ServiceName
                                         ).map((item, index) => (
