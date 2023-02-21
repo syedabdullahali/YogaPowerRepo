@@ -7,6 +7,9 @@ import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
 import { storage } from 'src/firebase'
 import { v4 } from 'uuid'
 import { useSelector } from 'react-redux';
+import { cilArrowCircleBottom, cilArrowCircleTop, cilInfo } from '@coreui/icons'
+import CIcon from '@coreui/icons-react'
+
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
@@ -33,6 +36,17 @@ const Recruitment = () => {
     const [Source, setSource] = useState('')
     const [grade, setgrade] = useState('')
     const [comment, setComment] = useState('')
+
+    const resumeInput = useRef('')
+    const imageInput = useRef('')
+  
+  
+    
+     
+    // Export 
+    
+     
+  
 
  
     const url1 = useSelector((el)=>el.domainOfApi) 
@@ -136,6 +150,12 @@ const Recruitment = () => {
 
 
     const imgRef = useRef(null)
+
+    const HandaleImageClick = () =>{
+        imageInput.current.click()
+        UploadImage()
+       }
+
     const handleImage = (e) => {
         setImage(e.target.files[0])
         const file = e.target.files[0]
@@ -150,26 +170,35 @@ const Recruitment = () => {
     }
 
     const UploadImage = () => {
-        if (image == null) return setError('Please Choose Profile Image ');
+        if (image == null) return ;
         const imageRef = ref(storage, `images/${image.name + v4()}`)
-        console.log(imageRef.fullPath);
+        // console.log(imageRef.fullPath);
         setImageUrl(imageRef.fullPath)
 
-        uploadBytes(imageRef, image).then(() => {
-            alert('image uploaded')
-        })
+        // uploadBytes(imageRef, image).then(() => {
+        //     alert('image uploaded')
+        // })
     }
     console.log(imageUrl);
 
     const UploadResume = () => {
-        if (resume == null) return setError('Please choose File ');
+        if (resume == null) return ;
         const resumeRef = ref(storage, `resume/${resume.name + v4()}`)
-        console.log(resumeRef.fullPath);
         setResumeUrl(resumeRef.fullPath)
-        uploadBytes(resumeRef, resume).then(() => {
-            alert('Resume uploaded')
-        })
+        // uploadBytes(resumeRef, resume).then(() => {
+        //     // alert('Resume uploaded')
+        // })
     }
+
+    const HandaleResumeInputClick = () =>{
+        resumeInput.current.click()
+        UploadResume()
+     }
+     const HandaleResumeInputChange = (event)=>{
+      const importresume = event.target.files[0];
+      setResume(importresume)
+
+     }
 
  
 
@@ -192,7 +221,7 @@ const Recruitment = () => {
                     </CCardHeader>
                     <CCardBody>
                         <CForm>
-                            <label style={{ color: 'red' }}>{error}</label>
+                            
                             <CRow>
                                 <CCol lg={3} sm={6} className='mt-2 mb-1' >
                                     <CImage ref={imgRef} className="mb-1" style={{ borderRadius: "100px" }} width={'200px'} src={ProfileIcon} />
@@ -203,8 +232,10 @@ const Recruitment = () => {
                                         type="file"
                                         onChange={handleImage}
                                         accept="image/*"
+                                        ref={imageInput}
+                                        hidden
                                     />
-                                    <CButton onClick={UploadImage} >Upload Image</CButton>
+                                    <CButton onClick={HandaleImageClick} > <CIcon icon={cilArrowCircleBottom} />Upload Image</CButton>
 
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
@@ -444,16 +475,21 @@ const Recruitment = () => {
                                         className="mb-1"
                                         type="file"
                                         accept='pdf/*'
-                                        onChange={(e) => setResume(e.target.files[0])}
+                                        ref={resumeInput}
                                         id="exampleFormControlInput1"
-                                        label="Upload Resume"
-                                        placeholder="Enter Upload Resume"
+                                        onChange={HandaleResumeInputChange}
+                                        hidden
                                     />
 
-                                    <CButton onClick={UploadResume}>Upload Resume</CButton>
+
+                                    <CButton className='mt-2' onClick={HandaleResumeInputClick}>  <CIcon icon={cilArrowCircleBottom} />Upload Resume</CButton>
+                                    <label style={{ color: 'red' }} className='ms-5'>{error}</label>
+                                  
                                 </CCol>
+                                
                             </CRow>
-                            <CButton className="mt-2" onClick={() => {
+                           
+                            <CButton className="mt-4" onClick={() => {
                                 saveRecruitment()
                             }}>Save</CButton>
                            

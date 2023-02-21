@@ -136,7 +136,7 @@ const EmpRecruitment = () => {
                             <CCol lg={4} sm={6} className='mb-2' >
                                 <CButtonGroup className='float-end'>
                                     <CButton color="primary">
-                                        <CIcon icon={cilArrowCircleBottom} />
+                                         <CIcon icon={cilArrowCircleBottom} />
                                         {' '}Import
                                     </CButton>
                                     <CButton color="primary">
