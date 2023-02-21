@@ -34,6 +34,7 @@ import axios from 'axios'
 import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md'
 import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs'
 import moment from 'moment/moment'
+import { useSelector } from 'react-redux'
 import AdmissionForm1 from 'src/components/AdmissionForm1'
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
@@ -44,6 +45,11 @@ const AllEnquires = () => {
     var day = currentdate.getDate() + '-' + (currentdate.getMonth() + 1) + '-' + currentdate.getFullYear();
     var month = currentdate.getMonth() + '-' + currentdate.getFullYear();
     var year = currentdate.getFullYear();
+
+    const url1 = useSelector((el)=>el.domainOfApi) 
+
+
+    
 
     const [select, setSelect] = useState('')
     const [followForm, setFollowForm] = useState()
@@ -181,7 +187,7 @@ const AllEnquires = () => {
     }
     const [staff, setStaff] = useState([])
     function getStaff() {
-        axios.get(`${url2}/employeeForm/all`, {
+        axios.get(`${url1}/employeeform`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -1271,6 +1277,11 @@ const AllEnquires = () => {
                             </CModalFooter>
                         </CModal>
 
+
+
+
+
+
                         <CModal size="xl" scrollable alignment="center" visible={visible1} onClose={() => setVisible1(false)}>
                             <CModalHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
                                 <CModalTitle>Enquiry Form</CModalTitle>
@@ -1400,14 +1411,16 @@ const AllEnquires = () => {
                                                         label="Staff Name"
                                                         value={StaffName}
                                                         onChange={(e) => setStaffName(e.target.value)}
-                                                        options={[
-                                                            "Select Staff Name",
-                                                            { label: "prabha", value: "prabha" },
-                                                            { label: "sejal", value: "sejal" },
-                                                            { label: "sonali", value: "sonali" },
-                                                            { label: "None", value: "None" },
-                                                        ]}
-                                                    />
+                                                        >
+                                                        
+                                        <option>Select Staff Name</option>
+                                        {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
+                                            item.username === username && (
+                                                <option key={index}>{item.FullName}</option>
+                                            )
+                                        ))}
+                                    </CFormSelect>
+
                                                 </CCol>
                                                 <CCol lg={6} md={6} sm={12}>
                                                     <CFormSelect
@@ -1614,12 +1627,12 @@ const AllEnquires = () => {
                                                         onChange={(e) => setCounseller(e.target.value)}
                                                         label='Counseller'
                                                     >
-                                                        <option>Select Counseller</option>
-                                                        {staff.filter((list) => list.username === username && list.Department.toLowerCase() === 'sales' && list.selected === 'Select').map((item, index) => (
-                                                            item.username === username && (
-                                                                <option key={index}>{item.FullName}</option>
-                                                            )
-                                                        ))}</CFormSelect>
+                                                         <option>Select Staff Name</option>
+                                        {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
+                                            item.username === username && (
+                                                <option key={index}>{item.FullName}</option>
+                                            )
+                                        ))}</CFormSelect>
                                                 </CCol>
                                             </CRow>
                                         </CCol>
@@ -1636,6 +1649,12 @@ const AllEnquires = () => {
                                 <CButton type='submit' color="primary" onClick={() => saveEnquiry()}>Update changes</CButton>
                             </CModalFooter>
                         </CModal>
+
+
+
+
+
+
                         <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} scrollable hover responsive>
                             <CTableHead style={{ position: 'sticky', backgroundColor: "#0B5345", color: "white", top: '0px' }} >
                                 <CTableRow style={{ position: 'sticky', top: '0px' }}>
@@ -1864,7 +1883,12 @@ const AllEnquires = () => {
                                         <CTableDataCell>{item.StaffName}</CTableDataCell>
                                         <CTableDataCell>{item.Counseller}</CTableDataCell>
                                         <CTableDataCell className='text-center'><a href={`tel:+${item.CountryCode}${item.ContactNumber}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a><a href={`mailto: ${item.Emailaddress}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => handleFollowup(item._id)} /></CTableDataCell>
-                                        <CTableDataCell className='text-center'>{dashboardAccess === 'admin' && <MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} onClick={() => handleEnquiry(item._id)} size='20px' />} <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
+                                        <CTableDataCell className='text-center'>{
+                                        dashboardAccess === 'admin' &&
+                                         <MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} 
+                                         onClick={() => handleEnquiry(item._id)} size='20px' />}
+                                          <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} 
+                                          onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
                                     </CTableRow>
                                 ))}
                             </CTableBody>

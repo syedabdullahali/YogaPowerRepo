@@ -95,7 +95,7 @@ console.log(trialDate)
                 console.error(error)
             })
 
-        axios.get(`${url}/enquiryForm/all`, {
+        axios.get(`${url1}/enquiryform`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -583,7 +583,7 @@ console.log(trialDate)
                                         label='Counseller'
                                     >
                                         <option>Select Counseller</option>
-                                        {staff.filter((list) => list.username === username && list.Department.toLowerCase() === 'sales' && list.selected === 'Select').map((item, index) => (
+                                        {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
                                             item.username === username && (
                                                 <option key={index}>{item.FullName}</option>
                                             )
