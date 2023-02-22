@@ -172,11 +172,12 @@ const Appointment = () => {
                                             />
 
 
-                                            {active && <CCard style={{ maxheight: '200px', width: '95%', position: 'absolute', minHeight: 'auto' }} >
+                                            {active && [...Enquiry.filter((el) => el.Fullname).filter((el) => el.Fullname.includes(clientName))][0]
+                                             && <CCard style={{ maxheight: '200px', width: '95%', position: 'absolute', minHeight: 'auto' }} >
 
                                                 {[...[...Enquiry.filter((el) => el.Fullname)].filter((el) => el.Fullname.includes(clientName)).map((el) => {
 
-                                                    return <div className='p-2 text-center' style={{ borderBottom: '1px solid gray' }}
+                                                    return <div className='p-2 text-center' style={{ borderBottom: '1px solid #c0c0c0' }}
                                                         onClick={selectedOption} id={el._id} >{el.Fullname}</div >
                                                 })]}
 
@@ -211,10 +212,11 @@ const Appointment = () => {
                                                 
 
                                             </CFormInput>
-                                         {active2 &&      <CCard  style={ { maxheight: '200px', width: '95%', position: 'absolute', minHeight: 'auto' }} >
-
+                                         {active2 &&[...optionAppointmentTyep.filter((el) => el.includes(appointmentType))][0] &&  
+                                             <CCard   style={ {overflowY:'scroll', maxHeight: '200px', height:'auto', 
+                                              position: 'absolute', minHeight: 'auto' }} >
                                                     {[...optionAppointmentTyep.filter((el) => el.includes(appointmentType)).map((el) => {
-                                                        return <div className='p-2 text-center' style={{ borderBottom: '1px solid gray' }}
+                                                        return <div className='p-2 text-center' style={{ borderBottom: '1px solid #c0c0c0' }}
                                                             onClick={selectedOption2}  >{el}</div >
                                                     })]}
                                                 </CCard>}
