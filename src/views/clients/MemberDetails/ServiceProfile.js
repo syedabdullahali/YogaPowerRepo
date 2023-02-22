@@ -6,8 +6,8 @@ const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
 const ServiceProfile = ({ id }) => {
-    console.log(id)
-    const [result, setResult] = useState()
+    console.log(id ,"service profile")
+    const [result, setResult] = useState([])
     const [active,setActive] = useState(false)
 
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -25,21 +25,33 @@ const ServiceProfile = ({ id }) => {
             'Authorization': `Bearer ${token}`,
             'My-Custom-Header': 'foobar'
         };
-  const data = axios.get(`${url}/invoice/${id}`, { headers })
+  const data = axios.get(`${url}/invoice/all`, { headers })
 
+
+ const data2 = axios.get(`${url}/memberForm/${id}`, {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }   
+})
   
+
+
+
 data.then((resp)=>{
-    console.log(resp.data)
+    console.log(resp.data,"hfuiwehfhwfhyrwgf")
+    setResult(resp.data)    
 });
             
-        data.then((resp) => {
-                setResult(resp.data.filter((list) => list.MemberId === id))
-                // console.log(resp.data.filter((list) => list.MemberId === id))
-            })
-            .catch((error) => {
-                // console.error(error)
-            })
+      
+data2.then((resp) => {
+    console.log(resp.data,"data2 2")
+    setResult(resp.data)              
+    })
+    .catch((error) => {
+        // console.error(error)
+    })
 
+console.log(result.filter((el)=>el.MemberId),id,"hello world");
 
     }
     return (
@@ -58,7 +70,7 @@ data.then((resp)=>{
             </CCol>
              
             <CCol xs={3} lg={3} sm={3}>
-                      <p >Member Id: {result?.centerName}</p>
+                      <p >Member Id:- {result?._id}</p>
                       <p>Attendance ID : {result?.AttendanceID}</p>
                       <p>Packeges : </p>
                       <p>Total Loyalty Points</p>
@@ -67,7 +79,7 @@ data.then((resp)=>{
             </CCol>
 
             <CCol xs={3} lg={3} sm={3}>
-                     <p>Membership status</p>
+                     <p>Membership status :{result?.status}</p>
                      <p>Start From</p>
                      <p>Packeges Amount</p>
                      <p>Referrals (0)</p>
@@ -160,7 +172,7 @@ data.then((resp)=>{
                         </CCol>
                         <CCol>
                             <b>Service Name</b> :<br/>
-                             Yoga {result?.ServiceName}
+                              {result?.serviceName}
                         </CCol>
                         <CCol>
                             <b>Duration:</b><br/> {result?.PackageName}

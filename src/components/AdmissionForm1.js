@@ -44,14 +44,18 @@ import { storage } from "src/firebase";
 import logo from 'src/assets/images/avatars/icon.png'
 import { v4 } from "uuid";
 import { useReactToPrint } from 'react-to-print'
+import { useSelector } from 'react-redux'
+
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
 const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
+    console.log(add, clickfun, ids, deleteId ,"ijuihuu")
+    const url1 = useSelector((el)=>el.domainOfApi) 
 
     const adId = JSON.parse(localStorage.getItem('adId'))
     console.log(adId);
-    console.log(ids);
+    console.log(ids,"ids");
     const componentRef = useRef()
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
@@ -216,7 +220,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
 
     const [staff, setStaff] = useState([])
     function getStaff() {
-        axios.get(`${url2}/employeeForm/all`, {
+        axios.get(`${url1}/employeeform`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -763,9 +767,9 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                         label="Service Name"
                                                     >
                                                         <option>Select Name</option>
-                                            {result1.filter((el)=>{
+                                                        {[...subService.filter((el)=>{
                                         return el.username === username                                  
-                                    }).map((el,i)=><option key={i}>{el.selected_service}</option>)
+                                    })].map((el,i)=><option key={i}>{el.selected_service}</option>)
                                     
                                     }</CFormSelect>
                                                 </CCol>
@@ -778,9 +782,11 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                         label="Service Variation"
                                                     >
                                                         <option>Service Variation</option>
-                                                        {result1.filter((el)=>{
+                                                            {[...subService.filter((el)=>{
                                         return el.username === username                                   
-                                    }).map((el,i)=><option key={i}>{el.sub_Service_Name}</option>)}</CFormSelect>
+                                    })].map((el,i)=><option key={i}>{el.sub_Service_Name}</option>)
+                                    }</CFormSelect> 
+                                    
                                                 </CCol>
 
                                                 <CCol xs={6}>
@@ -830,7 +836,8 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                         label="Assign Staff"
                                                     >
                                                         <option>Select Assign Staff</option>
-                                                        {staff.filter((list) => list.username === username && list.Department === 'Sales').map((item, index) => (
+                                                        {staff.filter((list) => list.username === username &&
+                                                         list.selected === 'Select').map((item, index) => (
                                                             <option key={index}>{item.FullName}</option>
                                                         ))}
                                                     </CFormSelect>
@@ -841,15 +848,15 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                         aria-label="Select Member Manager"
                                                         value={MemberManager}
                                                         onChange={(e) => setMemberManager(e.target.value)}
-                                                        label="Member Manager"
-                                                        options={[
-                                                            "Select Member Manager",
-                                                            { label: "prabha", value: "prabha" },
-                                                            { label: "sejal", value: "sejal" },
-                                                            { label: "sonali", value: "sonali" },
-                                                            { label: "None", value: "None" },
-                                                        ]}
-                                                    />
+                                                        label="Counselor"                                                     
+                                                        
+                                                    >
+                                                         <option>Select Counselor</option>
+                                                        {staff.filter((list) => list.username === username &&
+                                                         list.selected === 'Select').map((item, index) => (
+                                                            <option key={index}>{item.FullName}</option>
+                                                        ))}
+                                                    </CFormSelect>
                                                 </CCol>
                                                 <CCol xs={6}>
                                                     <CFormSelect
@@ -1130,7 +1137,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                             <CModalBody>
                                 <CRow>
                                     <CCol lg={12} className='text-center'><CImage src={logo} width="100px" height='100px' /></CCol>
-                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International 44</h5></CCol>
+                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International </h5></CCol>
 
                                 </CRow>
                                 <CRow className="mt-2">
@@ -1206,7 +1213,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                             {[...subService.filter((el)=>{
                                         return el.username === username                                   
                                     })].map((el,i)=><option key={i}>{el.sub_Service_Name}</option>)
-                                    }   //packages  //duration
+                                    }   
 
 
                                                         </CFormSelect>
@@ -1258,8 +1265,8 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                     value={ser2}
                                                     onChange={(e) => setSer2(e.target.value)}
                                                 >
-                                                    <option>Select Duration</option>
-                                                    <option value="">Select</option>
+                                            <option>Select Duration</option>
+                                            <option value="">Select</option>
                                             <option value=' 1 Week'>1 Week</option>
                                             <option value=" 2 Week">2 Week</option>
                                             <option value=" 3 Week">3 Week</option>

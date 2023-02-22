@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {
     CButton,
     CButtonGroup,
@@ -33,7 +33,7 @@ import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
 import axios from 'axios'
 import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md'
 import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs'
-
+import { CountryList } from "src/components/CountryList";
 import moment from 'moment/moment'
 import { useSelector } from 'react-redux'
 import AdmissionForm1 from 'src/components/AdmissionForm1'
@@ -47,10 +47,10 @@ const AllEnquires = () => {
     var month = currentdate.getMonth() + '-' + currentdate.getFullYear();
     var year = currentdate.getFullYear();
 
-    const url1 = useSelector((el)=>el.domainOfApi) 
+    const url1 = useSelector((el) => el.domainOfApi)
 
 
-    
+
 
     const [select, setSelect] = useState('')
     const [followForm, setFollowForm] = useState()
@@ -69,7 +69,7 @@ const AllEnquires = () => {
     const [Search8, setSearch8] = useState('')
     const [Search9, setSearch9] = useState('')
     const [Search10, setSearch10] = useState('')
-    console.log(select);
+
 
     const [Name, setName] = useState("");
     const [Contact, setContact] = useState("");
@@ -115,6 +115,9 @@ const AllEnquires = () => {
     const [appointmentTime, setappointmentTime] = useState("");
     const [appointmentfor, setappointmentfor] = useState("");
 
+    const [ServiceVariation, setServiceVariation] = useState("");
+
+
 
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
@@ -127,41 +130,58 @@ const AllEnquires = () => {
     const [paging, setPaging] = useState(0);
     const [packageArr, setPackageArr] = useState([]);
     const [updateItem, setUpdateItem] = useState([]);
+    const [subservice, setSubservice] = useState([]);
 
     const [pros, setPros] = useState([])
 
 
     const hiddenXLimportFileInput = useRef('')
     const hiddenXLExportFileInput = useRef('')
-  
-  
-    // Import 
-     const HandaleImportClick = () =>{
-         hiddenXLimportFileInput.current.click()
-     }
-     const HandaleImportChange = (event)=>{
-      const importXlFile = event.target.files[0];
-      // console.log("Import",importXlFile)
-     }
 
-     
+
+    useEffect(() => {
+        axios.get(`${url}/subservice/all`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                console.log(res.data)
+                setSubservice(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }, []);
+
+
+    // Import 
+    const HandaleImportClick = () => {
+        hiddenXLimportFileInput.current.click()
+    }
+    const HandaleImportChange = (event) => {
+        const importXlFile = event.target.files[0];
+        // console.log("Import",importXlFile)
+    }
+
+
     // Export 
-     const HandaleExportClick = () =>{
-      hiddenXLExportFileInput.current.click()
-     }
-     const HandaleExportChange = (event)=>{
-      const importXlFile = event.target.files[0];
-      // console.log("Export",importXlFile)
-     }
-  
+    const HandaleExportClick = () => {
+        hiddenXLExportFileInput.current.click()
+    }
+    const HandaleExportChange = (event) => {
+        const importXlFile = event.target.files[0];
+        // console.log("Export",importXlFile)
+    }
+
 
 
     useEffect(() => {
         getEnquiry()
         getStaff()
-        axios.get(`${url}/prospect/all`, {
+        axios.get(`${ url }/prospect/all`, {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${ token }`
             }
         })
             .then((res) => {
@@ -171,9 +191,9 @@ const AllEnquires = () => {
             .catch((error) => {
                 console.error(error)
             })
-        axios.get(`${url}/subservice/all`, {
+        axios.get(`${ url }/subservice/all`, {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${ token }`
             }
         })
             .then((res) => {
@@ -188,9 +208,9 @@ const AllEnquires = () => {
     }
     const [staff, setStaff] = useState([])
     function getStaff() {
-        axios.get(`${url1}/employeeform`, {
+        axios.get(`${ url1 }/employeeform`, {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${ token }`
             }
         })
             .then((res) => {
@@ -210,10 +230,10 @@ const AllEnquires = () => {
             EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, Counseller: Counseller, trialDate: trialDate, status: "all_enquiry",
         }
 
-        fetch(`${url}/enquiryForm/update/${edit}`, {
+        fetch(`${ url }/enquiryForm/update/${ edit }`, {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Bearer ${ token }`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -243,10 +263,10 @@ const AllEnquires = () => {
                 status: 'CallReport'
             }
 
-            fetch(`${url}/enquiryForm/update/${followForm}`, {
+            fetch(`${ url }/enquiryForm/update/${ followForm }`, {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${ token }`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -259,10 +279,10 @@ const AllEnquires = () => {
             })
 
 
-            fetch(`${url}/prospect/create`, {
+            fetch(`${ url }/prospect/create`, {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${ token }`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -282,10 +302,10 @@ const AllEnquires = () => {
                 status: 'CallReport'
             }
 
-            fetch(`${url}/enquiryForm/update/${followForm}`, {
+            fetch(`${ url }/enquiryForm/update/${ followForm }`, {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${ token }`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -297,10 +317,10 @@ const AllEnquires = () => {
                 })
             })
 
-            fetch(`${url}/prospect/create`, {
+            fetch(`${ url }/prospect/create`, {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${ token }`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -320,10 +340,10 @@ const AllEnquires = () => {
                 Name: Name, Contact: Contact, Email: email, ServiceName: ServiceName1, AppointmentDate: appointmentDate, AppointmentTime: appointmentTime, enquiryStage: enquiryStage, CallStatus: CallStatus1, FollowupDate: FollowupDate, TimeFollowp: TimeFollowp, Counseller: Counseller, Discussion: Discussion,
                 status: 'CallReport'
             }
-            fetch(`${url}/prospect/create`, {
+            fetch(`${ url }/prospect/create`, {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${ token }`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -350,10 +370,10 @@ const AllEnquires = () => {
                 const found = pros.filter((list) => list.EnquiryID === followForm).map((element, index) => {
                     return index === 0 && element._id;
                 });
-                fetch(`${url}/prospect/update/${found[0]}`, {
+                fetch(`${ url }/prospect/update/${ found[0] }`, {
                     method: "POST",
                     headers: {
-                        "Authorization": `Bearer ${token}`,
+                        "Authorization": `Bearer ${ token }`,
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
@@ -366,10 +386,10 @@ const AllEnquires = () => {
 
                 const data1 = { Counseller, CallStatus: CallStatus1 }
 
-                fetch(`${url}/enquiryForm/update/${followForm}`, {
+                fetch(`${ url }/enquiryForm/update/${ followForm }`, {
                     method: "POST",
                     headers: {
-                        "Authorization": `Bearer ${token}`,
+                        "Authorization": `Bearer ${ token }`,
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
@@ -381,10 +401,10 @@ const AllEnquires = () => {
                     })
                 })
             } else {
-                fetch(`${url}/prospect/create`, {
+                fetch(`${ url }/prospect/create`, {
                     method: "POST",
                     headers: {
-                        "Authorization": `Bearer ${token}`,
+                        "Authorization": `Bearer ${ token }`,
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
@@ -397,10 +417,10 @@ const AllEnquires = () => {
 
                 const data1 = { Counseller, CallStatus: CallStatus1 }
 
-                fetch(`${url}/enquiryForm/update/${followForm}`, {
+                fetch(`${ url }/enquiryForm/update/${ followForm }`, {
                     method: "POST",
                     headers: {
-                        "Authorization": `Bearer ${token}`,
+                        "Authorization": `Bearer ${ token }`,
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
@@ -412,10 +432,10 @@ const AllEnquires = () => {
                     })
                 })
             }
-            fetch(`${url}/prospect/create`, {
+            fetch(`${ url }/prospect/create`, {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${ token }`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -444,10 +464,10 @@ const AllEnquires = () => {
             status: 'CallReport'
         }
 
-        fetch(`${url}/prospect/create`, {
+        fetch(`${ url }/prospect/create`, {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Bearer ${ token }`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -459,10 +479,10 @@ const AllEnquires = () => {
         })
         const data1 = { Counseller }
 
-        fetch(`${url}/enquiryForm/update/${followForm}`, {
+        fetch(`${ url }/enquiryForm/update/${ followForm }`, {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Bearer ${ token }`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -476,9 +496,9 @@ const AllEnquires = () => {
     }
     const [ogList, setOgList] = useState([])
     function getEnquiry() {
-        axios.get(`${url}/enquiryForm/all`, {
+        axios.get(`${ url }/enquiryForm/all`, {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${ token }`
             }
         })
             .then((res) => {
@@ -495,9 +515,9 @@ const AllEnquires = () => {
         console.log(edit)
         setEdit(null)
         if (id != null) {
-            axios.get(`${url}/enquiryForm/${id}`, {
+            axios.get(`${ url }/enquiryForm/${ id }`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${ token }`
                 }
             }).then((res) => {
                 setEdit(res.data)
@@ -512,12 +532,13 @@ const AllEnquires = () => {
         }
     }
     function getUpdate(id) {
-        axios.get(`${url}/enquiryForm/${id}`, {
+        axios.get(`${ url }/enquiryForm/${ id }`, {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${ token }`
             }
         })
             .then((res) => {
+                console.log(res.data)
                 setUpdateItem(res.data)
                 setFullName(res.data.Fullname)
                 setEmailAddress(res.data.Emailaddress)
@@ -542,7 +563,7 @@ const AllEnquires = () => {
                 setCustomertype(res.data.Customertype)
                 setEnquirytype(res.data.enquirytype)
                 setappointmentDate(moment(res.data.appointmentDate).utc().format('YYYY-MM-DD'))
-                setappointmentTime(res.data.appointmentDate)
+                setappointmentTime(res.data.appointmentTime)
                 setappointmentfor(res.data.appointmentfor)
                 setVisible1(true)
             })
@@ -551,9 +572,9 @@ const AllEnquires = () => {
             })
     }
     function getProspect(id) {
-        axios.get(`${url}/enquiryForm/${id}`, {
+        axios.get(`${ url }/enquiryForm/${ id }`, {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${ token }`
             }
         })
             .then((res) => {
@@ -571,9 +592,9 @@ const AllEnquires = () => {
     }
 
     function getCallReport(id) {
-        axios.get(`${url}/enquiryForm/${id}`, {
+        axios.get(`${ url }/enquiryForm/${ id }`, {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${ token }`
             }
         })
             .then((res) => {
@@ -594,10 +615,10 @@ const AllEnquires = () => {
 
     function deleteEnquiry(id) {
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/enquiryForm/delete/${id}`, {
+            fetch(`${ url }/enquiryForm/delete/${ id }`, {
                 method: 'DELETE',
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${ token }`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -657,10 +678,10 @@ const AllEnquires = () => {
         }
     }
 
-    result1.map((el)=>{
-      console.log(el.status)
+    result1.map((el) => {
+        console.log(el.status)
     })
-    console.log(select,"select")
+    console.log(select, "select")
 
     console.log(select)
 
@@ -721,7 +742,7 @@ const AllEnquires = () => {
                             </CCol>
                             <CCol lg={6} sm={6} md={6}>
                                 <CButtonGroup className=' mb-2 float-end'>
-                                    <CButton onClick={HandaleImportClick}  color="primary">
+                                    <CButton onClick={HandaleImportClick} color="primary">
                                         <CIcon icon={cilArrowCircleBottom} />
                                         {' '}Import
                                     </CButton>
@@ -729,9 +750,9 @@ const AllEnquires = () => {
                                         accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                         ref={hiddenXLimportFileInput}
                                         onChange={HandaleImportChange} hidden />
-                                    
-                                    <CButton   onClick={HandaleExportClick}color="primary">
-                                        <CIcon  icon={cilArrowCircleTop} />
+
+                                    <CButton onClick={HandaleExportClick} color="primary">
+                                        <CIcon icon={cilArrowCircleTop} />
                                         {' '}Export
                                     </CButton>
                                     <CFormInput type='file'
@@ -751,7 +772,7 @@ const AllEnquires = () => {
                                         <CCard style={{ margin: "2px" }}>
                                             <CCardBody style={{ padding: "5px" }}>
                                                 Enquiries: {result1.filter((list) =>
-                                                    list.username === username && 
+                                                    list.username === username &&
                                                     moment(list.createdAt).format("MM-DD-YYYY").includes(select) && list.status === 'all_enquiry'
                                                 ).length}
                                             </CCardBody>
@@ -1278,7 +1299,7 @@ const AllEnquires = () => {
                                     Close
                                 </CButton>
                                 <CButton type='submit' color="primary" onClick={() => saveProspect()}>{
-                                enquiryStage === 'Join' ? 'Open Admission Form' : 'Save Prospect'}</CButton>
+                                    enquiryStage === 'Join' ? 'Open Admission Form' : 'Save Prospect'}</CButton>
                             </CModalFooter>
                         </CModal>
 
@@ -1323,7 +1344,20 @@ const AllEnquires = () => {
                                                 </CCol>
                                             </CRow>
                                             <CRow>
-                                                <CCol lg={12} md={6} sm={12}>
+                                                <CCol lg={6} md={6} sm={12}>
+                                                    <CFormSelect
+                                                        className="mb-1"
+                                                        aria-label="Select Currency"
+                                                        label="Country Code"
+                                                        value={CountryCode}
+                                                        onChange={(e) => setCountryCode(e.target.value)}
+
+                                                    >{CountryList.map((item, index) => (
+                                                        <option key={index} value={item.dial_code}>{item.name} {item.dial_code}</option>
+                                                    ))}
+                                                    </CFormSelect>
+                                                </CCol>
+                                                <CCol lg={6} md={6} sm={12}>
                                                     <CFormInput
                                                         className="mb-1"
                                                         type="number"
@@ -1416,15 +1450,15 @@ const AllEnquires = () => {
                                                         label="Staff Name"
                                                         value={StaffName}
                                                         onChange={(e) => setStaffName(e.target.value)}
-                                                        >
-                                                        
-                                        <option>Select Staff Name</option>
-                                        {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
-                                            item.username === username && (
-                                                <option key={index}>{item.FullName}</option>
-                                            )
-                                        ))}
-                                    </CFormSelect>
+                                                    >
+
+                                                        <option>Select Staff Name</option>
+                                                        {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
+                                                            item.username === username && (
+                                                                <option key={index}>{item.FullName}</option>
+                                                            )
+                                                        ))}
+                                                    </CFormSelect>
 
                                                 </CCol>
                                                 <CCol lg={6} md={6} sm={12}>
@@ -1493,7 +1527,7 @@ const AllEnquires = () => {
                                                     />
                                                 </CCol>
 
-                                                <CCol lg={12} md={6} sm={12}>
+                                                <CCol lg={6} md={6} sm={12}>
 
                                                     <CFormInput
                                                         className="mb-1"
@@ -1504,6 +1538,18 @@ const AllEnquires = () => {
                                                         label="Contact Number"
                                                         placeholder="Enter Number"
                                                     />
+                                                </CCol>
+                                                <CCol lg={6} md={6} sm={12}>
+                                                    <CFormSelect
+                                                        className="mb-1"
+                                                        aria-label="Select Working Days"
+                                                        value={CountryCode2}
+                                                        onChange={(e) => setCountryCode2(e.target.value)}
+                                                        label="Country Code"
+                                                    >{CountryList.map((item, index) => (
+                                                        <option key={index} value={item.dial_code}>{item.name} {item.dial_code}</option>
+                                                    ))}
+                                                    </CFormSelect>
                                                 </CCol>
                                             </CRow>
                                             <CRow>
@@ -1540,6 +1586,28 @@ const AllEnquires = () => {
                                                         ))}
                                                     </CFormSelect>
                                                 </CCol>
+
+                                                <CCol lg={6} md={6} sm={12}>
+                                                    <CFormSelect
+                                                        className="mb-1"
+                                                        aria-label="Select Service Name"
+                                                        value={ServiceVariation}
+                                                        onChange={(e) => setServiceVariation(e.target.value)}
+                                                        label="Service Package"
+
+                                                    >
+                                                        <option>Service Package</option>
+                                                        {subservice.filter((list) =>
+                                                            list.selected_service === ServiceName
+                                                        ).map((item, index) => (
+                                                            item.username === username && (
+                                                                item.status === true && (
+                                                                    <option key={index}>{item.sub_Service_Name}</option>
+                                                                )
+                                                            )
+                                                        ))}
+                                                    </CFormSelect>
+                                                </CCol>
                                                 <CCol lg={6} md={6} sm={12}>
                                                     <CFormSelect
                                                         className="mb-1"
@@ -1560,10 +1628,10 @@ const AllEnquires = () => {
                                                 <CCol lg={6} md={6} sm={12}>
                                                     <CFormSelect
                                                         className="mb-1"
-                                                        aria-label="Select Enquiry Type"
+                                                        aria-label="Select Enquiry Source"
                                                         value={enquirytype}
                                                         onChange={(e) => setEnquirytype(e.target.value)}
-                                                        label="Enquiry Type"
+                                                        label="Enquiry Source"
                                                         options={[
                                                             "Select Enquiry Type",
                                                             { label: "Walk-In", value: "Walk-In" },
@@ -1575,6 +1643,22 @@ const AllEnquires = () => {
                                                     />
                                                 </CCol>
                                                 <CCol lg={6} md={6} sm={12}>
+                                                    <CFormSelect
+                                                        className="mb-1"
+                                                        aria-label="Select"
+                                                        label="Enquiry Stage"
+                                                        value={appointmentfor}
+                                                        onChange={(e) => setappointmentfor(e.target.value)}
+                                                        options={[
+                                                            "Select",
+                                                            { label: "Appointment", value: "Appointment" },
+                                                            { label: "Trial Session", value: "Trial Session" },
+                                                            { label: "Join", value: "Join" },
+                                                            { label: "Enquiry", value: "Enquiry" },
+                                                        ]}
+                                                    />
+                                                </CCol>
+                                                {/* <CCol lg={6} md={6} sm={12}>
                                                     <CFormInput
                                                         className="mb-1"
                                                         label="Appointment Date"
@@ -1594,24 +1678,32 @@ const AllEnquires = () => {
                                                         onChange={(e) => setappointmentTime(e.target.value)}
 
                                                     />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormSelect
-                                                        className="mb-1"
-                                                        aria-label="Select"
-                                                        label="Enquiry For"
-                                                        value={appointmentfor}
-                                                        onChange={(e) => setappointmentfor(e.target.value)}
-                                                        options={[
-                                                            "Select",
-                                                            { label: "Appointment", value: "Appointment" },
-                                                            { label: "Trial Session", value: "Trial Session" },
-                                                            { label: "Join", value: "Join" },
-                                                            { label: "Enquiry", value: "Enquiry" },
-                                                        ]}
-                                                    />
-                                                </CCol>
-                                                {appointmentfor === 'Trial Session' && (
+                                                </CCol> */}
+                                                
+                                  <CCol lg={6} md={6} sm={12}>
+                               <CFormInput
+                                        className="mb-1"
+                                        label={`${(appointmentfor ==="Select"?"Appointment" :appointmentfor)} Date`}
+                                        type="date"
+                                        value={appointmentDate}
+                                        onChange={(e) => setappointmentDate(e.target.value)}
+                                        id="exampleFormControlInput1"
+                                    />
+                                </CCol>
+                                <CCol lg={6} md={6} sm={12}>
+                                    
+                                <CFormInput
+                                        className="mb-1"
+                                        label={`${(appointmentfor ==="Select"?"Appointment" :appointmentfor)} Time`}
+                                        type="time"
+                                        id="exampleFormControlInput1"
+                                        value={appointmentTime}
+                                        onChange={(e) => setappointmentTime(e.target.value)}
+
+                                    />
+                                </CCol>
+                                                
+                                                {/* {appointmentfor === 'Trial Session' && (
                                                     <CCol lg={6} md={6} sm={12}>
                                                         <CFormInput
                                                             className="mb-1"
@@ -1622,7 +1714,7 @@ const AllEnquires = () => {
                                                             id="exampleFormControlInput1"
                                                         />
                                                     </CCol>
-                                                )}
+                                                )} */}
                                                 <CCol lg={6} md={6} sm={12}>
 
                                                     <CFormSelect
@@ -1632,12 +1724,12 @@ const AllEnquires = () => {
                                                         onChange={(e) => setCounseller(e.target.value)}
                                                         label='Counseller'
                                                     >
-                                                         <option>Select Staff Name</option>
-                                        {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
-                                            item.username === username && (
-                                                <option key={index}>{item.FullName}</option>
-                                            )
-                                        ))}</CFormSelect>
+                                                        <option>Select Staff Name</option>
+                                                        {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
+                                                            item.username === username && (
+                                                                <option key={index}>{item.FullName}</option>
+                                                            )
+                                                        ))}</CFormSelect>
                                                 </CCol>
                                             </CRow>
                                         </CCol>
@@ -1675,7 +1767,7 @@ const AllEnquires = () => {
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Call Status</CTableHeaderCell>
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Last Call</CTableHeaderCell>
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Add</CTableHeaderCell>
-                                    <CTableHeaderCell style={{ position: 'sticky', top: '0px',minWidth:'100px' }} > Date/Time</CTableHeaderCell>
+                                    <CTableHeaderCell style={{ position: 'sticky', top: '0px', minWidth: '100px' }} > Date/Time</CTableHeaderCell>
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Assigned by</CTableHeaderCell>
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Counseller</CTableHeaderCell>
                                     <CTableHeaderCell style={{ position: 'sticky', top: '0px' }}>Action</CTableHeaderCell>
@@ -1851,24 +1943,24 @@ const AllEnquires = () => {
                                     </CTableDataCell>
                                 </CTableRow>
 
-                                {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>{
-                                                console.log(new Date(list.createdAt).getFullYear())
-                                                console.log(new Date(list.createdAt).getMonth())
-                                                console.log(new Date(list.createdAt).getMonth())
+                                {result1.slice(paging * 10, paging * 10 + 10).filter((list) => {
+                                    console.log(new Date(list.createdAt).getFullYear())
+                                    console.log(new Date(list.createdAt).getMonth())
+                                    console.log(new Date(list.createdAt).getMonth())
 
 
 
-                                  return   list.username === username &&
-                                    //  moment(list.createdAt).format(dateFormat).includes(select) 
-                                    //  && moment(list.createdAt).format("DD-MM-YYYY").includes(Search1)
+                                    return list.username === username &&
+                                        //  moment(list.createdAt).format(dateFormat).includes(select) 
+                                        //  && moment(list.createdAt).format("DD-MM-YYYY").includes(Search1)
 
-                                       list.Fullname.toLowerCase().includes(Search3.toLowerCase())
-                                       && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
-                                    list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && 
-                                    list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
-}).map((item,index) => (
+                                        list.Fullname.toLowerCase().includes(Search3.toLowerCase())
+                                        && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
+                                        list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) &&
+                                        list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
+                                }).map((item, index) => (
                                     <CTableRow key={index}>
-                                        <CTableDataCell>{((result1.length -index) )-(paging * 10)}</CTableDataCell>
+                                        <CTableDataCell>{((result1.length - index)) - (paging * 10)}</CTableDataCell>
                                         <CTableDataCell>{item.EnquiryId}</CTableDataCell>
                                         <CTableDataCell className='text-center'>{moment(item.createdAt).format("DD-MM-YYYY")}</CTableDataCell>
                                         <CTableDataCell>{moment(item.createdAt, "HH:mm").format("hh:mm A")}</CTableDataCell>
@@ -1880,40 +1972,42 @@ const AllEnquires = () => {
                                         <CTableDataCell>{item.CallStatus}</CTableDataCell>
                                         <CTableDataCell>{item.Message}</CTableDataCell>
                                         <CTableDataCell><BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }}
-                                         onClick={() => { addForm(item._id), setEdit(item._id), handleAdmission(item._id) }} /></CTableDataCell>
+                                            onClick={() => { addForm(item._id), setEdit(item._id), handleAdmission(item._id) }} /></CTableDataCell>
 
                                         <CTableDataCell>
-                                            
+
                                             {moment(item.appointmentDate).format("DD-MM-YYYY")
-                                         != 'Invalid date' && moment(item.appointmentDate).format("DD-MM-YYYY")}
-                                         <br />{moment(item.appointmentTime, "HH:mm").format("hh:mm A") != 
-                                         'Invalid date' ? moment(item.appointmentTime, "HH:mm").format("hh:mm A") : '-'}
+                                                != 'Invalid date' && moment(item.appointmentDate).format("DD-MM-YYYY")}
+                                            <br />{moment(item.appointmentTime, "HH:mm").format("hh:mm A") !=
+                                                'Invalid date' ? moment(item.appointmentTime, "HH:mm").format("hh:mm A") : '-'}
 
 
-                                         </CTableDataCell>
+                                        </CTableDataCell>
 
                                         <CTableDataCell>{item.StaffName}</CTableDataCell>
                                         <CTableDataCell>{item.Counseller}</CTableDataCell>
                                         <CTableDataCell className='text-center'>
-                                            <a href={`tel:+${item.CountryCode}${item.ContactNumber}`} target="_black">
+                                            <a href={`tel:+${ item.CountryCode }${ item.ContactNumber }`} target="_black">
                                                 <MdCall style={{ cursor: 'pointer', markerStart: '10px' }} o
-                                                nClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' />
-                                                </a><a href={`https://wa.me/${item.ContactNumber}`} target="_black">
-                                                    <BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }}
-                                                     onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a>
-                                                     <a href={`mailto: ${item.Emailaddress}`} target="_black">
-                                                         <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }}
-                                                          onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a> 
-                                                          <BsPlusCircle id={item._id} style={{ cursor: 'pointer',
-                                                           markerStart: '10px', marginLeft: "4px" }} onClick={() => handleFollowup(item._id)} />
-                                                           </CTableDataCell>
-                                        
+                                                    nClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' />
+                                            </a><a href={`https://wa.me/${ item.ContactNumber }`} target="_black">
+                                                <BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }}
+                                                    onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a>
+                                            <a href={`mailto: ${ item.Emailaddress }`} target="_black">
+                                                <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }}
+                                                    onClick={() => { setCallReport(true), handleCallReport(item._id) }} size='20px' /></a>
+                                            <BsPlusCircle id={item._id} style={{
+                                                cursor: 'pointer',
+                                                markerStart: '10px', marginLeft: "4px"
+                                            }} onClick={() => handleFollowup(item._id)} />
+                                        </CTableDataCell>
+
                                         <CTableDataCell className='text-center'>{
-                                        dashboardAccess === 'admin' &&
-                                         <MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} 
-                                         onClick={() => handleEnquiry(item._id)} size='20px' />}
-                                          <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} 
-                                          onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
+                                            dashboardAccess === 'admin' &&
+                                            <MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }}
+                                                onClick={() => handleEnquiry(item._id)} size='20px' />}
+                                            <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }}
+                                                onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
                                     </CTableRow>
                                 ))}
                             </CTableBody>
@@ -1921,41 +2015,41 @@ const AllEnquires = () => {
 
                     </CCardBody>
 
-                    <CPagination    aria-label="Page navigation example" align="center" className='mt-2'>
-                        <CPaginationItem style={{cursor:'pointer'}}  aria-label="Previous" disabled={paging != 0 ? false : true} 
-                        onClick={() => paging > 0 && setPaging(paging - 1)}>
+                    <CPagination aria-label="Page navigation example" align="center" className='mt-2'>
+                        <CPaginationItem style={{ cursor: 'pointer' }} aria-label="Previous" disabled={paging != 0 ? false : true}
+                            onClick={() => paging > 0 && setPaging(paging - 1)}>
                             <span aria-hidden="true">&laquo;</span>
                         </CPaginationItem>
-                        <CPaginationItem style={{cursor:'pointer'}}  active onClick={()  => setPaging(0)}>{paging + 1}</CPaginationItem>
+                        <CPaginationItem style={{ cursor: 'pointer' }} active onClick={() => setPaging(0)}>{paging + 1}</CPaginationItem>
                         {result1.filter((list) =>
                             list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select) && moment(list.createdAt).format("MM-DD-YYYY").includes(Search1) && list.Fullname.toLowerCase().includes(Search3.toLowerCase()) && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
                             list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
-                        ).length > (paging + 1) * 10 && <CPaginationItem style={{cursor:'pointer'}} 
-                         onClick={() => setPaging(paging + 1)} >{paging + 2}</CPaginationItem>}
+                        ).length > (paging + 1) * 10 && <CPaginationItem style={{ cursor: 'pointer' }}
+                            onClick={() => setPaging(paging + 1)} >{paging + 2}</CPaginationItem>}
 
                         {result1.filter((list) =>
                             list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select)
-                             && moment(list.createdAt).format("MM-DD-YYYY").includes(Search1) && 
-                             list.Fullname.toLowerCase().includes(Search3.toLowerCase()) && 
-                             list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
+                            && moment(list.createdAt).format("MM-DD-YYYY").includes(Search1) &&
+                            list.Fullname.toLowerCase().includes(Search3.toLowerCase()) &&
+                            list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
                             list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) &&
-                             list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) &&
-                              list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
-                        ).length > (paging + 2) * 10 && <CPaginationItem style={{cursor:'pointer'}}  
-                        onClick={() => setPaging(paging + 2)}>{paging + 3}</CPaginationItem>}
+                            list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) &&
+                            list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
+                        ).length > (paging + 2) * 10 && <CPaginationItem style={{ cursor: 'pointer' }}
+                            onClick={() => setPaging(paging + 2)}>{paging + 3}</CPaginationItem>}
                         {result1.filter((list) =>
                             list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select)
-                             && moment(list.createdAt).format("MM-DD-YYYY").includes(Search1) &&
-                              list.Fullname.toLowerCase().includes(Search3.toLowerCase()) && 
-                              list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
-                            list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && 
+                            && moment(list.createdAt).format("MM-DD-YYYY").includes(Search1) &&
+                            list.Fullname.toLowerCase().includes(Search3.toLowerCase()) &&
+                            list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
+                            list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) &&
                             list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) &&
                             list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
                         ).length > (paging + 1) * 10 ?
-                            <CPaginationItem aria-label="Next" style={{cursor:'pointer'}}  onClick={() => setPaging(paging + 1)}>
+                            <CPaginationItem aria-label="Next" style={{ cursor: 'pointer' }} onClick={() => setPaging(paging + 1)}>
                                 <span aria-hidden="true">&raquo;</span>
                             </CPaginationItem>
-                            : <CPaginationItem disabled aria-label="Next"  style={{cursor:'pointer'}} onClick={() => setPaging(paging + 1)}>
+                            : <CPaginationItem disabled aria-label="Next" style={{ cursor: 'pointer' }} onClick={() => setPaging(paging + 1)}>
                                 <span aria-hidden="true">&raquo;</span>
                             </CPaginationItem>
                         }

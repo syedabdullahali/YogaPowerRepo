@@ -33,6 +33,8 @@ import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs';
 import moment from 'moment';
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
+import { useSelector } from 'react-redux'
+import AdmissionForm1 from 'src/components/AdmissionForm1';
 
 const FollowupScheduling = () => {
     var currentdate = new Date();
@@ -74,6 +76,8 @@ const FollowupScheduling = () => {
     const [Discussion, setDiscussion] = useState("");
     const [Counseller, setCounseller] = useState("");
     const [updateItem, setUpdateItem] = useState();
+    const [admissionForm, setAdmissionForm] = useState(false)
+
 
     let user = JSON.parse(localStorage.getItem('user-info'))
     const token = user.token;
@@ -82,6 +86,7 @@ const FollowupScheduling = () => {
     const [result, setResult] = useState([]);
     const [result1, setResult1] = useState([]);
     const [paging, setPaging] = useState(0);
+    const url1 = useSelector((el) => el.domainOfApi)
 
     const [pros, setPros] = useState([])
     useEffect(() => {
@@ -112,9 +117,14 @@ const FollowupScheduling = () => {
                 console.error(error)
             })
     }, []);
+
+    
+
+
+
     const [staff, setStaff] = useState([])
     function getStaff() {
-        axios.get(`${url2}/employeeForm/all`, {
+        axios.get(`${url1}/employeeform`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -528,6 +538,9 @@ const FollowupScheduling = () => {
     }
     return (
         <CRow>
+            {
+   
+   <AdmissionForm1 add={true} clickfun={() => { setAdmissionForm(true) }} ids={[]} />                                  }
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
@@ -1281,10 +1294,11 @@ const FollowupScheduling = () => {
                                     list?.ServiceName?.toLowerCase()?.includes(Search6.toLowerCase())
 
                                      && list?.CallStatus !== 'Cold'
-                                //     list
                                 )
-                                .map((item, index) => (
-                                    <CTableRow key={index}>
+                                .map((item, index) =>{ 
+                                    console.log(item)
+                              
+                                  return <CTableRow key={index}>
                                         <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
                                         <CTableDataCell>{centerCode}Q{index + 10 + (paging * 10)}</CTableDataCell>
                                         <CTableDataCell className='text-center'>{moment(item.CallDate).format("DD-MM-YYYY")}</CTableDataCell>
@@ -1293,15 +1307,15 @@ const FollowupScheduling = () => {
                                         <CTableDataCell>{item.Email}</CTableDataCell>
                                         <CTableDataCell>{item.Contact}</CTableDataCell>
                                         <CTableDataCell>{item.ServiceName}</CTableDataCell>
-                                        <CTableDataCell>{item.CallStatus}</CTableDataCell>
+                                        <CTableDataCell>{item.CallStatus}</CTableDataCell>                                        
                                         <CTableDataCell>{item.FollowupDate && moment(item.FollowupDate).format("DD-MM-YYYY")}<br />{item.TimeFollowp && moment(item.TimeFollowp, "HH:mm").format("hh:mm A")}</CTableDataCell>
-                                        <CTableDataCell>{item.AppointmentDate && moment(item.AppointmentDate).format("DD-MM-YYYY")}<br />{item.AppointmentTime && moment(item.AppointmentTime, "HH:mm").format("hh:mm A")}</CTableDataCell>
                                         <CTableDataCell>{item.enquiryStage}</CTableDataCell>
+                                        <CTableDataCell>{item.Discussion}</CTableDataCell>
                                         <CTableDataCell>{item.Counseller}</CTableDataCell>
                                         <CTableDataCell className='text-center'><a href={`tel:+91${item.Contact}`} target="_black"><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item.EnquiryID) }} size='20px' /></a><a href={`https://wa.me/${item.Contact}`} target="_black"><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} onClick={() => { setCallReport(true), handleCallReport(item.EnquiryID) }} size='20px' /></a><a href={`mailto: ${item.Email}`} target="_black"> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => { setCallReport(true), handleCallReport(item.EnquiryID) }} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => handleFollowup(item.EnquiryID)} /></CTableDataCell>
                                         <CTableDataCell className='text-center'><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} onClick={() => handleEnquiry(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} onClick={() => deleteProspect(item._id)} size='20px' /></CTableDataCell>
                                     </CTableRow>
-                                ))}
+                                })}
                             </CTableBody>
                         </CTable>
                     </CCardBody>

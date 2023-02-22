@@ -38,10 +38,13 @@ import moment from 'moment/moment'
 import CallUpdate from 'src/components/CallUpdate'
 import ViewInvoice from 'src/components/ViewInvoice'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
 const AllClients = () => {
+    const url1 = useSelector((el)=>el.domainOfApi) 
+
     const [select, setSelect] = useState()
     const [followForm, setFollowForm] = useState()
     const [edit, setEdit] = useState()
@@ -137,7 +140,7 @@ const AllClients = () => {
     }, []);
     const [staff, setStaff] = useState([])
     function getStaff() {
-        axios.get(`${url2}/employeeForm/all`, {
+        axios.get(`${url1}/employeeform`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -1512,8 +1515,9 @@ const AllClients = () => {
                                     list.username === username
                                     && list.Fullname.toLowerCase().includes(Search1.toLowerCase()) &&
                                     list.AttendanceID.toLowerCase().includes(Search5.toLowerCase()) && list.serviceName.toLowerCase().includes(Search6.toLowerCase()) && list.fitnessGoal.toLowerCase().includes(Search7.toLowerCase())
-                                ).map((item, index) => (
-                                    item.username === username && (
+                                ).map((item, index) => {
+                                    console.log(item)
+                                   return item.username === username && (
                                         <CTableRow key={index}>
                                             <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
                                             <CTableDataCell>{centerCode}MEM{index + 10 + (paging * 10)}</CTableDataCell>
@@ -1532,7 +1536,7 @@ const AllClients = () => {
                                             <CTableDataCell className='text-center'><Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${item._id}/1`} target="_black"><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} size='20px' /></Link> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
                                         </CTableRow>
                                     )
-                                ))}
+                                    })}
                             </CTableBody>
                         </CTable>
                     </CCardBody>
