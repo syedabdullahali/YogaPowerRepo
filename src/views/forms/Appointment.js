@@ -173,7 +173,7 @@ const Appointment = () => {
 
 
                                             {active && [...Enquiry.filter((el) => el.Fullname).filter((el) => el.Fullname.includes(clientName))][0]
-                                             && <CCard style={{ maxheight: '200px', width: '95%', position: 'absolute', minHeight: 'auto' }} >
+                                             && <CCard style={{overflowY:'scroll', maxHeight: '200px', width: '95%', position: 'absolute', minHeight: 'auto' }} >
 
                                                 {[...[...Enquiry.filter((el) => el.Fullname)].filter((el) => el.Fullname.includes(clientName)).map((el) => {
 
@@ -213,7 +213,7 @@ const Appointment = () => {
 
                                             </CFormInput>
                                          {active2 &&[...optionAppointmentTyep.filter((el) => el.includes(appointmentType))][0] &&  
-                                             <CCard   style={ {overflowY:'scroll', maxHeight: '200px', height:'auto', 
+                                             <CCard   style={ {overflowY:'scroll', maxHeight: '200px', height:'auto', width: '95%',
                                               position: 'absolute', minHeight: 'auto' }} >
                                                     {[...optionAppointmentTyep.filter((el) => el.includes(appointmentType)).map((el) => {
                                                         return <div className='p-2 text-center' style={{ borderBottom: '1px solid #c0c0c0' }}
