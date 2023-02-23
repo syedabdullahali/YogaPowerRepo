@@ -331,6 +331,7 @@ const AllEnquires = () => {
                 })
             })
         } else if (enquiryStage === 'Join') {
+            console.log(followForm)
             handleAdmission(followForm)
             setVisible(false)
 

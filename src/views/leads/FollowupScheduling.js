@@ -77,6 +77,8 @@ const FollowupScheduling = () => {
     const [Counseller, setCounseller] = useState("");
     const [updateItem, setUpdateItem] = useState();
     const [admissionForm, setAdmissionForm] = useState(false)
+    const [admissionFormData,setAdmissionFormData] = useState([])
+
 
 
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -119,7 +121,25 @@ const FollowupScheduling = () => {
     }, []);
 
     
-
+    function handleAdmission(id) {
+        console.log(id,'followForm')
+        setEdit(null)
+        if (id != null) {
+            axios.get(`${url}/enquiryForm/${ id }`, {
+                headers: {
+                    'Authorization': `Bearer ${ token }`
+                }
+            }).then((res) => {
+                setAdmissionFormData(res.data)
+                if (admissionFormData != null && res.data != null) {
+                    setAdmissionForm(true)
+                }
+            })
+                .catch((error) => {
+                    console.error(error)
+                })
+        }
+    }
 
 
     const [staff, setStaff] = useState([])
@@ -223,6 +243,7 @@ const FollowupScheduling = () => {
                 })
             })
         } else if (enquiryStage === 'Join') {
+            console.log("Joni Hello")
             handleAdmission(followForm)
             setVisible(false)
 
@@ -538,9 +559,7 @@ const FollowupScheduling = () => {
     }
     return (
         <CRow>
-            {
-   
-   <AdmissionForm1 add={true} clickfun={() => { setAdmissionForm(true) }} ids={[]} />                                  }
+            {admissionForm&&<AdmissionForm1 add={admissionForm} clickfun={() => { setAdmissionForm(false) }} ids={admissionFormData} />  }
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
