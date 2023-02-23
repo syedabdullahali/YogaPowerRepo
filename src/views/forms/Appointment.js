@@ -204,8 +204,6 @@ function saveApointmentData(){
 
 sendAppointmentData()
 
-setClientName(' ')
-
 
 }
 
