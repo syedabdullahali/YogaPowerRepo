@@ -23,16 +23,23 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { MdDelete } from "react-icons/md";
+import { useSelector } from "react-redux";
+
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
 
 const PackageMaster = () => {
+    const url1 = useSelector((el)=>el.domainOfApi) 
+
+
     const [action, setAction] = useState(false)
     const [Package_Name, setPackageName] = useState("");
     const [fees, setFees] = useState("");
     const [packages, setPackages] = useState("")
     const [status, setStatus] = useState(false);
+    const [newservice,setNewService] = useState('')
+    const [variation,setVariation] = useState('')
     const [duration, setDuration] = useState("");
     const [subService,setService] = useState([])
 
@@ -63,28 +70,30 @@ const PackageMaster = () => {
     }
 
     function getPackage() {
-        axios.get(`${url}/Package/all`, {
+        axios.get(`${url1}/packagemaster`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
             .then((res) => {
                 setResult(res.data)
+                console.log(res.data)
             })
             .catch((error) => {
                 console.error(error)
             })
     }
-    const updateStatus = (id, status) => {
-        let item = { status: status }
-        fetch(`${url}/Package/update/${id}`, {
-            method: 'POST',
+    const updateStatus = (id, item, status) => {
+        let item2 = { Status: status }
+        
+        fetch(`${url1}/packagemaster/${id}`, {
+            method: 'PUT',
             headers: {
                 "Authorization": `Bearer ${token}`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(item)
+            body: JSON.stringify({...item,...item2})
         }).then((result) => {
             result.json().then((resp) => {
                 getPackage()
@@ -95,7 +104,7 @@ const PackageMaster = () => {
     function deletePackage(id) {
 
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/Package/delete/${id}`, {
+            fetch(`${url1}/packagemaster/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -112,12 +121,22 @@ const PackageMaster = () => {
     }
 
     const savePackage = () => {
-        let data = { username: username, Package_Name, fees, packages, duration, status }
+        let data = 
+        {
+           "Sr_No":"21",
+           "Service": newservice,
+           "Variation": variation,
+           "Package_Name":Package_Name,
+           "Duration": duration,
+           "Fees": fees,
+           "Status":status,
+           "Action": "edit",
+           "username": username            
+       }
         // console.warn(data);
-        fetch(`${url}/Package/create`, {
+        fetch(`${url1}/packagemaster`, {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -166,14 +185,18 @@ const PackageMaster = () => {
                                         id="exampleFormControlInput1"
                                         label="Service"
                                         placeholder="Enter Package Name"
+                                        value ={newservice}
+                                        onChange={(e)=>setNewService(e.target.value)}
                                        
                                     >
                                     
                                     <option>Select Service</option>
-                                    {[...subService.filter((el)=>{
-                                        return el.username === username                                  
+                                  
+                                     {[...subService.filter((el)=>{
+                                        return el.username === username                                   
                                     })].map((el,i)=><option key={i}>{el.selected_service}</option>)
-                                    }
+                                    }  
+
                                     </CFormSelect>
                      </CCol>
                         <CCol lg={6} md={6} sm={12}>
@@ -183,6 +206,8 @@ const PackageMaster = () => {
                                         id="exampleFormControlInput1"
                                         label="Variation"
                                         placeholder="Enter Package Name"
+                                        value={variation}
+                                        onChange={(e)=>setVariation(e.target.value)}
                                        
                                     >
                                    <option>Select Variation</option>
@@ -280,18 +305,20 @@ const PackageMaster = () => {
                     </CTableHead>
                     <CTableBody>
                         {result.map((item, index) => (
-                            item.username === username && (
+                            // item.username === username && (
                                 <CTableRow key={index}>
                                     <CTableDataCell>{index + 1}</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell>{item.Service}</CTableDataCell>
+                                    <CTableDataCell>{item.Variation}</CTableDataCell>
                                     <CTableDataCell>{item.Package_Name}</CTableDataCell>
-                                    <CTableDataCell>{item.packages} {item.duration}</CTableDataCell>
-                                    <CTableDataCell>{item.fees}</CTableDataCell>
-                                    <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} id={item._id} value={item.status} checked={item.status} onChange={() => updateStatus(item._id, !item.status)} /></CTableDataCell>
+                                    <CTableDataCell>{item.Duration}</CTableDataCell>
+                                    <CTableDataCell>{item.Fees}</CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormSwitch size="xl" style={{ cursor: 'pointer' }}
+                                         id={item._id} value={item.Status} checked={item.Status} onChange={() => updateStatus(item._id,item, !item.Status)} /></CTableDataCell>
                                     <CTableDataCell> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deletePackage(item._id)} size='20px' /> </CTableDataCell>
                                 </CTableRow>
-                            )
+                            // )
                         ))}
                     </CTableBody>
                 </CTable>

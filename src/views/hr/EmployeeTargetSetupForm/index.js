@@ -52,7 +52,8 @@ return <CCard>
        
     </CRow>
 
-    <CTable  className='mt-3'>
+<div style={{overflowY:'scroll'}} className='mb-3'>
+    <CTable  className='mt-3' style={{width:'200%'}}>
           <CTableHead >
              <CTableHeaderCell className=' '>Jan</CTableHeaderCell>
              <CTableHeaderCell className=''>Feb</CTableHeaderCell>
@@ -73,7 +74,7 @@ return <CCard>
                     <CFormInput type='number'></CFormInput>
                 </CTableDataCell>
                 <CTableDataCell>
-                    <CFormInput type='number'></CFormInput>
+                    <CFormInput type='number'  ></CFormInput>
                 </CTableDataCell>      <CTableDataCell>
                     <CFormInput type='number'></CFormInput>
                 </CTableDataCell>      <CTableDataCell>
@@ -101,6 +102,9 @@ return <CCard>
 
           </CTableBody>
      </CTable>
+</div>
+
+     
      <CCol >
        <CButton onClick={()=>setActiveForm((value)=>!value)} >Save</CButton>
      </CCol>

@@ -14,6 +14,9 @@ const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
 const Recruitment = () => {
+
+    const url1 = useSelector((el) => el.domainOfApi)
+    
     const [error, setError] = useState('')
     const [step, setStep] = useState(1)
     const [image, setImage] = useState('')

@@ -234,13 +234,13 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
     }
 
     function getSubService() {
-        axios.get(`${url}/subservice/all`, {
+        axios.get(`${url1}/packagemaster`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
             .then((res) => {
-                setService(res.data)
+                setService(res.data,"master")
                 console.log(res.data)
             })
             .catch((error) => {
@@ -255,6 +255,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
             }
         })
             .then((res) => {
+                console.log(res.data,"hello world8474875 ")
                 setMem(res.data)
             })
             .catch((error) => {
@@ -280,7 +281,9 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
         let data = {
             username: username,
             image: imageUrl,
-            Fullname, CountryCode, ContactNumber, WhatsappNumber, Email, Gender, DateofBirth, Anniversarydate, Address, Area, city, pincode, state, BloodGroup,
+            Fullname, CountryCode, ContactNumber,
+             WhatsappNumber, Email, Gender, DateofBirth, 
+             Anniversarydate, Address, Area, city, pincode, state, BloodGroup,
             FacebookID, sms, mail, pushnotification,
             Name, CountryCode1, ContactNumber1, Relationship,
             serviceName, serviceVaration, Customertype, EnquiryType, AssignStaff, MemberManager, Batch, GeneralTrainer, AttendanceID, CenterID, LockerKeyNo, PAN,
@@ -296,6 +299,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
         axios.post(`${url}/memberForm/create`, data, { headers },
         )
             .then((resp) => {
+                console.log(resp.data,"helllokjeoiuhfeuwfhuuifhrghrhg")
                 setMemberId(resp.data._id);
                 alert("successfully submitted")
                 console.log("refresh prevented");
@@ -340,6 +344,24 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
     const [ser5, setSer5] = useState('')
     const [ser6, setSer6] = useState('')
     const [invId, setInvId] = useState('')
+    const [invoiceNum,setInvoice] = useState([])
+
+
+
+//  const getInvoiceNoFun =()=>{
+//  const alllInvoice =    axios.get(`${url}/invoice/all`, he{ 'Authorization': `Bearer ${token}`,
+//  'My-Custom-Header': 'foobar' });
+//  console.log(alllInvoice,"jsdjehdeh alll invoice")
+//  setInvoice(alllInvoice.length)
+//  }
+
+
+
+//  useEffect(()=>{
+//     getInvoiceNoFun()
+// },[])
+
+
     const saveInvoice = () => {
         let data = {
             username: username,
@@ -374,6 +396,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                     .catch((error) => {
                         console.error(error)
                     })
+                    // getInvoiceNoFun()
             })
             .catch((error) => {
                 console.error(error)
@@ -1137,7 +1160,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                             <CModalBody>
                                 <CRow>
                                     <CCol lg={12} className='text-center'><CImage src={logo} width="100px" height='100px' /></CCol>
-                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International </h5></CCol>
+                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International  </h5></CCol>
 
                                 </CRow>
                                 <CRow className="mt-2">
@@ -1150,7 +1173,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                     <CCol lg={4} className='text-center mt-4'><h4>Invoice</h4></CCol>
                                     <CCol >
                                         Date : {datetime}<br />
-                                        Invoice No : {centerCode}INV{result1.length} <br />
+                                        Invoice No : {centerCode}INV{invoiceNum  +1} <br />
                                         <CRow>
                                             <CCol lg={9}>
                                                 <CInputGroup>
@@ -1197,7 +1220,8 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                             <option>Select Service</option>
                                                             {[...subService.filter((el)=>{
                                         return el.username === username                                  
-                                    })].map((el,i)=><option key={i}>{el.selected_service}</option>)
+                                    })].map((el,i)=><option key={i}>{el.Service
+                                    }</option>)
                                     }
                                                         </CFormSelect>
                                                     </CCol>
@@ -1212,7 +1236,8 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                             <option>Select Package</option>
                                                             {[...subService.filter((el)=>{
                                         return el.username === username                                   
-                                    })].map((el,i)=><option key={i}>{el.sub_Service_Name}</option>)
+                                    })].map((el,i)=><option key={i}>{el.Package_Name
+                                        }</option>)
                                     }   
 
 
@@ -1265,34 +1290,12 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                     value={ser2}
                                                     onChange={(e) => setSer2(e.target.value)}
                                                 >
-                                            <option>Select Duration</option>
-                                            <option value="">Select</option>
-                                            <option value=' 1 Week'>1 Week</option>
-                                            <option value=" 2 Week">2 Week</option>
-                                            <option value=" 3 Week">3 Week</option>
-                                            <option value=" 4 Week">4 Week</option>
-                                            <option value=" 5 Week">5 Week</option>
-                                            <option value=" 6 Week">6 Week</option>
-                                            <option value="1 Month">1 Month</option>
-                                            <option value="2 Month">2 Month</option>
-                                            <option value="3 Month">3 Month</option>
-                                            <option value="4 Month">4 Month</option>
-                                            <option value="5 Month">5 Month</option>
-                                            <option value="6 Month">6 Month</option>
-                                            <option value="7 Month">7 Month</option>
-                                            <option value="8 Month">8 Month</option>
-                                            <option value="9 Month">9 Month</option>
-                                            <option value="10 Month">10 Month</option>
-                                            <option value="11 Month">11 Month</option>
-                                            <option value="12 Month">12 Month</option>
-                                            <option value="13 Month">13 Month</option>
-                                            <option value="14 Month">14 Month</option>
-                                            <option value="15 Month">15 Month</option>
-                                            <option value="1 Year">1 Year</option>
-                                            <option value="2 Year">2 Year</option>
-                                            <option value="3 Year">3 Year</option>
-                                            <option value="4 Year">4 Year</option>
-                                            <option value="5 Year">5 Year</option>
+                                         <option>Select Duration</option>
+                                           {[...subService.filter((el)=>{
+                                        return el.username === username                                   
+                                    })].map((el,i)=><option key={i}>{el.Duration
+                                        }</option>)
+                                    }   
                                                 </CFormSelect>
 
 
@@ -1305,11 +1308,12 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                     onChange={(e) => setSer3(e.target.value)}
                                                 >
                                                     <option>Select Fees</option>
-                                                    {result1.filter((list) =>
-                                                        list.username === username &&
-                                                        list.status === true && list.duration.includes(ser2)).map((item, index) => (
-                                                            <option key={index} value={item.fees}>{item.fees}</option>
-                                                        ))}
+                                                    {[...subService.filter((el)=>{
+                                        return el.username === username                                   
+                                    })].map((el,i)=><option key={i}>{el.Fees
+
+                                        }</option>)
+                                    }  
                                                 </CFormSelect>
                                             </CTableDataCell>
                                         </CTableRow>
@@ -1513,7 +1517,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                             <CModalBody ref={componentRef} style={{ padding: '25px' }}>
                                 <CRow>
                                     <CCol lg={12} className='text-center'><CImage src={logo} width="100px" height='100px' /></CCol>
-                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International</h5></CCol>
+                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International </h5></CCol>
                                     <CCol className='mt-2' style={{ marginLeft: '10px' }}>
                                         <h6>Client Name: {Fullname}</h6>
                                         <div>Client Number: {ContactNumber}</div>
@@ -1523,7 +1527,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                     <CCol className='mt-2' style={{ marginRight: '30px' }}>
                                         <div className='float-end'>
                                             Date : {datetime}<br />
-                                            Invoice No : {centerCode}INV{result1.length} <br />
+                                            Invoice No : {centerCode}INV{invoiceNum} <br />
                                             Counseller : {ser5}
                                         </div>
                                     </CCol>

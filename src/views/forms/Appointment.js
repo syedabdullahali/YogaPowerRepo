@@ -21,6 +21,10 @@ import axios from 'axios'
 const url = 'https://yog-seven.vercel.app'
 import { useSelector } from 'react-redux'
 
+import { MdDelete } from "react-icons/md";
+
+
+
 
 
 const optionAppointmentTyep = [
@@ -33,27 +37,43 @@ const optionAppointmentTyep = [
 
 
 const Appointment = () => {
-    const url1 = useSelector((el)=>el.domainOfApi) 
+    const url1 = useSelector((el) => el.domainOfApi)
 
     const [appointment, setAppointment] = useState(false)
     const [Enquiry, setEnquiry] = useState([])
     const [active, setActive] = useState(false)
     const [active2, setActive2] = useState(false)
+    
 
     const [clientName, setClientName] = useState('')
     const [mobileNo, setMobileno] = useState('')
-    const [appointmentType,setAppointmentType] = useState('')
-    const [staff,setStaff] = useState([])
+    const [appointmentType, setAppointmentType] = useState('')
+    const [staff, setStaff] = useState([])
+    const [appointmentData,setAppointmentData] =useState([])
+    const [appointmentWith,setAppointmentWith] = useState([])
+    const  [bookingDate,setBookingDate] = useState()
+    const [fess,setFees] = useState('')
+    const [memberId,setMemberId] =useState('')
+    const [staffValue,setStaffValue]= useState('')
+    const [appointmentTime,setAppointmentTime] =useState('')
+    const [Appontment_Date,setAppointmentDate] = useState('')
+    const [feesStatus,setFessStatus] = useState('')
+    
+
+
 
     let user = JSON.parse(localStorage.getItem('user-info'))
     const token = user.token;
     const username = user.user.username;
 
+
+
+
+
     useEffect(() => {
         getEnquiry()
         getStaff()
     }, [])
-
     function getEnquiry() {
         axios.get(`${ url }/memberForm/all`, {
             headers: {
@@ -69,14 +89,29 @@ const Appointment = () => {
             })
     }
 
-
     const selectedOption = (e) => {
         setClientName(e.target.textContent)
-        console.log(e.target.id)
+        setMemberId(e.target.id)
         console.log(Enquiry.filter((el) => el._id === e.target.id)[0].ContactNumber)
         setMobileno(Enquiry.filter((el) => el._id === e.target.id)[0].ContactNumber || '')
         setActive(false)
     }
+
+    function getStaff() {
+        axios.get(`${ url1 }/employeeform`, {
+            headers: {
+                'Authorization': `Bearer ${ token }`
+            }
+        })
+            .then((res) => {
+                setStaff(res.data)
+                console.log(res.data);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+
 
     const ActiveDropDownHandler = () => {
         setActive(true)
@@ -85,33 +120,102 @@ const Appointment = () => {
         setActive2(true)
     }
 
-   const  selectedOption2 =(e)=>{
-    setAppointmentType(e.target.textContent)
-    setActive2(false)
-   }
+    const selectedOption2 = (e) => {
+        setAppointmentType(e.target.textContent)
+        setActive2(false)
+    }
 
-   function getStaff() {
-    axios.get(`${url1}/employeeform`, {
+
+const getAppointmentData = async ()=>{
+
+const  response =await axios.get(`${url1}/appointment`)
+console.log(response.data)
+setAppointmentData(response.data)
+}    
+
+useEffect(()=>{
+getAppointmentData()
+},[])
+
+// creating object to sumbit form 
+const AppointmentObj = {
+        "Sr_No": memberId,
+        "Booking_Date": bookingDate,
+        "Client_Name": clientName,
+        "Client_Number": mobileNo,
+        "Appointment_Type":appointmentType,
+        "Appointment_With": appointmentWith,
+        "Appointment_Date": Appontment_Date,
+        "Appointment_Time": appointmentTime,
+        "Fees_Status": feesStatus,
+        "Amount":fess,
+        "Status": true,
+        "Staff": staffValue,
+}
+console.log(AppointmentObj)
+
+
+const sendAppointmentData = async ()=>{
+    const data = JSON.stringify(AppointmentObj)
+
+     fetch(`${url1}/appointment`, {
+        method: "POST",
         headers: {
-            'Authorization': `Bearer ${token}`
-        }
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
+    }).then((result) => {
+        getAppointmentData()
+        console.log(result)
     })
-        .then((res) => {
-            setStaff(res.data)
-            console.log(res.data);
-        })
-        .catch((error) => {
-            console.error(error)
-        })
+
+}   
+
+function deleteAppointmentData(id){
+    fetch(`${url1}/appointment/${id}`, {
+        method: 'DELETE',       
+    }).then((result) => {
+        getAppointmentData()
+        console.log(result)
+    })
+}
+ 
+function updateAppointmentData(id,data,Status){
+  const data1 =   {...data,Status }
+    fetch(`${url1}/appointment/${id}`, {
+        method: 'PUT', 
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data1)      
+    }).then((result) => {
+        getAppointmentData()
+      
+    })
+}
+
+function saveApointmentData(){
+  
+
+
+
+
+sendAppointmentData()
+
+
 }
 
 
-    console.log('Syed Abdullah Ali'.includes(clientName))
+
+
+
     return (
 
         <CRow>
-            <CCol lg={12} sm={12}>
-                <CCard className='mb-3 border-top-success border-top-3'>
+            <CCol lg={12} sm={12} >
+                <CCard   className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
                         <strong className="mt-2">Appointment</strong>
                     </CCardHeader>
@@ -173,15 +277,15 @@ const Appointment = () => {
 
 
                                             {active && [...Enquiry.filter((el) => el.Fullname).filter((el) => el.Fullname.includes(clientName))][0]
-                                             && <CCard style={{overflowY:'scroll', maxHeight: '200px', width: '95%', position: 'absolute', minHeight: 'auto' }} >
+                                                && <CCard style={{ overflowY: 'scroll', maxHeight: '200px', width: '95%', position: 'absolute', minHeight: 'auto' }} >
 
-                                                {[...[...Enquiry.filter((el) => el.Fullname)].filter((el) => el.Fullname.includes(clientName)).map((el) => {
+                                                    {[...[...Enquiry.filter((el) => el.Fullname)].filter((el) => el.Fullname.includes(clientName)).map((el) => {
 
-                                                    return <div className='p-2 text-center' style={{ borderBottom: '1px solid #c0c0c0' }}
-                                                        onClick={selectedOption} id={el._id} >{el.Fullname}</div >
-                                                })]}
+                                                        return <div className='p-2 text-center' style={{ borderBottom: '1px solid #c0c0c0' }}
+                                                            onClick={selectedOption} id={el._id} >{el.Fullname}</div >
+                                                    })]}
 
-                                            </CCard>}
+                                                </CCard>}
 
 
 
@@ -199,22 +303,24 @@ const Appointment = () => {
                                                 onChange={(e) => setMobileno(e.target.value)}
                                             />
                                         </CCol>
-                                        <CCol xs={3} style={{position:'relative'}}>
+                                        <CCol xs={3} style={{ position: 'relative' }}>
                                             <CFormInput
                                                 className="mb-1"
                                                 aria-label="Select Service"
                                                 label="Appointment Type"
                                                 value={appointmentType}
-                                                onChange={(e)=>setAppointmentType(e.target.value)}
+                                                onChange={(e) => setAppointmentType(e.target.value)}
                                                 onFocus={ActiveDropDownHandler2}
 
                                             >
-                                                
+
 
                                             </CFormInput>
-                                         {active2 &&[...optionAppointmentTyep.filter((el) => el.includes(appointmentType))][0] &&  
-                                             <CCard   style={ {overflowY:'scroll', maxHeight: '200px', height:'auto', width: '95%',
-                                              position: 'absolute', minHeight: 'auto' }} >
+                                            {active2 && [...optionAppointmentTyep.filter((el) => el.includes(appointmentType))][0] &&
+                                                <CCard style={{
+                                                    overflowY: 'scroll', maxHeight: '200px', height: 'auto', width: '95%',
+                                                    position: 'absolute', minHeight: 'auto'
+                                                }} >
                                                     {[...optionAppointmentTyep.filter((el) => el.includes(appointmentType)).map((el) => {
                                                         return <div className='p-2 text-center' style={{ borderBottom: '1px solid #c0c0c0' }}
                                                             onClick={selectedOption2}  >{el}</div >
@@ -229,6 +335,8 @@ const Appointment = () => {
                                                 id="exampleFormControlInput1"
                                                 label="Appointment Date"
                                                 placeholder="Enter date"
+                                                value={Appontment_Date}
+                                                onChange={(e)=>setAppointmentDate(e.target.value)}
                                             />
                                         </CCol>
                                         <CCol xs={3}>
@@ -238,6 +346,8 @@ const Appointment = () => {
                                                 id="exampleFormControlInput1"
                                                 label="Fees"
                                                 placeholder="Enter Fees"
+                                                value={fess}
+                                                onChange={(e)=>setFees(e.target.value)}
                                             />
                                         </CCol>
                                         <CCol xs={3}>
@@ -245,51 +355,88 @@ const Appointment = () => {
                                                 className="mb-1"
                                                 aria-label="Select Service"
                                                 label="Staff"
-                                               
+                                                 value={staffValue}
+                                                 onChange={(e)=>setStaffValue(e.target.value)}
+
 
                                             >
                                                 <option>Select Staff</option>
-                                                
+
                                                 {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
                                                     item.username === username && (
                                                         <option key={index}>{item.FullName}</option>
                                                     )
                                                 ))}
-                                                </CFormSelect>
+                                            </CFormSelect>
                                         </CCol>
                                         <CCol xs={3}>
                                             <CFormSelect
                                                 className="mb-1"
                                                 aria-label="Select Service"
                                                 label="Appointment With"
-                                                options={[         
-                                                    {label:'Select Appointment With'},                              
-                                                    {label:'Jonas',value:'1'}
-                                                ]}
+                                                value={appointmentWith}
+                                                onChange={(e)=>setAppointmentWith(e.target.value)}
 
-                                            />
+                                            >
+                                                <option>Select Appointment With</option>
+
+                                                {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
+                                                    item.username === username && (
+                                                        <option key={index}>{item.FullName}</option>
+                                                    )
+                                                ))}
+
+                                            </CFormSelect>
                                         </CCol>
                                         <CCol xs={3}>
-                                         <CFormInput
-                                         type='time'
-                                         label='Appointment Time'
-                                          />                     
+                                            <CFormInput
+                                                type='time'
+                                                label='Appointment Time'
+                                                value={appointmentTime}
+                                                onChange={(e)=>setAppointmentTime(e.target.value)}
+                                            />
 
 
-                                        </CCol>    
+                                        </CCol>
+                                        <CCol xs={3}>
+                                            <CFormInput
+                                                type='date'
+                                                label='Booking Date'
+                                                value={bookingDate}
+                                                onChange={(e)=>setBookingDate(e.target.value)}
+                                            />
+
+
+                                        </CCol>
+                                        <CCol xs={3}>
+                                          <CFormSelect
+                                          label='Select Fees Status'
+                                          value={feesStatus}
+                                          onChange={(e)=>setFessStatus(e.target.value)}
+
+                                          >
+                                         <option>Select Fees Status</option>
+                                         <option>Full-filled</option>
+                                         <option>Not-filled</option>
+
+                                          </CFormSelect>
+
+                                        </CCol>
+
+
 
 
                                         <CCol className='mb-2 mt-4 float-end'>
-                                            <CButton className=' ms-2 float-end'>Cancel</CButton>
-                                            <CButton className=' float-end'>Book</CButton>
+                                            <CButton className=' ms-2 float-end'  onClick={() => setAppointment(!appointment)}>Cancel</CButton>
+                                            <CButton className=' float-end' onClick={()=>saveApointmentData()}>Book</CButton>
                                         </CCol>
 
                                     </CRow>
                                 </CCardBody>
                             </CCard>
                         }
-
-                        <CTable bordered style={{ borderColor: "#106103" }} responsive>
+<div style={{overflowY:'scroll'}}>
+                        <CTable  bordered style={{ borderColor: "#106103",width:'150%' }} responsive>
                             <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
                                 <CTableRow>
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
@@ -304,53 +451,38 @@ const Appointment = () => {
                                     <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Status</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Staff</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Delete</CTableHeaderCell>
+
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
+                                {appointmentData.map((el,i)=>
                                 <CTableRow>
-                                    <CTableDataCell>1</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell>{i+1}</CTableDataCell>
+                                    <CTableDataCell>{el.Booking_Date}</CTableDataCell>
+                                    <CTableDataCell>{el.Client_Name}</CTableDataCell>
+                                    <CTableDataCell>{el.Client_Number}</CTableDataCell>
+                                    <CTableDataCell>{el.Appointment_Type}</CTableDataCell>
+                                    <CTableDataCell>{el.Appointment_With}</CTableDataCell>
+                                    <CTableDataCell>{el.Appointment_Date}</CTableDataCell>
+                                    <CTableDataCell>{el.Appointment_Time}</CTableDataCell>
+                                    <CTableDataCell>{el.Fees_Status}</CTableDataCell>
+                                    <CTableDataCell>{el.Amount}</CTableDataCell>
+                                    <CTableDataCell>
+                                        {el.Status ||<CButton  onClick={()=>updateAppointmentData(el._id,el,!el.Status)} color='warning' size='sm' className='m-1'>Pending</CButton>}
+                                        {el.Status &&<CButton onClick={()=>updateAppointmentData(el._id,el,!el.Status)} color='success' size='sm' className='m-1'>Done</CButton>}
+                                    </CTableDataCell>
+                                    <CTableDataCell>{el.Staff}</CTableDataCell>
+                                    <CTableDataCell><MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={()=>
+                                         deleteAppointmentData(el._id)} size='20px' /></CTableDataCell>
+
+
+
                                 </CTableRow>
-                                <CTableRow>
-                                    <CTableDataCell>2</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
-                                <CTableRow>
-                                    <CTableDataCell>3</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
+                                )}
                             </CTableBody>
                         </CTable>
+</div>                        
                     </CCardBody>
                 </CCard>
             </CCol>
