@@ -156,7 +156,7 @@ console.log(AppointmentObj)
 
 
 const sendAppointmentData = async ()=>{
-    const data = JSON.stringify(AppointmentObj)
+    const data = AppointmentObj
 
      fetch(`${url1}/appointment`, {
         method: "POST",
@@ -164,7 +164,7 @@ const sendAppointmentData = async ()=>{
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: data
+        body: JSON.stringify(data)   
     }).then((result) => {
         getAppointmentData()
         console.log(result)
@@ -192,7 +192,7 @@ function updateAppointmentData(id,data,Status){
         body: JSON.stringify(data1)      
     }).then((result) => {
         getAppointmentData()
-      
+        console.log(result)
     })
 }
 
@@ -203,6 +203,8 @@ function saveApointmentData(){
 
 
 sendAppointmentData()
+
+setClientName(' ')
 
 
 }
