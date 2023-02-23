@@ -257,6 +257,27 @@ const Appointment = () => {
                                                 ))}
                                                 </CFormSelect>
                                         </CCol>
+                                        <CCol xs={3}>
+                                            <CFormSelect
+                                                className="mb-1"
+                                                aria-label="Select Service"
+                                                label="Appointment With"
+                                                options={[         
+                                                    {label:'Select Appointment With'},                              
+                                                    {label:'Jonas',value:'1'}
+                                                ]}
+
+                                            />
+                                        </CCol>
+                                        <CCol xs={3}>
+                                         <CFormInput
+                                         type='time'
+                                         label='Appointment Time'
+                                          />                     
+
+
+                                        </CCol>    
+
 
                                         <CCol className='mb-2 mt-4 float-end'>
                                             <CButton className=' ms-2 float-end'>Cancel</CButton>
