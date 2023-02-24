@@ -131,6 +131,7 @@ const Appointment = () => {
 
         const response = await axios.get(`${ url1 }/appointment`)       
         setAppointmentData([...response.data].reverse())
+        console.log(appointmentData)
     }
 
     useEffect(() => {
@@ -151,8 +152,10 @@ const Appointment = () => {
         "Amount": fess,
         "Status": false,
         "Staff": staffValue,
+        "Cancel":'Not'
     }
     console.log(AppointmentObj)
+    console.log(appointmentData)
 
 
     const sendAppointmentData = async () => {
@@ -182,8 +185,11 @@ const Appointment = () => {
         })
     }
 
-    function updateAppointmentData(id, data, Status) {
-        const data1 = { ...data, Status }
+    function updateAppointmentStatus(id, data, Status,Cancel1) {
+   const Cancel = Cancel1==='Not'?'Not':'cancel'
+   console.log(Cancel)
+
+        const data1 = { ...data, Status,Cancel}
         fetch(`${ url1 }/appointment/${ id }`, {
             method: 'PUT',
             headers: {
@@ -197,6 +203,9 @@ const Appointment = () => {
         })
     }
 
+
+  
+    
     function saveApointmentData() {
 
 
@@ -350,6 +359,36 @@ const Appointment = () => {
                                                 onChange={(e) => setAppointmentDate(e.target.value)}
                                             />
                                         </CCol>
+                                        <CCol xs={3}>
+                                            <CFormInput
+                                                type='time'
+                                                label='Appointment Time'
+                                                value={appointmentTime}
+                                                onChange={(e) => setAppointmentTime(e.target.value)}
+                                            />
+
+
+                                        </CCol>
+                                       
+                                        <CCol xs={3}>
+                                            <CFormSelect
+                                                className="mb-1"
+                                                aria-label="Select Service"
+                                                label="Appointment With"
+                                                value={appointmentWith}
+                                                onChange={(e) => setAppointmentWith(e.target.value)}
+
+                                            >
+                                                <option>Select Appointment With</option>
+
+                                                {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
+                                                    item.username === username && (
+                                                        <option key={index}>{item.FullName}</option>
+                                                    )
+                                                ))}
+
+                                            </CFormSelect>
+                                        </CCol>
                                        
                                         <CCol xs={3}>
                                             <CFormSelect
@@ -370,35 +409,6 @@ const Appointment = () => {
                                                 ))}
                                             </CFormSelect>
                                         </CCol>
-                                        <CCol xs={3}>
-                                            <CFormSelect
-                                                className="mb-1"
-                                                aria-label="Select Service"
-                                                label="Appointment With"
-                                                value={appointmentWith}
-                                                onChange={(e) => setAppointmentWith(e.target.value)}
-
-                                            >
-                                                <option>Select Appointment With</option>
-
-                                                {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
-                                                    item.username === username && (
-                                                        <option key={index}>{item.FullName}</option>
-                                                    )
-                                                ))}
-
-                                            </CFormSelect>
-                                        </CCol>
-                                        <CCol xs={3}>
-                                            <CFormInput
-                                                type='time'
-                                                label='Appointment Time'
-                                                value={appointmentTime}
-                                                onChange={(e) => setAppointmentTime(e.target.value)}
-                                            />
-
-
-                                        </CCol>
                                        
                                         <CCol xs={3}>
                                             <CFormSelect
@@ -409,9 +419,8 @@ const Appointment = () => {
                                             >
                                                 <option>Select Fees Status</option>
                                                 <option>Free</option>
-                                                <option>Payed</option>
+                                                <option>Paid</option>
                                                 <option>Package</option>
-
 
                                             </CFormSelect>
 
@@ -485,8 +494,10 @@ const Appointment = () => {
                                             <CTableDataCell>{el.Fees_Status}</CTableDataCell>
                                             <CTableDataCell>{el.Amount}</CTableDataCell>
                                             <CTableDataCell>
-                                                {el.Status || <CButton onClick={() => updateAppointmentData(el._id, el, !el.Status)} color='warning' size='sm' className='m-1'>Pending...</CButton>}
-                                                {el.Status && <CButton onClick={() => updateAppointmentData(el._id, el, !el.Status)} color='success' size='sm' className='m-1'>Done</CButton>}
+                                                { (el.Status ||el.Cancel==="cancel")  || <CButton onClick={() =>  updateAppointmentStatus(el._id, el, true ,'cancel')} color='warning' size='sm' className='m-1'>Pending...</CButton>}
+                                                {(el.Status &&el.Cancel!=="cancel") && <CButton onClick={() =>updateAppointmentStatus(el._id, el,false,'Not')} color='success' size='sm' className='m-1'>Done</CButton>}
+                                                {el.Cancel==="cancel" && <CButton onClick={() =>  updateAppointmentStatus(el._id, el,true,'Not')} color='danger' size='sm' className='m-1'>Cancel</CButton>}
+
                                             </CTableDataCell>
                                             <CTableDataCell>{el.Staff}</CTableDataCell>
                                             <CTableDataCell><MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() =>
