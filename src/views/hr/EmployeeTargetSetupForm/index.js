@@ -2,7 +2,13 @@ import {CForm,CCard,CCardHeader,CCardTitle,CFormInput,CCol,CFormSelect,
     CRow,CTable,CTableHead,CTableHeaderCell,CTableRow,CTableBody, 
     CTableDataCell,CButton} from '@coreui/react'
 
+import {useState} from 'react'    
+
 function EmployeeTargetSetupForm({closeForm}){
+   
+    const [TargetValue,setTargetValue] = useState('')
+
+    console.log(TargetValue)
 
 return <CCard>
 
@@ -27,13 +33,17 @@ return <CCard>
 
         <CCol lg={6}>
              <CFormSelect
-             label='Types Of Target'>
-                <option>Target 1</option>
-                <option value='Target 2'>Target 2</option>
-                <option value='Target 3'>Target 3</option>
-                <option value='Target 4'>Target 4</option>
-                <option value='Target 5'>Target 5</option>
-
+             label='Types Of Target'
+             onChange={(e)=>setTargetValue(e.target.value)}
+             >
+                <option ></option>
+                <option >Sales Target</option>
+                <option > Client Target</option>
+                <option > Calls Target</option>
+                <option >Lead Target</option>
+                <option >Renewals</option>
+                <option >Referral Leads</option>
+                <option > Media Target</option>
              </CFormSelect>
         </CCol>
   

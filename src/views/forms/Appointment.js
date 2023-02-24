@@ -29,9 +29,7 @@ import { MdDelete } from "react-icons/md";
 
 
 const optionAppointmentTyep = [
-    "Trial",
     "Diet",
-    "Yoga",
     "Treatment",
     "Other",
 ]
@@ -263,6 +261,16 @@ const Appointment = () => {
                             <CCard className='mt-1 mb-2'>
                                 <CCardBody>
                                     <CRow>
+                                    <CCol xs={3}>
+                                            <CFormInput
+                                                type='date'
+                                                label='Booking Date'
+                                                value={bookingDate}
+                                                onChange={(e) => setBookingDate(e.target.value)}
+                                            />
+
+
+                                        </CCol>
                                         <CCol xs={3} style={{ position: 'relative' }}>
                                             <CFormInput
                                                 className="mb-1"
@@ -342,17 +350,7 @@ const Appointment = () => {
                                                 onChange={(e) => setAppointmentDate(e.target.value)}
                                             />
                                         </CCol>
-                                        <CCol xs={3}>
-                                            <CFormInput
-                                                className="mb-1"
-                                                type="number"
-                                                id="exampleFormControlInput1"
-                                                label="Fees"
-                                                placeholder="Enter Fees"
-                                                value={fess}
-                                                onChange={(e) => setFees(e.target.value)}
-                                            />
-                                        </CCol>
+                                       
                                         <CCol xs={3}>
                                             <CFormSelect
                                                 className="mb-1"
@@ -401,16 +399,7 @@ const Appointment = () => {
 
 
                                         </CCol>
-                                        <CCol xs={3}>
-                                            <CFormInput
-                                                type='date'
-                                                label='Booking Date'
-                                                value={bookingDate}
-                                                onChange={(e) => setBookingDate(e.target.value)}
-                                            />
-
-
-                                        </CCol>
+                                       
                                         <CCol xs={3}>
                                             <CFormSelect
                                                 label='Select Fees Status'
@@ -419,14 +408,26 @@ const Appointment = () => {
 
                                             >
                                                 <option>Select Fees Status</option>
-                                                <option>Full-filled</option>
-                                                <option>Not-filled</option>
+                                                <option>Free</option>
+                                                <option>Payed</option>
+                                                <option>Package</option>
+
 
                                             </CFormSelect>
 
                                         </CCol>
 
-
+                                        <CCol xs={3}>
+                                            <CFormInput
+                                                className="mb-1"
+                                                type="number"
+                                                id="exampleFormControlInput1"
+                                                label="Fees"
+                                                placeholder="Enter Fees"
+                                                value={fess}
+                                                onChange={(e) => setFees(e.target.value)}
+                                            />
+                                        </CCol>
 
 
                                         <CCol className='mb-2 mt-4 float-end'>
