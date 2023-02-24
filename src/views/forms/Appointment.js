@@ -131,9 +131,8 @@ const Appointment = () => {
 
     const getAppointmentData = async () => {
 
-        const response = await axios.get(`${ url1 }/appointment`)
-        console.log(response.data)
-        setAppointmentData(response.data)
+        const response = await axios.get(`${ url1 }/appointment`)       
+        setAppointmentData([...response.data].reverse())
     }
 
     useEffect(() => {
@@ -152,7 +151,7 @@ const Appointment = () => {
         "Appointment_Time": appointmentTime,
         "Fees_Status": feesStatus,
         "Amount": fess,
-        "Status": true,
+        "Status": false,
         "Staff": staffValue,
     }
     console.log(AppointmentObj)
@@ -169,6 +168,7 @@ const Appointment = () => {
             },
             body: JSON.stringify(data)
         }).then((result) => {
+            alert('Successfully Save')
             getAppointmentData()
             console.log(result)
         })
