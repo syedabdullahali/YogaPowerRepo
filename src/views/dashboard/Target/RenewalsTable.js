@@ -4,7 +4,8 @@ import CIcon from '@coreui/icons-react'
 import {
     CButton,
     CButtonGroup,
-
+    CPagination,
+    CPaginationItem,
     CCol,
     CFormInput,
     CFormSelect,
@@ -28,6 +29,8 @@ import YogaSpinnar from 'src/views/theme/YogaSpinnar'
 function RenewalsTable() {
     const url = useSelector((el) => el.domainOfApi)
     const [renevalsData, setRenewals] = useState([])
+    const [pagination, setPagination] = useState(10)
+
 
 
     const getLiveClasses = useCallback(async function () {
@@ -121,9 +124,13 @@ function RenewalsTable() {
                 </CTableRow>
             </CTableHead>
             <CTableBody>
-                {renevalsData.map((el, i) =>
+                {renevalsData.filter((el, i) => {
+                  if (pagination - 10 < i + 1 && pagination >= i + 1) {
+                        return el
+                      }
+              }).map((el, i) =>
                     <CTableRow key={i}>
-                        <CTableDataCell>{i + 1}</CTableDataCell>
+                        <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
                         <CTableDataCell>{el.Employee}</CTableDataCell>
                         <CTableDataCell>{el.Target}</CTableDataCell>
                         <CTableDataCell>{el.No_Of_Renewals}</CTableDataCell>
@@ -138,6 +145,20 @@ function RenewalsTable() {
             <CCol style={{ width: '100%' }} className='d-flex justify-content-center '>
                 <YogaSpinnar />
             </CCol> : ''}
+
+            <div className='d-flex justify-content-center mt-3' >
+                        <CPagination aria-label="Page navigation example" style={{cursor:'pointer'}}>
+                            <CPaginationItem aria-label="Previous" onClick={() => setPagination((val) => val > 10 ? val - 10 : 10)}>
+                                <span aria-hidden="true" >&laquo;</span>
+                            </CPaginationItem>
+                            <CPaginationItem active >{pagination / 10}</CPaginationItem>
+                            {renevalsData.length > pagination / 10 * 10 && <CPaginationItem onClick={() => setPagination((val) => val < renevalsData.length ? val + 10 : val)}>{pagination / 10 + 1}</CPaginationItem>}
+                            {renevalsData.length > pagination / 10 * 20 && <CPaginationItem onClick={() => setPagination((val) => val < renevalsData.length ? val + 10 : val)}>{pagination / 10 + 2}</CPaginationItem>}
+                            <CPaginationItem aria-label="Next" onClick={() => setPagination((val) => val < renevalsData.length ? val + 10 : val)}>
+                                <span aria-hidden="true">&raquo;</span>
+                            </CPaginationItem>
+                    </CPagination>
+        </div>
     </CTabPane>
 }
 

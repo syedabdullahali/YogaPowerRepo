@@ -1,6 +1,6 @@
 import {CCard,CCardTitle,CCardHeader,CTable,CTableHead,
     CTableHeaderCell,CTableBody,CTableRow,CTableDataCell, 
-    CButton,CCol,CPagination,CPaginationItem}from '@coreui/react'
+    CButton,CCol,CPagination,CPaginationItem,}from '@coreui/react'
 import React,{useState,useEffect} from 'react'   
 import YogaSpinnar from '../theme/YogaSpinnar';
 import {MdDelete} from 'react-icons/md';
@@ -8,6 +8,7 @@ import {MdDelete} from 'react-icons/md';
 import { useSelector } from 'react-redux'
 
 import axios from 'axios'
+import { async } from '@firebase/util';
 const  EmployeeTargetSetupForm =  React.lazy(()=>import('./EmployeeTargetSetupForm'))
   
 function EmployeeTargetSheet(){
@@ -15,6 +16,7 @@ function EmployeeTargetSheet(){
   const [activeForm,setActiveForm] = useState(false)
   const [employeeTargetSheeTdata,setEmployeeTargetSeetData] = useState([])
   const [pagination, setPagination] = useState(10)
+
 
 
 const closeForm  = ()=>{
@@ -35,8 +37,35 @@ setEmployeeTargetSeetData(data.reverse())
  }
 }
 
-async function deleteEmployeeData (id){
-  console.log(id)
+console.log(findDataToDelete)
+
+
+// This Logic use To Delete Data also in Employee Target section along With Emplooye Target Sheet Data
+
+  const TargetDataDelete = async (id,url)=>{
+    const response1 = axios.get(url)     
+    response1.then(({data})=>{
+      const Data2 = [...data].find((el)=>el.Sr_No===id)
+     if([...data].find((el)=>el.Sr_No===id)){
+      async function  Delete (){
+          console.log('2 l')
+          const d = axios.delete(`${url}/${Data2._id}`)   
+        }
+      Delete()
+     }
+    })
+  }
+
+async function deleteEmployeeData (id,TypeOfTarget,EmployeeId){
+
+console.log(id,TypeOfTarget,EmployeeId)
+if(TypeOfTarget==="Sales Target"){TargetDataDelete(EmployeeId,`${url1}/salestarget`)}
+if(TypeOfTarget==="Client Target"){TargetDataDelete(EmployeeId,`${url1}/clienttarget`)}
+if(TypeOfTarget==='Calls Target'){TargetDataDelete(EmployeeId,`${url1}/callstarget`)}
+if(TypeOfTarget==='Lead Target'){TargetDataDelete(EmployeeId,`${url1}/leadstarget`)}
+if(TypeOfTarget==='Renewals'){TargetDataDelete(EmployeeId,`${url1}/renewalstarget`)}
+if(TypeOfTarget==='Referral Leads'){TargetDataDelete(EmployeeId,`${url1}/referralsleadstarget`)}
+if(TargetValue ==='Media Target'){TargetDataDelete(EmployeeId,`${url1}/mediatarget`)}
   try{
    await  axios.delete(`${url1}/employeetargetsheet/${id}`)
   getEmployeeTargetSheetData()
@@ -57,7 +86,7 @@ return <CCard>
      <CCol className='pb-4 mt-3  d-flex justify-content-end '>
   {activeForm ||<CButton onClick={()=>setActiveForm((value)=>!value)} >Add New</CButton>}
   </CCol>
-  {activeForm && <EmployeeTargetSetupForm closeForm={closeForm} getEmployeeTargetSheetData={getEmployeeTargetSheetData}/>}
+  {activeForm && <EmployeeTargetSetupForm closeForm={closeForm} getEmployeeTargetSheetData={getEmployeeTargetSheetData} data={employeeTargetSheeTdata}/>}
 
   </div>   
 
@@ -95,21 +124,21 @@ return <CCard>
              <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
              <CTableDataCell>{el.Employee}</CTableDataCell>
              <CTableDataCell>{el.Type_Of_Target}</CTableDataCell>
-             <CTableDataCell>{el.Year!=='0'&&el.Year}</CTableDataCell>
-             <CTableDataCell>{el.Jan!=='0'&&el.Jan}</CTableDataCell>
-             <CTableDataCell>{el.Feb!=='0'&&el.Feb}</CTableDataCell>
-             <CTableDataCell>{el.March!=='0'&&el.March}</CTableDataCell>
-             <CTableDataCell>{el.April!=='0'&&el.April}</CTableDataCell>
-             <CTableDataCell>{el.May!=='0'&&el.May}</CTableDataCell>
-             <CTableDataCell>{el.June!=='0'&&el.June}</CTableDataCell>
-             <CTableDataCell>{el.July!=='0'&&el.July}</CTableDataCell>
-             <CTableDataCell>{el.August !=='0'&&el.August}</CTableDataCell>
-             <CTableDataCell>{el.Sept !=='0'&&el.Sept}</CTableDataCell>
-             <CTableDataCell>{el.Oct!=='0'&& el.Oct}</CTableDataCell>
-             <CTableDataCell>{el.Nov!=='0'&&el.Nov}</CTableDataCell>
-             <CTableDataCell>{el.Dec!=='0'&&el.Dec}</CTableDataCell>
+             <CTableDataCell>{el.Year}</CTableDataCell>
+             <CTableDataCell>{el.Jan}</CTableDataCell>
+             <CTableDataCell>{el.Feb}</CTableDataCell>
+             <CTableDataCell>{el.March}</CTableDataCell>
+             <CTableDataCell>{el.April}</CTableDataCell>
+             <CTableDataCell>{el.May}</CTableDataCell>
+             <CTableDataCell>{el.June}</CTableDataCell>
+             <CTableDataCell>{el.July}</CTableDataCell>
+             <CTableDataCell>{el.August}</CTableDataCell>
+             <CTableDataCell>{el.Sept}</CTableDataCell>
+             <CTableDataCell>{el.Oct}</CTableDataCell>
+             <CTableDataCell>{el.Nov}</CTableDataCell>
+             <CTableDataCell>{el.Dec}</CTableDataCell>
              <CTableDataCell ><MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "40%" }} 
-                                                onClick={() => deleteEmployeeData(el._id)} size='20px' /></CTableDataCell>
+                                                onClick={() => deleteEmployeeData(el._id,el.Type_Of_Target,el.Id)} size='20px' /></CTableDataCell>
            </CTableRow>
             
             )}

@@ -16,7 +16,8 @@ import {
     CTableHeaderCell,
     CTableRow,
     CTabPane,
-    CSpinner
+    CPagination,
+    CPaginationItem
 } from '@coreui/react'
 import React, { useState, useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
@@ -28,6 +29,7 @@ function MeadiaTargetTable() {
 
     const url = useSelector((el) => el.domainOfApi)
     const [mediaTarget, setMediaTarget] = useState([])
+    const [pagination, setPagination] = useState(10)
 
 
     const getLiveClasses = useCallback(async function () {
@@ -125,9 +127,13 @@ function MeadiaTargetTable() {
             <CTableBody>
 
                 {
-                    mediaTarget.map((el, i) =>
+                    mediaTarget.filter((el, i) => {
+                        if (pagination - 10 < i + 1 && pagination >= i + 1) {
+                              return el
+                            }
+                    }).map((el, i) =>
                         <CTableRow>
-                            <CTableDataCell>{i + 1}</CTableDataCell>
+                            <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
                             <CTableDataCell>{el.Employee}</CTableDataCell>
                             <CTableDataCell>{el.Google_Reviews}</CTableDataCell>
                             <CTableDataCell>{el.Facebook}</CTableDataCell>
@@ -143,6 +149,20 @@ function MeadiaTargetTable() {
             <CCol style={{ width: '100%' }} className='d-flex justify-content-center '>
                 <YogaSpinnar />
             </CCol> : ''}
+
+            <div className='d-flex justify-content-center mt-3' >
+                        <CPagination aria-label="Page navigation example" style={{cursor:'pointer'}}>
+                            <CPaginationItem aria-label="Previous" onClick={() => setPagination((val) => val > 10 ? val - 10 : 10)}>
+                                <span aria-hidden="true" >&laquo;</span>
+                            </CPaginationItem>
+                            <CPaginationItem active >{pagination / 10}</CPaginationItem>
+                            {mediaTarget.length > pagination / 10 * 10 && <CPaginationItem onClick={() => setPagination((val) => val < mediaTarget.length ? val + 10 : val)}>{pagination / 10 + 1}</CPaginationItem>}
+                            {mediaTarget.length > pagination / 10 * 20 && <CPaginationItem onClick={() => setPagination((val) => val < mediaTarget.length ? val + 10 : val)}>{pagination / 10 + 2}</CPaginationItem>}
+                            <CPaginationItem aria-label="Next" onClick={() => setPagination((val) => val < mediaTarget.length ? val + 10 : val)}>
+                                <span aria-hidden="true">&raquo;</span>
+                            </CPaginationItem>
+                    </CPagination>
+        </div>   
     </CTabPane>
 }
 

@@ -16,10 +16,13 @@ import {
     CTableHeaderCell,
     CTableRow,
     CTabPane,
+    CPagination,
+    CPaginationItem
 } from '@coreui/react'
 import React, { useState, useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
+
 import YogaSpinnar from 'src/views/theme/YogaSpinnar'
 
 
@@ -27,9 +30,10 @@ import YogaSpinnar from 'src/views/theme/YogaSpinnar'
 function SalesTargetTable() {
     const url = useSelector((el) => el.domainOfApi)
     const [salesTargetData, setSalesTarget] = useState([])
+    const [pagination, setPagination] = useState(10)
+
     const getLiveClasses = useCallback(async function () {
         try {
-            // get Data 
             const response1 = await axios.get(`${ url }/salestarget`)
             setSalesTarget(response1.data)
 
@@ -128,9 +132,13 @@ function SalesTargetTable() {
             </CTableHead>
             <CTableBody>
 
-                {salesTargetData.map((el, i) =>
+                {salesTargetData.filter((el, i) => {
+                  if (pagination - 10 < i + 1 && pagination >= i + 1) {
+                        return el
+                      }
+              }).map((el, i) =>
                     <CTableRow key={i}>
-                        <CTableDataCell>{i + 1}</CTableDataCell>
+                        <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
                         <CTableDataCell>{el.Employee}</CTableDataCell>
                         <CTableDataCell>{el.Target}</CTableDataCell>
                         <CTableDataCell>{el.New_Sales}</CTableDataCell>
@@ -150,6 +158,22 @@ function SalesTargetTable() {
             <CCol style={{ width: '100%' }} className='d-flex justify-content-center '>
                 <YogaSpinnar />
             </CCol> : ''}
+
+            <div className='d-flex justify-content-center mt-3' >
+                        <CPagination aria-label="Page navigation example" style={{cursor:'pointer'}}>
+                            <CPaginationItem aria-label="Previous" onClick={() => setPagination((val) => val > 10 ? val - 10 : 10)}>
+                                <span aria-hidden="true" >&laquo;</span>
+                            </CPaginationItem>
+                            <CPaginationItem active >{pagination / 10}</CPaginationItem>
+                            {salesTargetData.length > pagination / 10 * 10 && <CPaginationItem onClick={() => setPagination((val) => val < salesTargetData.length ? val + 10 : val)}>{pagination / 10 + 1}</CPaginationItem>}
+                            {salesTargetData.length > pagination / 10 * 20 && <CPaginationItem onClick={() => setPagination((val) => val < salesTargetData.length ? val + 10 : val)}>{pagination / 10 + 2}</CPaginationItem>}
+                            <CPaginationItem aria-label="Next" onClick={() => setPagination((val) => val < salesTargetData.length ? val + 10 : val)}>
+                                <span aria-hidden="true">&raquo;</span>
+                            </CPaginationItem>
+                    </CPagination>
+        </div>
+
+
     </CTabPane>
 
 

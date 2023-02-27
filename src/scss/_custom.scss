@@ -164,18 +164,18 @@ width: 60px;
     position: absolute;
 }
 .YoagaSpinarring:nth-child(1){
-    border-bottom-width:5px ;
+    border-bottom-width:8px ;
     border-color: gray;
     animation:rotate1 1.5s linear infinite;
 }
 .YoagaSpinarring:nth-child(2){
-    border-right-width:5px ;
+    border-right-width:8px ;
     border-color: #0B5345;
     animation:rotate2 1.5s linear infinite;
 }
 
 .YoagaSpinarring:nth-child(3){
-    border-top-width:5px ;
+    border-top-width:6px ;
     border-color:blue;
     animation:rotate3 1.5s linear infinite;
 }

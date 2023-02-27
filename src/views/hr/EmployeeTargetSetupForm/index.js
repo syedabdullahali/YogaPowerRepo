@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData }) {
+function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData ,data }) {
     const url1 = useSelector((el) => el.domainOfApi)
     let user = JSON.parse(localStorage.getItem('user-info'))
     const username = user.user.username;
@@ -15,20 +15,21 @@ function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData }) {
     const [TargetValue, setTargetValue] = useState('')
     const [employeeData, setEmployeeData] = useState([])
     const [selectedEmployee, setSselectedEmployee] = useState('')
+
     const [year, setYear] = useState('')
 
-    const [monthInput1, setMonthIput1] = useState(' ')
-    const [monthInput2, setMonthIput2] = useState(' ')
-    const [monthInput3, setMonthIput3] = useState(' ')
-    const [monthInput4, setMonthIput4] = useState(' ')
-    const [monthInput5, setMonthIput5] = useState(' ')
-    const [monthInput6, setMonthIput6] = useState(' ')
-    const [monthInput7, setMonthIput7] = useState(' ')
-    const [monthInput8, setMonthIput8] = useState(' ')
-    const [monthInput9, setMonthIput9] = useState(' ')
-    const [monthInput10, setMonthIput10] = useState(' ')
-    const [monthInput11, setMonthIput11] = useState(' ')
-    const [monthInput12, setMonthIput12] = useState(' ')
+    const [monthInput1, setMonthIput1] = useState('0')
+    const [monthInput2, setMonthIput2] = useState('0')
+    const [monthInput3, setMonthIput3] = useState('0')
+    const [monthInput4, setMonthIput4] = useState('0')
+    const [monthInput5, setMonthIput5] = useState('0')
+    const [monthInput6, setMonthIput6] = useState('0')
+    const [monthInput7, setMonthIput7] = useState('0')
+    const [monthInput8, setMonthIput8] = useState('0')
+    const [monthInput9, setMonthIput9] = useState('0')
+    const [monthInput10, setMonthIput10] = useState('0')
+    const [monthInput11, setMonthIput11] = useState('0')
+    const [monthInput12, setMonthIput12] = useState('0')
 
 
     useEffect(() => {
@@ -76,33 +77,88 @@ function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData }) {
     const PostData = { ...EmployeeData, ...MonthData }
 
 
-    async function saveTargetSheetData() {
-        // To Get  Month Data To Individual Sales  
+
+
+const ValdateUserIn = [...data].some((el)=>{
+    return el.Id === selectedEmployee.split('---')[1]
+})
+
+
+
+const UserData =  [...data].find((el,i)=> el.Id ===selectedEmployee.split('---')[1])
+console.log( UserData,"ejkndjnefjefej")
+useEffect(()=>{
+
+if(!UserData){
+        setMonthIput1('0')
+        setMonthIput2('0')
+        setMonthIput3('0')
+        setMonthIput4('0')
+        setMonthIput5('0')
+        setMonthIput6('0')
+        setMonthIput7('0')
+        setMonthIput8('0')
+        setMonthIput9('0')
+        setMonthIput10('0')
+        setMonthIput11('0')
+        setMonthIput12('0')
+        setTargetValue('0')
+        setYear('0')  
+    return
+}
+  setMonthIput1(UserData.Jan)
+  setMonthIput2(UserData.Feb)
+  setMonthIput3(UserData.March)
+  setMonthIput4(UserData.April)
+  setMonthIput5(UserData.May)
+  setMonthIput6(UserData.June)
+  setMonthIput7(UserData.July)
+  setMonthIput8(UserData.August)
+  setMonthIput9(UserData.Sept)
+  setMonthIput10(UserData.Oct)
+  setMonthIput11(UserData.Nov)
+  setMonthIput12(UserData.Dec)
+  setTargetValue(UserData.TargetValue)
+  setYear(UserData.Year)
+
+},[selectedEmployee?.split('---')[1]])
+
+
+async function saveTargetSheetData() {
         for (const Key in MonthData) {
             arrMonthData.push({ "monthName": Key, "Target": (MonthData[Key] || "  ") })
         }
-        // To Send Post to info all about Sales  
-        await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
 
+if(UserData){
+await axios.put(`${ url1 }/employeetargetsheet/${UserData._id}`, JSON.stringify(PostData), {
+        headers: {
+           'Content-Type': 'application/json'
+       }
+})
+
+}else{
+await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
+     headers: {
+        'Content-Type': 'application/json'
+    }
+})
+}
 
         // Sales Target Api scope 
 
         if (TargetValue === "Sales Target") {
             const data = {
+                "Year":year,
                 "Sr_No": selectedEmployee.split('---')[1],
                 "Employee": selectedEmployee.split('---')[0],
-                "Target": " ",
-                "New_Sales": " ",
-                "Renewals": " ",
-                "Upgrade_Sales": " ",
-                "Cross_Sales": " ",
-                "Balance_Collection": " ",
-                "Total_Collected": " ",
-                "Achived": " ",
+                "Target": "0",
+                "New_Sales": "0",
+                "Renewals": "0",
+                "Upgrade_Sales": "0",
+                "Cross_Sales": "0",
+                "Balance_Collection": "0",
+                "Total_Collected": "0",
+                "Achived": "0",
                 "annualTarget": [
                     ...arrMonthData
                 ]
@@ -122,15 +178,16 @@ function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData }) {
         if (TargetValue === 'Client Target') {
 
             const data = {
+                "Year":year,
                 "Sr_No": selectedEmployee.split('---')[1],
                 "Employee": selectedEmployee.split('---')[0],
-                "Target": " ",
-                "New_Sales": " ",
-                "Reference": " ",
-                "Renewals": " ",
-                "Upgrade_Sales": " ",
-                "Cross_Selling": " ",
-                "Total_Collected": " ",
+                "Target": "0",
+                "New_Sales": "0",
+                "Reference": "0",
+                "Renewals": "0",
+                "Upgrade_Sales": "0",
+                "Cross_Selling": "0",
+                "Total_Collected": "0",
                 "Achived": " ",
                 "annualTarget": [
                     ...arrMonthData
@@ -151,13 +208,14 @@ function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData }) {
 
         if (TargetValue === 'Calls Target') {
             const data = {
+                "Year":year,
                 "Sr_No": selectedEmployee.split('---')[1],
                 "Employee": selectedEmployee.split('---')[0],
-                "Call_Target": " ",
-                "Follow_Ups": " ",
-                "Members_Call": " ",
-                "Total_Completed": " ",
-                "Achived": " ",
+                "Call_Target": "0",
+                "Follow_Ups": "0",
+                "Members_Call": "0",
+                "Total_Completed": "0",
+                "Achived": "0",
                 "__v": 0,
                 "annualTarget": [
                     ...arrMonthData
@@ -178,13 +236,14 @@ function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData }) {
         if (TargetValue === 'Lead Target') {
 
             const data = {
+                "Year":year,
                 "Sr_No": selectedEmployee.split('---')[1],
                 "Employee": selectedEmployee.split('---')[0],
-                "Lead_Assign": " ",
-                "Spot_Conversions": " ",
-                "Total_Leads_Conversion": " ",
-                "Total_Amount": " ",
-                "Achived": " ",
+                "Lead_Assign": "0",
+                "Spot_Conversions": "0",
+                "Total_Leads_Conversion": "0",
+                "Total_Amount": "0",
+                "Achived": "0",
                 "annualTarget": [
                     ...arrMonthData
                 ]
@@ -206,13 +265,14 @@ function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData }) {
         if (TargetValue === 'Renewals') {
 
             const data = {
+                "Year":year,
                 "Sr_No": selectedEmployee.split('---')[1],
                 "Employee": selectedEmployee.split('---')[0],
-                "Target": " ",
-                "No_Of_Renewals": " ",
-                "Conversion": " ",
-                "Total_Amount": " ",
-                "Achived": " ",
+                "Target": "0",
+                "No_Of_Renewals": "0",
+                "Conversion": "0",
+                "Total_Amount": "0",
+                "Achived": "0",
                 "annualTarget": [
                     ...arrMonthData
                 ]
@@ -232,13 +292,14 @@ function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData }) {
 
         if (TargetValue === 'Referral Leads') {
             const data = {
+                "Year":year,
                 "Sr_No": selectedEmployee.split('---')[1],
                 "Employee": selectedEmployee.split('---')[0],
-                "No_Of_Referrals_Target": " ",
-                "No_Of_Referrals_Leads": " ",
-                "Convert_To_Member": " ",
-                "Total_Amount": " ",
-                "Achived": " ",
+                "No_Of_Referrals_Target": "0",
+                "No_Of_Referrals_Leads": "0",
+                "Convert_To_Member": "0",
+                "Total_Amount": "0",
+                "Achived": "0",
                 "annualTarget": [
                     ...arrMonthData
                 ]
@@ -257,20 +318,18 @@ function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData }) {
 
         if (TargetValue === 'Media Target') {
             const data = {
+                "Year":year,
                 "Sr_No": selectedEmployee.split('---')[1],
                 "Employee": selectedEmployee.split('---')[0],
                 "Google_Reviews": 10,
-                "Facebook": " ",
-                "Instagram": " ",
-                "Linkedin": " ",
-                "Justdial": " ",
-                "Achived": " ",
+                "Facebook": "0",
+                "Instagram": "0",
+                "Linkedin": "0",
+                "Justdial": "0",
+                "Achived": "0",
                 "__v": 0,
                 "annualTarget": [
-                    {
-                        "monthName": " ",
-                        "Target": " "
-                    }
+                    ...arrMonthData
                 ]
             }
             async function PostRequestToMediaTarget() {
@@ -290,21 +349,21 @@ function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData }) {
         getEmployeeTargetSheetData()
         alert('Success Fully Save')
         arrMonthData = []
-        setMonthIput1(' ')
-        setMonthIput2(' ')
-        setMonthIput3(' ')
-        setMonthIput4(' ')
-        setMonthIput5(' ')
-        setMonthIput6(' ')
-        setMonthIput7(' ')
-        setMonthIput8(' ')
-        setMonthIput9(' ')
-        setMonthIput10(' ')
-        setMonthIput11(' ')
-        setMonthIput12(' ')
-        setTargetValue(' ')
-        setSselectedEmployee(' ')
-        setYear(' ')
+        // setMonthIput1('0')
+        // setMonthIput2('0')
+        // setMonthIput3('0')
+        // setMonthIput4('0')
+        // setMonthIput5('0')
+        // setMonthIput6('0')
+        // setMonthIput7('0')
+        // setMonthIput8('0')
+        // setMonthIput9('0')
+        // setMonthIput10('0')
+        // setMonthIput11('0')
+        // setMonthIput12('0')
+        // setTargetValue('0')
+        // setSselectedEmployee('0')
+        // setYear('0')
     }
 
 
