@@ -51,7 +51,6 @@ data2.then((resp) => {
         // console.error(error)
     })
 
-console.log(result.filter((el)=>el.MemberId),id,"hello world");
 
     }
     return (

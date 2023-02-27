@@ -146,3 +146,76 @@ table,th{
     border: 1.5px solid white;
     border-collapse: collapse;
 }
+
+.YoagaLoaderSpianr{
+display: flex;
+justify-content: center;
+align-items: center;
+position: relative;
+height: 60px;
+width: 60px;
+
+}
+.YoagaSpinarring{
+    height: 60px;
+    width: 60px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    position: absolute;
+}
+.YoagaSpinarring:nth-child(1){
+    border-bottom-width:5px ;
+    border-color: gray;
+    animation:rotate1 1.5s linear infinite;
+}
+.YoagaSpinarring:nth-child(2){
+    border-right-width:5px ;
+    border-color: #0B5345;
+    animation:rotate2 1.5s linear infinite;
+}
+
+.YoagaSpinarring:nth-child(3){
+    border-top-width:5px ;
+    border-color:blue;
+    animation:rotate3 1.5s linear infinite;
+}
+
+@keyframes rotate1{
+    0%{
+         transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+    }
+    100%{
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+
+    }
+}
+
+@keyframes rotate2{
+    0%{
+         transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+    }
+    100%{
+        transform: rotateX(50deg) rotateY(-10deg) rotateZ(360deg);
+
+    }
+}
+
+@keyframes rotate3{
+    0%{
+         transform: rotateX(35deg) rotateY(50deg) rotateZ(0deg);
+    }
+    100%{
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+
+    }
+}
+.loader{
+    font-size: 10px;
+    color: gray;
+    font-weight: bold;
+}
+.parent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -34,12 +34,16 @@ import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
 import axios from 'axios'
 import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md'
 import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs'
+import { useSelector } from 'react-redux'
 import moment from 'moment/moment'
 import { Link } from 'react-router-dom'
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
 const Renewals = () => {
+
+    const url1 = useSelector((el)=>el.domainOfApi) 
+
     const [select, setSelect] = useState()
     const [followForm, setFollowForm] = useState()
     const [edit, setEdit] = useState()
@@ -57,6 +61,7 @@ const Renewals = () => {
     const [Search9, setSearch9] = useState('')
     const [Search10, setSearch10] = useState('')
 
+    
     const [Name, setName] = useState("");
     const [Contact, setContact] = useState("");
     const [email, setEmail] = useState("");
@@ -222,7 +227,8 @@ const Renewals = () => {
     }
     const [ogList, setOgList] = useState([])
     function getEnquiry() {
-        axios.get(`${url}/memberForm/all`, {
+        axios.get(`${url1}/renewalsclient
+        `, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -1030,6 +1036,7 @@ const Renewals = () => {
                                 <CButton type='submit' color="primary" onClick={() => saveEnquiry()}>Update changes</CButton>
                             </CModalFooter>
                         </CModal>
+
                         <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
@@ -1206,24 +1213,22 @@ const Renewals = () => {
                                     </CTableDataCell>
                                 </CTableRow>
                                 {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                                    list.username === username && list.status === 'Renewals'
-
-                                    && list.Fullname.toLowerCase().includes(Search1.toLowerCase()) &&
-                                    list.AttendanceID.toLowerCase().includes(Search5.toLowerCase()) && list.serviceName.toLowerCase().includes(Search6.toLowerCase()) && list.fitnessGoal.toLowerCase().includes(Search7.toLowerCase())
-
+                                    list.username === username 
+                                    
                                 ).map((item, index) => (
                                     item.username === username && (
                                         <CTableRow key={index}>
                                             <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
                                             <CTableDataCell>{centerCode}MEM{index + 10 + (paging * 10)}</CTableDataCell>
-                                            <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${item._id}/1`} target="_black">{item.Fullname}</Link></CTableDataCell>
-                                            <CTableDataCell>{item.ContactNumber}</CTableDataCell>
-                                            <CTableDataCell>{item.InvoiceNo}</CTableDataCell>
-                                            <CTableDataCell>{item.AttendanceID}</CTableDataCell>
-                                            <CTableDataCell>{item.serviceName}</CTableDataCell>
-                                            <CTableDataCell>{item.startDate}</CTableDataCell>
-                                            <CTableDataCell>{item.endDate}</CTableDataCell>
-                                            <CTableDataCell>{item.fitnessGoal}</CTableDataCell>
+                                            <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }} 
+                                            to={`/clients/member-details/${item._id}/1`} target="_black">{item.Name}</Link></CTableDataCell>
+                                            <CTableDataCell>{item.Mobile_No}</CTableDataCell>
+                                            <CTableDataCell>{item.Invoice_No}</CTableDataCell>
+                                            <CTableDataCell>{item.Attendence_Id}</CTableDataCell>
+                                            <CTableDataCell>{item.Service}</CTableDataCell>
+                                            <CTableDataCell>{item.Start_Date}</CTableDataCell>
+                                            <CTableDataCell>{item.End_Date}</CTableDataCell>
+                                            <CTableDataCell>{item.Fitness_Goal}</CTableDataCell>
                                             <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${item._id}/5`} target="_black"><BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px' }} /></Link></CTableDataCell>
                                             <CTableDataCell><CButton>View</CButton></CTableDataCell>
                                             <CTableDataCell className='text-center'><CFormSwitch checked={item.status} /></CTableDataCell>
@@ -1236,6 +1241,7 @@ const Renewals = () => {
                                 ))}
                             </CTableBody>
                         </CTable>
+
                     </CCardBody>
                     <CPagination aria-label="Page navigation example" align="center" className='mt-2'>
                         <CPaginationItem aria-label="Previous" disabled={paging != 0 ? false : true} onClick={() => paging > 0 && setPaging(paging - 1)}>

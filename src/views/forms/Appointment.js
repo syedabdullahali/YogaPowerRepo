@@ -23,7 +23,7 @@ import axios from 'axios'
 const url = 'https://yog-seven.vercel.app'
 import { useSelector } from 'react-redux'
 import { MdDelete } from "react-icons/md";
-
+import YogaSpinnar from '../theme/YogaSpinnar'
 
 
 
@@ -33,6 +33,9 @@ const optionAppointmentTyep = [
     "Treatment",
     "Other",
 ]
+
+
+
 
 
 const Appointment = () => {
@@ -99,7 +102,7 @@ const Appointment = () => {
     }
 
     function getStaff() {
-        axios.get(`${ url1 }/employeeform`, {
+        axios.get(`${url1}/employeeform`, {
             headers: {
                 'Authorization': `Bearer ${ token }`
             }
@@ -129,7 +132,7 @@ const Appointment = () => {
 
     const getAppointmentData = async () => {
 
-        const response = await axios.get(`${ url1 }/appointment`)       
+        const response = await axios.get(`${ url1 }/appointment`)
         setAppointmentData([...response.data].reverse())
         console.log(appointmentData)
     }
@@ -152,7 +155,7 @@ const Appointment = () => {
         "Amount": fess,
         "Status": false,
         "Staff": staffValue,
-        "Cancel":'Not'
+        "Cancel": 'Not'
     }
     console.log(AppointmentObj)
     console.log(appointmentData)
@@ -171,7 +174,14 @@ const Appointment = () => {
         }).then((result) => {
             alert('Successfully Save')
             getAppointmentData()
-            console.log(result)
+            setAppointmentType('')
+            setAppointmentDate('')
+            setAppointmentTime('')
+            setBookingDate('')
+            setAppointmentWith('')
+            setFessStatus('')
+            setFees('')
+            setStaffValue('')
         })
 
     }
@@ -185,11 +195,11 @@ const Appointment = () => {
         })
     }
 
-    function updateAppointmentStatus(id, data, Status,Cancel1) {
-   const Cancel = Cancel1==='Not'?'Not':'cancel'
-   console.log(Cancel)
+    function updateAppointmentStatus(id, data, Status, Cancel1) {
+        const Cancel = Cancel1 === 'Not' ? 'Not' : 'cancel'
+        console.log(Cancel)
 
-        const data1 = { ...data, Status,Cancel}
+        const data1 = { ...data, Status, Cancel }
         fetch(`${ url1 }/appointment/${ id }`, {
             method: 'PUT',
             headers: {
@@ -204,8 +214,8 @@ const Appointment = () => {
     }
 
 
-  
-    
+
+
     function saveApointmentData() {
 
 
@@ -225,7 +235,7 @@ const Appointment = () => {
 
         <CRow>
             <CCol lg={12} sm={12} >
-                <CCard className='mb-3  border-top-3' style={{borderTopColor:'#0B5345'}}>
+                <CCard className='mb-3  border-top-3' style={{ borderTopColor: '#0B5345' }}>
                     <CCardHeader>
                         <strong className="mt-2">Appointment</strong>
                     </CCardHeader>
@@ -270,7 +280,7 @@ const Appointment = () => {
                             <CCard className='mt-1 mb-2'>
                                 <CCardBody>
                                     <CRow>
-                                    <CCol xs={3}>
+                                        <CCol xs={3}>
                                             <CFormInput
                                                 type='date'
                                                 label='Booking Date'
@@ -369,7 +379,7 @@ const Appointment = () => {
 
 
                                         </CCol>
-                                       
+
                                         <CCol xs={3}>
                                             <CFormSelect
                                                 className="mb-1"
@@ -389,7 +399,7 @@ const Appointment = () => {
 
                                             </CFormSelect>
                                         </CCol>
-                                       
+
                                         <CCol xs={3}>
                                             <CFormSelect
                                                 className="mb-1"
@@ -409,7 +419,7 @@ const Appointment = () => {
                                                 ))}
                                             </CFormSelect>
                                         </CCol>
-                                       
+
                                         <CCol xs={3}>
                                             <CFormSelect
                                                 label='Select Fees Status'
@@ -448,7 +458,9 @@ const Appointment = () => {
                                 </CCardBody>
                             </CCard>
                         }
-                        <div style={{ overflowY: 'scroll' }}>
+
+                        <div>
+
                             <CTable bordered style={{ borderColor: "#0B5345", width: '150%' }} responsive>
                                 <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
                                     <CTableRow>
@@ -474,13 +486,13 @@ const Appointment = () => {
                                             return el
                                         }
                                         return false
-                                    }).map((el, i) =>{
-                                         
-                                       
-                                    const hours =    el.Appointment_Time.split(":")[0]
-                                    const minute =   el.Appointment_Time.split(":")[1] 
+                                    }).map((el, i) => {
 
-                                   const Time =    +hours<12?(+hours||12)+":"+minute+"AM":   ((+hours-12 || 12) +":" +minute+"PM")
+
+                                        const hours = el.Appointment_Time.split(":")[0]
+                                        const minute = el.Appointment_Time.split(":")[1]
+
+                                        const Time = +hours < 12 ? (+hours || 12) + ":" + minute + "AM" : ((+hours - 12 || 12) + ":" + minute + "PM")
 
                                         return <CTableRow>
                                             <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
@@ -494,9 +506,9 @@ const Appointment = () => {
                                             <CTableDataCell>{el.Fees_Status}</CTableDataCell>
                                             <CTableDataCell>{el.Amount}</CTableDataCell>
                                             <CTableDataCell>
-                                                { (el.Status ||el.Cancel==="cancel")  || <CButton onClick={() =>  updateAppointmentStatus(el._id, el, true ,'cancel')} color='warning' size='sm' className='m-1'>Pending...</CButton>}
-                                                {(el.Status &&el.Cancel!=="cancel") && <CButton onClick={() =>updateAppointmentStatus(el._id, el,false,'Not')} color='success' size='sm' className='m-1'>Done</CButton>}
-                                                {el.Cancel==="cancel" && <CButton onClick={() =>  updateAppointmentStatus(el._id, el,true,'Not')} color='danger' size='sm' className='m-1'>Cancel</CButton>}
+                                                {(el.Status || el.Cancel === "cancel") || <CButton onClick={() => updateAppointmentStatus(el._id, el, true, 'cancel')} color='warning' size='sm' className='m-1'>Pending...</CButton>}
+                                                {(el.Status && el.Cancel !== "cancel") && <CButton onClick={() => updateAppointmentStatus(el._id, el, false, 'Not')} color='success' size='sm' className='m-1'>Done</CButton>}
+                                                {el.Cancel === "cancel" && <CButton onClick={() => updateAppointmentStatus(el._id, el, true, 'Not')} color='danger' size='sm' className='m-1'>Cancel</CButton>}
 
                                             </CTableDataCell>
                                             <CTableDataCell>{el.Staff}</CTableDataCell>
@@ -506,13 +518,24 @@ const Appointment = () => {
 
 
                                         </CTableRow>
-})}
+                                    })}
+
                                 </CTableBody>
+                                
                             </CTable>
+                          
+                          
                         </div>
+                        
                     </CCardBody>
+                    
+                    {!appointmentData[0] ?
+                                <CCol style={{ width: '100%' }} className='d-flex justify-content-center my-3'>
+                                    <YogaSpinnar />
+                         </CCol> : ''}
+
                     <div className='d-flex justify-content-center' >
-                        <CPagination aria-label="Page navigation example" style={{cursor:'pointer'}}>
+                        <CPagination aria-label="Page navigation example" style={{ cursor: 'pointer' }}>
                             <CPaginationItem aria-label="Previous" onClick={() => setPagination((val) => val > 10 ? val - 10 : 10)}>
                                 <span aria-hidden="true" >&laquo;</span>
                             </CPaginationItem>

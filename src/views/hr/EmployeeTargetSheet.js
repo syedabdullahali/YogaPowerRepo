@@ -2,6 +2,7 @@ import {CCard,CCardTitle,CCardHeader,CTable,CTableHead,
     CTableHeaderCell,CTableBody,CTableRow,CTableDataCell, 
     CButton,CCol,CPagination,CPaginationItem}from '@coreui/react'
 import React,{useState,useEffect} from 'react'   
+import YogaSpinnar from '../theme/YogaSpinnar';
 import {MdDelete} from 'react-icons/md';
 
 import { useSelector } from 'react-redux'
@@ -9,7 +10,6 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 const  EmployeeTargetSetupForm =  React.lazy(()=>import('./EmployeeTargetSetupForm'))
   
-
 function EmployeeTargetSheet(){
   const url1 = useSelector((el)=>el.domainOfApi) 
   const [activeForm,setActiveForm] = useState(false)
@@ -17,7 +17,7 @@ function EmployeeTargetSheet(){
   const [pagination, setPagination] = useState(10)
 
 
-  const closeForm  = ()=>{
+const closeForm  = ()=>{
     setActiveForm(false)
   }
 
@@ -26,12 +26,7 @@ useEffect(()=>{
 },[])
 
 
-
-
-
-
-async function getEmployeeTargetSheetData(){
-  
+async function getEmployeeTargetSheetData(){  
 try{  
 const {data} = await  axios.get(`${url1}/employeetargetsheet`)
 setEmployeeTargetSeetData(data.reverse())
@@ -53,11 +48,6 @@ async function deleteEmployeeData (id){
 
 
 return <CCard>
-
-
-
-   
-
      <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
          <CCardTitle className='p-2'>
             <h4>Empyolee Target Sheet</h4></CCardTitle>
@@ -72,7 +62,7 @@ return <CCard>
   </div>   
 
 
-   <div style={{overflowX:'scroll',boxSizing:'border-box'}} className='p-4'>
+   <div style={{overflowX:'scroll',boxSizing:'border-box'}} className='mx-4'>
 
      <CTable style={{width:'180%'}} className='mt-3'>
           <CTableHead >
@@ -101,7 +91,7 @@ return <CCard>
                         return el
                       }
               }).map((el,i)=>
-             <CTableRow>
+             <CTableRow key={i}>
              <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
              <CTableDataCell>{el.Employee}</CTableDataCell>
              <CTableDataCell>{el.Type_Of_Target}</CTableDataCell>
@@ -126,6 +116,10 @@ return <CCard>
 
           </CTableBody>
      </CTable>
+     {!employeeTargetSheeTdata[0] ?
+                                <CCol style={{ width: '100%' }} className='d-flex justify-content-center my-3'>
+                                    <YogaSpinnar />
+                         </CCol> : ''}
      </div>
      <div className='d-flex justify-content-center mt-3' >
                         <CPagination aria-label="Page navigation example" style={{cursor:'pointer'}}>
