@@ -25,11 +25,17 @@ import axios from 'axios'
 import YogaSpinnar from 'src/views/theme/YogaSpinnar'
 
 
-function MeadiaTargetTable() {
+function MeadiaTargetTable({EmployeeData}) {
+    let  num =0
+    let user = JSON.parse(localStorage.getItem('user-info'))
+    const username = user.user.username;
 
     const url = useSelector((el) => el.domainOfApi)
     const [mediaTarget, setMediaTarget] = useState([])
     const [pagination, setPagination] = useState(10)
+    const [selectedEmployee, setSselectedEmployee] = useState('')
+    const [selectedMonth,setSelectedMonth] = useState('')
+    const [selectedYear,setSelectedYear] = useState('')
 
 
     const getLiveClasses = useCallback(async function () {
@@ -48,23 +54,39 @@ function MeadiaTargetTable() {
 
     return <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={true}>
         <CRow className='mb-3'>
-            <CCol xs={2}>
+            <CCol sm={3}>
                 <CInputGroup>
                     <CInputGroupText
                         component="label"
                         htmlFor="inputGroupSelect01"
+
                     >
                         Month
                     </CInputGroupText>
-                    <CFormSelect id="inputGroupSelect01">
-                        <option>Sep</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </CFormSelect>
+                   <CFormSelect
+                   value={selectedMonth}
+                   onChange={(e)=>setSelectedMonth(e.target.value)}
+                   >
+                    <option>Select Your Month</option>
+                    <option>Jan</option>
+                    <option>Feb</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>Sept</option>
+                    <option>Oct</option>
+                    <option>Nov</option>
+                    <option>Dec</option>
+
+                   </CFormSelect>
+                    
                 </CInputGroup>
+                
             </CCol>
-            <CCol xs={2}>
+            <CCol sm={3}>
                 <CInputGroup>
                     <CInputGroupText
                         component="label"
@@ -72,38 +94,52 @@ function MeadiaTargetTable() {
                     >
                         Year
                     </CInputGroupText>
-                    <CFormSelect id="inputGroupSelect01">
-                        <option>2022</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </CFormSelect>
+                   <CFormSelect
+                   value={selectedYear}
+                   onChange={(e)=>setSelectedYear(e.target.value)}
+                   >
+                      <option>Select Year</option>
+                      <option>{new Date().getFullYear() - 9}</option>
+                        <option >{new Date().getFullYear() - 8}</option>
+                        <option >{new Date().getFullYear() - 7}</option>
+                        <option >{new Date().getFullYear() - 6}</option>
+                        <option> {new Date().getFullYear()-5}</option>
+                        <option>{new Date().getFullYear() - 4}</option>
+                        <option >{new Date().getFullYear() - 3}</option>
+                        <option >{new Date().getFullYear() - 2}</option>
+                        <option >{new Date().getFullYear() - 1}</option>
+                        <option> {new Date().getFullYear()}</option>
+
+                   </CFormSelect>
+                    
                 </CInputGroup>
+                
             </CCol>
             <CCol>
                 <CInputGroup className="left">
-                    <CFormInput
-                        placeholder="Staff Name"
-                        aria-label="Recipient's username"
-                        aria-describedby="button-addon2"
-                    />
-                    <CButton type="button" color="primary" id="button-addon2">
-                        Go
-                    </CButton>
+                <CInputGroupText
+                        component="label"
+                        htmlFor="inputGroupSelect01"
+                    >
+                       Employee
+                    </CInputGroupText>
+                <CFormSelect 
+                    value={selectedEmployee}
+                    onChange={(e) => setSselectedEmployee(e.target.value)}
+                >
+                    <option >Select Your Employee </option>
+
+                    {EmployeeData.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
+                        item.username === username && (
+                            <option key={index} value={item._id} >{item.FullName}</option>
+                        )
+                    ))}
+
+                </CFormSelect>
+                 
                 </CInputGroup>
             </CCol>
-            <CCol>
-                <CButtonGroup>
-                    <CButton color="primary">
-                        <CIcon icon={cilArrowCircleBottom} />
-                        Import
-                    </CButton>
-                    <CButton color="primary">
-                        <CIcon icon={cilArrowCircleTop} />
-                        Export
-                    </CButton>
-                </CButtonGroup>
-            </CCol>
+            
         </CRow>
         <CTable bordered borderColor="black" responsive>
             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
@@ -126,7 +162,7 @@ function MeadiaTargetTable() {
 
             <CTableBody>
 
-                {
+                {/* {
                     mediaTarget.filter((el, i) => {
                         if (pagination - 10 < i + 1 && pagination >= i + 1) {
                               return el
@@ -142,7 +178,36 @@ function MeadiaTargetTable() {
                             <CTableDataCell>{el.Justdial}</CTableDataCell>
                             <CTableDataCell>{el.Achived}</CTableDataCell>
                         </CTableRow>
-                    )}
+                    )} */}
+                    {[... mediaTarget.filter((el4)=>{
+    if(selectedYear){
+     return el4.Year===selectedYear
+    }else if(selectedEmployee){
+    return el4.Sr_No===selectedEmployee
+    }else{
+    return el4
+    }
+}).map(el=>el.annualTarget.filter((el3)=>selectedMonth?el3.monthName===selectedMonth:el3)
+.map((el2,i)=>{
+        if(+el2.Target){
+            num++
+            return  <CTableRow key={num}>
+            <CTableDataCell>{num}</CTableDataCell>
+            <CTableDataCell>{el.Employee}</CTableDataCell>
+                            <CTableDataCell>{el.Google_Reviews}</CTableDataCell>
+                            <CTableDataCell>{el.Facebook}</CTableDataCell>
+                            <CTableDataCell>{el.Instagram}</CTableDataCell>
+                            <CTableDataCell>{el.Linkedin}</CTableDataCell>
+                            <CTableDataCell>{el.Justdial}</CTableDataCell>
+                            <CTableDataCell>{el.Achived}</CTableDataCell>
+        </CTableRow>    
+        }
+    }).filter((el)=>el)).flat(2)].filter((el, i) => {
+        if (pagination - 10 < i + 1 && pagination >= i + 1) {
+              return el
+            }
+    })
+}
             </CTableBody>
         </CTable>
         {!mediaTarget[0] ?
@@ -151,18 +216,18 @@ function MeadiaTargetTable() {
             </CCol> : ''}
 
             <div className='d-flex justify-content-center mt-3' >
-                        <CPagination aria-label="Page navigation example" style={{cursor:'pointer'}}>
+                <CPagination aria-label="Page navigation example" style={{cursor:'pointer'}}>
                             <CPaginationItem aria-label="Previous" onClick={() => setPagination((val) => val > 10 ? val - 10 : 10)}>
                                 <span aria-hidden="true" >&laquo;</span>
                             </CPaginationItem>
                             <CPaginationItem active >{pagination / 10}</CPaginationItem>
-                            {mediaTarget.length > pagination / 10 * 10 && <CPaginationItem onClick={() => setPagination((val) => val < mediaTarget.length ? val + 10 : val)}>{pagination / 10 + 1}</CPaginationItem>}
-                            {mediaTarget.length > pagination / 10 * 20 && <CPaginationItem onClick={() => setPagination((val) => val < mediaTarget.length ? val + 10 : val)}>{pagination / 10 + 2}</CPaginationItem>}
-                            <CPaginationItem aria-label="Next" onClick={() => setPagination((val) => val < mediaTarget.length ? val + 10 : val)}>
+                            {num > pagination / 10 * 10 && <CPaginationItem onClick={() => setPagination((val) => val < num ? val + 10 : val)}>{pagination / 10 + 1}</CPaginationItem>}
+                            {num > pagination / 10 * 20 && <CPaginationItem onClick={() => setPagination((val) => val < num ? val + 10 : val)}>{pagination / 10 + 2}</CPaginationItem>}
+                            <CPaginationItem aria-label="Next" onClick={() => setPagination((val) => val < num ? val + 10 : val)}>
                                 <span aria-hidden="true">&raquo;</span>
                             </CPaginationItem>
-                    </CPagination>
-        </div>   
+                 </CPagination>
+          </div>      
     </CTabPane>
 }
 

@@ -38,9 +38,27 @@ const ReferralLeadsData = React.lazy(()=>import('./Target/ReferralLeadsData'))
 const MeadiaTargetTable = React.lazy(()=>import('./Target/MediaTargetTable'))
 
 
-const SalesTarget = () => {
-    const [activeKey, setActiveKey] = useState(1)
 
+
+const SalesTarget = () => {
+    const url = useSelector((el) => el.domainOfApi)
+    const [activeKey, setActiveKey] = useState(1)
+    const [employeeData, setEmployeeData] = useState([])
+
+
+    async function getEmployee() {
+        try {
+            const { data } = await axios.get(`${ url }/employeeform`)
+            setEmployeeData(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    useEffect(() => {
+        getEmployee()
+}, [])
 
 
 
@@ -130,13 +148,13 @@ const SalesTarget = () => {
                     <CCardBody>
                         <CTabContent>
                           
-                            {activeKey===1&& <SalesTargetTable/>}
-                            {activeKey===2&&<ClinetTargetTabel/>}
-                            {activeKey===3&&<CallesTargetTable/>} 
-                            {activeKey===4&&<LeadTargetTable/>}                                                      
-                            {activeKey===5&& <RenewalsTable/>}
-                            {activeKey===6&&<ReferralLeadsData/>}
-                            {activeKey ===7&&<MeadiaTargetTable/>}                 
+                            {activeKey===1&& <SalesTargetTable EmployeeData ={employeeData}/>}
+                            {activeKey===2&&<ClinetTargetTabel EmployeeData ={employeeData}/>}
+                            {activeKey===3&&<CallesTargetTable EmployeeData ={employeeData}/>} 
+                            {activeKey===4&&<LeadTargetTable EmployeeData ={employeeData}/>}                                                      
+                            {activeKey===5&& <RenewalsTable EmployeeData ={employeeData}/>}
+                            {activeKey===6&&<ReferralLeadsData EmployeeData ={employeeData}/>}
+                            {activeKey ===7&&<MeadiaTargetTable EmployeeData ={employeeData}/>}                 
                         </CTabContent>
                     </CCardBody>
                 </CCard>

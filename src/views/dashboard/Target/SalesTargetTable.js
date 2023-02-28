@@ -27,11 +27,23 @@ import YogaSpinnar from 'src/views/theme/YogaSpinnar'
 
 
 
-function SalesTargetTable() {
+function SalesTargetTable({EmployeeData}) {
     let num = 0
     const url = useSelector((el) => el.domainOfApi)
+    
     const [salesTargetData, setSalesTarget] = useState([])
     const [pagination, setPagination] = useState(10)
+
+    const [selectedEmployee, setSselectedEmployee] = useState('')
+    const [selectedMonth,setSelectedMonth] = useState('')
+    const [selectedYear,setSelectedYear] = useState('')
+
+    let user = JSON.parse(localStorage.getItem('user-info'))
+    const username = user.user.username;
+
+
+  
+
 
     const getLiveClasses = useCallback(async function () {
         try {
@@ -45,7 +57,7 @@ function SalesTargetTable() {
 
     useEffect(() => {
         getLiveClasses()
-    }, [getLiveClasses])
+    }, [])
 
 
     console.log([...salesTargetData.map(el=>el.annualTarget.map((el2)=>{
@@ -53,6 +65,9 @@ function SalesTargetTable() {
             return [el.Employee,el2.Target]        
         }
     }).filter((el)=>el)).flat(2)])
+
+
+console.log(selectedEmployee,selectedMonth,selectedYear)
 
 
     return <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={true}>
@@ -63,10 +78,14 @@ function SalesTargetTable() {
                     <CInputGroupText
                         component="label"
                         htmlFor="inputGroupSelect01"
+
                     >
                         Month
                     </CInputGroupText>
-                   <CFormSelect>
+                   <CFormSelect
+                   value={selectedMonth}
+                   onChange={(e)=>setSelectedMonth(e.target.value)}
+                   >
                     <option>Select Your Month</option>
                     <option>Jan</option>
                     <option>Feb</option>
@@ -81,7 +100,6 @@ function SalesTargetTable() {
                     <option>Nov</option>
                     <option>Dec</option>
 
-
                    </CFormSelect>
                     
                 </CInputGroup>
@@ -95,7 +113,10 @@ function SalesTargetTable() {
                     >
                         Year
                     </CInputGroupText>
-                   <CFormSelect>
+                   <CFormSelect
+                   value={selectedYear}
+                   onChange={(e)=>setSelectedYear(e.target.value)}
+                   >
                       <option>Select Year</option>
                       <option>{new Date().getFullYear() - 9}</option>
                         <option >{new Date().getFullYear() - 8}</option>
@@ -115,34 +136,32 @@ function SalesTargetTable() {
             </CCol>
             <CCol>
                 <CInputGroup className="left">
-                    <CFormInput
-                        placeholder="Staff Name"
-                        aria-label="Recipient's username"
-                        aria-describedby="button-addon2"
-                    />
-                    <CButton type="button" color="primary" id="button-addon2">
-                        Go
-                    </CButton>
+                <CInputGroupText
+                        component="label"
+                        htmlFor="inputGroupSelect01"
+                    >
+                       Employee
+                    </CInputGroupText>
+                <CFormSelect 
+                    value={selectedEmployee}
+                    onChange={(e) => setSselectedEmployee(e.target.value)}
+                >
+                    <option >Select Your Employee </option>
+
+                    {EmployeeData.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
+                        item.username === username && (
+                            <option key={index} value={item._id} >{item.FullName}</option>
+                        )
+                    ))}
+
+                </CFormSelect>
+                 
                 </CInputGroup>
             </CCol>
             
         </CRow>
 
-        <CRow>
-       
-            <CCol>
-                <CButtonGroup>
-                    <CButton color="primary">
-                        <CIcon icon={cilArrowCircleBottom} />
-                        Import
-                    </CButton>
-                    <CButton color="primary">
-                        <CIcon icon={cilArrowCircleTop} />
-                        Export
-                    </CButton>
-                </CButtonGroup>
-            </CCol>
-        </CRow>
+        
         <CTable bordered borderColor="black" responsive>
             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                 <CTableRow>
@@ -167,33 +186,23 @@ function SalesTargetTable() {
                 </CTableRow>
             </CTableHead>
             <CTableBody>
-
-                {/* {salesTargetData.filter((el, i) => {
-                  if (pagination - 10 < i + 1 && pagination >= i + 1) {
-                        return el
-                      }
-              }).map((el, i) =>{
-                
-                    return <CTableRow key={i}>
-                        <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
-                        <CTableDataCell>{el.Employee}</CTableDataCell>
-                        <CTableDataCell>{el.Target}</CTableDataCell>
-                        <CTableDataCell>{el.New_Sales}</CTableDataCell>
-                        <CTableDataCell>{el.Renewals}</CTableDataCell>
-                        <CTableDataCell>{el.Upgrade_Sales}</CTableDataCell>
-                        <CTableDataCell>{el.Cross_Sales}</CTableDataCell>
-                        <CTableDataCell>{el.Balance_Collection}</CTableDataCell>
-                        <CTableDataCell>{el.Total_Collected}</CTableDataCell>
-                        <CTableDataCell>{el.Achived}</CTableDataCell>
-                    </CTableRow>
-})} */}
+   
 
 
-{[...salesTargetData.map(el=>el.annualTarget.map((el2,i)=>{
+{[...salesTargetData.filter((el4)=>{
+    if(selectedYear){
+     return el4.Year===selectedYear
+    }else if(selectedEmployee){
+    return el4.Sr_No===selectedEmployee
+    }else{
+    return el4
+    }
+}).map(el=>el.annualTarget.filter((el3)=>selectedMonth?el3.monthName===selectedMonth:el3)
+.map((el2,i)=>{
         if(+el2.Target){
             num++
             return  <CTableRow key={num}>
-            <CTableDataCell>{num  + pagination - 10}</CTableDataCell>
+            <CTableDataCell>{num }</CTableDataCell>
             <CTableDataCell>{el.Employee}</CTableDataCell>
             <CTableDataCell>{el2.Target}</CTableDataCell>
             <CTableDataCell>{el.New_Sales}</CTableDataCell>
@@ -205,7 +214,11 @@ function SalesTargetTable() {
             <CTableDataCell>{el.Achived}</CTableDataCell>
         </CTableRow>       
         }
-    }).filter((el)=>el)).flat(2)]
+    }).filter((el)=>el)).flat(2)].filter((el, i) => {
+        if (pagination - 10 < i + 1 && pagination >= i + 1) {
+              return el
+            }
+    })
 }
 
 
@@ -222,9 +235,9 @@ function SalesTargetTable() {
                                 <span aria-hidden="true" >&laquo;</span>
                             </CPaginationItem>
                             <CPaginationItem active >{pagination / 10}</CPaginationItem>
-                            {salesTargetData.length > pagination / 10 * 10 && <CPaginationItem onClick={() => setPagination((val) => val < salesTargetData.length ? val + 10 : val)}>{pagination / 10 + 1}</CPaginationItem>}
-                            {salesTargetData.length > pagination / 10 * 20 && <CPaginationItem onClick={() => setPagination((val) => val < salesTargetData.length ? val + 10 : val)}>{pagination / 10 + 2}</CPaginationItem>}
-                            <CPaginationItem aria-label="Next" onClick={() => setPagination((val) => val < salesTargetData.length ? val + 10 : val)}>
+                            {num > pagination / 10 * 10 && <CPaginationItem onClick={() => setPagination((val) => val < num ? val + 10 : val)}>{pagination / 10 + 1}</CPaginationItem>}
+                            {num > pagination / 10 * 20 && <CPaginationItem onClick={() => setPagination((val) => val < num ? val + 10 : val)}>{pagination / 10 + 2}</CPaginationItem>}
+                            <CPaginationItem aria-label="Next" onClick={() => setPagination((val) => val < num.length ? val + 10 : val)}>
                                 <span aria-hidden="true">&raquo;</span>
                             </CPaginationItem>
                     </CPagination>

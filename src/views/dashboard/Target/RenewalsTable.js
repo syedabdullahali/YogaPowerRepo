@@ -26,11 +26,16 @@ import axios from 'axios'
 import YogaSpinnar from 'src/views/theme/YogaSpinnar'
 
 
-function RenewalsTable() {
+function RenewalsTable({EmployeeData}) {
     const url = useSelector((el) => el.domainOfApi)
     const [renevalsData, setRenewals] = useState([])
     const [pagination, setPagination] = useState(10)
+    const [selectedEmployee, setSselectedEmployee] = useState('')
+    const [selectedMonth,setSelectedMonth] = useState('')
+    const [selectedYear,setSelectedYear] = useState('')
     let num =0
+    let user = JSON.parse(localStorage.getItem('user-info'))
+    const username = user.user.username;
 
 
     const getLiveClasses = useCallback(async function () {
@@ -48,24 +53,40 @@ function RenewalsTable() {
 
 
     return <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={true}>
-        <CRow className='mb-3'>
-            <CCol xs={2}>
+       <CRow className='mb-3'>
+            <CCol sm={3}>
                 <CInputGroup>
                     <CInputGroupText
                         component="label"
                         htmlFor="inputGroupSelect01"
+
                     >
                         Month
                     </CInputGroupText>
-                    <CFormSelect id="inputGroupSelect01">
-                        <option>Sep</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </CFormSelect>
+                   <CFormSelect
+                   value={selectedMonth}
+                   onChange={(e)=>setSelectedMonth(e.target.value)}
+                   >
+                    <option>Select Your Month</option>
+                    <option>Jan</option>
+                    <option>Feb</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>Sept</option>
+                    <option>Oct</option>
+                    <option>Nov</option>
+                    <option>Dec</option>
+
+                   </CFormSelect>
+                    
                 </CInputGroup>
+                
             </CCol>
-            <CCol xs={2}>
+            <CCol sm={3}>
                 <CInputGroup>
                     <CInputGroupText
                         component="label"
@@ -73,38 +94,52 @@ function RenewalsTable() {
                     >
                         Year
                     </CInputGroupText>
-                    <CFormSelect id="inputGroupSelect01">
-                        <option>2022</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </CFormSelect>
+                   <CFormSelect
+                   value={selectedYear}
+                   onChange={(e)=>setSelectedYear(e.target.value)}
+                   >
+                      <option>Select Year</option>
+                      <option>{new Date().getFullYear() - 9}</option>
+                        <option >{new Date().getFullYear() - 8}</option>
+                        <option >{new Date().getFullYear() - 7}</option>
+                        <option >{new Date().getFullYear() - 6}</option>
+                        <option> {new Date().getFullYear()-5}</option>
+                        <option>{new Date().getFullYear() - 4}</option>
+                        <option >{new Date().getFullYear() - 3}</option>
+                        <option >{new Date().getFullYear() - 2}</option>
+                        <option >{new Date().getFullYear() - 1}</option>
+                        <option> {new Date().getFullYear()}</option>
+
+                   </CFormSelect>
+                    
                 </CInputGroup>
+                
             </CCol>
             <CCol>
                 <CInputGroup className="left">
-                    <CFormInput
-                        placeholder="Staff Name"
-                        aria-label="Recipient's username"
-                        aria-describedby="button-addon2"
-                    />
-                    <CButton type="button" color="primary" id="button-addon2">
-                        Go
-                    </CButton>
+                <CInputGroupText
+                        component="label"
+                        htmlFor="inputGroupSelect01"
+                    >
+                       Employee
+                    </CInputGroupText>
+                <CFormSelect 
+                    value={selectedEmployee}
+                    onChange={(e) => setSselectedEmployee(e.target.value)}
+                >
+                    <option >Select Your Employee </option>
+
+                    {EmployeeData.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
+                        item.username === username && (
+                            <option key={index} value={item._id} >{item.FullName}</option>
+                        )
+                    ))}
+
+                </CFormSelect>
+                 
                 </CInputGroup>
             </CCol>
-            <CCol>
-                <CButtonGroup>
-                    <CButton color="primary">
-                        <CIcon icon={cilArrowCircleBottom} />
-                        Import
-                    </CButton>
-                    <CButton color="primary">
-                        <CIcon icon={cilArrowCircleTop} />
-                        Export
-                    </CButton>
-                </CButtonGroup>
-            </CCol>
+            
         </CRow>
         <CTable bordered borderColor="black" responsive>
             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
@@ -139,7 +174,7 @@ function RenewalsTable() {
                         <CTableDataCell>{el.Achived}</CTableDataCell>
                     </CTableRow>
                 )} */}
-         {[...renevalsData.map(el=>el.annualTarget.map((el2,i)=>{
+         {/* {[...renevalsData.map(el=>el.annualTarget.map((el2,i)=>{
         if(+el2.Target){
             num++
             return  <CTableRow key={num}>
@@ -153,9 +188,40 @@ function RenewalsTable() {
         </CTableRow>      
         }
     }).filter((el)=>el)).flat(2)]
+
+    
+} */}
+
+
+
+{[...renevalsData.filter((el4)=>{
+    if(selectedYear){
+     return el4.Year===selectedYear
+    }else if(selectedEmployee){
+    return el4.Sr_No===selectedEmployee
+    }else{
+    return el4
+    }
+}).map(el=>el.annualTarget.filter((el3)=>selectedMonth?el3.monthName===selectedMonth:el3)
+.map((el2)=>{
+        if(+el2.Target){
+            num++
+            return  <CTableRow key={num}>
+            <CTableDataCell>{num }</CTableDataCell>
+            <CTableDataCell>{el.Employee}</CTableDataCell>
+            <CTableDataCell>{el2.Target}</CTableDataCell>
+            <CTableDataCell>{el.No_Of_Renewals}</CTableDataCell>
+            <CTableDataCell>{el.Conversion}</CTableDataCell>
+            <CTableDataCell>{el.Total_Amount}</CTableDataCell>
+            <CTableDataCell>{el.Achived}</CTableDataCell>
+        </CTableRow>       
+        }
+    }).filter((el)=>el)).flat(2)].filter((el, i) => {
+        if (pagination - 10 < i + 1 && pagination >= i + 1) {
+              return el
+            }
+    })
 }
-
-
 
 
             </CTableBody>
@@ -171,9 +237,9 @@ function RenewalsTable() {
                                 <span aria-hidden="true" >&laquo;</span>
                             </CPaginationItem>
                             <CPaginationItem active >{pagination / 10}</CPaginationItem>
-                            {renevalsData.length > pagination / 10 * 10 && <CPaginationItem onClick={() => setPagination((val) => val < renevalsData.length ? val + 10 : val)}>{pagination / 10 + 1}</CPaginationItem>}
-                            {renevalsData.length > pagination / 10 * 20 && <CPaginationItem onClick={() => setPagination((val) => val < renevalsData.length ? val + 10 : val)}>{pagination / 10 + 2}</CPaginationItem>}
-                            <CPaginationItem aria-label="Next" onClick={() => setPagination((val) => val < renevalsData.length ? val + 10 : val)}>
+                            {num > pagination / 10 * 10 && <CPaginationItem onClick={() => setPagination((val) => val < num ? val + 10 : val)}>{pagination / 10 + 1}</CPaginationItem>}
+                            {num > pagination / 10 * 20 && <CPaginationItem onClick={() => setPagination((val) => val < num ? val + 10 : val)}>{pagination / 10 + 2}</CPaginationItem>}
+                            <CPaginationItem aria-label="Next" onClick={() => setPagination((val) => val < num.length ? val + 10 : val)}>
                                 <span aria-hidden="true">&raquo;</span>
                             </CPaginationItem>
                     </CPagination>
