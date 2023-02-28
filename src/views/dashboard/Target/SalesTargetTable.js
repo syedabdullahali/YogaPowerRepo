@@ -28,6 +28,7 @@ import YogaSpinnar from 'src/views/theme/YogaSpinnar'
 
 
 function SalesTargetTable() {
+    let num = 0
     const url = useSelector((el) => el.domainOfApi)
     const [salesTargetData, setSalesTarget] = useState([])
     const [pagination, setPagination] = useState(10)
@@ -47,10 +48,17 @@ function SalesTargetTable() {
     }, [getLiveClasses])
 
 
+    console.log([...salesTargetData.map(el=>el.annualTarget.map((el2)=>{
+        if(+el2.Target){
+            return [el.Employee,el2.Target]        
+        }
+    }).filter((el)=>el)).flat(2)])
+
+
     return <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={true}>
 
         <CRow className='mb-3'>
-            <CCol xs={2}>
+            <CCol sm={3}>
                 <CInputGroup>
                     <CInputGroupText
                         component="label"
@@ -58,15 +66,28 @@ function SalesTargetTable() {
                     >
                         Month
                     </CInputGroupText>
-                    <CFormSelect id="inputGroupSelect01">
-                        <option>Sep</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </CFormSelect>
+                   <CFormSelect>
+                    <option>Select Your Month</option>
+                    <option>Jan</option>
+                    <option>Feb</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>Sept</option>
+                    <option>Oct</option>
+                    <option>Nov</option>
+                    <option>Dec</option>
+
+
+                   </CFormSelect>
+                    
                 </CInputGroup>
+                
             </CCol>
-            <CCol xs={2}>
+            <CCol sm={3}>
                 <CInputGroup>
                     <CInputGroupText
                         component="label"
@@ -74,13 +95,23 @@ function SalesTargetTable() {
                     >
                         Year
                     </CInputGroupText>
-                    <CFormSelect id="inputGroupSelect01">
-                        <option>2022</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </CFormSelect>
+                   <CFormSelect>
+                      <option>Select Year</option>
+                      <option>{new Date().getFullYear() - 9}</option>
+                        <option >{new Date().getFullYear() - 8}</option>
+                        <option >{new Date().getFullYear() - 7}</option>
+                        <option >{new Date().getFullYear() - 6}</option>
+                        <option> {new Date().getFullYear()-5}</option>
+                        <option>{new Date().getFullYear() - 4}</option>
+                        <option >{new Date().getFullYear() - 3}</option>
+                        <option >{new Date().getFullYear() - 2}</option>
+                        <option >{new Date().getFullYear() - 1}</option>
+                        <option> {new Date().getFullYear()}</option>
+
+                   </CFormSelect>
+                    
                 </CInputGroup>
+                
             </CCol>
             <CCol>
                 <CInputGroup className="left">
@@ -94,6 +125,11 @@ function SalesTargetTable() {
                     </CButton>
                 </CInputGroup>
             </CCol>
+            
+        </CRow>
+
+        <CRow>
+       
             <CCol>
                 <CButtonGroup>
                     <CButton color="primary">
@@ -132,12 +168,13 @@ function SalesTargetTable() {
             </CTableHead>
             <CTableBody>
 
-                {salesTargetData.filter((el, i) => {
+                {/* {salesTargetData.filter((el, i) => {
                   if (pagination - 10 < i + 1 && pagination >= i + 1) {
                         return el
                       }
-              }).map((el, i) =>
-                    <CTableRow key={i}>
+              }).map((el, i) =>{
+                
+                    return <CTableRow key={i}>
                         <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
                         <CTableDataCell>{el.Employee}</CTableDataCell>
                         <CTableDataCell>{el.Target}</CTableDataCell>
@@ -149,7 +186,27 @@ function SalesTargetTable() {
                         <CTableDataCell>{el.Total_Collected}</CTableDataCell>
                         <CTableDataCell>{el.Achived}</CTableDataCell>
                     </CTableRow>
-                )}
+})} */}
+
+
+{[...salesTargetData.map(el=>el.annualTarget.map((el2,i)=>{
+        if(+el2.Target){
+            num++
+            return  <CTableRow key={num}>
+            <CTableDataCell>{num  + pagination - 10}</CTableDataCell>
+            <CTableDataCell>{el.Employee}</CTableDataCell>
+            <CTableDataCell>{el2.Target}</CTableDataCell>
+            <CTableDataCell>{el.New_Sales}</CTableDataCell>
+            <CTableDataCell>{el.Renewals}</CTableDataCell>
+            <CTableDataCell>{el.Upgrade_Sales}</CTableDataCell>
+            <CTableDataCell>{el.Cross_Sales}</CTableDataCell>
+            <CTableDataCell>{el.Balance_Collection}</CTableDataCell>
+            <CTableDataCell>{el.Total_Collected}</CTableDataCell>
+            <CTableDataCell>{el.Achived}</CTableDataCell>
+        </CTableRow>       
+        }
+    }).filter((el)=>el)).flat(2)]
+}
 
 
             </CTableBody>

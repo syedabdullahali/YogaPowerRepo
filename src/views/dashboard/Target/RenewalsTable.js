@@ -30,7 +30,7 @@ function RenewalsTable() {
     const url = useSelector((el) => el.domainOfApi)
     const [renevalsData, setRenewals] = useState([])
     const [pagination, setPagination] = useState(10)
-
+    let num =0
 
 
     const getLiveClasses = useCallback(async function () {
@@ -124,7 +124,7 @@ function RenewalsTable() {
                 </CTableRow>
             </CTableHead>
             <CTableBody>
-                {renevalsData.filter((el, i) => {
+                {/* {renevalsData.filter((el, i) => {
                   if (pagination - 10 < i + 1 && pagination >= i + 1) {
                         return el
                       }
@@ -138,7 +138,26 @@ function RenewalsTable() {
                         <CTableDataCell>{el.Total_Amount}</CTableDataCell>
                         <CTableDataCell>{el.Achived}</CTableDataCell>
                     </CTableRow>
-                )}
+                )} */}
+         {[...renevalsData.map(el=>el.annualTarget.map((el2,i)=>{
+        if(+el2.Target){
+            num++
+            return  <CTableRow key={num}>
+            <CTableDataCell>{num+ pagination - 10}</CTableDataCell>
+            <CTableDataCell>{el.Employee}</CTableDataCell>
+            <CTableDataCell>{el2.Target}</CTableDataCell>
+            <CTableDataCell>{el.No_Of_Renewals}</CTableDataCell>
+            <CTableDataCell>{el.Conversion}</CTableDataCell>
+            <CTableDataCell>{el.Total_Amount}</CTableDataCell>
+            <CTableDataCell>{el.Achived}</CTableDataCell>
+        </CTableRow>      
+        }
+    }).filter((el)=>el)).flat(2)]
+}
+
+
+
+
             </CTableBody>
         </CTable>
         {!renevalsData[0] ?

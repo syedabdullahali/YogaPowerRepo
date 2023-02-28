@@ -37,19 +37,36 @@ setEmployeeTargetSeetData(data.reverse())
  }
 }
 
-console.log(findDataToDelete)
-
 
 // This Logic use To Delete Data also in Employee Target section along With Emplooye Target Sheet Data
+let id1 = ''
+
+const DeleteParentApiData = async ()=>{
+  await axios.delete(`${url1}/employeetargetsheet/${id1}`).then(()=>{
+    getEmployeeTargetSheetData()
+  })
+
+
+}
 
   const TargetDataDelete = async (id,url)=>{
     const response1 = axios.get(url)     
     response1.then(({data})=>{
       const Data2 = [...data].find((el)=>el.Sr_No===id)
+      if(Data2===undefined){
+        DeleteParentApiData() 
+        return 
+      }
+     
      if([...data].find((el)=>el.Sr_No===id)){
       async function  Delete (){
           console.log('2 l')
-          const d = axios.delete(`${url}/${Data2._id}`)   
+          const d = axios.delete(`${url}/${Data2._id}`)
+          d.then((res)=>{
+            DeleteParentApiData()
+          }).catch((error)=>{
+            alert('Network Error')
+          })   
         }
       Delete()
      }
@@ -57,8 +74,8 @@ console.log(findDataToDelete)
   }
 
 async function deleteEmployeeData (id,TypeOfTarget,EmployeeId){
-
-console.log(id,TypeOfTarget,EmployeeId)
+id1 = id
+try{
 if(TypeOfTarget==="Sales Target"){TargetDataDelete(EmployeeId,`${url1}/salestarget`)}
 if(TypeOfTarget==="Client Target"){TargetDataDelete(EmployeeId,`${url1}/clienttarget`)}
 if(TypeOfTarget==='Calls Target'){TargetDataDelete(EmployeeId,`${url1}/callstarget`)}
@@ -66,12 +83,10 @@ if(TypeOfTarget==='Lead Target'){TargetDataDelete(EmployeeId,`${url1}/leadstarge
 if(TypeOfTarget==='Renewals'){TargetDataDelete(EmployeeId,`${url1}/renewalstarget`)}
 if(TypeOfTarget==='Referral Leads'){TargetDataDelete(EmployeeId,`${url1}/referralsleadstarget`)}
 if(TargetValue ==='Media Target'){TargetDataDelete(EmployeeId,`${url1}/mediatarget`)}
-  try{
-   await  axios.delete(`${url1}/employeetargetsheet/${id}`)
   getEmployeeTargetSheetData()
-  }catch(error){
+}catch(error){
    console.error(error)
-  }
+}
 
 }
 

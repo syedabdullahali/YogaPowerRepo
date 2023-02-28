@@ -79,13 +79,12 @@ function EmployeeTargetSetupForm({ closeForm, getEmployeeTargetSheetData ,data }
 
 
 
-const ValdateUserIn = [...data].some((el)=>{
-    return el.Id === selectedEmployee.split('---')[1]
-})
 
 
 
-const UserData =  [...data].find((el,i)=> el.Id ===selectedEmployee.split('---')[1])
+
+const UserData =  [...data].find((el,i)=> el.Id ===selectedEmployee.split('---')[1]
+ && el.Type_Of_Target===TargetValue)
 console.log( UserData,"ejkndjnefjefej")
 useEffect(()=>{
 
@@ -102,7 +101,6 @@ if(!UserData){
         setMonthIput10('0')
         setMonthIput11('0')
         setMonthIput12('0')
-        setTargetValue('0')
         setYear('0')  
     return
 }
@@ -121,30 +119,78 @@ if(!UserData){
   setTargetValue(UserData.TargetValue)
   setYear(UserData.Year)
 
-},[selectedEmployee?.split('---')[1]])
+},[selectedEmployee?.split('---')[1],TargetValue])
+
+
+
+
 
 
 async function saveTargetSheetData() {
+    const SaveParentApiData = async  () =>{
+        if(UserData?.TargetValue===TargetValue){
+            await axios.put(`${ url1 }/employeetargetsheet/${UserData._id}`, JSON.stringify(PostData), {
+                    headers: {
+                       'Content-Type': 'application/json'
+                   }
+            }).then((res)=>{
+                getEmployeeTargetSheetData()
+            })   
+            }else{
+            await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
+                 headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res)=>{
+                getEmployeeTargetSheetData()
+            })
+            }
+    }
+
+
+
         for (const Key in MonthData) {
             arrMonthData.push({ "monthName": Key, "Target": (MonthData[Key] || "  ") })
         }
 
-if(UserData){
-await axios.put(`${ url1 }/employeetargetsheet/${UserData._id}`, JSON.stringify(PostData), {
-        headers: {
-           'Content-Type': 'application/json'
-       }
-})
 
-}else{
-await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
-     headers: {
-        'Content-Type': 'application/json'
-    }
-})
+
+async function  PutRequesToNestedApi (url,data1,id){
+    console.log(url,data1,id)
+   await axios.get(url).then(({data})=>{
+    const Data2 = [...data].find((el)=>el.Sr_No===id)
+    if(Data2){
+        async function Put (){
+         const d = axios.put(`${url}/${Data2._id}`,JSON.stringify({...data,...data1}),{
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+         d.then(({data})=>{
+            SaveParentApiData()            
+              alert('SuccessFully Save')
+         })              
+        }
+        Put()
+      }
+
+   })   
+}
+        // Sales Target Api scope 
+
+async function  PostRequesToNestedApi (url,data){
+    await axios.post(url,JSON.stringify(data), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+    }).then(({data})=>{
+        SaveParentApiData()            
+        alert('SuccessFully Save')
+    })    
 }
 
-        // Sales Target Api scope 
+
+
 
         if (TargetValue === "Sales Target") {
             const data = {
@@ -163,15 +209,13 @@ await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
                     ...arrMonthData
                 ]
             }
-            async function PostRequestToSalesTarget() {
-                await axios.post(`${ url1 }/salestarget`, JSON.stringify(data), {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
 
+            if(UserData?.TargetValue===TargetValue){
+                PutRequesToNestedApi(`${ url1 }/salestarget`,data,UserData.Id)
+            }else{
+                PostRequesToNestedApi(`${ url1 }/salestarget`,data)
+                console.log("hello")
             }
-            PostRequestToSalesTarget()
         }
 
 
@@ -193,15 +237,13 @@ await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
                     ...arrMonthData
                 ]
             }
-            async function PostRequestToClientTarget() {
-                await axios.post(`${ url1 }/clienttarget`, JSON.stringify(data), {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
 
+          
+            if(UserData?.TargetValue===TargetValue){
+                PutRequesToNestedApi(`${url1}/clienttarget`,data,UserData.Id)
+            }else{
+                PostRequesToNestedApi(`${url1}/clienttarget`,data)
             }
-            PostRequestToClientTarget()
 
         }
 
@@ -221,15 +263,12 @@ await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
                     ...arrMonthData
                 ]
             }
-            async function PostRequestToCallesTarget() {
-                await axios.post(`${ url1 }/callstarget`, JSON.stringify(data), {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
 
+            if(UserData?.TargetValue===TargetValue){
+                PutRequesToNestedApi(`${url1}/callstarget`,data,UserData.Id)
+            }else{
+                PostRequesToNestedApi(`${url1}/callstarget`,data)
             }
-            PostRequestToCallesTarget()
 
         }
 
@@ -249,14 +288,12 @@ await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
                 ]
 
             }
-            async function PostRequestToLeadTarget() {
-                 await axios.post(`${ url1 }/leadstarget`, JSON.stringify(data), {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
+
+            if(UserData?.TargetValue===TargetValue){
+                PutRequesToNestedApi(`${url1}/leadstarget`,data,UserData.Id)
+            }else{
+                PostRequesToNestedApi(`${url1}/leadstarget`,data)
             }
-            PostRequestToLeadTarget()
 
         }
 
@@ -277,14 +314,12 @@ await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
                     ...arrMonthData
                 ]
             }
-            async function PostRequestToRenewals() {
-                 await axios.post(`${ url1 }/renewalstarget`, JSON.stringify(data), {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
+
+            if(UserData?.TargetValue===TargetValue){
+                PutRequesToNestedApi(`${url1}/renewalstarget`,data,UserData.Id)
+            }else{
+                PostRequesToNestedApi(`${url1}/renewalstarget`,data)
             }
-            PostRequestToRenewals()
 
         }
 
@@ -303,15 +338,13 @@ await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
                 "annualTarget": [
                     ...arrMonthData
                 ]
+            }         
+
+            if(UserData?.TargetValue===TargetValue){
+                PutRequesToNestedApi(`${url1}/referralsleadstarget`,data,UserData.Id)
+            }else{
+                PostRequesToNestedApi(`${url1}/referralsleadstarget`,data)
             }
-            async function PostRequestToReferralLeads() {
-                 await axios.post(`${ url1 }/referralsleadstarget`, JSON.stringify(data), {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-            }
-            PostRequestToReferralLeads()
 
         }
 
@@ -332,14 +365,13 @@ await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
                     ...arrMonthData
                 ]
             }
-            async function PostRequestToMediaTarget() {
-               await axios.post(`${ url1 }/mediatarget`, JSON.stringify(data), {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
+          
+
+            if(UserData?.TargetValue===TargetValue){
+                PutRequesToNestedApi(`${url1}/mediatarget`,data,UserData.Id)
+            }else{
+                PostRequesToNestedApi(`${url1}/mediatarget`,data)
             }
-            PostRequestToMediaTarget()
 
         }
 
@@ -347,7 +379,6 @@ await axios.post(`${ url1 }/employeetargetsheet`, JSON.stringify(PostData), {
 
         // Ton Upadte and Clear After SuccessFully Save 
         getEmployeeTargetSheetData()
-        alert('Success Fully Save')
         arrMonthData = []
         // setMonthIput1('0')
         // setMonthIput2('0')
