@@ -8,7 +8,6 @@ import {MdDelete} from 'react-icons/md';
 import { useSelector } from 'react-redux'
 
 import axios from 'axios'
-import { async } from '@firebase/util';
 const  EmployeeTargetSetupForm =  React.lazy(()=>import('./EmployeeTargetSetupForm'))
   
 function EmployeeTargetSheet(){
@@ -60,7 +59,6 @@ const DeleteParentApiData = async ()=>{
      
      if([...data].find((el)=>el.Sr_No===id)){
       async function  Delete (){
-          console.log('2 l')
           const d = axios.delete(`${url}/${Data2._id}`)
           d.then((res)=>{
             DeleteParentApiData()

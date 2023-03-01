@@ -146,7 +146,6 @@ const AllEnquires = () => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setSubservice(res.data)
             })
             .catch((error) => {
@@ -161,7 +160,6 @@ const AllEnquires = () => {
     }
     const HandaleImportChange = (event) => {
         const importXlFile = event.target.files[0];
-        // console.log("Import",importXlFile)
     }
 
 
@@ -171,7 +169,6 @@ const AllEnquires = () => {
     }
     const HandaleExportChange = (event) => {
         const importXlFile = event.target.files[0];
-        // console.log("Export",importXlFile)
     }
 
 
@@ -221,13 +218,18 @@ const AllEnquires = () => {
             })
     }
 
+
+
+
+
     const saveEnquiry = () => {
         let data = {
             username: username,
             Fullname, Emailaddress, ContactNumber, Gander, DateofBirth, address, Area, city, Profession,
             StaffName, CenterName, CallStatus, Message,
             person_Name, Relation, ContactNumber2: ContactNumber2,
-            EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, Counseller: Counseller, trialDate: trialDate, status: "all_enquiry",
+            EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate,
+             appointmentTime, appointmentfor: appointmentfor, Counseller: Counseller, trialDate: trialDate, status: "all_enquiry",
         }
 
         fetch(`${ url }/enquiryForm/update/${ edit }`, {
@@ -240,11 +242,16 @@ const AllEnquires = () => {
             body: JSON.stringify(data)
         }).then((resp) => {
             resp.json().then(() => {
+                 getEnquiry()
                 alert("successfully submitted")
                 setVisible1(false)
             })
         })
     }
+
+
+
+
 
     const saveProspect = () => {
         var currentdate = new Date();
@@ -532,6 +539,7 @@ const AllEnquires = () => {
                 })
         }
     }
+    
     function getUpdate(id) {
         axios.get(`${ url }/enquiryForm/${ id }`, {
             headers: {
@@ -539,7 +547,6 @@ const AllEnquires = () => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setUpdateItem(res.data)
                 setFullName(res.data.Fullname)
                 setEmailAddress(res.data.Emailaddress)
@@ -682,16 +689,15 @@ const AllEnquires = () => {
     result1.map((el) => {
         console.log(el.status)
     })
-    console.log(select, "select")
 
-    console.log(select)
 
     return (
         <CRow>
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">All Enquires <span className='float-end'>Total Member : {result1.filter((list) => list.username === username).length}</span></strong>
+                        <strong className="mt-2">All Enquires <span className='float-end'>Total Member : 
+                        {result1.filter((list) => list.username === username).length}</span></strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-between'>
@@ -892,67 +898,7 @@ const AllEnquires = () => {
                             </CCol>
                             <CCol></CCol>
                         </CRow>
-                        {/* <CRow className='mb-3'>
-                            <CCol lg={2} md={6} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        All
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01"
-                                        value={filter1}
-                                        onChange={(e) => setfilter1(e.target.value)}>
-                                        <option>Select</option>
-                                        <option>Staff</option>
-                                        <option>Lead Source</option>
-                                        <option>Enquiry Stage</option>
-                                        <option>Call Status</option>
-                                        <option>Service Name</option>
-                                        <option>Customer Type</option>
-                                        <option>Enquiry Type</option>
-                                        <option>Gender</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-
-                            <CCol lg={3} md={6} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Sub-Filter
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01"
-                                        value={filter3}
-                                        onChange={(e) => setfilter3(e.target.value)}>
-                                        <option>2022</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} md={6} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Marketing
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01"
-                                        value={filter4}
-                                        onChange={(e) => setfilter4(e.target.value)}>
-                                        <option>Select</option>
-                                        <option>Send E-mail</option>
-                                        <option>Send SMS</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                        </CRow> */}
+                      
                         {admissionForm &&
                             <AdmissionForm1 add={admissionForm} clickfun={() => { setAdmissionForm(false) }} ids={edit} />
                         }
@@ -1300,7 +1246,7 @@ const AllEnquires = () => {
                                     Close
                                 </CButton>
                                 <CButton type='submit' color="primary" onClick={() => saveProspect()}>{
-                                    enquiryStage === 'Join' ? 'Open Admission Form' : 'Save Prospect'}</CButton>
+                                    enquiryStage === 'Join' ? 'Open Admission Form' : 'Save'}</CButton>
                             </CModalFooter>
                         </CModal>
 
@@ -1659,27 +1605,7 @@ const AllEnquires = () => {
                                                         ]}
                                                     />
                                                 </CCol>
-                                                {/* <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        label="Appointment Date"
-                                                        type="date"
-                                                        value={appointmentDate}
-                                                        onChange={(e) => setappointmentDate(e.target.value)}
-                                                        id="exampleFormControlInput1"
-                                                    />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        label="Appointment Time"
-                                                        type="time"
-                                                        id="exampleFormControlInput1"
-                                                        value={appointmentTime}
-                                                        onChange={(e) => setappointmentTime(e.target.value)}
-
-                                                    />
-                                                </CCol> */}
+                                               
                                                 
                                   <CCol lg={6} md={6} sm={12}>
                                <CFormInput
@@ -1704,18 +1630,7 @@ const AllEnquires = () => {
                                     />
                                 </CCol>
                                                 
-                                                {/* {appointmentfor === 'Trial Session' && (
-                                                    <CCol lg={6} md={6} sm={12}>
-                                                        <CFormInput
-                                                            className="mb-1"
-                                                            label='Trial Date'
-                                                            type="date"
-                                                            value={trialDate}
-                                                            onChange={(e) => setTrialDate(e.target.value)}
-                                                            id="exampleFormControlInput1"
-                                                        />
-                                                    </CCol>
-                                                )} */}
+                                               
                                                 <CCol lg={6} md={6} sm={12}>
 
                                                     <CFormSelect
@@ -1945,15 +1860,12 @@ const AllEnquires = () => {
                                 </CTableRow>
 
                                 {result1.slice(paging * 10, paging * 10 + 10).filter((list) => {
-                                    console.log(new Date(list.createdAt).getFullYear())
-                                    console.log(new Date(list.createdAt).getMonth())
-                                    console.log(new Date(list.createdAt).getMonth())
+                                  
 
 
 
                                     return list.username === username &&
-                                        //  moment(list.createdAt).format(dateFormat).includes(select) 
-                                        //  && moment(list.createdAt).format("DD-MM-YYYY").includes(Search1)
+                                       
 
                                         list.Fullname.toLowerCase().includes(Search3.toLowerCase())
                                         && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
@@ -1972,8 +1884,10 @@ const AllEnquires = () => {
                                         <CTableDataCell>{item.appointmentfor}</CTableDataCell>
                                         <CTableDataCell>{item.CallStatus}</CTableDataCell>
                                         <CTableDataCell>{item.Message}</CTableDataCell>
-                                        <CTableDataCell><BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }}
-                                            onClick={() => { addForm(item._id), setEdit(item._id), handleAdmission(item._id) }} /></CTableDataCell>
+                                        <CTableDataCell>
+                                            <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }}
+                                            onClick={() => { addForm(item._id), setEdit(item._id), handleAdmission(item._id) }} />
+                                            </CTableDataCell>
 
                                         <CTableDataCell>
 
@@ -2000,7 +1914,7 @@ const AllEnquires = () => {
                                             <BsPlusCircle id={item._id} style={{
                                                 cursor: 'pointer',
                                                 markerStart: '10px', marginLeft: "4px"
-                                            }} onClick={() => handleFollowup(item._id)} />
+                                            }} onClick={() => handleFollowup(item._id,item)} />
                                         </CTableDataCell>
 
                                         <CTableDataCell className='text-center'>{

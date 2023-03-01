@@ -476,6 +476,7 @@ const TrialEnquires = () => {
             }
         })
             .then((res) => {
+                console.log(res.data.filter((el)=>el.appointmentfor === 'Trial Session'),"Trail Data")
                 setResult1(res.data.filter((list) => list.username === username).reverse())
                 setOgList(res.data.filter((list) => list.username === username).reverse())
                 console.log(res.data);
@@ -1685,8 +1686,13 @@ const TrialEnquires = () => {
                                     </CTableDataCell>
                                 </CTableRow>
                                 {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                                    list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select) && list.appointmentfor === 'Trial Session' && list.Fullname.toLowerCase().includes(Search3.toLowerCase()) && list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
-                                    list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
+                                    list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select) 
+                                    && list.appointmentfor === 'Trial Session' && 
+                                    list.Fullname.toLowerCase().includes(Search3.toLowerCase()) &&
+                                     list.StaffName.toLowerCase().includes(Search9.toLowerCase()) &&
+                                    list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) &&
+                                     list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && 
+                                     list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
                                 ).map((item, index) => (
                                     item.username === username && (
                                         <CTableRow key={index}>
@@ -1702,9 +1708,8 @@ const TrialEnquires = () => {
                                             <CTableDataCell>{item.CallStatus}</CTableDataCell>
                                             <CTableDataCell>{moment(item.appointmentDate).format("DD-MM-YYYY") != 'Invalid date' && moment(item.appointmentDate).format("DD-MM-YYYY")}<br />{moment(item.appointmentTime, "HH:mm").format("hh:mm A") != 'Invalid date' && moment(item.appointmentTime, "HH:mm").format("hh:mm A")}</CTableDataCell>
                                             <CTableDataCell>
-                                            <CButton color='success'>Done</CButton>  
-                                            <CButton color='warning' >Pending...</CButton>    
-  
+                                            <CButton size='sm' color='success'>Done</CButton>  
+                                            <CButton size='sm' color='warning' >Pending...</CButton>    
                                             </CTableDataCell>
                                             <CTableDataCell>{item.Message}</CTableDataCell>
                                            

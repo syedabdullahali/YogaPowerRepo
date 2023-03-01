@@ -132,7 +132,6 @@ const AllClients = () => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setResult(res.data)
             })
             .catch((error) => {
@@ -148,7 +147,6 @@ const AllClients = () => {
         })
             .then((res) => {
                 setStaff(res.data)
-                console.log(res.data);
             })
             .catch((error) => {
                 console.error(error)
@@ -178,7 +176,8 @@ const AllClients = () => {
             Fullname, Emailaddress, ContactNumber, Gander, DateofBirth, address, Area, city, Profession,
             StaffName, CenterName, CallStatus, Message,
             person_Name, Relation, ContactNumber2: ContactNumber2,
-            EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, status: "all_enquiry",
+            EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime,
+             appointmentfor: appointmentfor, status: "all_enquiry",
         }
 
         fetch(`${url}/memberForm/update/${edit}`, {
@@ -231,7 +230,10 @@ const AllClients = () => {
             + currentdate.getMinutes();
         let data = {
             EnquiryID: followForm, CallDate: date, Time: time,
-            Name: Name, Contact: Contact, Email: email, ServiceName: ServiceName1, AppointmentDate: appointmentDate, AppointmentTime: appointmentTime, enquiryStage: enquiryStage, CallStatus: CallStatus1, FollowupDate: FollowupDate, TimeFollowp: TimeFollowp, Counseller: Counseller, Discussion: Discussion,
+            Name: Name, Contact: Contact, Email: email, ServiceName: ServiceName1,
+             AppointmentDate: appointmentDate, AppointmentTime: appointmentTime, 
+             enquiryStage: enquiryStage, CallStatus: CallStatus1, FollowupDate: FollowupDate,
+              TimeFollowp: TimeFollowp, Counseller: Counseller, Discussion: Discussion,
         }
 
         fetch(`${url}/prospect/create`, {
@@ -257,6 +259,7 @@ const AllClients = () => {
             }
         })
             .then((res) => {
+                console.log(res.data,"Client Attendance")
                 setResult1(res.data.filter((list) => list.username === username).reverse())
                 setOgList(res.data.filter((list) => list.username === username).reverse())
             })
@@ -515,7 +518,8 @@ const AllClients = () => {
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">All Clients <span className='float-end'>Total Clients : {result1.filter((list) => list.username === username).length}</span></strong>
+                        <strong className="mt-2">All Clients <span className='float-end'>Total Clients 
+                        : {result1.filter((list) => list.username === username).length}</span></strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-between'>
@@ -616,72 +620,7 @@ const AllClients = () => {
                             <CCol></CCol>
                         </CRow>
 
-                        {/* <CRow className='mb-3'>
-                            <CCol lg={2} md={6} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        All
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>Sep</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} md={6} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Service Category
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} md={6} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Sub-Filter
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} md={6} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Marketing
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                        </CRow> */}
+                      
                         <CallUpdate add={Calls} clickfun={() => setCalls(false)} ids={CallUpdateID} />
 
                         <CModal size='lg' style={{ border: '2px solid #0B5345' }} visible={callReport} color='' onClose={() => setCallReport(false)} >

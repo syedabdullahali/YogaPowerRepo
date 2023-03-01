@@ -134,6 +134,7 @@ async function saveTargetSheetData() {
                        'Content-Type': 'application/json'
                    }
             }).then((res)=>{
+                ChildApiRequest() 
                 getEmployeeTargetSheetData()
             })   
             }else{
@@ -142,18 +143,19 @@ async function saveTargetSheetData() {
                     'Content-Type': 'application/json'
                 }
             }).then((res)=>{
+                ChildApiRequest() 
                 getEmployeeTargetSheetData()
             })
             }
-    }
 
+    }
 
 
         for (const Key in MonthData) {
             arrMonthData.push({ "monthName": Key, "Target": (MonthData[Key] || "  ") })
         }
 
-
+SaveParentApiData()
 
 async function  PutRequesToNestedApi (url,data1,id){
     console.log(url,data1,id)
@@ -161,15 +163,14 @@ async function  PutRequesToNestedApi (url,data1,id){
     const Data2 = [...data].find((el)=>el.Sr_No===id)
     if(Data2){
         async function Put (){
-         const d = axios.put(`${url}/${Data2._id}`,JSON.stringify({...data,...data1}),{
+         await axios.put(`${url}/${Data2._id}`,JSON.stringify({...data,...data1}),{
             headers: {
                 'Content-Type': 'application/json'
-            }
-        })
-         d.then(({data})=>{
-            SaveParentApiData()            
-              alert('SuccessFully Save')
-         })              
+            }        
+        }).then((res)=>{
+            alert('SuccessFully Save')
+            arrMonthData = []
+        })          
         }
         Put()
       }
@@ -184,13 +185,14 @@ async function  PostRequesToNestedApi (url,data){
                 'Content-Type': 'application/json'
             }
     }).then(({data})=>{
-        SaveParentApiData()            
         alert('SuccessFully Save')
+                arrMonthData = []
     })    
 }
 
 
 
+function ChildApiRequest(){
 
         if (TargetValue === "Sales Target") {
             const data = {
@@ -374,12 +376,11 @@ async function  PostRequesToNestedApi (url,data){
             }
 
         }
-
+}
 
 
         // Ton Upadte and Clear After SuccessFully Save 
         getEmployeeTargetSheetData()
-        arrMonthData = []
         // setMonthIput1('0')
         // setMonthIput2('0')
         // setMonthIput3('0')

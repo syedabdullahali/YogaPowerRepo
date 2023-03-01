@@ -54,11 +54,17 @@ const EnquiryForm = () => {
     const [trialTime, setTrialTime] = useState("");
     const [appointmentDate, setappointmentDate] = useState("");
     const [appointmentTime, setappointmentTime] = useState("");
-    const [appointmentfor, setappointmentfor] = useState("Appointment");
+    const [appointmentfor, setappointmentfor] = useState("");
     const [counseller, setCounseller] = useState("");
-    
+    const [error,setError] = useState('')
+    const [personalDetailDenger,setPersionalDetailDengar] = useState(false)
+    const [LeadDetailDenger,setLeadDetailDengar] = useState(false)
+    const [scheduleenquiryDanger,setScheduleenquiryDanger] = useState(false)
+
+
 
 console.log(trialDate)
+
 
     const navigate = useNavigate()
 
@@ -70,7 +76,6 @@ console.log(trialDate)
 
 
     let user = JSON.parse(localStorage.getItem('user-info'))
-    console.log(user);
     const token = user.token;
     const username = user.user.username;
     const centerCode = user.user.centerCode;
@@ -82,7 +87,8 @@ console.log(trialDate)
     useEffect(() => {
         getStaff()
         getLeadSource()
-        axios.get(`${url}/subservice/all`, {
+        axios.get(`${url1}/packagemaster`, {
+        
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -95,7 +101,7 @@ console.log(trialDate)
                 console.error(error)
             })
 
-        axios.get(`${url1}/enquiryform`, {
+        axios.get(`${url}/enquiryForm/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -140,7 +146,73 @@ console.log(trialDate)
             })
     }
 
+    const Email = Emailaddress.includes('@')            
+    const contact = ContactNumber.length===10  
+    const address1 = address.trim().split(' ').length>=2 
+
+
+    
+
+    const PersionalDetailsValidation  =  Fullname !=='' &&Email&&Emailaddress.includes('@')!==''
+                                         && CountryCode!=='' && contact && Gander !==''  && DateofBirth!==''  
+                                         && address1!==''&&Area!=='' &&city!==''&& Profession!==''   
+
+    const ScheduleenquiryfollowUp   = StaffName.trim() !==''&& CenterName.trim()!==''&& CallStatus.trim()!==''
+        && Message.trim().split(' ').length>=2                                     
+
+    const LeadInformationValidation = EnquiryDate !==''   && ServiceName !=='' && ServiceVariation !=='' &&
+                                      Customertype !=='' && enquirytype !=='' && appointmentfor !==''  
+                                       && appointmentDate !=='' && appointmentTime !==''&& appointmentTime !==''
+
+
+
+    
+
+
+useEffect(()=>{
+    if(PersionalDetailsValidation){
+        setError('')
+        setPersionalDetailDengar((val)=>!val)
+        return 
+        }else if(ScheduleenquiryfollowUp){
+        setError('')
+        setScheduleenquiryDanger((val)=>!val)
+        return 
+        }else if(LeadInformationValidation){
+        setError('')
+        setLeadDetailDengar((val)=>!val)
+        return 
+    }
+},[PersionalDetailsValidation,LeadInformationValidation])
+                                       
     const saveEnquiry = () => {
+
+   
+
+
+
+
+
+   
+        
+
+
+if(!PersionalDetailsValidation){
+setError('Please Fill all Require Personal Details')
+setPersionalDetailDengar(val=>true)
+return 
+}else if(!ScheduleenquiryfollowUp){
+    setError('Please Fill all Require Schedule enquiry follow-up')
+    setScheduleenquiryDanger((val)=>true)
+    return 
+}else if(!LeadInformationValidation){
+setError('Please Fill all Require Lead Information')
+setLeadDetailDengar((val)=>true)
+return 
+}
+
+          console.log(PersionalDetailsValidation,LeadInformationValidation,"validation check")                             
+
         let enqId = centerCode + 'Q' + (result1.length + 1);
 
         let data = {
@@ -157,6 +229,7 @@ console.log(trialDate)
             'Authorization': `Bearer ${token}`,
             'My-Custom-Header': 'foobar'
         }
+
 
         axios.post(`${url}/enquiryForm/create`, data, { headers })
             .then((resp) => {
@@ -183,6 +256,12 @@ console.log(trialDate)
                 setappointmentfor('')
                 setCounseller('')
                 setAddress('')
+                setCustomertype('')
+                setEnquirytype('')
+                setLeadDetailDengar(false)
+                setPersionalDetailDengar(false)
+                setScheduleenquiryDanger(false)
+      
             })
             .catch((error) =>
                 console.error(error)
@@ -193,7 +272,7 @@ console.log(trialDate)
     return (
         <CCard className="mb-3 border-success">
             <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                <CCardTitle>Enquiry Form</CCardTitle>
+                <CCardTitle>Enquiry Form </CCardTitle>
             </CCardHeader>
             <CCardBody>
                 <CForm>
@@ -203,7 +282,7 @@ console.log(trialDate)
                             <CRow>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
-                                        className="mb-1"
+                                        className={Fullname.trim()===''&&personalDetailDenger ?"mb-1 bg-light-warning":"mb-1"}
                                         type="text"
                                         name="name"
                                         id="exampleFormControlInput1"
@@ -215,14 +294,15 @@ console.log(trialDate)
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
-                                        className="mb-1"
+                                        className={
+                                        !Email
+                                        &&personalDetailDenger ?"mb-1 bg-light-warning":"mb-1"}
                                         type="email"
                                         id="exampleFormControlInput1"
                                         label="Email address"
                                         value={Emailaddress}
                                         onChange={(e) => setEmailAddress(e.target.value)}
                                         placeholder="name@example.com"
-                                        text="Must be 8-20 characters long."
                                         aria-describedby="exampleFormControlInputHelpInline"
                                     />
                                 </CCol>
@@ -230,7 +310,7 @@ console.log(trialDate)
                             <CRow>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
-                                        className="mb-1"
+                                       className={CountryCode.trim()===''&&personalDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         aria-label="Select Currency"
                                         label="Country Code"
                                         value={CountryCode}
@@ -243,20 +323,26 @@ console.log(trialDate)
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
-                                        className="mb-1"
+                                        className={!contact && personalDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         type="number"
                                         value={ContactNumber}
-                                        onChange={(e) => setContactNumber(e.target.value)}
+                                        onChange={(e) =>{
+                                         e.target.value.length <=10? 
+                                         setContactNumber(e.target.value):
+                                         setContactNumber((val)=>val)
+
+                                        }}
                                         id="exampleFormControlInput1"
                                         label="Contact Number"
                                         placeholder="Enter Number"
+                                        text={!contact&& personalDetailDenger &&<span className="text-danger">Must be 10 characters long</span>}
                                     />
                                 </CCol>
                             </CRow>
                             <CRow>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
-                                        className="mb-1"
+                                        className={Gander.trim()===''&&personalDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         aria-label="Select Currency"
                                         value={Gander}
                                         onChange={(e) => setGander(e.target.value)}
@@ -271,7 +357,7 @@ console.log(trialDate)
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
-                                        className="mb-1"
+                                        className={DateofBirth.trim()===''&& personalDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         type="date"
                                         format="MM-dd-yyyy"
                                         value={DateofBirth}
@@ -284,17 +370,18 @@ console.log(trialDate)
                             </CRow>
 
                             <CFormTextarea
+                                className={!address1 && personalDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                 id="exampleFormControlTextarea1"
                                 label="Address"
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
                                 rows="2"
-                                text="Must be 8-20 words long."
+                                text="Must be 2-20 words long."
                             ></CFormTextarea>
                             <CRow>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
-                                        className="mb-1"
+                                       className={Area.trim()==='' && personalDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         type="text"
                                         value={Area}
                                         onChange={(e) => setArea(e.target.value)}
@@ -305,7 +392,7 @@ console.log(trialDate)
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
-                                        className="mb-1"
+                                       className={city.trim()===''&& personalDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         type="text"
                                         value={city}
                                         onChange={(e) => setCity(e.target.value)}
@@ -317,7 +404,7 @@ console.log(trialDate)
                             </CRow>
 
                             <CFormInput
-                                className="mb-1"
+                               className={Profession.trim()===''&&personalDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                 type="text"
                                 value={Profession}
                                 onChange={(e) => setProfession(e.target.value)}
@@ -330,7 +417,7 @@ console.log(trialDate)
                             <CRow>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
-                                        className="mb-1"
+                                        className={StaffName.trim()==='' && scheduleenquiryDanger?"mb-1 bg-light-warning":"mb-1"}
                                         aria-label="Select Staff Name"
                                         label="Staff Name"
                                         value={StaffName}
@@ -346,7 +433,7 @@ console.log(trialDate)
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
-                                        className="mb-1"
+                                        className={CenterName.trim()==='' && scheduleenquiryDanger?"mb-1 bg-light-warning":"mb-1"}
                                         aria-label="Select Staff Name"
                                         value={CenterName}
                                         onChange={(e) => setCenterName(e.target.value)}
@@ -360,7 +447,7 @@ console.log(trialDate)
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
-                                        className="mb-1"
+                                        className={CallStatus.trim()==='' && scheduleenquiryDanger?"mb-1 bg-light-warning":"mb-1"}
                                         aria-label="Select Call Status"
                                         value={CallStatus}
                                         onChange={(e) => setCallStatus(e.target.value)}
@@ -375,12 +462,13 @@ console.log(trialDate)
                                 </CCol>
                             </CRow>
                             <CFormTextarea
+                                 className={!(Message.trim().split(' ').length>=2) && scheduleenquiryDanger?"mb-1 bg-light-warning":"mb-1" }
                                 id="exampleFormControlTextarea1"
                                 label="Message"
                                 value={Message}
                                 onChange={(e) => setMessage(e.target.value)}
                                 rows="2"
-                                text="Must be 8-20 words long."
+                                text="Must be 2-20 words long."
                             ></CFormTextarea>
                         </CCol>
 
@@ -428,7 +516,11 @@ console.log(trialDate)
                                         className="mb-1"
                                         type="number"
                                         value={ContactNumber2}
-                                        onChange={(e) => setContactNumber2(e.target.value)}
+                                        onChange={(e) =>{
+                                          e.target.value.length <=10? 
+                                            setContactNumber2(e.target.value):
+                                            setContactNumber2(val=>val)
+                                        }}
                                         id="exampleFormControlInput1"
                                         label="Contact Number"
                                         placeholder="Enter Number"
@@ -439,7 +531,7 @@ console.log(trialDate)
                                 <CCardTitle>Lead Information</CCardTitle>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
-                                        className="mb-1"
+                                        className={EnquiryDate.trim()===''&& LeadDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         name="enquiry_date"
                                         type="date"
                                         id="exampleFormControlInput1"
@@ -452,7 +544,7 @@ console.log(trialDate)
 
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
-                                        className="mb-1"
+                                        className={ServiceName.trim()===''&& LeadDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         aria-label="Select Service Name"
                                         value={ServiceName}
                                         onChange={(e) => setServiceName(e.target.value)}
@@ -462,17 +554,17 @@ console.log(trialDate)
                                         <option>Select Service</option>
                                         {result.map((item, index) => (
                                             item.username === username && (
-                                                item.status === true && (
-                                                    <option key={index}>{item.selected_service}</option>
+                                               item.Status=== true && (
+                                                    <option key={index}>{item.Service }</option>                                                  
                                                 )
-                                            )
-                                        ))}
+                                            
+                                            )))}
                                     </CFormSelect>
                                 </CCol>
 
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
-                                        className="mb-1"
+                                        className={ServiceVariation.trim()===''&& LeadDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         aria-label="Select Service Name"
                                         value={ServiceVariation}
                                         onChange={(e) => setServiceVariation(e.target.value)}
@@ -481,11 +573,11 @@ console.log(trialDate)
                                     >
                                         <option>Service Package</option>
                                         {result.filter((list) =>
-                                            list.selected_service === ServiceName
+                                            list.Service=== ServiceName
                                         ).map((item, index) => (
                                             item.username === username && (
-                                                item.status === true && (
-                                                    <option key={index}>{item.sub_Service_Name}</option>
+                                                item.Status === true && (
+                                                    <option key={index}>{item.Package_Name }</option>
                                                 )
                                             )
                                         ))}
@@ -493,7 +585,7 @@ console.log(trialDate)
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
-                                        className="mb-1"
+                                        className={Customertype.trim()===''&& LeadDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         aria-label="Select Customer type"
                                         value={Customertype}
                                         onChange={(e) => setCustomertype(e.target.value)}
@@ -512,7 +604,7 @@ console.log(trialDate)
 
 
                                     <CFormSelect
-                                        className="mb-1"
+                                        className={enquirytype.trim()===''&& LeadDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         aria-label="Select Assign Staff"
                                         value={enquirytype}
                                         onChange={(e) => setEnquirytype(e.target.value)}
@@ -526,14 +618,14 @@ console.log(trialDate)
                                         ))}</CFormSelect>
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
-                                <CFormSelect
-                                        className="mb-1"
+                                <CFormSelect                                
+                                        className={appointmentfor.trim()===''&& LeadDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         label='Enquiry Stage'
                                         aria-label="Select"
                                         value={appointmentfor}
                                         onChange={(e) => setappointmentfor(e.target.value)}
                                         options={[
-                                            "Select",
+                                            "Select Enquiry Stage",
                                             { label: "Enquiry", value: "Follow Up Time" },
                                             { label: "Appointment", value: "Appointment" },
                                             { label: "Trial Session", value: 'Trial Session' },
@@ -546,8 +638,8 @@ console.log(trialDate)
                               
                                   <CCol lg={6} md={6} sm={12}>
                                <CFormInput
-                                        className="mb-1"
-                                        label={`${(appointmentfor ==="Select"?"Appointment" :appointmentfor)} Date`}
+                                        className={appointmentDate.trim()===''&& LeadDetailDenger?"mb-1 bg-light-warning":"mb-1"}
+                                        label={`${(appointmentfor ==="Select Enquiry Stage"?"Appointment" :appointmentfor)} Date`}
                                         type="date"
                                         value={appointmentDate}
                                         onChange={(e) => setappointmentDate(e.target.value)}
@@ -557,8 +649,8 @@ console.log(trialDate)
                                 <CCol lg={6} md={6} sm={12}>
                                     
                                 <CFormInput
-                                        className="mb-1"
-                                        label={`${(appointmentfor ==="Select"?"Appointment" :appointmentfor)} Time`}
+                                        className={appointmentTime.trim()===''&& LeadDetailDenger?"mb-1 bg-light-warning":"mb-1"}
+                                        label={`${(appointmentfor ==="Select Enquiry Stage"?"Appointment" :appointmentfor)} Time`}
                                         type="time"
                                         id="exampleFormControlInput1"
                                         value={appointmentTime}
@@ -576,7 +668,7 @@ console.log(trialDate)
                                     6} md={6} sm={12}>
 
                                     <CFormSelect
-                                        className="mb-1"
+                                        className={counseller.trim()===''&& LeadDetailDenger?"mb-1 bg-light-warning":"mb-1"}
                                         aria-label="Select Assign Staff"
                                         value={counseller}
                                         onChange={(e) => setCounseller(e.target.value)}
@@ -592,10 +684,12 @@ console.log(trialDate)
                             </CRow>
                         </CCol>
                     </CRow>
+
                     <CButton className="mt-2" onClick={() =>{
                         saveEnquiry()
-                          changeRoute() 
                      }} >Save</CButton>
+
+                     {error &&<p className="mt-2" style={{color:'red',fontSize:'15px'}}>{error}</p>}
                 </CForm>
             </CCardBody>
         </CCard>

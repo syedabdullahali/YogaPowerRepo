@@ -38,7 +38,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { CountryList } from "src/components/CountryList";
 import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { listAll, ref, uploadBytes } from "firebase/storage";
 import { storage } from "src/firebase";
 import logo from 'src/assets/images/avatars/icon.png'
@@ -47,16 +46,16 @@ import { useReactToPrint } from 'react-to-print'
 import { useSelector } from 'react-redux'
 
 const url = 'https://yog-seven.vercel.app'
-const url2 = 'https://yog-seven.vercel.app'
 
 const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
-    console.log(add, clickfun, ids, deleteId ,"ijuihuu")
+    
     const url1 = useSelector((el)=>el.domainOfApi) 
 
     const adId = JSON.parse(localStorage.getItem('adId'))
     console.log(adId);
     console.log(ids,"ids");
     const componentRef = useRef()
+
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
         documentTitle: 'yog-power',
@@ -64,8 +63,10 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
     })
 
     const [activeKey, setActiveKey] = useState(1)
+
     const [image, setImage] = useState(null)
     const [imageUrl, setImageUrl] = useState(null)
+
     const [Fullname, setFullname] = useState('')
     const [CountryCode, setCountryCode] = useState('')
     const [ContactNumber, setContactNumber] = useState('')
@@ -124,19 +125,25 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
     const [subService,setService] = useState([])
 
 
+
+
+
     var currentdate = new Date();
     var datetime = currentdate.getDay() + "/" + currentdate.getMonth()
         + "/" + currentdate.getFullYear();
-    const navigate = useNavigate()
+
+
+
     let user = JSON.parse(localStorage.getItem('user-info'))
-    console.log(user);
     const token = user.token;
     const username = user.user.username;
     const centerCode = user.user.centerCode;
+
     const [result, setResult] = useState([]);
-    const [result1, setResult1] = useState([]);
+
     const [visi, setVisi] = useState(false);
     const [mem, setMem] = useState([]);
+
     const [packageArr, setPackageArr] = useState([]);
     useEffect(() => {
         getStaff()
@@ -146,17 +153,12 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
         getLeadSource()
         getPackage()
         getImage()
-        console.log(ids);
         getDetails(ids)
     }, [])
 
-    /*  EnquiryId: centerCode + 'Q' + result1.length + 1,
-                Fullname, Emailaddress, CountryCode, ContactNumber, Gander, DateofBirth, address, Area, city, Profession,
-                StaffName, CenterName, CallStatus, Message,
-                person_Name, Relation, CountryCode2: CountryCode2, ContactNumber2: ContactNumber2,
-                EnquiryDate, ServiceName, ServiceVariation, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, Counseller: counseller, trialDate: trialDate, 
-             */
+   
     function getDetails(data) {
+
         setFullname(data.Fullname)
         setEmail(data.Emailaddress)
         setCountryCode(data.CountryCode)
@@ -174,6 +176,10 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
         setserviceName(data.ServiceName)
         setserviceVariation(data.ServiceVariation)
         setAssignStaff(data.StaffName)
+        setCustomertype(data.Customertype)
+        setEnquiryType(data.enquirytype)
+        setMemberManager(data.Counseller)
+        
 
     }
 
@@ -187,7 +193,6 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setPackageArr(res.data)
             })
             .catch((error) => {
@@ -197,11 +202,13 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
 
     function getImage() {
         listAll(imagesListRef).then((response) => {
-            console.log(response);
+            console.log(response); // relate to fire base 
         })
     }
 
+
     const [leadArr, setLeadArr] = useState([]);
+
     function getLeadSource() {
         axios.get(`${url}/leadSourceMaster/all`, {
             headers: {
@@ -209,7 +216,6 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setLeadArr(res.data)
             })
             .catch((error) => {
@@ -233,6 +239,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
             })
     }
 
+
     function getSubService() {
         axios.get(`${url1}/packagemaster`, {
             headers: {
@@ -240,7 +247,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
             }
         })
             .then((res) => {
-                setService(res.data,"master")
+                setService(res.data)
                 console.log(res.data)
             })
             .catch((error) => {
@@ -248,6 +255,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
             })
     }
     
+
     function getMem() {
         axios.get(`${url}/memberForm/all`, {
             headers: {
@@ -262,6 +270,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                 console.error(error)
             })
     }
+
     function getBatch() {
         axios.get(`${url}/Batch/all`, {
             headers: {
@@ -277,6 +286,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
             })
     }
 
+
     const saveMember = () => {
         let data = {
             username: username,
@@ -286,43 +296,45 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
              Anniversarydate, Address, Area, city, pincode, state, BloodGroup,
             FacebookID, sms, mail, pushnotification,
             Name, CountryCode1, ContactNumber1, Relationship,
-            serviceName, serviceVaration, Customertype, EnquiryType, AssignStaff, MemberManager, Batch, GeneralTrainer, AttendanceID, CenterID, LockerKeyNo, PAN,
-            BackPain, BoneFracture, CarpalTunnel, AsthmaCOPD, DigestiveDisorder, Diabetes, Epilepsy, FootPain, Glaucoma, HeartDiseaseCondition, HerniaDiastasisRecti,
-            HighBloodPressure, Other: OtherText, Weight, Height, fitnessLevel, fitnessGoal, idealWeight, suggestion, comments, plan: true, status: 'active',
+            serviceName, serviceVaration, Customertype, EnquiryType,
+             AssignStaff, MemberManager, Batch, GeneralTrainer, AttendanceID,
+              CenterID, LockerKeyNo, PAN,
+            BackPain, BoneFracture, CarpalTunnel, AsthmaCOPD, DigestiveDisorder,
+             Diabetes, Epilepsy, FootPain, Glaucoma, HeartDiseaseCondition, HerniaDiastasisRecti,
+            HighBloodPressure, Other: OtherText, Weight, Height, fitnessLevel,
+             fitnessGoal, idealWeight, suggestion, comments, plan: true, status: 'active',
         }
 
 
-        const headers = {
+const headers = {
             'Authorization': `Bearer ${token}`,
             'My-Custom-Header': 'foobar'
         };
         axios.post(`${url}/memberForm/create`, data, { headers },
-        )
-            .then((resp) => {
-                console.log(resp.data,"helllokjeoiuhfeuwfhuuifhrghrhg")
+        ).then((resp) => {
+                console.log(resp.data._id)
                 setMemberId(resp.data._id);
                 alert("successfully submitted")
-                console.log("refresh prevented");
                 setVisi(true)
-            })
-            .catch((error) => {
+}).catch((error) => {
                 console.error(error)
-            })
-        if (deleteId != undefined && deleteId != null) {
-            fetch(`${url}/enquiryForm/delete/${deleteId}`, {
-                method: 'DELETE',
-                headers: {
+})
+            
+if (deleteId != undefined && deleteId != null) {
+    fetch(`${url}/enquiryForm/delete/${deleteId}`, {
+            method: 'DELETE',
+            headers: {
                     "Authorization": `Bearer ${token}`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                },
+            },
             }).then((result) => {
                 result.json().then((resp) => {
                     console.warn(resp)
                 })
             })
         }
-    }
+}
 
     const [visi1, setVisi1] = useState('')
     const [MemberId, setMemberId] = useState('')
@@ -346,20 +358,28 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
     const [invId, setInvId] = useState('')
     const [invoiceNum,setInvoice] = useState([])
 
+ 
 
 
-//  const getInvoiceNoFun =()=>{
-//  const alllInvoice =    axios.get(`${url}/invoice/all`, he{ 'Authorization': `Bearer ${token}`,
-//  'My-Custom-Header': 'foobar' });
-//  console.log(alllInvoice,"jsdjehdeh alll invoice")
-//  setInvoice(alllInvoice.length)
-//  }
+ const getInvoiceNoFun =async ()=>{
+const headers = {
+        'Authorization': `Bearer ${token}`,
+        'My-Custom-Header': 'foobar'
+};
+
+  await  axios.get(`${url}/invoice/all`,{headers}).then(({data})=>{
+    setInvoice(data.length)
+  })
+ }
 
 
 
-//  useEffect(()=>{
-//     getInvoiceNoFun()
-// },[])
+ useEffect(()=>{
+    getInvoiceNoFun()
+},[])
+
+
+
 
 
     const saveInvoice = () => {
@@ -367,9 +387,14 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
             username: username,
             date: datetime,
             centerName: centerCode,
-            InvoiceNo: `Invoice-${mem.length}`,
-            MemberId: MemberId, MemberName: Fullname, ServiceName: serviceName, PackageName: ser6, duration: ser2, fees: ser3, startDate, endDate,
-            counseller: ser5, trainer: GeneralTrainer, amount: total, tax, discount, totalAmount: finalTotal, paidAmount, pendingAmount, paymode, status: 'active'
+            InvoiceNo: `INV${invoiceNum}`,
+            MemberId: MemberId, MemberName: Fullname,
+            ServiceName: serviceName, PackageName: ser6,
+            duration: ser2, fees: ser3, startDate, endDate,
+            counseller: ser5, trainer: GeneralTrainer,
+            amount: total, tax, discount, totalAmount:
+            finalTotal, paidAmount, pendingAmount, 
+            paymode, status: 'active'
         }
 
         const headers = {
@@ -379,32 +404,23 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
         axios.post(`${url}/invoice/create`, data, { headers },
         )
             .then((resp) => {
+                console.log(resp.data,"ekfmkemfm new invoice no")
                 setInvId(resp.data._id);
-                console.log(resp.data._id);
                 alert("successfully submitted")
-                console.log("refresh prevented");
                 setVisi1(true)
                 let data1 = { invoiceId: resp.data._id, invoiceNum: resp.data.InvoiceNo, startDate, endDate, }
-                axios.post(`${url}/memberForm/${MemberId}`, data1, { headers },
+                axios.post(`${url}/memberForm/update/${MemberId}`, data1, { headers },
                 )
                     .then((report) => {
-                        console.log(invId);
-                        console.log(report);
                         alert("successfully submitted")
-                        console.log("refresh prevented");
                     })
                     .catch((error) => {
                         console.error(error)
                     })
-                    // getInvoiceNoFun()
             })
             .catch((error) => {
                 console.error(error)
             })
-
-
-
-        console.log(invId);
 
     }
 
@@ -790,11 +806,13 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                         label="Service Name"
                                                     >
                                                         <option>Select Name</option>
-                                                        {[...subService.filter((el)=>{
-                                        return el.username === username                                  
-                                    })].map((el,i)=><option key={i}>{el.selected_service}</option>)
-                                    
-                                    }</CFormSelect>
+                                                        {[...subService].map((item, index) => (
+                                            item.username === username && (
+                                               item.Status=== true && (
+                                                    <option key={index}>{item.Service }</option>                                                  
+                                                )
+                                            
+                                            )))}</CFormSelect>
                                                 </CCol>
                                                 <CCol xs={6}>
                                                     <CFormSelect
@@ -802,12 +820,18 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                         aria-label="Select Service Name"
                                                         value={serviceVaration}
                                                         onChange={(e) => setserviceVariation(e.target.value)}
-                                                        label="Service Variation"
+                                                        label="Service Package"
                                                     >
-                                                        <option>Service Variation</option>
-                                                            {[...subService.filter((el)=>{
-                                        return el.username === username                                   
-                                    })].map((el,i)=><option key={i}>{el.sub_Service_Name}</option>)
+                                                        <option>Service Package</option>
+                                                            {[...subService].filter((list) =>
+                                            list.Service=== serviceName
+                                        ).map((item, index) => (
+                                            item.username === username && (
+                                                item.Status === true && (
+                                                    <option key={index}>{item.Package_Name }</option>
+                                                )
+                                            )
+                                        ))
                                     }</CFormSelect> 
                                     
                                                 </CCol>
@@ -921,7 +945,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                         label="Attendance ID"
                                                     >
                                                         <option>Select Attendance ID</option>
-                                                        <option>CLIENT{mem.length + 1}</option>
+                                                        <option value={`CLA${mem.length+1}`}>CLA{mem.length + 1}</option>
                                                     </CFormSelect>
                                                 </CCol>
                                                 <CCol xs={6}>
@@ -1183,13 +1207,18 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                     >
                                                         Counseller :
                                                     </CInputGroupText>
-                                                    <CFormInput
-                                                        type="text"
-                                                        value={ser5}
-                                                        onChange={(e) => setSer5(e.target.value)}
-                                                        style={{ minWidth: "100px" }}
-                                                        aria-describedby="exampleFormControlInputHelpInline"
-                                                    />
+                                                    <CFormSelect
+                                                     value={ser5}
+                                                     onChange={(e) => setSer5(e.target.value)}                                                                                                        
+                                                    >
+                                                    <option>Select Assign Staff</option>
+                                                        {staff.filter((list) => list.username === username &&
+                                                         list.selected === 'Select').map((item, index) => (
+                                                            <option key={index}>{item.FullName}</option>
+                                                        ))}
+
+                                                    </CFormSelect>
+                                             
                                                 </CInputGroup>
                                             </CCol>
                                         </CRow>
@@ -1235,7 +1264,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                         >
                                                             <option>Select Package</option>
                                                             {[...subService.filter((el)=>{
-                                        return el.username === username                                   
+                                        return el.username === username && el.Service=== ser1                                
                                     })].map((el,i)=><option key={i}>{el.Package_Name
                                         }</option>)
                                     }   
@@ -1292,7 +1321,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                 >
                                          <option>Select Duration</option>
                                            {[...subService.filter((el)=>{
-                                        return el.username === username                                   
+                                         return el.username === username && el.Service=== ser1                                  
                                     })].map((el,i)=><option key={i}>{el.Duration
                                         }</option>)
                                     }   
@@ -1309,7 +1338,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
                                                 >
                                                     <option>Select Fees</option>
                                                     {[...subService.filter((el)=>{
-                                        return el.username === username                                   
+                                    return el.username === username && el.Service=== ser1                                    
                                     })].map((el,i)=><option key={i}>{el.Fees
 
                                         }</option>)
