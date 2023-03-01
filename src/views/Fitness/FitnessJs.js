@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom';
 import {
     CButton,
     CButtonGroup,
@@ -52,15 +53,12 @@ const Fitness = () => {
     let user = JSON.parse(localStorage.getItem('user-info'))
     const token = user.token;
 
-
-
+    const {id} = useParams()
+    console.log(id)
 
     const closeFormFun = () => {
         setForm(() => false)
     }
-
-
-
 
 
     return (
@@ -95,8 +93,6 @@ const Fitness = () => {
             {showForm && active === 4 ? <WorkoutTempletForm closeFormFun={closeFormFun} /> : ''}
             {showForm && active === 5 ? <ExerciseLbiiry closeFormFun={closeFormFun} /> : ''}
             {showForm && active === 6 ? <DailyWorkoutScheduling closeFormFun={closeFormFun} /> : ''}
-
-
 
 
             {active === 1 && <MeasurementTable Token={token} />}

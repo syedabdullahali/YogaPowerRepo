@@ -1614,8 +1614,11 @@ const ColdEnquires = () => {
                                     </CTableDataCell>
                                 </CTableRow>
                                 {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                                    list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select) && list.CallStatus === 'Cold' && list.Fullname.toLowerCase().includes(Search3.toLowerCase()) &&
-                                    list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
+                                    list.username === username && moment(list.createdAt).format("MM-DD-YYYY").includes(select) &&
+                                     list.CallStatus === 'Cold' && list.Fullname.toLowerCase().includes(Search3.toLowerCase()) &&
+                                    list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && 
+                                    list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && 
+                                    list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
                                     && list.StaffName.toLowerCase().includes(Search9.toLowerCase())
                                 ).map((item, index) => (
                                     item.username === username && (

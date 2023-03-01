@@ -39,12 +39,14 @@ import CallUpdate from 'src/components/CallUpdate'
 import ViewInvoice from 'src/components/ViewInvoice'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
 const AllClients = () => {
     const url1 = useSelector((el)=>el.domainOfApi) 
+    const navigateFitnees = useNavigate()
 
     const [select, setSelect] = useState()
     const [followForm, setFollowForm] = useState()
@@ -511,6 +513,13 @@ const AllClients = () => {
                     console.error(error)
                 })
         }
+    }
+
+
+
+    function NavigateFitnnesofClient(id){
+    console.log(id)
+     navigateFitnees(`/fitness/fitness-Goal/${id}`)   
     }
 
     return (
@@ -1468,7 +1477,9 @@ const AllClients = () => {
                                             <CTableDataCell>{item.serviceName}</CTableDataCell>
                                             <CTableDataCell>{moment(item.startDate).format("DD-MM-YYYY")}</CTableDataCell>
                                             <CTableDataCell>{moment(item.endDate).format("DD-MM-YYYY")}</CTableDataCell>
-                                            <CTableDataCell>{item.fitnessGoal}</CTableDataCell>
+                                            <CTableDataCell>
+                                               <CButton size='sm' onClick={()=>NavigateFitnnesofClient(item._id)} >View Fitness</CButton>
+                                            </CTableDataCell>
                                             <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${item._id}/5`} target="_black"><BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px' }} /></Link></CTableDataCell>
                                             <CTableDataCell><CButton onClick={() => { setCalls(true), setCallUpdateID(item._id) }}>View</CButton></CTableDataCell>
                                             <CTableDataCell className='text-center'>{item.status === 'active' ? <><CButton className='mt-1' color='success' onClick={() => updateRec(item._id, 'inactive')} >Active</CButton></> : <CButton className='mt-1' color='danger' onClick={() => updateRec(item._id, 'active')}>Inactive</CButton>}</CTableDataCell>

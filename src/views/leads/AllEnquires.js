@@ -277,10 +277,11 @@ const AllEnquires = () => {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data1)
+                body: JSON.stringify({...data1,...data2})
             }).then((resp) => {
                 resp.json().then(() => {
                     alert("successfully submitted")
+                    getEnquiry()
                     setVisible(false)
                 })
             })
@@ -305,11 +306,14 @@ const AllEnquires = () => {
             let data2 = {
                 username: username,
                 EnquiryID: followForm, CallDate: date, Time: time,
-                Name: Name, Contact: Contact, Email: email, ServiceName: ServiceName1, AppointmentDate: appointmentDate, AppointmentTime: appointmentTime, enquiryStage: enquiryStage, CallStatus: CallStatus1, FollowupDate: FollowupDate, TimeFollowp: TimeFollowp, Counseller: Counseller, Discussion: Discussion,
+                Name: Name, Contact: Contact, Email: email, ServiceName:
+                 ServiceName1, AppointmentDate: appointmentDate, AppointmentTime:
+                  appointmentTime, enquiryStage: enquiryStage, CallStatus: CallStatus1, 
+                  FollowupDate: FollowupDate, TimeFollowp: TimeFollowp, Counseller: Counseller, Discussion: Discussion,
                 status: 'CallReport'
             }
 
-            fetch(`${ url }/enquiryForm/update/${ followForm }`, {
+            fetch(`${ url }/enquiryForm/update/${followForm}`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${ token }`,
@@ -331,13 +335,60 @@ const AllEnquires = () => {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({...data1,...data2})
+            }).then((resp) => {
+                resp.json().then(() => {
+                    getEnquiry()
+                    setCallReport(false)
+                })
+            })
+        } else if (enquiryStage === 'Not interested') {
+               
+
+            const data1 = {appointmentfor: 'Not interested', Counseller: Counseller }
+            let data2 = {
+                username: username,
+                EnquiryID: followForm, CallDate: date, Time: time,
+                Name: Name, Contact: Contact, Email: email, ServiceName:
+                 ServiceName1, enquiryStage: enquiryStage, CallStatus: "Cold", 
+                  Counseller: Counseller, Discussion: Discussion,
+                status: 'CallReport'
+            }
+
+            fetch(`${ url }/enquiryForm/update/${ followForm }`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${ token }`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({...data1,...data2})
+            }).then((resp) => {
+                resp.json().then((res) => {
+                    alert("successfully submitted")
+                    getEnquiry()
+                    setVisible(false)
+                })
+            })
+
+            fetch(`${ url }/prospect/create`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${ token }`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify(data2)
             }).then((resp) => {
                 resp.json().then(() => {
                     setCallReport(false)
+                    getEnquiry()
                 })
             })
-        } else if (enquiryStage === 'Join') {
+        } 
+        
+        
+        else if (enquiryStage === 'Join') {
             console.log(followForm)
             handleAdmission(followForm)
             setVisible(false)
@@ -355,9 +406,10 @@ const AllEnquires = () => {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data2)
+                body: JSON.stringify({...data1,...data2})
             }).then((resp) => {
                 resp.json().then(() => {
+                    getEnquiry()
                     setCallReport(false)
                 })
             })
@@ -385,9 +437,10 @@ const AllEnquires = () => {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify({...data1,...data2})
                 }).then((resp) => {
                     resp.json().then(() => {
+                        getEnquiry()
                         setVisible(false)
                     })
                 })
@@ -405,6 +458,7 @@ const AllEnquires = () => {
                 }).then((resp) => {
                     resp.json().then(() => {
                         alert("successfully submitted")
+                        getEnquiry()
                         setVisible(false)
                     })
                 })
@@ -419,6 +473,7 @@ const AllEnquires = () => {
                     body: JSON.stringify(data)
                 }).then((resp) => {
                     resp.json().then(() => {
+                        getEnquiry()
                         setVisible(false)
                     })
                 })
@@ -437,6 +492,7 @@ const AllEnquires = () => {
                     resp.json().then(() => {
                         alert("successfully submitted")
                         setVisible(false)
+                        getEnquiry()
                     })
                 })
             }
@@ -451,6 +507,7 @@ const AllEnquires = () => {
             }).then((resp) => {
                 resp.json().then(() => {
                     setCallReport(false)
+                    getEnquiry()
                 })
             })
 
@@ -499,6 +556,7 @@ const AllEnquires = () => {
             resp.json().then(() => {
                 alert("successfully submitted")
                 setVisible(false)
+                getEnquiry()
             })
         })
     }
@@ -691,6 +749,7 @@ const AllEnquires = () => {
     })
 
 
+    console.log(enquiryStage)
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -1038,8 +1097,8 @@ const AllEnquires = () => {
                             </CModalFooter>
                         </CModal>
 
-                        <CModal size='lg' style={{ border: '2px solid #0B5345' }} visible={visible} color='' onClose={() => setVisible(false)} >
-                            <CModalHeader  >
+                        <CModal size='lg'  style={{ border: '2px solid #0B5345' }} visible={visible} color='' onClose={() => setVisible(false)} >
+                            <CModalHeader style={{ backgroundColor: '#0B5345', color: 'white' }} >
                                 <CModalTitle>Prospect Form</CModalTitle>
                             </CModalHeader>
                             <CModalBody>
@@ -1124,10 +1183,12 @@ const AllEnquires = () => {
                                                 label="Prospect Stage"
                                                 options={[
                                                     "Select",
+                                                    { label: 'Prospect', value: 'Prospect' },
                                                     { label: "Appointment", value: "Appointment" },
                                                     { label: "Trial Session", value: "Trial Session" },
                                                     { label: "Join", value: "Join" },
-                                                    { label: 'Prospect', value: 'Prospect' }
+                                                    { label: 'Not Interested', value: 'Not interested' },
+
                                                 ]}
                                             />
                                         </CCol>
@@ -1182,7 +1243,7 @@ const AllEnquires = () => {
                                                 </CCol>
                                             </>
                                         }
-                                        {enquiryStage != 'Join' &&
+                                        {enquiryStage != 'Join' && enquiryStage != 'Not interested'&&
 
                                             <CCol lg={4} md={6} sm={12}>
                                                 <CFormSelect

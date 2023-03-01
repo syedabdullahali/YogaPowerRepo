@@ -295,7 +295,7 @@ const routes = [
 
   // Fitness
 
-  {path:'/fitness/fitness-Goal',name:'Fitness Goal',element:Fitness},
+  {path:'/fitness/fitness-Goal/:id',name:'Fitness Goal',element:Fitness},
 
   //Marketing
   { path: '/Marketing', name: 'Marketing', element: EmailMarketing, exact: true },
