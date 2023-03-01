@@ -240,7 +240,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Fitness Goal',
-        to: '/fitness/fitness-Goal',
+        to: '/fitness/fitness-Goal/all-client-fitness',
       }
     ],
   },
