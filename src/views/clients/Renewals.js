@@ -28,15 +28,19 @@ import {
     CTableHead,
     CTableHeaderCell,
     CTableRow,
+    CImage,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
 import axios from 'axios'
 import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md'
-import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs'
+import { BsPlusCircle, BsWhatsapp,BsEye } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
-import moment from 'moment/moment'
+import moment, { duration } from 'moment/moment'
 import { Link } from 'react-router-dom'
+import logo from 'src/assets/images/avatars/icon.png'
+
+
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
@@ -45,10 +49,7 @@ const Renewals = () => {
     const url1 = useSelector((el)=>el.domainOfApi) 
 
     const [select, setSelect] = useState()
-    const [followForm, setFollowForm] = useState()
-    const [edit, setEdit] = useState()
-    const [visible, setVisible] = useState(false)
-    const [visible1, setVisible1] = useState(false)
+  
 
     const [Search1, setSearch1] = useState('')
     const [Search2, setSearch2] = useState('')
@@ -61,49 +62,15 @@ const Renewals = () => {
     const [Search9, setSearch9] = useState('')
     const [Search10, setSearch10] = useState('')
 
-    
-    const [Name, setName] = useState("");
-    const [Contact, setContact] = useState("");
-    const [email, setEmail] = useState("");
-    const [ServiceName1, setServiceName1] = useState("");
-    const [CallStatus1, setCallStatus1] = useState("");
-    const [enquiryStage, setEnquiryStage] = useState('')
-    const [FollowupDate, setFollowupDate] = useState("");
-    const [TimeFollowp, setTimeFollowp] = useState("");
-    const [Discussion, setDiscussion] = useState("");
-    const [Counseller, setCounseller] = useState("");
 
-    const [Fullname, setFullName] = useState("");
-    const [Emailaddress, setEmailAddress] = useState("");
-    const [CountryCode, setCountryCode] = useState("");
-    const [ContactNumber, setContactNumber] = useState("");
-    const [Gander, setGander] = useState("");
-    const [DateofBirth, setDateofBirth] = useState("");
-    const [address, setAddress] = useState("");
-    const [Area, setArea] = useState("");
-    const [city, setCity] = useState("");
-    const [Profession, setProfession] = useState("");
+    // Invoice
 
-
-    const [StaffName, setStaffName] = useState("");
-    const [CenterName, setCenterName] = useState("");
-    const [CallStatus, setCallStatus] = useState("");
-    const [Message, setMessage] = useState("");
-
-
-    const [person_Name, setperson_Name] = useState("");
-    const [Relation, setRelation] = useState("");
-    const [CountryCode2, setCountryCode2] = useState("");
-    const [ContactNumber2, setContactNumber2] = useState("");
-
-
-    const [EnquiryDate, setEnquiryDate] = useState("");
-    const [ServiceName, setServiceName] = useState("");
-    const [Customertype, setCustomertype] = useState("");
-    const [enquirytype, setEnquirytype] = useState("");
-    const [appointmentDate, setappointmentDate] = useState("");
-    const [appointmentTime, setappointmentTime] = useState("");
-    const [appointmentfor, setappointmentfor] = useState("");
+    const [fullname,setFullName] = useState('')
+    const [contactNumber,setContactNumber] = useState('')
+    const [attendanceID,setAttendanceID] = useState('')
+    const [email,setEmail] = useState('')
+ 
+    const [allIvoiceOfaUser,setAllInvoiceOfUser] = useState([])
 
 
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -112,211 +79,55 @@ const Renewals = () => {
     const username = user.user.username;
     const centerCode = user.user.centerCode;
     const [result1, setResult1] = useState([]);
+    const [invoiceData,setInvoiceData] = useState([])
     console.log(token);
     const [result, setResult] = useState([]);
     const [updateItem, setUpdateItem] = useState([]);
     const [paging, setPaging] = useState(0);
+    const [showInvoiceModal,setInvoceModal] = useState(false)
     useEffect(() => {
         getEnquiry()
-        getStaff()
-        axios.get(`${url}/subservice/all`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                console.log(res.data)
-                setResult(res.data)
-            })
-            .catch((error) => {
-                console.error(error)
-            })
+       
     }, []);
-    const [staff, setStaff] = useState([])
-    function getStaff() {
-        axios.get(`${url2}/employeeForm/all`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                setStaff(res.data)
-                console.log(res.data);
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
 
-    const saveEnquiry = () => {
-        let data = {
-            username: username,
-            Fullname, Emailaddress, ContactNumber, Gander, DateofBirth, address, Area, city, Profession,
-            StaffName, CenterName, CallStatus, Message,
-            person_Name, Relation, ContactNumber2: ContactNumber2,
-            EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, status: "all_enquiry",
-        }
+ 
+    
 
-        fetch(`${url}/memberForm/update/${edit}`, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        }).then((resp) => {
-            resp.json().then(() => {
-                alert("successfully submitted")
-                setFullName('')
-                setEmailAddress('')
-                setCountryCode('')
-                setContactNumber('')
-                setGander('')
-                setDateofBirth('')
-                setAddress('')
-                setArea('')
-                setCity('')
-                setProfession('')
-                setStaffName('')
-                setCenterName('')
-                setCallStatus('')
-                setMessage('')
-                setperson_Name('')
-                setRelation('')
-                setCountryCode2('')
-                setContactNumber2('')
-                setEnquiryDate('')
-                setServiceName('')
-                setCustomertype('')
-                setEnquirytype('')
-                setappointmentDate('')
-                setappointmentTime('')
-                setappointmentfor('')
-                setVisible1(false)
-            })
-        })
-    }
-
-    const saveProspect = () => {
-        var currentdate = new Date();
-        var date = currentdate.getDay() + "-" + currentdate.getMonth()
-            + "-" + currentdate.getFullYear();
-        var time =
-            + currentdate.getHours() + ":"
-            + currentdate.getMinutes();
-        let data = {
-            EnquiryID: followForm, CallDate: date, Time: time,
-            Name: Name, Contact: Contact, Email: email, ServiceName: ServiceName1, AppointmentDate: appointmentDate, AppointmentTime: appointmentTime, enquiryStage: enquiryStage, CallStatus: CallStatus1, FollowupDate: FollowupDate, TimeFollowp: TimeFollowp, Counseller: Counseller, Discussion: Discussion,
-        }
-
-        fetch(`${url}/prospect/create`, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        }).then((resp) => {
-            resp.json().then(() => {
-                alert("successfully submitted")
-                setVisible(false)
-            })
-        })
-    }
-    const [ogList, setOgList] = useState([])
     function getEnquiry() {
-        axios.get(`${url1}/renewalsclient
+        axios.get(`${ url }/memberForm/all
         `, {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${ token }`
             }
         })
             .then((res) => {
+                console.log(res.data, "data new")
+                // 4
                 setResult1(res.data.filter((list) => list.username === username).reverse())
-                setOgList(res.data.filter((list) => list.username === username).reverse())
             })
             .catch((error) => {
                 console.error(error)
             })
     }
-    const [filterBy, setFilterBy] = useState('')
-    const [subFilter, setSubFilter] = useState('')
-    const [arr, setArr] = useState([])
-    function getUnique(arr, index) {
-        const unique = arr
-            .map(e => e[index])
-            // store the keys of the unique objects
-            .map((e, i, final) => final.indexOf(e) === i && i)
-            // eliminate the dead keys & store unique objects
-            .filter(e => arr[e]).map(e => arr[e]);
-        return unique;
+    const getDate = (date,val) => {
+
+        const date2 = new Date(date).getDate() + "/" + (new Date(date).getMonth() + (val? 1:0)) + "/" + new Date(date).getFullYear()
+        if (date2 === 'NaN/NaN/NaN') {
+            return 'Invalid Date'
+        }
+        return date2
+
     }
-    function filterArr(og, v) {
-        if (v === '')
-            setResult1(og)
-        else
-            setResult1(og.filter((list) => list[filterBy] === v))
-    }
-    function getUpdate(id) {
-        axios.get(`${url}/memberForm/${id}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                setUpdateItem(res.data)
-                setFullName(res.data.Fullname)
-                setEmailAddress(res.data.Emailaddress)
-                setCountryCode(+res.data.CountryCode)
-                setContactNumber(res.data.ContactNumber)
-                setGander(res.data.Gander)
-                setDateofBirth(moment(res.data.DateofBirth).utc().format('YYYY-MM-DD'))
-                setAddress(res.data.address)
-                setArea(res.data.Area)
-                setCity(res.data.city)
-                setProfession(res.data.Profession)
-                setStaffName(res.data.StaffName)
-                setCenterName(res.data.CenterName)
-                setCallStatus(res.data.CallStatus)
-                setMessage(res.data.Message)
-                setperson_Name(res.data.person_Name)
-                setRelation(res.data.Relation)
-                setCountryCode2(res.data.CountryCode2)
-                setContactNumber2(res.data.ContactNumber2)
-                setEnquiryDate(res.data.EnquiryDate)
-                setServiceName(res.data.ServiceName)
-                setCustomertype(res.data.Customertype)
-                setEnquirytype(res.data.enquirytype)
-                setappointmentDate(moment(res.data.appointmentDate).utc().format('YYYY-MM-DD'))
-                setappointmentTime(res.data.appointmentDate)
-                setappointmentfor(res.data.appointmentfor)
-                setVisible1(true)
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
-    function getProspect(id) {
-        axios.get(`${url}/memberForm/${id}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                setUpdateItem(res.data)
-                setName(res.data.Fullname)
-                setContact(res.data.ContactNumber)
-                setServiceName1(res.data.ServiceName)
-                setCallStatus1(res.data.CallStatus)
-                setEmail(res.data.Emailaddress)
-                setVisible(true)
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
+
+
+    const getEndDate = (date, startDate) => {
+        const date2 = new Date(date).getDate() + "/" + (new Date(date).getMonth() + 1) + "/" + new Date(date).getFullYear()
+        if (date2 === 'NaN/NaN/NaN') {
+            return 'Invalid Date'
+        }
+        return date2
+
+    } 
 
 
     function deleteEnquiry(id) {
@@ -338,17 +149,236 @@ const Renewals = () => {
         }
     }
 
-    const handleFollowup = (id) => {
-        setFollowForm(id)
-        getProspect(id)
-    }
+  
 
-    function handleEnquiry(id) {
-        setEdit(id)
-        getUpdate(id)
-    }
+
+
+
+
+    const getInvoiceNoFun =async ()=>{
+        const headers = {
+                'Authorization': `Bearer ${token}`,
+                'My-Custom-Header': 'foobar'
+        };
+        
+          await  axios.get(`${url}/invoice/all`,{headers}).then(({data})=>{
+            setInvoiceData(data)
+          })
+         }
+        
+        
+        
+         useEffect(()=>{
+            getInvoiceNoFun()
+},[])
+
+function ShowUserInvoceHandler (id,item){
+    const uniqUserInvoiceAllData = invoiceData.filter((el)=>el?.MemberId===id)
+    setAllInvoiceOfUser(uniqUserInvoiceAllData)    
+    setContactNumber(item?.ContactNumber)
+    setEmail(item?.Email)
+    setAttendanceID(item?.AttendanceID)
+    setFullName(item?.Fullname)
+    setInvoceModal(true)
+    
+}
+
+
+
     return (
         <CRow>
+
+
+<CModal size="xl" alignment="center" scrollable visible={showInvoiceModal} onClose={() => setInvoceModal(false)}>
+                            <CModalHeader>
+                                <CModalTitle>Invoice Preview</CModalTitle>
+                            </CModalHeader>
+                            <CModalBody  style={{ padding: '25px' }}>
+                                <CRow>
+                                   <CCol lg={12} className='text-center'><CImage src={logo} width="100px" height='100px' /></CCol>
+                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International </h5></CCol>
+                                </CRow>
+                               
+
+                               
+
+{ allIvoiceOfaUser.filter((list) =>{
+                                    const time =  (new Date(list.endDate) -new Date())
+                                    const days = Math.ceil(time/(1000*60*60*24))
+                                          if((days<=15 && days>=1 &&  list.username === username)){
+                                            console.log(list.invoiceId)
+                                             return true 
+                                          }
+                                          return false                                                                         
+                                     }).map((el,i)=>{
+
+
+return <div  className='my-5' > 
+
+                            <CRow>                                                                   
+                                 <CCol className='mt-2' style={{ marginLeft: '10px' }}>
+                                     <h6>Client Name: {fullname}</h6>
+                                     <div>Client Number: {contactNumber}</div>
+                                     Customer ID : {attendanceID}<br />
+                                     Email-Id : {email}<br />
+                                 </CCol>
+                                 <CCol className='mt-2' style={{ marginRight: '30px' }}>
+                                     <div className='float-end'>
+                                         Date : { getDate(el?.date)}<br />
+                                         Invoice No {el?.centerName}:{el?.InvoiceNo} <br />
+                                         Counseller : {el?.counseller}
+                                     </div>
+                                 </CCol>
+                            </CRow>    
+                                 <CCol lg={12} className='text-center p-0'><h4 className='m-0 p-0'>Invoice</h4></CCol>
+
+<CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} responsive>
+                                   <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
+                                        <CTableRow >
+                                            <CTableHeaderCell>Sr.No</CTableHeaderCell>
+                                            <CTableHeaderCell>DESCRIPTION</CTableHeaderCell>
+                                            <CTableHeaderCell>DURATION</CTableHeaderCell>
+                                            <CTableHeaderCell>SERVICE FEE</CTableHeaderCell>
+                                        </CTableRow>
+                                    </CTableHead>
+                                    <CTableBody>
+                                        <CTableRow>
+                                            <CTableDataCell>{i+1}</CTableDataCell>
+                                            <CTableDataCell>
+                                                <CRow>
+                                                    <CCol lg={12}>
+                                                        <div style={{ fontWeight: 'bold' }}>Service Name: {el?.ServiceName}</div>
+                                                    </CCol>
+                                                    <CCol lg={12}>
+                                                        <div style={{ fontWeight: 'bold' }}>Package Name: {el?.PackageName}</div>
+
+                                                    </CCol>
+                                                </CRow>
+                                                <CRow>
+                                                    <CCol>
+                                                        <div>Start Date: {getDate(el?.startDate,true)}</div>
+                                                    </CCol>
+                                                    <CCol>
+                                                        <div >End Date: {getDate(el?.endDate,true)}</div>
+                                                    </CCol>
+                                                </CRow>
+
+                                            </CTableDataCell>
+                                            <CTableDataCell>
+                                                <div style={{ fontWeight: 'bold' }}>{el?.duration}</div>
+
+                                            </CTableDataCell>
+                                            <CTableDataCell>
+                                                <div style={{ fontWeight: 'bold' }}>{el?.fees}</div>
+                                            </CTableDataCell>
+                                        </CTableRow>
+
+                                        <CTableRow>
+                                            <CTableDataCell colSpan={2}></CTableDataCell>
+                                            <CTableDataCell colSpan={2}>
+                                                <CTable bordered style={{ margin: '0', padding: '0' }} responsive>
+                                                    <CTableBody>
+                                                        <CTableRow>
+                                                            <CTableDataCell>Sub Total</CTableDataCell>
+                                                            <CTableDataCell>
+                                                                <div style={{ fontWeight: 'bold' }}>{el?.fees}</div>
+
+                                                            </CTableDataCell>
+                                                        </CTableRow>
+
+                                                        <CTableRow>
+                                                            <CTableDataCell>
+
+                                                                Discount
+
+                                                            </CTableDataCell>
+                                                            <CTableDataCell>
+                                                                <div style={{ fontWeight: 'bold' }}>{el?.discount}</div>
+                                                            </CTableDataCell>
+                                                        </CTableRow>
+                                                        <CTableRow>
+                                                            <CTableDataCell>
+                                                                Tax
+                                                            </CTableDataCell>
+                                                            <CTableDataCell className="mt-2">
+                                                                <div style={{ fontWeight: 'bold' }}>{el?.fees / 100 * el?.tax}</div>
+                                                            </CTableDataCell>
+                                                        </CTableRow>
+                                                        <CTableRow>
+                                                            <CTableDataCell>Total Amount</CTableDataCell>
+                                                            <CTableDataCell>
+                                                                <div style={{ fontWeight: 'bold' }}>{el?.totalAmount +el?.pendingAmount}</div>
+
+                                                            </CTableDataCell>
+                                                        </CTableRow>
+
+                                                        <CTableRow>
+                                                            <CTableDataCell>Paid Amount</CTableDataCell>
+                                                            <CTableDataCell>
+                                                                <div style={{ fontWeight: 'bold' }}>{el?.paidAmount}</div>
+
+                                                            </CTableDataCell>
+                                                        </CTableRow>
+                                                        <CTableRow>
+                                                            <CTableDataCell>Balance Amount</CTableDataCell>
+                                                            <CTableDataCell>
+                                                                <div style={{ fontWeight: 'bold' }}>{el?.pendingAmount}</div>
+                                                            </CTableDataCell>
+                                                        </CTableRow>
+
+                                                        <CTableRow>
+                                                            <CTableDataCell>Mode of Payment</CTableDataCell>
+
+                                                            <CTableDataCell>
+                                                                <div style={{ fontWeight: 'bold' }}>{el?.paymode}</div>
+                                                            </CTableDataCell>
+                                                        </CTableRow>
+                                                        <CTableRow>
+                                                        </CTableRow>
+                                                    </CTableBody>
+                                                </CTable>
+                                            </CTableDataCell>
+                                        </CTableRow>
+                                        <CTableRow>
+                                            <CTableDataCell colSpan={3}>Total</CTableDataCell>
+                                            <CTableDataCell>
+                                                <div style={{ fontWeight: 'bold' }}>{el?.paidAmount}</div>
+                                            </CTableDataCell>
+                                        </CTableRow>
+                                        </CTableBody>
+                                        </CTable>
+
+</div>})}
+              
+
+                               <CTable>
+                                    <CTableBody>
+                                        <CTableRow style={{ backgroundColor: "#0B5345", color: "white" }}>
+                                            <CTableDataCell colSpan={4}>
+                                                <h5>TERMS AND CONDITIONS</h5>
+                                            </CTableDataCell>
+                                        </CTableRow>
+                                        <CTableRow>
+                                            <CTableDataCell colSpan={4}>
+                                                <div>Fee once paid is not refundable, Non transferable & no package extension, lapsed sessions has to be adjusted within the expiry date. Instructors & timings are subject to change. All packages would be on hourly basis in a day. If a person wishes to workout more than an hour in a day, kindly upgrade your package accordingly. follow guidelines for better result</div>
+                                            </CTableDataCell>
+                                        </CTableRow>
+
+                                        <CTableRow>
+                                            <CTableDataCell colSpan={4}>
+                                                <div style={{ fontWeight: 'bold' }}>Address: Shop 24/25, 2nd Floor, V Mall, Thakur Complex, Kandivali East, Mumbai 400 101. India.</div>
+                                                <label style={{ fontWeight: 'bold' }}>Email: info@yogpowerint.com</label>
+                                                <label style={{ fontWeight: 'bold', marginLeft: '10px' }}>Phone: +91 9819 1232 91</label>
+                                                <div style={{ fontWeight: 'bold' }}>Website: https://yogpowerint.com</div>
+                                            </CTableDataCell>
+                                        </CTableRow>
+                                    </CTableBody>
+                                </CTable>
+                            </CModalBody>
+                            <CModalFooter>
+                                {/* <CButton color="primary" onClick={handlePrint}>Print</CButton> */}
+                            </CModalFooter>
+                        </CModal>
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
@@ -420,8 +450,8 @@ const Renewals = () => {
                                 <CFormSelect
                                     className="mb-1"
                                     aria-label="Select Service Name"
-                                    value={filterBy}
-                                    onChange={(e) => { setFilterBy(e.target.value); setArr(getUnique(ogList, e.target.value)) }}
+                                    // value={filterBy}
+                                    // onChange={(e) => { setFilterBy(e.target.value); setArr(getUnique(ogList, e.target.value)) }}
                                     label="Filter By"
 
                                 >
@@ -438,604 +468,22 @@ const Renewals = () => {
                                 <CFormSelect
                                     className="mb-1"
                                     aria-label="Select Service Name"
-                                    value={subFilter}
-                                    onChange={(e) => { setSubFilter(e.target.value); filterArr(ogList, e.target.value) }}
+                                    // value={subFilter}
+                                    // onChange={(e) => { setSubFilter(e.target.value); filterArr(ogList, e.target.value) }}
                                     label="Sub-filter"
 
                                 >
                                     <option value=''>Select</option>
-                                    {arr.filter((list) => list[filterBy] != '').map((item, index) => (
+                                    {/* {arr.filter((list) => list[filterBy] != '').map((item, index) => (
                                         item.username === username && (
                                             <option key={index} value={item.id}>{item[filterBy]}</option>
                                         )
-                                    ))}
+                                    ))} */}
                                 </CFormSelect>
                             </CCol>
                             <CCol></CCol>
                         </CRow>
 
-                        {/* <CRow className='mb-3'>
-                            <CCol lg={2} md={6} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        All
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>Sep</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} md={6} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Service Category
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} md={6} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Sub-Filter
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} md={6} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Marketing
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                        </CRow> */}
-                        <CModal size='lg' style={{ border: '2px solid #0B5345' }} visible={visible} color='' onClose={() => setVisible(false)} >
-                            <CModalHeader  >
-                                <CModalTitle>Upgrade Form</CModalTitle>
-                            </CModalHeader>
-                            <CModalBody>
-                                <CForm >
-                                    <CRow>
-                                        <CCol lg={4} md={6} sm={12}>
-                                            <CFormInput
-                                                className="mb-1"
-                                                type="text"
-                                                id="exampleFormControlInput1"
-                                                label="Name"
-                                                value={Name}
-                                                onChange={(e) => setName(e.target.value)}
-                                                placeholder="Enter Name"
-                                            />
-                                        </CCol>
-                                        <CCol lg={4} md={6} sm={12}>
-                                            <CFormInput
-                                                className="mb-1"
-                                                type="email"
-                                                id="exampleFormControlInput1"
-                                                label="Email Address"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                placeholder="name@example.com"
-                                                aria-describedby="exampleFormControlInputHelpInline"
-                                            />
-                                        </CCol>
-
-                                        <CCol lg={4} md={6} sm={12}>
-                                            <CFormInput
-                                                className="mb-1"
-                                                type="number"
-                                                value={Contact}
-                                                onChange={(e) => setContact(e.target.value)}
-                                                id="exampleFormControlInput1"
-                                                label="Contact No"
-                                                placeholder="Enter Number"
-                                            />
-                                        </CCol>
-                                        <CCol lg={4} md={6} sm={12}>
-                                            <CFormSelect
-                                                className="mb-1"
-                                                aria-label="Select Service Name"
-                                                value={ServiceName1}
-                                                onChange={(e) => setServiceName1(e.target.value)}
-                                                label="Service Name"
-
-                                            >
-                                                <option>Select Service</option>
-                                                {result.map((item, index) => (
-                                                    item.username === username && (
-                                                        item.status === true && (
-                                                            <option key={index} value={item.id}>{item.selected_service}</option>
-                                                        )
-                                                    )
-                                                ))}
-                                            </CFormSelect>
-                                        </CCol>
-                                        <CCol lg={4} md={6} sm={12}>
-
-                                            <CFormSelect
-                                                className="mb-1"
-                                                aria-label="Select Assign Staff"
-                                                value={Counseller}
-                                                onChange={(e) => setCounseller(e.target.value)}
-                                                label='Counseller'
-                                            >
-                                                <option>Select Counseller</option>
-                                                {staff.filter((list) => list.username === username && list.selected === 'Select').map((item, index) => (
-                                                    item.username === username && (
-                                                        <option key={index}>{item.FullName}</option>
-                                                    )
-                                                ))}</CFormSelect>
-                                        </CCol>
-                                        <CCol lg={4} md={6} sm={12}>
-                                            <CFormSelect
-                                                className="mb-1"
-                                                aria-label="Select Call Status"
-                                                value={enquiryStage}
-                                                onChange={(e) => setEnquiryStage(e.target.value)}
-                                                label="Prospect Stage"
-                                                options={[
-                                                    "Select",
-                                                    { label: "Appointment", value: "Appointment" },
-                                                    { label: "Trial Session", value: "Trial Session" },
-                                                    { label: "Join", value: "Join" },
-                                                    { label: 'Enquiry', value: 'Enquiry' }
-                                                ]}
-                                            />
-                                        </CCol>
-
-                                        {(enquiryStage === 'Appointment' || enquiryStage === 'Trial Session') &&
-                                            <>
-                                                <CCol lg={4} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        label="Appointment Date"
-                                                        type="date"
-                                                        value={appointmentDate}
-                                                        onChange={(e) => setappointmentDate(e.target.value)}
-                                                        id="exampleFormControlInput1"
-                                                    />
-                                                </CCol>
-                                                <CCol lg={4} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        label="Appointment Time"
-                                                        type="time"
-                                                        id="exampleFormControlInput1"
-                                                        value={appointmentTime}
-                                                        onChange={(e) => setappointmentTime(e.target.value)}
-
-                                                    />
-                                                </CCol>
-                                            </>
-                                        }
-                                        <CCol lg={4} md={6} sm={12}>
-                                            <CFormSelect
-                                                className="mb-1"
-                                                aria-label="Select Call Status"
-                                                value={CallStatus1}
-                                                onChange={(e) => setCallStatus1(e.target.value)}
-                                                label="Call Status"
-                                                options={[
-                                                    "Select",
-                                                    { label: "Cold", value: "Cold" },
-                                                    { label: "Warm", value: "Warm" },
-                                                    { label: "Hot", value: "Hot" },
-                                                ]}
-                                            />
-                                        </CCol>
-                                        {(enquiryStage === 'Join' || enquiryStage === 'Enquiry') &&
-                                            <>
-
-                                                <CCol lg={4} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        label="FollowUp Date"
-                                                        type="date"
-                                                        value={FollowupDate}
-                                                        onChange={(e) => setFollowupDate(e.target.value)}
-                                                        id="exampleFormControlInput1"
-                                                    />
-                                                </CCol>
-                                                <CCol lg={4} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        label="FollowUp Time"
-                                                        type="time"
-                                                        id="exampleFormControlInput1"
-                                                        value={TimeFollowp}
-                                                        onChange={(e) => setTimeFollowp(e.target.value)}
-
-                                                    />
-                                                </CCol>
-                                            </>
-                                        }
-                                        <CCol>
-                                            <CFormTextarea
-                                                id="exampleFormControlTextarea1"
-                                                label="Discussion"
-                                                value={Discussion}
-                                                onChange={(e) => setDiscussion(e.target.value)}
-                                                rows="2"
-                                                text="Must be 8-20 words long."
-                                            ></CFormTextarea>
-                                        </CCol>
-                                    </CRow>
-                                </CForm>
-                            </CModalBody>
-                            <CModalFooter>
-                                <CButton color="secondary" onClick={() => setVisible(false)}>
-                                    Close
-                                </CButton>
-                                <CButton type='submit' color="primary" onClick={() => saveProspect()}>Save Prospect</CButton>
-                            </CModalFooter>
-                        </CModal>
-
-                        <CModal size="xl" scrollable alignment="center" visible={visible1} onClose={() => setVisible1(false)}>
-                            <CModalHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                                <CModalTitle>Enquiry Form</CModalTitle>
-                            </CModalHeader>
-                            <CModalBody>
-                                <CForm >
-                                    <CRow>
-                                        <CCol lg={6} sm={12}>
-                                            <CCardTitle>Personal Details</CCardTitle>
-                                            <CRow>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        type="text"
-                                                        id="exampleFormControlInput1"
-                                                        label="Full name"
-                                                        value={Fullname}
-                                                        onChange={(e) => setFullName(e.target.value)}
-                                                        placeholder="Enter Name"
-                                                    />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        type="email"
-                                                        id="exampleFormControlInput1"
-                                                        label="Email address"
-                                                        value={Emailaddress}
-                                                        onChange={(e) => setEmailAddress(e.target.value)}
-                                                        placeholder="name@example.com"
-                                                        text="Must be 8-20 characters long."
-                                                        aria-describedby="exampleFormControlInputHelpInline"
-                                                    />
-                                                </CCol>
-                                            </CRow>
-                                            <CRow>
-                                                <CCol lg={12} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        type="number"
-                                                        value={ContactNumber}
-                                                        onChange={(e) => setContactNumber(e.target.value)}
-                                                        id="exampleFormControlInput1"
-                                                        label="Contact Number"
-                                                        placeholder="Enter Number"
-                                                    />
-                                                </CCol>
-                                            </CRow>
-                                            <CRow>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormSelect
-                                                        className="mb-1"
-                                                        aria-label="Select Currency"
-                                                        value={Gander}
-                                                        onChange={(e) => setGander(e.target.value)}
-                                                        label="Gander"
-                                                        options={[
-                                                            "Select Gender",
-                                                            { label: "Male", value: "Male" },
-                                                            { label: "Female", value: "Female" },
-                                                            { label: "Other", value: "Other" },
-                                                        ]}
-                                                    />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        type="date"
-                                                        value={DateofBirth}
-                                                        onChange={(e) => setDateofBirth(e.target.value)}
-                                                        id="exampleFormControlInput1"
-                                                        label="Date of Birth"
-                                                        placeholder="Enter Date"
-                                                    />
-                                                </CCol>
-                                            </CRow>
-
-                                            <CFormTextarea
-                                                id="exampleFormControlTextarea1"
-                                                label="Address"
-                                                value={address}
-                                                onChange={(e) => setAddress(e.target.value)}
-                                                rows="2"
-                                                text="Must be 8-20 words long."
-                                            ></CFormTextarea>
-                                            <CRow>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        type="text"
-                                                        value={Area}
-                                                        onChange={(e) => setArea(e.target.value)}
-                                                        id="exampleFormControlInput1"
-                                                        label="Area"
-                                                        placeholder="Enter Locality"
-                                                    />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        type="text"
-                                                        value={city}
-                                                        onChange={(e) => setCity(e.target.value)}
-                                                        id="exampleFormControlInput1"
-                                                        label="City"
-                                                        placeholder="Enter City"
-                                                    />
-                                                </CCol>
-                                            </CRow>
-
-                                            <CFormInput
-                                                className="mb-1"
-                                                type="text"
-                                                value={Profession}
-                                                onChange={(e) => setProfession(e.target.value)}
-                                                id="exampleFormControlInput1"
-                                                label="Profession"
-                                                placeholder="Enter Profession"
-                                            />
-
-                                            <CCardTitle>Schedule enquiry follow-up</CCardTitle>
-                                            <CRow>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormSelect
-                                                        className="mb-1"
-                                                        aria-label="Select Staff Name"
-                                                        label="Staff Name"
-                                                        value={StaffName}
-                                                        onChange={(e) => setStaffName(e.target.value)}
-                                                        options={[
-                                                            "Select Staff Name",
-                                                            { label: "prabha", value: "prabha" },
-                                                            { label: "sejal", value: "sejal" },
-                                                            { label: "sonali", value: "sonali" },
-                                                            { label: "None", value: "None" },
-                                                        ]}
-                                                    />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormSelect
-                                                        className="mb-1"
-                                                        aria-label="Select Staff Name"
-                                                        value={CenterName}
-                                                        onChange={(e) => setCenterName(e.target.value)}
-                                                        label="Center Name"
-                                                        options={[
-                                                            "Select Center",
-                                                            { label: "V-mall Thakur Complex", value: "V-mall Thakur Complex" },
-                                                            { label: "Station Kandivali East", value: "Station Kandivali East" },
-                                                        ]}
-                                                    />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormSelect
-                                                        className="mb-1"
-                                                        aria-label="Select Call Status"
-                                                        value={CallStatus}
-                                                        onChange={(e) => setCallStatus(e.target.value)}
-                                                        label="Call Status"
-                                                        options={[
-                                                            "Select Call Status",
-                                                            { label: "Cold", value: "Cold" },
-                                                            { label: "Warm", value: "Warm" },
-                                                            { label: "Hot", value: "Hot" },
-                                                        ]}
-                                                    />
-                                                </CCol>
-                                            </CRow>
-                                            <CFormTextarea
-                                                id="exampleFormControlTextarea1"
-                                                label="Message"
-                                                value={Message}
-                                                onChange={(e) => setMessage(e.target.value)}
-                                                rows="2"
-                                                text="Must be 8-20 words long."
-                                            ></CFormTextarea>
-                                        </CCol>
-
-                                        <CCol lg={6} sm={12}>
-                                            <CRow>
-                                                <CCardTitle>Emergency contact</CCardTitle>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        type="text"
-                                                        id="exampleFormControlInput1"
-                                                        label="Name"
-                                                        value={person_Name}
-                                                        onChange={(e) => setperson_Name(e.target.value)}
-                                                        placeholder="Enter Name"
-                                                    />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        type="text"
-                                                        id="exampleFormControlInput1"
-                                                        label="Relationship"
-                                                        value={Relation}
-                                                        onChange={(e) => setRelation(e.target.value)}
-                                                        placeholder="Enter Relationship"
-                                                    />
-                                                </CCol>
-
-                                                <CCol lg={12} md={6} sm={12}>
-
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        type="number"
-                                                        value={ContactNumber2}
-                                                        onChange={(e) => setContactNumber2(e.target.value)}
-                                                        id="exampleFormControlInput1"
-                                                        label="Contact Number"
-                                                        placeholder="Enter Number"
-                                                    />
-                                                </CCol>
-                                            </CRow>
-                                            <CRow>
-                                                <CCardTitle>Lead Information</CCardTitle>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        name="enquiry_date"
-                                                        type="date"
-                                                        id="exampleFormControlInput1"
-                                                        value={EnquiryDate}
-                                                        onChange={(e) => setEnquiryDate(e.target.value)}
-                                                        label="Enquiry Date"
-                                                        placeholder="Enter date"
-                                                    />
-                                                </CCol>
-
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormSelect
-                                                        className="mb-1"
-                                                        aria-label="Select Service Name"
-                                                        value={ServiceName}
-                                                        onChange={(e) => setServiceName(e.target.value)}
-                                                        label="Service Name"
-
-                                                    >
-                                                        <option>Select Service</option>
-                                                        {result.map((item, index) => (
-                                                            item.username === username && (
-                                                                item.status === true && (
-                                                                    <option key={index} value={item.id}>{item.selected_service}</option>
-                                                                )
-                                                            )
-                                                        ))}
-                                                    </CFormSelect>
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormSelect
-                                                        className="mb-1"
-                                                        aria-label="Select Customer type"
-                                                        value={Customertype}
-                                                        onChange={(e) => setCustomertype(e.target.value)}
-                                                        label="Customer type"
-                                                        options={[
-                                                            "Select Customer type",
-                                                            { label: "Self", value: "Self" },
-                                                            { label: "Group", value: "Group" },
-                                                            { label: "Couple", value: "Couple" },
-                                                            { label: "Youth", value: "Touth" },
-                                                            { label: "Kids", value: "Kids" },
-                                                        ]}
-                                                    />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormSelect
-                                                        className="mb-1"
-                                                        aria-label="Select Enquiry Type"
-                                                        value={enquirytype}
-                                                        onChange={(e) => setEnquirytype(e.target.value)}
-                                                        label="Enquiry Type"
-                                                        options={[
-                                                            "Select Enquiry Type",
-                                                            { label: "Walk-In", value: "Walk-In" },
-                                                            { label: "E-mail", value: "E-mail" },
-                                                            { label: "Social Media", value: "Social Media" },
-                                                            { label: "Website", value: "Website" },
-                                                            { label: "Call Enquiry", value: "Call Enquiry" },
-                                                        ]}
-                                                    />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        label="Appointment Date"
-                                                        type="date"
-                                                        value={appointmentDate}
-                                                        onChange={(e) => setappointmentDate(e.target.value)}
-                                                        id="exampleFormControlInput1"
-                                                    />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormInput
-                                                        className="mb-1"
-                                                        label="Appointment Time"
-                                                        type="time"
-                                                        id="exampleFormControlInput1"
-                                                        value={appointmentTime}
-                                                        onChange={(e) => setappointmentTime(e.target.value)}
-
-                                                    />
-                                                </CCol>
-                                                <CCol lg={6} md={6} sm={12}>
-                                                    <CFormSelect
-                                                        className="mb-1"
-                                                        aria-label="Select"
-                                                        label="Enquiry For"
-                                                        value={appointmentfor}
-                                                        onChange={(e) => setappointmentfor(e.target.value)}
-                                                        options={[
-                                                            "Select",
-                                                            { label: "Appointment", value: "Appointment" },
-                                                            { label: "Trial Session", value: "Trial Session" },
-                                                        ]}
-                                                    />
-                                                </CCol>
-                                            </CRow>
-                                        </CCol>
-                                    </CRow>
-
-                                </CForm>
-
-                            </CModalBody>
-
-                            <CModalFooter>
-                                <CButton color="secondary" onClick={() => setVisible1(false)}>
-                                    Close
-                                </CButton>
-                                <CButton type='submit' color="primary" onClick={() => saveEnquiry()}>Update changes</CButton>
-                            </CModalFooter>
-                        </CModal>
 
                         <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
@@ -1054,6 +502,7 @@ const Renewals = () => {
                                     <CTableHeaderCell>Type of Call</CTableHeaderCell>
                                     <CTableHeaderCell>Status</CTableHeaderCell>
                                     <CTableHeaderCell>Action</CTableHeaderCell>
+                                    <CTableHeaderCell>Invoice</CTableHeaderCell>
                                     <CTableHeaderCell>Edit</CTableHeaderCell>
                                 </CTableRow>
                             </CTableHead>
@@ -1211,39 +660,77 @@ const Renewals = () => {
                                             aria-describedby="exampleFormControlInputHelpInline"
                                         />
                                     </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            style={{ minWidth: "100px" }}
+                                            type="text"
+                                            disabled
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
                                 </CTableRow>
-                                {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                                    list.username === username 
-                                    
-                                ).map((item, index) => (
-                                    item.username === username && (
+                                {result1.filter((list) =>{
+                                    const time =  (new Date(list.endDate) -new Date())
+                                    const days = Math.ceil(time/(1000*60*60*24))
+                                          if((days<=15 && days>=1 &&  list.username === username)){
+                                            console.log(list.invoiceId)
+                                             return true 
+                                          }
+                                          return false                                                                         
+                                     }).map((item, index) => (
                                         <CTableRow key={index}>
                                             <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
                                             <CTableDataCell>{centerCode}MEM{index + 10 + (paging * 10)}</CTableDataCell>
                                             <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }} 
-                                            to={`/clients/member-details/${item._id}/1`} target="_black">{item.Name}</Link></CTableDataCell>
-                                            <CTableDataCell>{item.Mobile_No}</CTableDataCell>
-                                            <CTableDataCell>{item.Invoice_No}</CTableDataCell>
-                                            <CTableDataCell>{item.Attendence_Id}</CTableDataCell>
-                                            <CTableDataCell>{item.Service}</CTableDataCell>
-                                            <CTableDataCell>{item.Start_Date}</CTableDataCell>
-                                            <CTableDataCell>{item.End_Date}</CTableDataCell>
+                                            to={`/clients/member-details/${item._id}/1`} target="_black">{item.Fullname}</Link></CTableDataCell>
+                                            <CTableDataCell>{item.ContactNumber}</CTableDataCell>
+                                            <CTableDataCell>{item.invoiceNum}</CTableDataCell>
+                                            <CTableDataCell>{item.AttendanceID}</CTableDataCell>
+                                            <CTableDataCell>{item.serviceName}</CTableDataCell>
+                                            <CTableDataCell>{ getDate(item.startDate,true)}</CTableDataCell>
+                                            <CTableDataCell>{ getEndDate(item.endDate,item.startDate)}</CTableDataCell>
                                             <CTableDataCell>{item.Fitness_Goal}</CTableDataCell>
-                                            <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${item._id}/5`} target="_black"><BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px' }} /></Link></CTableDataCell>
+                                            <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }}
+                                             to={`/clients/member-details/${item._id}/5`} target="_black">
+                                                <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px' }} /></Link></CTableDataCell>
                                             <CTableDataCell><CButton>View</CButton></CTableDataCell>
-                                            <CTableDataCell className='text-center'><CFormSwitch checked={item.status} /></CTableDataCell>
+                                            <CTableDataCell className='text-center'><CFormSwitch checked={item.status} />
+                                            </CTableDataCell>
 
-                                            <CTableDataCell className='text-center'><a href={`tel:${item.CountryCode}${item.ContactNumber}`} target='_black'><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a target='_black' href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a target='_black' href={`mailto: ${item.Emailaddress}`}> <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => handleFollowup(item._id)} /></CTableDataCell>
-                                            <CTableDataCell className='text-center'><Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${item._id}/1`} target="_black"><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} size='20px' /></Link> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
+                                    <CTableDataCell className='text-center'><a href={`tel:${item.CountryCode}${item.ContactNumber}`} target='_black'>
+                                                <MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a>
+                                                <a target='_black' href={`https://wa.me/${item.ContactNumber}`}>
+                                                    <BsWhatsapp style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a>
+                                                    <a target='_black' href={`mailto: ${item.Emailaddress}`}>
+                                                         <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a>
+                                     <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => handleFollowup(item._id)} />
+                                     </CTableDataCell>
+
+                                    <CTableDataCell  >
+                                    <CButtonGroup className='d-flex px-3' >
+                                        <CButton size='sm' color='success'>
+                                             <BsPlusCircle  id={item._id} style={{ cursor: 'pointer', markerStart: '10px' }} />
+                                             </CButton>
+                                        <CButton  size='sm'
+                                         onClick={()=>ShowUserInvoceHandler(item._id,item)} ><BsEye style={{ cursor: 'pointer', markerStart: '10px' }}/></CButton>
+                                   </CButtonGroup>  
+                                   </CTableDataCell>    
+
+                                            <CTableDataCell className='text-center'><Link index={-1} style={{ textDecoration: 'none' }} 
+                                            to={`/clients/member-details/${item._id}/1`} target="_black">
+                                                <MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} 
+                                                size='20px' /></Link> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} 
+                                                onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
                                         </CTableRow>
 
                                     )
-                                ))}
+                                )}
                             </CTableBody>
                         </CTable>
 
                     </CCardBody>
-                    <CPagination aria-label="Page navigation example" align="center" className='mt-2'>
+                    {/* <CPagination aria-label="Page navigation example" align="center" className='mt-2'>
                         <CPaginationItem aria-label="Previous" disabled={paging != 0 ? false : true} onClick={() => paging > 0 && setPaging(paging - 1)}>
                             <span aria-hidden="true">&laquo;</span>
                         </CPaginationItem>
@@ -1277,7 +764,7 @@ const Renewals = () => {
                                 <span aria-hidden="true">&raquo;</span>
                             </CPaginationItem>
                         }
-                    </CPagination>
+                    </CPagination> */}
                 </CCard>
             </CCol >
         </CRow >
