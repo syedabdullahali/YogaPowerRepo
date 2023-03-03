@@ -363,13 +363,14 @@ const TotalInvoice = () => {
 
                                 </CTableRow>
                             })}
-                            {!AllInvoiceData[0] ?
-                                <CCol style={{ width: '100%' }} className='d-flex justify-content-center my-3'>
-                                    <YogaSpinnar />
-                         </CCol> : ''}
+                           
                             </CTableBody>
                         </CTable>
                     </CCardBody>
+                    {!AllInvoiceData[0] ?
+                                <CCol style={{ width: '100%' }} className='d-flex justify-content-center my-3'>
+                                    <YogaSpinnar />
+                         </CCol> : ''}
                 </CCard>
             </CCol>
 
