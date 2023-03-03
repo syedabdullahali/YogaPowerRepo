@@ -17,11 +17,116 @@ import {
     CTableHead,
     CTableHeaderCell,
     CTableRow,
+    CPagination,
+    CPaginationItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop, cilPlus } from '@coreui/icons'
+import {useEffect, useState} from 'react'
+import axios from 'axios'
+import YogaSpinnar from '../theme/YogaSpinnar';
+import { useSelector } from "react-redux";
+
+
+
+const url = 'https://yog-seven.vercel.app'
+let user = JSON.parse(localStorage.getItem('user-info'))
+    console.log(user);
+    const token = user.token;
+    const username = user.user.username;
+
 
 const BalancePayment = () => {
+    let num =0;
+    const [pagination, setPagination] = useState(10)
+    const [result, setResult] = useState([]);
+    const [serviceName,setServiceName] = useState('')
+    const [result1,setResult1] = useState([])
+    const url1 = useSelector((el)=>el.domainOfApi) 
+
+
+
+
+    const getDate = (date,val) => {
+
+        const date2 = new Date(date).getDate() + "/" + (new Date(date).getMonth() + (val? 1:0)) + "/" + new Date(date).getFullYear()
+        if (date2 === 'NaN/NaN/NaN') {
+            return 'Invalid Date'
+        }
+        return date2
+
+    }
+
+    const [AllInvoiceData,setAllInvoiceData] = useState([])
+
+    console.log(AllInvoiceData)
+    const getAllInvoiceData = async ()=>{
+        const {data} = await axios.get(`${url}/invoice/all`,{ 
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }})
+        
+        setAllInvoiceData(data.reverse())     
+                
+}   
+
+function getPackage() {
+    axios.get(`${url1}/packagemaster`, {
+
+    })
+        .then((res) => {
+            setResult(res.data)
+            console.log(res.data)
+        })
+        .catch((error) => {
+            console.error(error)
+        })
+}
+
+
+function getEnquiry() {
+    axios.get(`${url}/memberForm/all`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then((res) => {
+           
+         setResult1(res.data.filter((list) => list.username === username).reverse())
+         getAllInvoiceData()
+        })
+        .catch((error) => {
+            console.error(error)
+        })
+}
+
+
+
+
+
+
+
+function getMemId(id){
+
+    console.log(   )
+      
+    //   })?.AttendanceID)
+
+return  result1.find((el)=>el.invoiceId ===id)?.AttendanceID
+
+
+}
+
+useEffect(()=>{
+    getPackage()
+    getEnquiry()
+},[])
+
+useEffect(()=>{
+setPagination(10)
+},[serviceName])
+
+
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -101,11 +206,17 @@ const BalancePayment = () => {
                             </CCol>
                             <CCol lg={3} sm={6} className='mb-2'>
                                 <CInputGroup>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>Select Service</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <CFormSelect id="inputGroupSelect01"
+                                    onChange={(e)=>setServiceName(e.target.value)}
+                                    >
+                                    <option>Select Service</option>
+                                        {result.map((item, index) => (
+                                            item.username === username && (
+                                               item.Status=== true && (
+                                                    <option key={index}>{item.Service }</option>                                                  
+                                                )
+                                            
+                                            )))}
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
@@ -141,50 +252,63 @@ const BalancePayment = () => {
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
+
+                                {AllInvoiceData.filter((el)=>{    
+                                  if(el.pendingAmount>0) 
+                                  {
+                                    if(serviceName){
+                                        num =0
+                                        return serviceName=== el.ServiceName
+                                    }
+                                    return el
+                                }
+                                }).filter((el, i) => {
+                                    num++
+                  if (pagination - 10 < i + 1 && pagination >= i + 1) {
+                        return el
+                }
+                
+
+              }).map((el,i)=>
                                 <CTableRow>
-                                <CTableDataCell>1</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
+                                    <CTableDataCell>{getDate(el.createdAt)}</CTableDataCell>
+                                    <CTableDataCell>{el.centerName}</CTableDataCell>
+                                    <CTableDataCell>{getMemId(el._id)}</CTableDataCell>
+                                    <CTableDataCell>{el.MemberName}</CTableDataCell>
+                                    <CTableDataCell>{el.ServiceName}</CTableDataCell>
+                                    <CTableDataCell>{el.counseller}</CTableDataCell>
+                                    <CTableDataCell>{el.amount}</CTableDataCell>
+                                    <CTableDataCell>{el.paidAmount}</CTableDataCell>
+                                    <CTableDataCell>{el.pendingAmount}</CTableDataCell>
+                                    <CTableDataCell>{el.paymode}</CTableDataCell>
                                 </CTableRow>
-                                <CTableRow>
-                                <CTableDataCell>2</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
-                                <CTableRow>
-                                <CTableDataCell>3</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
+                                )}
+                              
                             </CTableBody>
+                          
                         </CTable>
+                        {!AllInvoiceData[0] ?
+                                <CCol style={{ width: '100%' }} className='d-flex justify-content-center my-3'>
+                                    <YogaSpinnar />
+                         </CCol> : ''}
                     </CCardBody>
                 </CCard>
             </CCol>
+            
+            <div className='d-flex justify-content-center mt-3' >
+                        <CPagination aria-label="Page navigation example" style={{cursor:'pointer'}}>
+                            <CPaginationItem aria-label="Previous" onClick={() => setPagination((val) => val > 10 ? val - 10 : 10)}>
+                                <span aria-hidden="true" >&laquo;</span>
+                            </CPaginationItem>
+                            <CPaginationItem active >{pagination / 10}</CPaginationItem>
+                            {num > pagination / 10 * 10 && <CPaginationItem onClick={() => setPagination((val) => val < num ? val + 10 : val)}>{pagination / 10 + 1}</CPaginationItem>}
+                            {num > pagination / 10 * 20 && <CPaginationItem onClick={() => setPagination((val) => val < num ? val + 10 : val)}>{pagination / 10 + 2}</CPaginationItem>}
+                            <CPaginationItem aria-label="Next" onClick={() => setPagination((val) => val < num ? val + 10 : val)}>
+                                <span aria-hidden="true">&raquo;</span>
+                            </CPaginationItem>
+                        </CPagination>
+      </div>
         </CRow>
     )
 }

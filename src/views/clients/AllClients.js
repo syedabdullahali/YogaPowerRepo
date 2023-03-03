@@ -78,6 +78,14 @@ const AllClients = () => {
     const [CallUpdateID, setCallUpdateID] = useState("");
     const [callsDate,setCallsDate]=useState('') 
     const [callsTime,setCallsTime] = useState('')
+    const [AllInvoiceData,setAllInvoiceData] = useState('')
+    const [InvoiceOfaClinet,setInvoiceOfaClient] = useState('')
+
+    const [TotalAmount,setTotalAmount] = useState('')
+    const [Paid,setPaidAmount] = useState('')
+    const [Balance,setBalance] = useState('') 
+
+
 
 
   
@@ -222,6 +230,63 @@ const AllClients = () => {
     console.log(id)
      navigateFitnees(`/fitness/fitness-Goal/${id}`)   
     }
+
+
+
+const getAllInvoiceData = async ()=>{
+const {data} = await axios.get(`${url}/invoice/all`,{ 
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }})
+
+setAllInvoiceData(data)     
+        
+}    
+
+
+
+
+
+const getInvoiceInfoOfaUser  = async (item)=>{
+const invoiceUser = AllInvoiceData.find((el)=>{
+return el._id === item?.invoiceId
+})
+setInvoiceOfaClient(invoiceUser)
+}
+
+useEffect(()=>{
+   getAllInvoiceData()
+},[])
+
+
+useEffect(()=>{
+if(enquiryStage==='Payment Calls'){
+console.log("hello",InvoiceOfaClinet)
+setTotalAmount(InvoiceOfaClinet.amount)
+setPaidAmount(InvoiceOfaClinet.paidAmount)
+setBalance(InvoiceOfaClinet.pendingAmount)
+
+}
+},[enquiryStage,visible])
+
+
+function updateRec(id, status) {
+    const data1 = { status: status }
+    fetch(`${url}/memberForm/update/${id}`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data1)
+    }).then((resp) => {
+        resp.json().then(() => {
+            getEnquiry()
+        })
+    })
+}
+
 
     return (
         <CRow>
@@ -463,11 +528,39 @@ const AllClients = () => {
 
                                         </CFormInput>
                                         
-                                       </CCol>
-
-                                       
-                                      
+                                       </CCol>                                      
                                     </CRow>
+
+                                    {enquiryStage==='Payment Calls'&&<CRow>
+                                          <CCol sm={4}>
+                                            <CFormInput
+                                            label='Total Amount'
+                                            value={TotalAmount}
+                                            > 
+
+                                            </CFormInput>
+                                          </CCol>  
+                                          <CCol sm={4}>
+
+                                            <CFormInput
+                                             label='Paid'
+                                             value={Paid}
+                                            >
+                                            
+                                            </CFormInput>
+                                          </CCol> 
+                                            
+
+                                          <CCol sm={4}>
+                                            <CFormInput
+                                            label='Balance'   
+                                            value={Balance}                                        
+                                            >
+                                            
+                                            </CFormInput>
+                                          </CCol>
+                                        
+                                        </CRow>}
                                 </CForm>
                             </CModalBody>
                             <CModalFooter>
@@ -658,7 +751,9 @@ const AllClients = () => {
                                 {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                                     list.username === username
                                     && list.Fullname.toLowerCase().includes(Search1.toLowerCase()) &&
-                                    list.AttendanceID.toLowerCase().includes(Search5.toLowerCase()) && list.serviceName.toLowerCase().includes(Search6.toLowerCase()) && list.fitnessGoal.toLowerCase().includes(Search7.toLowerCase())
+                                    list.AttendanceID.toLowerCase().includes(Search5.toLowerCase()) &&
+                                     list.serviceName.toLowerCase().includes(Search6.toLowerCase()) && 
+                                     list.fitnessGoal.toLowerCase().includes(Search7.toLowerCase())
                                 ).map((item, index) => {
                                    return item.username === username && (
                                         <CTableRow key={index}>
@@ -695,7 +790,7 @@ const AllClients = () => {
                                                              <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() =>
                                                                  { setCallReport(true), handleCallReport(item._id) }} size='20px' />
                                                                  </a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer'
-                                                                 , markerStart: '10px' }} onClick={() => handleFollowup(item._id)} />
+                                                                 , markerStart: '10px' }} onClick={() => {handleFollowup(item._id),getInvoiceInfoOfaUser(item) }} />
                                                                  </CTableDataCell>
                                             <CTableDataCell className='text-center'>
                                                 <Link index={-1} style={{ textDecoration: 'none' }}

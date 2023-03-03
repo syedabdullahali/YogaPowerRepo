@@ -5,7 +5,16 @@ import {
     CTabPane,
 } from '@coreui/react'
 
+
+
+
+
+
+
 function FinanceRights(){
+
+
+
 
 
     return <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={true} >

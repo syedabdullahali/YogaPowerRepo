@@ -36,13 +36,29 @@ import axios from 'axios'
 import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md'
 import { BsPlusCircle, BsWhatsapp,BsEye } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
-import moment, { duration } from 'moment/moment'
 import { Link } from 'react-router-dom'
-import logo from 'src/assets/images/avatars/icon.png'
+
+//  Invoice Slip
+const Invoice  = React.lazy(()=>import('./Invoice'))
+const AddInvoiceSlip = React.lazy(()=>import('./AddInvoiceSlip'))
 
 
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
+
+//  rasidArr:[
+//   {remainingAmount:0,
+//    PaidAmount:0,
+//    previous:"InvoiceDate"
+//    newSlipDate:'',
+//    status:true,
+//    afterPayremainingAmount: '',
+//    SlipNo:''
+//    CashearName:''
+//    mobNo:'' 
+// }
+
+// ]
 
 const Renewals = () => {
 
@@ -62,15 +78,10 @@ const Renewals = () => {
     const [Search9, setSearch9] = useState('')
     const [Search10, setSearch10] = useState('')
 
-
     // Invoice
-
-    const [fullname,setFullName] = useState('')
-    const [contactNumber,setContactNumber] = useState('')
-    const [attendanceID,setAttendanceID] = useState('')
-    const [email,setEmail] = useState('')
  
     const [allIvoiceOfaUser,setAllInvoiceOfUser] = useState([])
+    const [ClientData,setClient] = useState([])
 
 
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -81,10 +92,10 @@ const Renewals = () => {
     const [result1, setResult1] = useState([]);
     const [invoiceData,setInvoiceData] = useState([])
     console.log(token);
-    const [result, setResult] = useState([]);
-    const [updateItem, setUpdateItem] = useState([]);
     const [paging, setPaging] = useState(0);
     const [showInvoiceModal,setInvoceModal] = useState(false)
+    const [showInvoiceModal2,setInvoceModal2] = useState(false)
+
     useEffect(() => {
         getEnquiry()
        
@@ -120,7 +131,7 @@ const Renewals = () => {
     }
 
 
-    const getEndDate = (date, startDate) => {
+    const getEndDate = (date) => {
         const date2 = new Date(date).getDate() + "/" + (new Date(date).getMonth() + 1) + "/" + new Date(date).getFullYear()
         if (date2 === 'NaN/NaN/NaN') {
             return 'Invalid Date'
@@ -172,213 +183,33 @@ const Renewals = () => {
             getInvoiceNoFun()
 },[])
 
+let obj = {}
+
 function ShowUserInvoceHandler (id,item){
     const uniqUserInvoiceAllData = invoiceData.filter((el)=>el?.MemberId===id)
     setAllInvoiceOfUser(uniqUserInvoiceAllData)    
-    setContactNumber(item?.ContactNumber)
-    setEmail(item?.Email)
-    setAttendanceID(item?.AttendanceID)
-    setFullName(item?.Fullname)
-    setInvoceModal(true)
-    
+    setClient(item)
+    setInvoceModal(true)      
 }
 
 
 
     return (
         <CRow>
-
-
-<CModal size="xl" alignment="center" scrollable visible={showInvoiceModal} onClose={() => setInvoceModal(false)}>
-                            <CModalHeader>
-                                <CModalTitle>Invoice Preview</CModalTitle>
-                            </CModalHeader>
-                            <CModalBody  style={{ padding: '25px' }}>
-                                <CRow>
-                                   <CCol lg={12} className='text-center'><CImage src={logo} width="100px" height='100px' /></CCol>
-                                    <CCol lg={12} className='text-center mt-2'><h5>Yog Power International </h5></CCol>
-                                </CRow>
-                               
-
-                               
-
-{ allIvoiceOfaUser.filter((list) =>{
-                                    const time =  (new Date(list.endDate) -new Date())
-                                    const days = Math.ceil(time/(1000*60*60*24))
-                                          if((days<=15 && days>=1 &&  list.username === username)){
-                                            console.log(list.invoiceId)
-                                             return true 
-                                          }
-                                          return false                                                                         
-                                     }).map((el,i)=>{
-
-
-return <div  className='my-5' > 
-
-                            <CRow>                                                                   
-                                 <CCol className='mt-2' style={{ marginLeft: '10px' }}>
-                                     <h6>Client Name: {fullname}</h6>
-                                     <div>Client Number: {contactNumber}</div>
-                                     Customer ID : {attendanceID}<br />
-                                     Email-Id : {email}<br />
-                                 </CCol>
-                                 <CCol className='mt-2' style={{ marginRight: '30px' }}>
-                                     <div className='float-end'>
-                                         Date : { getDate(el?.date)}<br />
-                                         Invoice No {el?.centerName}:{el?.InvoiceNo} <br />
-                                         Counseller : {el?.counseller}
-                                     </div>
-                                 </CCol>
-                            </CRow>    
-                                 <CCol lg={12} className='text-center p-0'><h4 className='m-0 p-0'>Invoice</h4></CCol>
-
-<CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} responsive>
-                                   <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
-                                        <CTableRow >
-                                            <CTableHeaderCell>Sr.No</CTableHeaderCell>
-                                            <CTableHeaderCell>DESCRIPTION</CTableHeaderCell>
-                                            <CTableHeaderCell>DURATION</CTableHeaderCell>
-                                            <CTableHeaderCell>SERVICE FEE</CTableHeaderCell>
-                                        </CTableRow>
-                                    </CTableHead>
-                                    <CTableBody>
-                                        <CTableRow>
-                                            <CTableDataCell>{i+1}</CTableDataCell>
-                                            <CTableDataCell>
-                                                <CRow>
-                                                    <CCol lg={12}>
-                                                        <div style={{ fontWeight: 'bold' }}>Service Name: {el?.ServiceName}</div>
-                                                    </CCol>
-                                                    <CCol lg={12}>
-                                                        <div style={{ fontWeight: 'bold' }}>Package Name: {el?.PackageName}</div>
-
-                                                    </CCol>
-                                                </CRow>
-                                                <CRow>
-                                                    <CCol>
-                                                        <div>Start Date: {getDate(el?.startDate,true)}</div>
-                                                    </CCol>
-                                                    <CCol>
-                                                        <div >End Date: {getDate(el?.endDate,true)}</div>
-                                                    </CCol>
-                                                </CRow>
-
-                                            </CTableDataCell>
-                                            <CTableDataCell>
-                                                <div style={{ fontWeight: 'bold' }}>{el?.duration}</div>
-
-                                            </CTableDataCell>
-                                            <CTableDataCell>
-                                                <div style={{ fontWeight: 'bold' }}>{el?.fees}</div>
-                                            </CTableDataCell>
-                                        </CTableRow>
-
-                                        <CTableRow>
-                                            <CTableDataCell colSpan={2}></CTableDataCell>
-                                            <CTableDataCell colSpan={2}>
-                                                <CTable bordered style={{ margin: '0', padding: '0' }} responsive>
-                                                    <CTableBody>
-                                                        <CTableRow>
-                                                            <CTableDataCell>Sub Total</CTableDataCell>
-                                                            <CTableDataCell>
-                                                                <div style={{ fontWeight: 'bold' }}>{el?.fees}</div>
-
-                                                            </CTableDataCell>
-                                                        </CTableRow>
-
-                                                        <CTableRow>
-                                                            <CTableDataCell>
-
-                                                                Discount
-
-                                                            </CTableDataCell>
-                                                            <CTableDataCell>
-                                                                <div style={{ fontWeight: 'bold' }}>{el?.discount}</div>
-                                                            </CTableDataCell>
-                                                        </CTableRow>
-                                                        <CTableRow>
-                                                            <CTableDataCell>
-                                                                Tax
-                                                            </CTableDataCell>
-                                                            <CTableDataCell className="mt-2">
-                                                                <div style={{ fontWeight: 'bold' }}>{el?.fees / 100 * el?.tax}</div>
-                                                            </CTableDataCell>
-                                                        </CTableRow>
-                                                        <CTableRow>
-                                                            <CTableDataCell>Total Amount</CTableDataCell>
-                                                            <CTableDataCell>
-                                                                <div style={{ fontWeight: 'bold' }}>{el?.totalAmount +el?.pendingAmount}</div>
-
-                                                            </CTableDataCell>
-                                                        </CTableRow>
-
-                                                        <CTableRow>
-                                                            <CTableDataCell>Paid Amount</CTableDataCell>
-                                                            <CTableDataCell>
-                                                                <div style={{ fontWeight: 'bold' }}>{el?.paidAmount}</div>
-
-                                                            </CTableDataCell>
-                                                        </CTableRow>
-                                                        <CTableRow>
-                                                            <CTableDataCell>Balance Amount</CTableDataCell>
-                                                            <CTableDataCell>
-                                                                <div style={{ fontWeight: 'bold' }}>{el?.pendingAmount}</div>
-                                                            </CTableDataCell>
-                                                        </CTableRow>
-
-                                                        <CTableRow>
-                                                            <CTableDataCell>Mode of Payment</CTableDataCell>
-
-                                                            <CTableDataCell>
-                                                                <div style={{ fontWeight: 'bold' }}>{el?.paymode}</div>
-                                                            </CTableDataCell>
-                                                        </CTableRow>
-                                                        <CTableRow>
-                                                        </CTableRow>
-                                                    </CTableBody>
-                                                </CTable>
-                                            </CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                            <CTableDataCell colSpan={3}>Total</CTableDataCell>
-                                            <CTableDataCell>
-                                                <div style={{ fontWeight: 'bold' }}>{el?.paidAmount}</div>
-                                            </CTableDataCell>
-                                        </CTableRow>
-                                        </CTableBody>
-                                        </CTable>
-
-</div>})}
-              
-
-                               <CTable>
-                                    <CTableBody>
-                                        <CTableRow style={{ backgroundColor: "#0B5345", color: "white" }}>
-                                            <CTableDataCell colSpan={4}>
-                                                <h5>TERMS AND CONDITIONS</h5>
-                                            </CTableDataCell>
-                                        </CTableRow>
-                                        <CTableRow>
-                                            <CTableDataCell colSpan={4}>
-                                                <div>Fee once paid is not refundable, Non transferable & no package extension, lapsed sessions has to be adjusted within the expiry date. Instructors & timings are subject to change. All packages would be on hourly basis in a day. If a person wishes to workout more than an hour in a day, kindly upgrade your package accordingly. follow guidelines for better result</div>
-                                            </CTableDataCell>
-                                        </CTableRow>
-
-                                        <CTableRow>
-                                            <CTableDataCell colSpan={4}>
-                                                <div style={{ fontWeight: 'bold' }}>Address: Shop 24/25, 2nd Floor, V Mall, Thakur Complex, Kandivali East, Mumbai 400 101. India.</div>
-                                                <label style={{ fontWeight: 'bold' }}>Email: info@yogpowerint.com</label>
-                                                <label style={{ fontWeight: 'bold', marginLeft: '10px' }}>Phone: +91 9819 1232 91</label>
-                                                <div style={{ fontWeight: 'bold' }}>Website: https://yogpowerint.com</div>
-                                            </CTableDataCell>
-                                        </CTableRow>
-                                    </CTableBody>
-                                </CTable>
-                            </CModalBody>
-                            <CModalFooter>
-                                {/* <CButton color="primary" onClick={handlePrint}>Print</CButton> */}
-                            </CModalFooter>
-                        </CModal>
+            {<AddInvoiceSlip
+            setInvoceModal2={setInvoceModal2}
+            showInvoiceModal2={showInvoiceModal2}
+            allIvoiceOfaUser={allIvoiceOfaUser}
+            
+            />}
+           {<Invoice 
+            allIvoiceOfaUser={allIvoiceOfaUser} 
+            ClientData={ClientData} setInvoceModal={setInvoceModal}
+            showInvoiceModal={showInvoiceModal}
+            
+            />}
+        
+           
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
@@ -689,7 +520,7 @@ return <div  className='my-5' >
                                             <CTableDataCell>{item.AttendanceID}</CTableDataCell>
                                             <CTableDataCell>{item.serviceName}</CTableDataCell>
                                             <CTableDataCell>{ getDate(item.startDate,true)}</CTableDataCell>
-                                            <CTableDataCell>{ getEndDate(item.endDate,item.startDate)}</CTableDataCell>
+                                            <CTableDataCell>{ getEndDate(item.endDate)}</CTableDataCell>
                                             <CTableDataCell>{item.Fitness_Goal}</CTableDataCell>
                                             <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }}
                                              to={`/clients/member-details/${item._id}/5`} target="_black">
@@ -709,7 +540,7 @@ return <div  className='my-5' >
 
                                     <CTableDataCell  >
                                     <CButtonGroup className='d-flex px-3' >
-                                        <CButton size='sm' color='success'>
+                                        <CButton size='sm' color='success' onClick={()=>setInvoceModal2(true)}>
                                              <BsPlusCircle  id={item._id} style={{ cursor: 'pointer', markerStart: '10px' }} />
                                              </CButton>
                                         <CButton  size='sm'
