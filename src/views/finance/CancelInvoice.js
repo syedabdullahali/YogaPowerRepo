@@ -133,7 +133,7 @@ const CancelInvoice = () => {
  async function DeleteInvoice (id){
     if(!confirm('Do you want to delete'))return
 
-    axios.delete(`${url}/invoice/delete/${id}`,{ 
+    axios.delete(`${url1}/invoice/delete/${id}`,{ 
         headers: {
             "Authorization": `Bearer ${token}`,
             'Accept': 'application/json',
@@ -149,7 +149,7 @@ const CancelInvoice = () => {
  async function  StatusOpration(value,id){
  const status = value
    
-    axios.post(`${url}/invoice/update/${id}`,{status:status},{ 
+    axios.post(`${url1}/invoice/update/${id}`,{status:status},{ 
         headers: {
             "Authorization": `Bearer ${token}`,
             'Accept': 'application/json',

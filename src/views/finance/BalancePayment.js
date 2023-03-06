@@ -178,6 +178,8 @@ setBalanceAmount((pendingAmount-paymentAmount))
 
 const savePaymentAmount = () =>{
 
+
+
 const ClientResipt  = {
     RemainingAmount:pendingAmount,
         PaidAmount:paymentAmount,
@@ -204,10 +206,12 @@ const headers = {
 
 axios.post(`${url1}/invoice/update/${clientInvoiceData._id}`,obj, {headers},)
     .then((resp) => {
-        console.log(resp.data,"ekfmkemfm new invoice no")
+        setPendingAmount(balanceAmount)
+        setResiptsModal(false)
         alert('Successfully save')
         getAllInvoiceData()
-
+        setPaymentAmount('')
+        setBalanceAmount('')
     })
     .catch((error) => {
         console.error(error)
