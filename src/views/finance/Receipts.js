@@ -21,10 +21,115 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop, cilPlus } from '@coreui/icons'
 import { BsReceipt } from 'react-icons/bs'
+import { useState,useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
+import {BsEye } from 'react-icons/bs'
+import {MdReceiptLong} from 'react-icons/md'
+
+
+const Invoice = React.lazy(()=>import('../clients/Invoice'))
+const ViewRecepits =React.lazy(()=>import('./ViewRecepits'))
+
+const url = 'https://yog-seven.vercel.app'
+
+let user = JSON.parse(localStorage.getItem('user-info'))
+    const token = user.token;
+    const username = user.user.username;
 
 const Receipt = () => {
+    let num  = 0;
+
+    const [AllInvoiceData,setAllInvoiceData] = useState([])
+    const [ClientData,setClient] = useState([])
+    const [showInvoiceModal,setInvoceModal] = useState(false)
+    const [allIvoiceOfaUser,setAllInvoiceOfUser] = useState([])
+    const [result1,setResult1] = useState([])
+    const [showReceipts,setShowReceipts] = useState(false)
+    const [receptsData,setResiptsData] = useState('')
+    const [receptsInvoiceData,setReceptsInvoiceData] = useState('')
+    const [resiptNo,setResiptNo] = useState(1)
+
+    
+    const url1 = useSelector((el)=>el.domainOfApi) 
+
+
+    const getAllInvoiceData = async ()=>{
+        const {data} = await axios.get(`${url1}/invoice/all`,{ 
+                  headers: {
+                      'Authorization': `Bearer ${token}`
+                  }})
+          
+          setAllInvoiceData(data.reverse())     
+                  
+  }  
+
+
+const getDate = (date,val) => {
+
+    const date2 = new Date(date).getDate() + "/" + (new Date(date).getMonth() + (val? 1:0)) + "/" + new Date(date).getFullYear()
+    if (date2 === 'NaN/NaN/NaN') {
+        return 'Invalid Date'
+    }
+    return date2
+
+}
+
+function getEnquiry() {
+    axios.get(`${url}/memberForm/all`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then((res) => {
+           
+         setResult1(res.data.filter((list) => list.username === username).reverse())
+         getAllInvoiceData()
+        })
+        .catch((error) => {
+            console.error(error)
+        })
+}
+
+useEffect(()=>{
+getEnquiry()
+},[])
+
+function ShowUserInvoceHandler (id,item){
+    const uniqClientData = result1.filter((el)=>el?.invoiceId===id)
+    console.log(uniqClientData)
+    setAllInvoiceOfUser([item])    
+    setClient(...uniqClientData)
+    setInvoceModal(true)      
+} 
+
+
+function ViewReceiptsFun(el,el2,num){
+setResiptsData(el2)
+setReceptsInvoiceData(el)
+setResiptNo(num)
+setShowReceipts(true)
+}
+
+
     return (
         <CRow>
+
+      <Invoice 
+            allIvoiceOfaUser={allIvoiceOfaUser} 
+            ClientData={ClientData} setInvoceModal={setInvoceModal}
+            showInvoiceModal={showInvoiceModal}            
+            />  
+   
+   <ViewRecepits
+   showReceipts={showReceipts}
+   setShowReceipts={setShowReceipts}
+   receptsData={receptsData}
+   receptsInvoiceData={receptsInvoiceData}
+   resiptNo={resiptNo}
+/>
+   
+
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
@@ -117,9 +222,9 @@ const Receipt = () => {
                                 </CButton>
                             </CCol>
                         </CRow>
-                        <CTable bordered style={{ borderColor: "#106103" }} responsive>
+                        <CTable bordered style={{ borderColor: "#106103",minWidth:'150%' }} responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
-                                <CTableRow>
+                                <CTableRow >
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Date</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Receipt No</CTableHeaderCell>
@@ -131,51 +236,34 @@ const Receipt = () => {
                                     <CTableHeaderCell scope="col">Created By</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Paid Amount</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Pay Mode</CTableHeaderCell>
-                                    {/* <CTableHeaderCell scope="col">Renewls Revenue</CTableHeaderCell> */}
-                                    {/* <CTableHeaderCell scope="col">
-                                        Balance Collection
-                                    </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Achived %</CTableHeaderCell> */}
+                                    <CTableHeaderCell scope="col">View Invoice</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">View Receipt</CTableHeaderCell>  
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
-                                <CTableRow>
-                                <CTableDataCell>1</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
-                                <CTableRow>
-                                <CTableDataCell>2</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
-                                <CTableRow>
-                                <CTableDataCell>3</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
+                                {AllInvoiceData.flatMap((el,)=>{
+                                   return el.Receipts.map((el2,i)=>{
+                                    num ++
+                                        return <CTableRow>
+                                        <CTableDataCell>{num}</CTableDataCell>
+                                            <CTableDataCell>{getDate(el2.NewSlipDate,true)}</CTableDataCell>
+                                            <CTableDataCell>{el.InvoiceNo +"RN"+ +(1+i)}</CTableDataCell>
+                                            <CTableDataCell>{el.InvoiceNo}</CTableDataCell>
+                                            <CTableDataCell>{el.MemberId}</CTableDataCell>
+                                            <CTableDataCell>{el.MemberName}</CTableDataCell>
+                                            <CTableDataCell>{el.ServiceName}</CTableDataCell>
+                                            <CTableDataCell>{el2.Counseller}</CTableDataCell>
+                                            <CTableDataCell>{el2.PaidAmount}</CTableDataCell>
+                                            <CTableDataCell>{el2.Pay_Mode}</CTableDataCell>
+                                            <CTableDataCell onClick={()=>ShowUserInvoceHandler(el._id,el)} className='text-center'>
+                                                <CButton size='sm'><BsEye/></CButton></CTableDataCell>
+                                            <CTableDataCell className='text-center'>
+                                                <CButton onClick={()=>ViewReceiptsFun(el,el2,i+1)} size='sm' className='text-white' color='info'><MdReceiptLong/></CButton>
+                                            </CTableDataCell>
+                                        </CTableRow>
+    
+                                    })
+                                 })}                               
                             </CTableBody>
                         </CTable>
                     </CCardBody>

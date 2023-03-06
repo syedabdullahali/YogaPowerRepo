@@ -302,7 +302,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
             BackPain, BoneFracture, CarpalTunnel, AsthmaCOPD, DigestiveDisorder,
              Diabetes, Epilepsy, FootPain, Glaucoma, HeartDiseaseCondition, HerniaDiastasisRecti,
             HighBloodPressure, Other: OtherText, Weight, Height, fitnessLevel,
-             fitnessGoal, idealWeight, suggestion, comments, plan: true, status: 'active',
+             fitnessGoal, idealWeight, suggestion, comments, status: 'active',
         }
 
 
@@ -367,7 +367,7 @@ const headers = {
         'My-Custom-Header': 'foobar'
 };
 
-  await  axios.get(`${url}/invoice/all`,{headers}).then(({data})=>{
+  await  axios.get(`${url1}/invoice/all`,{headers}).then(({data})=>{
     setInvoice(data.length)
   })
  }
@@ -401,14 +401,14 @@ const headers = {
             'Authorization': `Bearer ${token}`,
             'My-Custom-Header': 'foobar'
         };
-        axios.post(`${url}/invoice/create`, data, { headers },
+        axios.post(`${url1}/invoice/create`, data, { headers },
         )
             .then((resp) => {
                 console.log(resp.data,"ekfmkemfm new invoice no")
                 setInvId(resp.data._id);
                 alert("successfully submitted")
                 setVisi1(true)
-                let data1 = { invoiceId: resp.data._id, invoiceNum: resp.data.InvoiceNo, startDate, endDate, }
+                let data1 = { invoiceId: resp.data._id, invoiceNum: resp.data.InvoiceNo, startDate, endDate,plan: true, }
                 axios.post(`${url}/memberForm/update/${MemberId}`, data1, { headers },
                 )
                     .then((report) => {

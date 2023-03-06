@@ -56,7 +56,7 @@ const CancelInvoice = () => {
 
     
     const getAllInvoiceData = async ()=>{
-        const {data} = await axios.get(`${url}/invoice/all`,{ 
+        const {data} = await axios.get(`${url1}/invoice/all`,{ 
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }})
@@ -282,8 +282,8 @@ const CancelInvoice = () => {
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
                                 <CTableRow>
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Date</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Center Name</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Invoice Date</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Center code</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">
                                         Invoice No
                                     </CTableHeaderCell>
@@ -322,9 +322,9 @@ const CancelInvoice = () => {
                 }
 
               }).map((el,i)=>{
-                                    return <CTableRow>
+                                    return <CTableRow key={i}>
                                    <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
-                                    <CTableDataCell>{getDate(el.createdAt)}</CTableDataCell>
+                                    <CTableDataCell>{getDate(el.createdAt,true)}</CTableDataCell>
                                     <CTableDataCell>{el.centerName}</CTableDataCell>
                                     <CTableDataCell>{el.InvoiceNo}</CTableDataCell>
                                     <CTableDataCell>{getMemId(el._id)}</CTableDataCell>

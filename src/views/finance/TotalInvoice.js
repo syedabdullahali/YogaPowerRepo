@@ -29,9 +29,8 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 import { MdDelete } from 'react-icons/md';
 import YogaSpinnar from '../theme/YogaSpinnar';
+import {Link} from 'react-router-dom'
 const Invoice = React.lazy(()=>import('../clients/Invoice'))
-
-
 
 
 
@@ -59,7 +58,7 @@ const TotalInvoice = () => {
 
 
     const getAllInvoiceData = async ()=>{
-        const {data} = await axios.get(`${url}/invoice/all`,{ 
+        const {data} = await axios.get(`${url1}/invoice/all`,{ 
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }})
@@ -136,7 +135,7 @@ const TotalInvoice = () => {
  async function DeleteInvoice (id){
     if(!confirm('Do you want to delete'))return
 
-    axios.delete(`${url}/invoice/delete/${id}`,{ 
+    axios.delete(`${url1}/invoice/delete/${id}`,{ 
         headers: {
             "Authorization": `Bearer ${token}`,
             'Accept': 'application/json',
@@ -152,7 +151,7 @@ const TotalInvoice = () => {
  async function  StatusOpration(value,id){
  const status = value
    
-    axios.post(`${url}/invoice/update/${id}`,{status:status},{ 
+    axios.post(`${url1}/invoice/update/${id}`,{status:status},{ 
         headers: {
             "Authorization": `Bearer ${token}`,
             'Accept': 'application/json',
@@ -179,8 +178,9 @@ const TotalInvoice = () => {
             />
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
-                    <CCardHeader>
+                    <CCardHeader className='d-flex justify-content-between'>
                         <strong className="mt-2">Total Invoice</strong>
+                        <strong className="mt-2" > Total Invoice :{AllInvoiceData.length}</strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-center mb-2'>
@@ -279,14 +279,15 @@ const TotalInvoice = () => {
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
                                 <CTableRow>
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Date</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Center Name</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Invoice Date</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Center Code </CTableHeaderCell>
                                     <CTableHeaderCell scope="col">
                                         Client Id
                                     </CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Client Name</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Invoice No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Services</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Service Duration</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Start Date</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">End Date</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
@@ -328,14 +329,16 @@ const TotalInvoice = () => {
               }).map((el,i)=>{
                                     return <CTableRow>
                                    <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
-                                    <CTableDataCell>{getDate(el.createdAt)}</CTableDataCell>
+                                    <CTableDataCell>{getDate(el.createdAt,true)}</CTableDataCell>
                                     <CTableDataCell>{el.centerName}</CTableDataCell>
                                     <CTableDataCell>{getMemId(el._id)}</CTableDataCell>
-                                    <CTableDataCell>{el.MemberName}</CTableDataCell>
+<CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${el.MemberId}/1`} target="_black">{el.MemberName}</Link></CTableDataCell>
+
                                     <CTableDataCell>{el.InvoiceNo}</CTableDataCell>
                                     <CTableDataCell>{el.ServiceName}</CTableDataCell>
+                                    <CTableDataCell>{el.duration}</CTableDataCell>
                                     <CTableDataCell>{getDate(el.startDate,true)}</CTableDataCell>
-                                    <CTableDataCell>{getDate(el.endDate)}</CTableDataCell>
+                                    <CTableDataCell>{getDate(el.endDate,true)}</CTableDataCell>
                                     <CTableDataCell>{el.counseller}</CTableDataCell>
                                     <CTableDataCell>{el.trainer}</CTableDataCell>
                                     <CTableDataCell>{el.counseller}</CTableDataCell>

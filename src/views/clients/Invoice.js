@@ -1,26 +1,15 @@
 import React, { useRef} from 'react'
 import {
     CButton,
-    CButtonGroup,
-    CCard,
-    CCardBody,
-    CCardHeader,
-    CCardTitle,
+   
     CCol,
-    CForm,
-    CFormInput,
-    CFormSelect,
-    CFormSwitch,
-    CFormTextarea,
-    CInputGroup,
-    CInputGroupText,
+  
     CModal,
     CModalBody,
     CModalFooter,
     CModalHeader,
     CModalTitle,
-    CPagination,
-    CPaginationItem,
+    CCard,
     CRow,
     CTable,
     CTableBody,
@@ -38,6 +27,7 @@ import { useReactToPrint } from 'react-to-print'
 
 
 function Invoice ({allIvoiceOfaUser,showInvoiceModal,setInvoceModal,ClientData}){
+    console.log(allIvoiceOfaUser)
     const getDate = (date,val) => {
         const date2 = new Date(date).getDate() + "/" + (new Date(date).getMonth() + (val? 1:0)) + "/" + new Date(date).getFullYear()
         if (date2 === 'NaN/NaN/NaN') {
@@ -164,7 +154,7 @@ return <div  className='my-5' >
                                                         <CTableRow>
                                                             <CTableDataCell>Total Amount</CTableDataCell>
                                                             <CTableDataCell>
-                                                                <div style={{ fontWeight: 'bold' }}>{el?.totalAmount +el?.pendingAmount}</div>
+                                                                <div style={{ fontWeight: 'bold' }}>{el.amount}</div>
 
                                                             </CTableDataCell>
                                                         </CTableRow>
@@ -176,12 +166,7 @@ return <div  className='my-5' >
 
                                                             </CTableDataCell>
                                                         </CTableRow>
-                                                        <CTableRow>
-                                                            <CTableDataCell>Balance Amount</CTableDataCell>
-                                                            <CTableDataCell>
-                                                                <div style={{ fontWeight: 'bold' }}>{el?.pendingAmount}</div>
-                                                            </CTableDataCell>
-                                                        </CTableRow>
+                                                      
 
                                                         <CTableRow>
                                                             <CTableDataCell>Mode of Payment</CTableDataCell>
@@ -196,17 +181,65 @@ return <div  className='my-5' >
                                                 </CTable>
                                             </CTableDataCell>
                                         </CTableRow>
+                                        
+                                       
+
                                         <CTableRow>
                                             <CTableDataCell colSpan={3}>Total</CTableDataCell>
                                             <CTableDataCell>
                                                 <div style={{ fontWeight: 'bold' }}>{el?.paidAmount}</div>
                                             </CTableDataCell>
                                         </CTableRow>
+
                                         </CTableBody>
                                         </CTable>
 
+
+                                { el.Receipts[0]&& <CTable bordered style={{ borderColor: "#106103" }} responsive>
+                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
+                                <CTableRow >
+                                    <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Date</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Receipt No</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">
+                                        Invoice No                                    </CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Client Id</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Pay Mode</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Created By</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Paid Amount</CTableHeaderCell>
+                                   
+                                </CTableRow>
+                            </CTableHead>
+                            <CTableBody>
+                               
+                                    {el.Receipts.map((el2,i)=>{
+                                        return <CTableRow>
+                                        <CTableDataCell>1</CTableDataCell>
+                                            <CTableDataCell>{getDate(el2.NewSlipDate,true)}</CTableDataCell>
+                                            <CTableDataCell>{el.InvoiceNo +"RN"+ +(1+i)}</CTableDataCell>
+                                            <CTableDataCell>{el.InvoiceNo}</CTableDataCell>
+                                            <CTableDataCell>{el.MemberId}</CTableDataCell>
+                                            <CTableDataCell>{el2.Pay_Mode}</CTableDataCell>                                     
+                                            <CTableDataCell>{el2.Counseller}</CTableDataCell>
+                                            <CTableDataCell>{el2.PaidAmount}</CTableDataCell>
+                                        </CTableRow>    
+                                    })}
+                                    
+                            </CTableBody>
+                            
+</CTable>}
+                                                        <CRow >
+                                                            <CCol className='text-end'>
+                                                                <strong>Balance Amount- </strong> 
+                                                                <span style={{ fontWeight: 'bold' }}>{el?.pendingAmount}</span>
+                                                            </CCol>
+                                                        </CRow>
+                                
 </div>})}
-              
+
+
+
+
 
                                <CTable>
                                     <CTableBody>

@@ -750,6 +750,7 @@ function updateRec(id, status) {
                                 </CTableRow>
                                 {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                                     list.username === username
+                                    &&list.plan===true
                                     && list.Fullname.toLowerCase().includes(Search1.toLowerCase()) &&
                                     list.AttendanceID.toLowerCase().includes(Search5.toLowerCase()) &&
                                      list.serviceName.toLowerCase().includes(Search6.toLowerCase()) && 

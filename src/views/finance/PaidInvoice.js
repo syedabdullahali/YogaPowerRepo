@@ -56,7 +56,7 @@ const PaidInvoice = () => {
 
 
     const getAllInvoiceData = async ()=>{
-        const {data} = await axios.get(`${url}/invoice/all`,{ 
+        const {data} = await axios.get(`${url1}/invoice/all`,{ 
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }})
@@ -133,7 +133,7 @@ const PaidInvoice = () => {
  async function DeleteInvoice (id){
     if(!confirm('Do you want to delete'))return
 
-    axios.delete(`${url}/invoice/delete/${id}`,{ 
+    axios.delete(`${url1}/invoice/delete/${id}`,{ 
         headers: {
             "Authorization": `Bearer ${token}`,
             'Accept': 'application/json',
@@ -149,7 +149,7 @@ const PaidInvoice = () => {
  async function  StatusOpration(value,id){
  const status = value
    
-    axios.post(`${url}/invoice/update/${id}`,{status:status},{ 
+    axios.post(`${url1}/invoice/update/${id}`,{status:status},{ 
         headers: {
             "Authorization": `Bearer ${token}`,
             'Accept': 'application/json',
@@ -272,7 +272,7 @@ const PaidInvoice = () => {
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
                                 <CTableRow>
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Date</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Invoice Date</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Invoice No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">
                                         Client Id
@@ -280,6 +280,7 @@ const PaidInvoice = () => {
                                     <CTableHeaderCell scope="col">Client Name</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Receipts No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Services</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Service Duration</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Total Amount</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Paid</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Bal</CTableHeaderCell>
@@ -314,7 +315,7 @@ const PaidInvoice = () => {
 
               }).map((el,i)=>{
                 console.log(el)
-                                    return <CTableRow>
+                                    return <CTableRow key={i}>
                                    <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
                                     <CTableDataCell>{getDate(el.createdAt,true)}</CTableDataCell>
                                     <CTableDataCell>{el.InvoiceNo}</CTableDataCell>
@@ -322,6 +323,7 @@ const PaidInvoice = () => {
                                     <CTableDataCell>{el.MemberName}</CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell>{el.ServiceName}</CTableDataCell>
+                                    <CTableDataCell>{el.duration}</CTableDataCell>
                                     <CTableDataCell>{el.amount}</CTableDataCell>
                                     <CTableDataCell>{el.paidAmount}</CTableDataCell>
                                     <CTableDataCell>{el.pendingAmount}</CTableDataCell>

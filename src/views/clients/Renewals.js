@@ -504,7 +504,7 @@ function ShowUserInvoceHandler (id,item){
                                 {result1.filter((list) =>{
                                     const time =  (new Date(list.endDate) -new Date())
                                     const days = Math.ceil(time/(1000*60*60*24))
-                                          if((days<=15 && days>=1 &&  list.username === username)){
+                                          if((days<=15 && days>=1 &&  list.username === username &&list.plan===true)){
                                             console.log(list.invoiceId)
                                              return true 
                                           }
