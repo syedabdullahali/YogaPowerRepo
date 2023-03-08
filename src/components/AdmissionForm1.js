@@ -257,13 +257,12 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
     
 
     function getMem() {
-        axios.get(`${url}/memberForm/all`, {
+        axios.get(`${url1}/memberForm/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
             .then((res) => {
-                console.log(res.data,"hello world8474875 ")
                 setMem(res.data)
             })
             .catch((error) => {
@@ -310,7 +309,7 @@ const headers = {
             'Authorization': `Bearer ${token}`,
             'My-Custom-Header': 'foobar'
         };
-        axios.post(`${url}/memberForm/create`, data, { headers },
+        axios.post(`${url1}/memberForm/create`, data, { headers },
         ).then((resp) => {
                 console.log(resp.data._id)
                 setMemberId(resp.data._id);
@@ -408,8 +407,10 @@ const headers = {
                 setInvId(resp.data._id);
                 alert("successfully submitted")
                 setVisi1(true)
-                let data1 = { invoiceId: resp.data._id, invoiceNum: resp.data.InvoiceNo, startDate, endDate,plan: true, }
-                axios.post(`${url}/memberForm/update/${MemberId}`, data1, { headers },
+                let data1 = { invoiceId: resp.data._id, invoiceNum: resp.data.InvoiceNo, startDate,
+                   endDate,plan: true,ClientId:`${centerCode}MEM${10+mem.length}`
+                }
+                axios.post(`${url1}/memberForm/update/${MemberId}`, data1, { headers },
                 )
                     .then((report) => {
                         alert("successfully submitted")

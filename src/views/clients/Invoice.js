@@ -214,7 +214,7 @@ return <div  className='my-5' >
                                
                                     {el.Receipts.map((el2,i)=>{
                                         return <CTableRow>
-                                        <CTableDataCell>1</CTableDataCell>
+                                        <CTableDataCell>{i+1}</CTableDataCell>
                                             <CTableDataCell>{getDate(el2.NewSlipDate,true)}</CTableDataCell>
                                             <CTableDataCell>{el.InvoiceNo +"RN"+ +(1+i)}</CTableDataCell>
                                             <CTableDataCell>{el.InvoiceNo}</CTableDataCell>

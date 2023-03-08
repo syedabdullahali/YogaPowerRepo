@@ -147,20 +147,30 @@ const TotalInvoice = () => {
 
   }
 
-
- async function  StatusOpration(value,id){
- const status = value
-   
-    axios.post(`${url1}/invoice/update/${id}`,{status:status},{ 
+  const postRequestInvoice = (value,id,commentValue)=>{
+    const status = value
+    axios.post(`${url1}/invoice/update/${id}`,{status:status,commentsofwrite:commentValue},{ 
         headers: {
             "Authorization": `Bearer ${token}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         }}).then((res)=>{
-            
+            console.log(res.data)
         getEnquiry()    
-     })   
+     })
+  }
 
+ async function  StatusOpration(value,id){
+ const status = value
+ if(status==='cancel'){
+    let commentValue = prompt("Why you want to cancel")
+    
+    if(commentValue){
+        postRequestInvoice(value,id,commentValue)
+    }
+ }else if(status==='done'||status==='active'){
+    postRequestInvoice(value,id)
+ }
  }   
 
 
@@ -320,8 +330,7 @@ const TotalInvoice = () => {
                 }
                 return el
               }).filter((el, i) => {
-                                    num++
-                                    
+                                    num++                                    
                   if (pagination - 10 < i + 1 && pagination >= i + 1) {
                         return el
                 }

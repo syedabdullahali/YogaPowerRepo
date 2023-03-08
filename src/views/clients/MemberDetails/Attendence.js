@@ -32,7 +32,6 @@ const Attendence = ({ id }) => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setResult1(res.data.reverse())
             })
             .catch((error) => {
@@ -43,8 +42,7 @@ const Attendence = ({ id }) => {
     const [invId, setinvId] = useState()
     const [cliId, setCliId] = useState()
     function handleInvoice(inId, clId) {
-        console.log(inId)
-        console.log(clId)
+ 
         setinvId(null)
         setCliId(null)
         if (inId && clId != null) {
@@ -54,7 +52,6 @@ const Attendence = ({ id }) => {
                 }
             })
                 .then((res) => {
-                    console.log(res.data)
                     setinvId(res.data)
                 })
                 .catch((error) => {
@@ -66,7 +63,6 @@ const Attendence = ({ id }) => {
                 }
             })
                 .then((res) => {
-                    console.log(res.data)
                     setCliId(res.data)
 
                     if (invId != null && res.data != null) {
@@ -91,7 +87,6 @@ const Attendence = ({ id }) => {
                 },
             }).then((result) => {
                 result.json().then((resp) => {
-                    console.warn(resp)
                     getInvoice()
                 })
             })

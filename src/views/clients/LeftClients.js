@@ -38,10 +38,13 @@ import moment from 'moment/moment'
 import ViewInvoice from 'src/components/ViewInvoice'
 import CallUpdate from 'src/components/CallUpdate'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
 const LeftClients = () => {
+    const url1 = useSelector((el)=>el.domainOfApi) 
     const [select, setSelect] = useState()
     const [followForm, setFollowForm] = useState()
     const [edit, setEdit] = useState()
@@ -152,7 +155,7 @@ const LeftClients = () => {
 
     function updateRec(id, status) {
         const data1 = { status: status }
-        fetch(`${url}/memberForm/update/${id}`, {
+        fetch(`${url1}/memberForm/update/${id}`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -176,7 +179,7 @@ const LeftClients = () => {
             EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, status: "all_enquiry",
         }
 
-        fetch(`${url}/memberForm/update/${edit}`, {
+        fetch(`${url1}/memberForm/update/${edit}`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -246,7 +249,7 @@ const LeftClients = () => {
     }
     const [ogList, setOgList] = useState([])
     function getEnquiry() {
-        axios.get(`${url}/memberForm/all`, {
+        axios.get(`${url1}/memberForm/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -278,7 +281,7 @@ const LeftClients = () => {
             setResult1(og.filter((list) => list[filterBy] === v))
     }
     function getUpdate(id) {
-        axios.get(`${url}/memberForm/${id}`, {
+        axios.get(`${url1}/memberForm/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -317,7 +320,7 @@ const LeftClients = () => {
             })
     }
     function getProspect(id) {
-        axios.get(`${url}/memberForm/${id}`, {
+        axios.get(`${url1}/memberForm/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -340,7 +343,7 @@ const LeftClients = () => {
     function deleteEnquiry(id) {
 
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/memberForm/delete/${id}`, {
+            fetch(`${url1}/memberForm/delete/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -373,7 +376,7 @@ const LeftClients = () => {
 
     const [callReport, setCallReport] = useState(false)
     function getCallReport(id) {
-        axios.get(`${url}/memberForm/${id}`, {
+        axios.get(`${url1}/memberForm/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

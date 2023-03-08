@@ -39,7 +39,7 @@ import ViewInvoice from 'src/components/ViewInvoice'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
+import { useDispatch } from 'react-redux'
 import CallUpdate from 'src/components/CallUpdate'
 
 const url = 'https://yog-seven.vercel.app'
@@ -47,6 +47,7 @@ const url2 = 'https://yog-seven.vercel.app'
 
 const AllClients = () => {
     const url1 = useSelector((el)=>el.domainOfApi) 
+    const dispatch = useDispatch()
     const navigateFitnees = useNavigate()
 
     const [select, setSelect] = useState()
@@ -131,8 +132,6 @@ const AllClients = () => {
     }
 
    
-
-   
     const saveCalls = () => {
         let obj = {
             Name,
@@ -148,13 +147,12 @@ const AllClients = () => {
     }
     const [ogList, setOgList] = useState([])
     function getEnquiry() {
-        axios.get(`${url}/memberForm/all`, {
+        axios.get(`${url1}/memberForm/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
             .then((res) => {
-                console.log(res.data,"Client Attendance")
                 setResult1(res.data.filter((list) => list.username === username).reverse())
                 setOgList(res.data.filter((list) => list.username === username).reverse())
             })
@@ -170,7 +168,7 @@ const AllClients = () => {
 
   
     function getClientinfo(id) {
-        axios.get(`${url}/memberForm/${id}`, {
+        axios.get(`${url1}/memberForm/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -181,8 +179,7 @@ const AllClients = () => {
                 setContact(res.data.ContactNumber)
                 setServiceName1(res.data.serviceName)
                 setCallStatus1(res.data.CallStatus)
-                setEmail(res.data.Email)
-                
+                setEmail(res.data.Email)                
                 setVisible(true)
             })
             .catch((error) => {
@@ -194,7 +191,7 @@ const AllClients = () => {
     function deleteEnquiry(id) {
 
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/memberForm/delete/${id}`, {
+            fetch(`${url1}/memberForm/delete/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -272,7 +269,7 @@ setBalance(InvoiceOfaClinet.pendingAmount)
 
 function updateRec(id, status) {
     const data1 = { status: status }
-    fetch(`${url}/memberForm/update/${id}`, {
+    fetch(`${url1}/memberForm/update/${id}`, {
         method: "POST",
         headers: {
             "Authorization": `Bearer ${token}`,
@@ -286,6 +283,7 @@ function updateRec(id, status) {
         })
     })
 }
+
 
 
     return (
@@ -759,7 +757,7 @@ function updateRec(id, status) {
                                    return item.username === username && (
                                         <CTableRow key={index}>
                                             <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
-                                            <CTableDataCell>{centerCode}MEM{index + 10 + (paging * 10)}</CTableDataCell>
+                                            <CTableDataCell>{item.ClientId}</CTableDataCell>
                                             <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${item._id}/1`} target="_black">{item.Fullname}</Link></CTableDataCell>
                                             <CTableDataCell>{item.ContactNumber}</CTableDataCell>
                                             <CTableDataCell><label style={{ cursor: 'pointer' }} onClick={() =>

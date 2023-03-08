@@ -85,7 +85,6 @@ const CallUpdate = ({ id }) => {
             }
         })
             .then((res) => {
-                console.warn(res.data.filter((list) => list.status === "prospect"))
                 setPros(res.data.filter((list) => list.status === "prospect"))
             })
             .catch((error) => {
@@ -97,7 +96,6 @@ const CallUpdate = ({ id }) => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setResult(res.data)
             })
             .catch((error) => {
@@ -113,7 +111,6 @@ const CallUpdate = ({ id }) => {
         })
             .then((res) => {
                 setStaff(res.data)
-                console.log(res.data);
             })
             .catch((error) => {
                 console.error(error)
@@ -281,7 +278,6 @@ const CallUpdate = ({ id }) => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setResult1(res.data.reverse())
             })
             .catch((error) => {

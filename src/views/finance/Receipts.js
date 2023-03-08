@@ -17,6 +17,8 @@ import {
     CTableHead,
     CTableHeaderCell,
     CTableRow,
+    CPagination,
+    CPaginationItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop, cilPlus } from '@coreui/icons'
@@ -40,7 +42,6 @@ let user = JSON.parse(localStorage.getItem('user-info'))
 const Receipt = () => {
     let num  = 0;
 
-    const [AllInvoiceData,setAllInvoiceData] = useState([])
     const [ClientData,setClient] = useState([])
     const [showInvoiceModal,setInvoceModal] = useState(false)
     const [allIvoiceOfaUser,setAllInvoiceOfUser] = useState([])
@@ -49,18 +50,43 @@ const Receipt = () => {
     const [receptsData,setResiptsData] = useState('')
     const [receptsInvoiceData,setReceptsInvoiceData] = useState('')
     const [resiptNo,setResiptNo] = useState(1)
-
+    const [pagination, setPagination] = useState(10)
+    const [serviceName,setServiceName] = useState('')
+    const [result, setResult] = useState([]);
+    const [resiptData2,setResiptData2] = useState([])
     
     const url1 = useSelector((el)=>el.domainOfApi) 
+
+
+
+    useEffect(()=>{
+        setPagination(10)
+        getPackage()
+        },[serviceName])
+
+
+    function getPackage() {
+        axios.get(`${url1}/packagemaster`, {
+    
+        })
+            .then((res) => {
+                setResult(res.data)
+                console.log(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
 
 
     const getAllInvoiceData = async ()=>{
         const {data} = await axios.get(`${url1}/invoice/all`,{ 
                   headers: {
                       'Authorization': `Bearer ${token}`
-                  }})
-          
-          setAllInvoiceData(data.reverse())     
+                  }})          
+          setResiptData2(data.reverse().flatMap((el)=>el.Receipts.map((el2)=>{
+            return{...el,...el2}}) 
+            ))       
                   
   }  
 
@@ -110,6 +136,11 @@ setReceptsInvoiceData(el)
 setResiptNo(num)
 setShowReceipts(true)
 }
+
+
+
+
+
 
 
     return (
@@ -207,11 +238,17 @@ setShowReceipts(true)
                             </CCol>
                             <CCol lg={3} sm={6} className='mb-2'>
                                 <CInputGroup>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>Select Service</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <CFormSelect id="inputGroupSelect01"
+                                     onChange={(e)=>setServiceName(e.target.value)}
+                                    >
+                                    <option>Select Service</option>
+                                        {result.map((item, index) => (
+                                            item.username === username && (
+                                               item.Status=== true && (
+                                                    <option key={index}>{item.Service}</option>                                                  
+                                                )
+                                            
+                                            )))}
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
@@ -241,35 +278,61 @@ setShowReceipts(true)
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
-                                {AllInvoiceData.flatMap((el,)=>{
-                                   return el.Receipts.map((el2,i)=>{
-                                    num ++
+                                {resiptData2.filter((el)=>{
+                   if(serviceName){
+                    num =0
+                    return serviceName=== el.ServiceName
+                }
+                return el
+              }).filter((el, i) => {
+                num++
+                  if (pagination - 10 < i + 1 && pagination >= i + 1) {
+                        return el
+                }
+
+              }).map((el,i)=>{
                                         return <CTableRow>
-                                        <CTableDataCell>{num}</CTableDataCell>
-                                            <CTableDataCell>{getDate(el2.NewSlipDate,true)}</CTableDataCell>
+                                        <CTableDataCell>{i+pagination-10+1}</CTableDataCell>
+                                            <CTableDataCell>{getDate(el.NewSlipDate,true)}</CTableDataCell>
                                             <CTableDataCell>{el.InvoiceNo +"RN"+ +(1+i)}</CTableDataCell>
                                             <CTableDataCell>{el.InvoiceNo}</CTableDataCell>
                                             <CTableDataCell>{el.MemberId}</CTableDataCell>
                                             <CTableDataCell>{el.MemberName}</CTableDataCell>
                                             <CTableDataCell>{el.ServiceName}</CTableDataCell>
-                                            <CTableDataCell>{el2.Counseller}</CTableDataCell>
-                                            <CTableDataCell>{el2.PaidAmount}</CTableDataCell>
-                                            <CTableDataCell>{el2.Pay_Mode}</CTableDataCell>
+                                            <CTableDataCell>{el.Counseller}</CTableDataCell>
+                                            <CTableDataCell>{el.PaidAmount}</CTableDataCell>
+                                            <CTableDataCell>{el.Pay_Mode}</CTableDataCell>
                                             <CTableDataCell onClick={()=>ShowUserInvoceHandler(el._id,el)} className='text-center'>
                                                 <CButton size='sm'><BsEye/></CButton></CTableDataCell>
                                             <CTableDataCell className='text-center'>
-                                                <CButton onClick={()=>ViewReceiptsFun(el,el2,i+1)} size='sm' className='text-white' color='info'><MdReceiptLong/></CButton>
+                                                <CButton onClick={()=>ViewReceiptsFun(el,el,i+1)} size='sm' className='text-white' color='info'><MdReceiptLong/></CButton>
                                             </CTableDataCell>
                                         </CTableRow>
     
                                     })
-                                 })}                               
+                                 }                               
                             </CTableBody>
                         </CTable>
                     </CCardBody>
                 </CCard>
             </CCol>
+
+            <div className='d-flex justify-content-center mt-3' >
+                        <CPagination aria-label="Page navigation example" style={{cursor:'pointer'}}>
+                            <CPaginationItem aria-label="Previous" onClick={() => setPagination((val) => val > 10 ? val - 10 : 10)}>
+                                <span aria-hidden="true" >&laquo;</span>
+                            </CPaginationItem>
+                            <CPaginationItem active >{pagination / 10}</CPaginationItem>
+                            {num > pagination / 10 * 10 && <CPaginationItem onClick={() => setPagination((val) => val < num ? val + 10 : val)}>{pagination / 10 + 1}</CPaginationItem>}
+                            {num > pagination / 10 * 20 && <CPaginationItem onClick={() => setPagination((val) => val < num ? val + 10 : val)}>{pagination / 10 + 2}</CPaginationItem>}
+                            <CPaginationItem aria-label="Next" onClick={() => setPagination((val) => val < num ? val + 10 : val)}>
+                                <span aria-hidden="true">&raquo;</span>
+                            </CPaginationItem>
+                        </CPagination>
+      </div>
         </CRow>
+
+
     )
 }
 

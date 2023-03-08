@@ -87,7 +87,6 @@ const Documents = ({ id }) => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setResult1(res.data.reverse())
             })
             .catch((error) => {
@@ -100,7 +99,6 @@ const Documents = ({ id }) => {
         uploadBytes(imageRef, image).then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
                 setImageUrl(url)
-                console.log(url);
             });
         });
         if (imageUrl != null) {
@@ -112,7 +110,6 @@ const Documents = ({ id }) => {
             }
             axios.post(`${url}/Document/create`, data, { headers })
                 .then((resp) => {
-                    console.log(resp.data)
                     alert('Successfully Added')
                     getGallery()
                     setAction1(false)

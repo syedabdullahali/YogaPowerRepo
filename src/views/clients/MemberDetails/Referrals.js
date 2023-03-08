@@ -54,7 +54,6 @@ const Referrals = ({ id }) => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setResult1(res.data.reverse())
             })
             .catch((error) => {

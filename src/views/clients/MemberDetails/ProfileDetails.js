@@ -45,6 +45,7 @@ import logo from 'src/assets/images/avatars/icon.png'
 import { v4 } from "uuid";
 import { useReactToPrint } from 'react-to-print'
 import moment from "moment";
+import { useSelector } from 'react-redux'
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 
@@ -118,13 +119,17 @@ const ProfileDetails = ({ ids, deleteId }) => {
     const [idealWeight, setidealWeight] = useState('')
     const [suggestion, setsuggestion] = useState('')
     const [comments, setcomments] = useState('')
+    const url1 = useSelector((el)=>el.domainOfApi) 
+
+
+
+
 
     var currentdate = new Date();
     var datetime = currentdate.getDay() + "/" + currentdate.getMonth()
         + "/" + currentdate.getFullYear();
     const navigate = useNavigate()
     let user = JSON.parse(localStorage.getItem('user-info'))
-    console.log(user);
     const token = user.token;
     const username = user.user.username;
     const centerCode = user.user.centerCode;
@@ -154,10 +159,9 @@ const ProfileDetails = ({ ids, deleteId }) => {
             'Authorization': `Bearer ${token}`,
             'My-Custom-Header': 'foobar'
         };
-        axios.get(`${url}/memberForm/${id}`, { headers },
+        axios.get(`${url1}/memberForm/${id}`, { headers },
         )
             .then((resp) => {
-                console.log(resp.data)
                 setFullname(resp.data.Fullname)
                 setEmail(resp.data.Email)
                 setCountryCode(resp.data.CountryCode)
@@ -213,7 +217,6 @@ const ProfileDetails = ({ ids, deleteId }) => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setPackageArr(res.data)
             })
             .catch((error) => {
@@ -223,7 +226,6 @@ const ProfileDetails = ({ ids, deleteId }) => {
 
     function getImage() {
         listAll(imagesListRef).then((response) => {
-            console.log(response);
         })
     }
 
@@ -235,7 +237,6 @@ const ProfileDetails = ({ ids, deleteId }) => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setLeadArr(res.data)
             })
             .catch((error) => {
@@ -246,7 +247,7 @@ const ProfileDetails = ({ ids, deleteId }) => {
 
     const [staff, setStaff] = useState([])
     function getStaff() {
-        axios.get(`${url2}/employeeForm/all`, {
+        axios.get(`${url1}/employeeform`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -292,7 +293,6 @@ const ProfileDetails = ({ ids, deleteId }) => {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 setResult(res.data)
             })
             .catch((error) => {
@@ -322,7 +322,6 @@ const ProfileDetails = ({ ids, deleteId }) => {
             .then((resp) => {
                 setMemberId(resp.data._id);
                 alert("successfully submitted")
-                console.log("refresh prevented");
                 setVisi(true)
             })
             .catch((error) => {
@@ -382,18 +381,13 @@ const ProfileDetails = ({ ids, deleteId }) => {
         )
             .then((resp) => {
                 setInvId(resp.data._id);
-                console.log(resp.data._id);
                 alert("successfully submitted")
-                console.log("refresh prevented");
                 setVisi1(true)
                 let data1 = { invoiceId: resp.data._id, invoiceNum: resp.data.InvoiceNo, startDate, endDate, }
                 axios.post(`${url}/memberForm/${MemberId}`, data1, { headers },
                 )
                     .then((report) => {
-                        console.log(invId);
-                        console.log(report);
                         alert("successfully submitted")
-                        console.log("refresh prevented");
                     })
                     .catch((error) => {
                         console.error(error)
@@ -402,10 +396,6 @@ const ProfileDetails = ({ ids, deleteId }) => {
             .catch((error) => {
                 console.error(error)
             })
-
-
-
-        console.log(invId);
 
     }
 
@@ -451,7 +441,6 @@ const ProfileDetails = ({ ids, deleteId }) => {
             imgRef.current.src = e.target.result
         }
         reader.readAsDataURL(file)
-        console.log(file, image);
     }
 
 

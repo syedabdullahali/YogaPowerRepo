@@ -2,12 +2,14 @@ import { CButton, CCard, CCardTitle, CCol, CFormSelect, CImage, CRow,CTable,CTab
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
-const url = 'https://yog-seven.vercel.app'
-const url2 = 'https://yog-seven.vercel.app'
+import { useSelector } from 'react-redux'
 
 const ServiceProfile = ({ id }) => {
     console.log(id ,"service profile")
+    const url1 = useSelector((el)=>el.domainOfApi) 
+
     const [result, setResult] = useState([])
+    const [allInvoiceData,setAllInvoiceData] = useState([])
     const [active,setActive] = useState(false)
 
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -20,39 +22,67 @@ const ServiceProfile = ({ id }) => {
         getDetails(id)
     }, [])
 
-    function getDetails(id) {
+function getDetails(id) {
         const headers = {
             'Authorization': `Bearer ${token}`,
             'My-Custom-Header': 'foobar'
         };
-  const data = axios.get(`${url}/invoice/all`, { headers })
 
-
- const data2 = axios.get(`${url}/memberForm/${id}`, {
-    headers: {
-        'Authorization': `Bearer ${token}`
-    }   
+ const data2 = axios.get(`${url1}/memberForm/${id}`, {
+   headers
 })
   
-
-
-
-data.then((resp)=>{
-    console.log(resp.data,"hfuiwehfhwfhyrwgf")
-    setResult(resp.data)    
-});
-            
-      
-data2.then((resp) => {
-    console.log(resp.data,"data2 2")
-    setResult(resp.data)              
-    })
+    data2.then(({data}) => {
+        setResult(data)  
+        getInvoiceData(data)
+            })
     .catch((error) => {
-        // console.error(error)
+    console.error(error)
     })
+}
+
+function getInvoiceData(data){
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'My-Custom-Header': 'foobar'
+    };
+    axios.get(`${url1}/invoice/${data.invoiceId}`, { headers }).then(({data})=>{
+        setAllInvoiceData(data)
+     })
 
 
+}
+
+const getDate = (date,val) => {
+
+    const date2 = new Date(date).getDate() + "/" + (new Date(date).getMonth() + (val? 1:0)) + "/" + new Date(date).getFullYear()
+    if (date2 === 'NaN/NaN/NaN') {
+        return 'Invalid Date'
     }
+    return date2
+
+}
+
+
+
+
+// useEffect( async ()=>{
+//     const headers = {
+//         'Authorization': `Bearer ${token}`,
+//         'My-Custom-Header': 'foobar'
+//     };
+
+//     if(!result){return}
+//     const data = axios.get(`${url1}/invoice/${result.invoiceId}`, { headers }).then(({data})=>{
+//         setAllInvoiceData(data)
+//      })
+// getInvoiceData()
+// },[result.invoiceId])
+
+console.log(allInvoiceData,result,"game on")
+
+
+
     return (
         <CRow>
             <CCol xs={12}>
@@ -69,28 +99,28 @@ data2.then((resp) => {
             </CCol>
              
             <CCol xs={3} lg={3} sm={3}>
-                      <p >Member Id:- {result?._id}</p>
+                      <p >Member Id:- {result?.ClientId}</p>
                       <p>Attendance ID : {result?.AttendanceID}</p>
-                      <p>Packeges : </p>
+                      <p>Service: {allInvoiceData?.ServiceName} </p>
                       <p>Total Loyalty Points</p>
                       <CButton size='sm'>Add/View Loyalty Points</CButton>
 
             </CCol>
 
             <CCol xs={3} lg={3} sm={3}>
-                     <p>Membership status :{result?.status}</p>
-                     <p>Start From</p>
-                     <p>Packeges Amount</p>
+                     <p>Membership status :</p>
+                     <p>Start From : </p>
+                     <p>Packeges Amount:</p>
                      <p>Referrals (0)</p>
                      <p>No of Shop Item: 0</p>
             </CCol>
                      
             <CCol xs={3} lg={3} sm={3}>
         
-                     <p>Status : {result?.status}</p>
-                     <p>25-11-2022</p>
-                     <p>Total Pending payment :0</p>
-                     <p>Referral value:0</p>
+                     <p>{result?.status}</p>
+                     <p>{ getDate(allInvoiceData.startDate,true)}</p>
+                     <p> Rs {allInvoiceData.amount}</p>
+                     <p>Referrals Value(0)</p>
                      <p>Shop Value: 0</p>
 
             </CCol>
@@ -171,29 +201,33 @@ data2.then((resp) => {
                         </CCol>
                         <CCol>
                             <b>Service Name</b> :<br/>
-                              {result?.serviceName}
+                            {allInvoiceData?.ServiceName}
                         </CCol>
                         <CCol>
-                            <b>Duration:</b><br/> {result?.PackageName}
+                            <b>Duration:</b><br/> {allInvoiceData?.duration}
                         </CCol>
                         <CCol>
-                             <b>Packages:</b> <br/>3 days a week
+                             <b>Packages:</b> <br/>{allInvoiceData?.PackageName}
                         </CCol>
                         </CCol>
 
                         <CCol className='d-flex '>
                        
                         <CCol>
-                             <b>TOTAL DAYS</b> <br/>12 days
+                             <b>TOTAL DAYS</b> <br/>
+
+                             {
+                            Math.ceil(new Date(allInvoiceData?.endDate) -new Date(allInvoiceData?.startDate))/(1000*60*60*24) 
+                             } days
                         </CCol>
                         <CCol>
-                              <b>START DATE</b> <br/>01/02/2022
+                              <b>START DATE</b> <br/>{getDate(allInvoiceData?.startDate,true)}
                         </CCol>
                         <CCol>
-                              <b>EXPIRY DATE</b> <br/>30/03/22
+                              <b>EXPIRY DATE</b> <br/>{getDate(allInvoiceData?.endDate,true)}
                         </CCol>
                         <CCol>
-                              <b>Status </b><br/>active
+                              <b>Status </b><br/>{result?.status}
                         </CCol>  
                         </CCol>    
   

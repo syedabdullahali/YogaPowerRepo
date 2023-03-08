@@ -35,17 +35,26 @@ import Referrals from './Referrals'
 import ServiceProfile from './ServiceProfile'
 import Teams from './Teams'
 import Attendence from './Attendence'
+import axios from 'axios'
+
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
 const MemberDetails = () => {
     const [activeKey, setActiveKey] = useState(0)
+    const [AllclientData,setAllClientData] = useState([])
     const { id, i } = useParams()
-    console.log(id)
+
+    let user = JSON.parse(localStorage.getItem('user-info'))
+
+
+
     useEffect(() => {
         if (id !== null) {
             setActiveKey(i)
         }
     }, [])
+
+   
 
     return (
         <CRow>
@@ -83,7 +92,7 @@ const MemberDetails = () => {
                         <CTabContent>
                             {[
                                 { id: '1', heading: 'Profile', com: <ProfileDetails ids={id} deleteId={id} /> },
-                                { id: '2', heading: 'Services', com: <ServiceProfile id={id} /> },
+                                { id: '2', heading: 'Services', com: <ServiceProfile id={id}  /> },
                                 { id: '3', heading: 'Payments', com: <Payment id={id} /> },
                                 { id: '4', heading: 'Attendence', com: <Attendence id={id} /> },   
                                 { id: '5', heading: 'Appoinments', com: <Appointment id={id} /> },

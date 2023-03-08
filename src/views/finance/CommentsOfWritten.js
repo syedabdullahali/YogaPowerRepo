@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {
     CButton,
     CButtonGroup,
@@ -20,8 +20,73 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop, cilPlus } from '@coreui/icons'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+
+
+let user = JSON.parse(localStorage.getItem('user-info'))
+    const token = user.token;
+    const username = user.user.username;
 
 const CommentOfWritten = () => {
+
+
+    const [AllInvoiceData,setAllInvoiceData] = useState([])
+    const url1 = useSelector((el)=>el.domainOfApi) 
+    const [serviceName,setServiceName] = useState('')
+    const [result, setResult] = useState([]);
+    const [pagination, setPagination] = useState(10)
+    let num =0
+
+
+
+
+    useEffect(()=>{
+        setPagination(10)
+        getPackage()
+        },[serviceName])
+
+
+    function getPackage() {
+        axios.get(`${url1}/packagemaster`)
+            .then((res) => {
+                setResult(res.data)
+                console.log(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+
+
+
+    const getAllInvoiceData = async ()=>{
+        const {data} = await axios.get(`${url1}/invoice/all`,{ 
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }})
+        
+        setAllInvoiceData(data.reverse())     
+                
+    } 
+    useEffect(()=>{
+       getAllInvoiceData()
+    },[])
+
+
+    const getDate = (date,val) => {
+
+        const date2 = new Date(date).getDate() + "/" + (new Date(date).getMonth() + (val? 1:0)) + "/" + new Date(date).getFullYear()
+        if (date2 === 'NaN/NaN/NaN') {
+            return 'Invalid Date'
+        }
+        return date2
+
+    }
+
+  
+console.log(AllInvoiceData)    
+
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -101,12 +166,18 @@ const CommentOfWritten = () => {
                             </CCol>
                             <CCol lg={3} sm={6} className='mb-2'>
                                 <CInputGroup>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>Select Service</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
+                                <CFormSelect id="inputGroupSelect01"
+                                     onChange={(e)=>setServiceName(e.target.value)}
+                                    >
+                                    <option>Select Service</option>
+                                        {result.map((item, index) => (
+                                            item.username === username && (
+                                               item.Status=== true && (
+                                                    <option key={index}>{item.Service}</option>                                                  
+                                                )
+                                            
+                                            )))}
+                                </CFormSelect>
                                 </CInputGroup>
                             </CCol>
                             <CCol lg={4} sm={6} className='mb-2' >
@@ -129,45 +200,34 @@ const CommentOfWritten = () => {
                                     <CTableHeaderCell scope="col">Cancelled By</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Invoice No</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Comments</CTableHeaderCell>
-                                    {/* <CTableHeaderCell scope="col">Renewls Revenue</CTableHeaderCell> */}
-                                    {/* <CTableHeaderCell scope="col">
-                                        Balance Collection
-                                    </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Achived %</CTableHeaderCell> */}
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
+                                
+            {AllInvoiceData.filter((el)=>el.commentsofwrite&&el.status==="cancel").filter((el)=>{
+                   if(serviceName){
+                    num =0
+                    return serviceName=== el.ServiceName
+                }
+                return el
+              }).filter((el, i) => {
+                           num++                                    
+                  if (pagination - 10 < i + 1 && pagination >= i + 1) {
+                        return el
+                }
+
+              }).map((el,i)=>
                                 <CTableRow>
-                                <CTableDataCell>1</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
+                                    <CTableDataCell>{num+1+pagination-1}</CTableDataCell>
+                                    <CTableDataCell>{getDate(el.createdAt,true)}</CTableDataCell>
+                                    <CTableDataCell>{el.MemberId}</CTableDataCell>
+                                    <CTableDataCell>{el.MemberName}</CTableDataCell>
+                                    <CTableDataCell>{el.ServiceName}</CTableDataCell>
+                                    <CTableDataCell>{el.username}</CTableDataCell>
+                                    <CTableDataCell>{el.InvoiceNo}</CTableDataCell>
+                                    <CTableDataCell>{el.commentsofwrite}</CTableDataCell>
                                 </CTableRow>
-                                <CTableRow>
-                                <CTableDataCell>2</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
-                                <CTableRow>
-                                <CTableDataCell>3</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                </CTableRow>
+                                )}                                
                             </CTableBody>
                         </CTable>
                     </CCardBody>

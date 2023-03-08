@@ -105,7 +105,7 @@ const Renewals = () => {
     
 
     function getEnquiry() {
-        axios.get(`${ url }/memberForm/all
+        axios.get(`${url1}/memberForm/all
         `, {
             headers: {
                 'Authorization': `Bearer ${ token }`
@@ -144,7 +144,7 @@ const Renewals = () => {
     function deleteEnquiry(id) {
 
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/memberForm/delete/${id}`, {
+            fetch(`${url1}/memberForm/delete/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -172,7 +172,7 @@ const Renewals = () => {
                 'My-Custom-Header': 'foobar'
         };
         
-          await  axios.get(`${url}/invoice/all`,{headers}).then(({data})=>{
+          await  axios.get(`${url1}/invoice/all`,{headers}).then(({data})=>{
             setInvoiceData(data)
           })
          }
