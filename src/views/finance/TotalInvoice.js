@@ -69,7 +69,7 @@ const TotalInvoice = () => {
     
     
     function getEnquiry() {
-        axios.get(`${url}/memberForm/all`, {
+        axios.get(`${url1}/memberForm/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -98,13 +98,11 @@ const TotalInvoice = () => {
     }
 
 
-    function getMemId(id){
-    return  result1.find((el)=>el.invoiceId ===id)?.AttendanceID    
-    }
-    
+  
     useEffect(()=>{
         getPackage()
         getEnquiry()
+        
     },[])
     
     useEffect(()=>{
@@ -164,7 +162,7 @@ const TotalInvoice = () => {
  const status = value
  if(status==='cancel'){
     let commentValue = prompt("Why you want to cancel")
-    
+
     if(commentValue){
         postRequestInvoice(value,id,commentValue)
     }
@@ -340,7 +338,7 @@ const TotalInvoice = () => {
                                    <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
                                     <CTableDataCell>{getDate(el.createdAt,true)}</CTableDataCell>
                                     <CTableDataCell>{el.centerName}</CTableDataCell>
-                                    <CTableDataCell>{getMemId(el._id)}</CTableDataCell>
+                                    <CTableDataCell>{el.clientId}</CTableDataCell>
 <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${el.MemberId}/1`} target="_black">{el.MemberName}</Link></CTableDataCell>
 
                                     <CTableDataCell>{el.InvoiceNo}</CTableDataCell>
@@ -349,7 +347,7 @@ const TotalInvoice = () => {
                                     <CTableDataCell>{getDate(el.startDate,true)}</CTableDataCell>
                                     <CTableDataCell>{getDate(el.endDate,true)}</CTableDataCell>
                                     <CTableDataCell>{el.counseller}</CTableDataCell>
-                                    <CTableDataCell>{el.trainer}</CTableDataCell>
+                                    <CTableDataCell>{el.clientId}</CTableDataCell>
                                     <CTableDataCell>{el.counseller}</CTableDataCell>
                                     <CTableDataCell>{el.fees}</CTableDataCell>
                                     <CTableDataCell>{el.discount}</CTableDataCell>

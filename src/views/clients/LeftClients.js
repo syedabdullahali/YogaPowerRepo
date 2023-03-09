@@ -1471,10 +1471,21 @@ const LeftClients = () => {
                                         />
                                     </CTableDataCell>
                                 </CTableRow>
-                                {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
-                                    list.username === username && list.plan === false
-                                    && list.Fullname.toLowerCase().includes(Search1.toLowerCase()) &&
-                                    list.AttendanceID.toLowerCase().includes(Search5.toLowerCase()) && list.serviceName.toLowerCase().includes(Search6.toLowerCase()) && list.fitnessGoal.toLowerCase().includes(Search7.toLowerCase())
+                                {result1.filter((list) =>{
+                                    const time =  (new Date(list.endDate) -new Date())
+                                    const days = Math.ceil(time/(1000*60*60*24))
+                                          if((days<=0 && list.username === username &&list.plan===true)){
+                                            console.log(list.invoiceId)
+                                             return true 
+                                          }
+                                          return false                                                                         
+                                     }).slice(paging * 10, paging * 10 + 10).filter((list) =>
+                                    list.username === username
+                                    //  &&list.plan === false
+                                    // && list.Fullname.toLowerCase().includes(Search1.toLowerCase()) &&
+                                    // list.AttendanceID.toLowerCase().includes(Search5.toLowerCase()) &&
+                                    //  list.serviceName.toLowerCase().includes(Search6.toLowerCase()) &&
+                                    //   list.fitnessGoal.toLowerCase().includes(Search7.toLowerCase())
                                 ).map((item, index) => (
                                     item.username === username && (
                                         <CTableRow key={index}>

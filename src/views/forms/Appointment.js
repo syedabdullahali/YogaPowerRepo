@@ -79,7 +79,7 @@ const Appointment = () => {
         getStaff()
     }, [])
     function getEnquiry() {
-        axios.get(`${ url }/memberForm/all`, {
+        axios.get(`${url1}/memberForm/all`, {
             headers: {
                 'Authorization': `Bearer ${ token }`
             }

@@ -118,8 +118,8 @@ console.log(allInvoiceData,result,"game on")
             <CCol xs={3} lg={3} sm={3}>
         
                      <p>{result?.status}</p>
-                     <p>{ getDate(allInvoiceData.startDate,true)}</p>
-                     <p> Rs {allInvoiceData.amount}</p>
+                     <p>{ getDate(allInvoiceData?.startDate,true)}</p>
+                     <p> Rs {allInvoiceData?.amount}</p>
                      <p>Referrals Value(0)</p>
                      <p>Shop Value: 0</p>
 

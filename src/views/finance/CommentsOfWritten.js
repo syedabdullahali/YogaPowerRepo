@@ -220,7 +220,7 @@ console.log(AllInvoiceData)
                                 <CTableRow>
                                     <CTableDataCell>{num+1+pagination-1}</CTableDataCell>
                                     <CTableDataCell>{getDate(el.createdAt,true)}</CTableDataCell>
-                                    <CTableDataCell>{el.MemberId}</CTableDataCell>
+                                    <CTableDataCell>{el.clientId}</CTableDataCell>
                                     <CTableDataCell>{el.MemberName}</CTableDataCell>
                                     <CTableDataCell>{el.ServiceName}</CTableDataCell>
                                     <CTableDataCell>{el.username}</CTableDataCell>

@@ -67,7 +67,7 @@ const PaidInvoice = () => {
     
     
     function getEnquiry() {
-        axios.get(`${url}/memberForm/all`, {
+        axios.get(`${url1}/memberForm/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -94,12 +94,6 @@ const PaidInvoice = () => {
                 console.error(error)
             })
     }
-
-
-    function getMemId(id){
-    return  result1.find((el)=>el.invoiceId ===id)?.AttendanceID    
-    }
-    
     useEffect(()=>{
         getPackage()
         getEnquiry()
@@ -319,7 +313,7 @@ const PaidInvoice = () => {
                                    <CTableDataCell>{i + 1 + pagination - 10}</CTableDataCell>
                                     <CTableDataCell>{getDate(el.createdAt,true)}</CTableDataCell>
                                     <CTableDataCell>{el.InvoiceNo}</CTableDataCell>
-                                    <CTableDataCell>{getMemId(el._id)}</CTableDataCell>
+                                    <CTableDataCell>{el.clientId}</CTableDataCell>
                                     <CTableDataCell>{el.MemberName}</CTableDataCell>
                                     <CTableDataCell></CTableDataCell>
                                     <CTableDataCell>{el.ServiceName}</CTableDataCell>

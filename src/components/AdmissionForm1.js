@@ -393,7 +393,8 @@ const headers = {
             counseller: ser5, trainer: GeneralTrainer,
             amount: total, tax, discount, totalAmount:
             finalTotal, paidAmount, pendingAmount, 
-            paymode, status: 'active'
+            paymode, status: 'active',typesofdiscount:dis1,
+            clientId:`${centerCode}MEM${10+mem.length}`
         }
 
         const headers = {

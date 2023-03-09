@@ -71,7 +71,6 @@ const Receipt = () => {
         })
             .then((res) => {
                 setResult(res.data)
-                console.log(res.data)
             })
             .catch((error) => {
                 console.error(error)
@@ -85,6 +84,7 @@ const Receipt = () => {
                       'Authorization': `Bearer ${token}`
                   }})          
           setResiptData2(data.reverse().flatMap((el)=>el.Receipts.map((el2)=>{
+            delete el2._id
             return{...el,...el2}}) 
             ))       
                   
@@ -102,7 +102,7 @@ const getDate = (date,val) => {
 }
 
 function getEnquiry() {
-    axios.get(`${url}/memberForm/all`, {
+    axios.get(`${url1}/memberForm/all`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -117,13 +117,17 @@ function getEnquiry() {
         })
 }
 
+
+
+
 useEffect(()=>{
 getEnquiry()
 },[])
 
+
 function ShowUserInvoceHandler (id,item){
+    
     const uniqClientData = result1.filter((el)=>el?.invoiceId===id)
-    console.log(uniqClientData)
     setAllInvoiceOfUser([item])    
     setClient(...uniqClientData)
     setInvoceModal(true)      
@@ -296,7 +300,7 @@ setShowReceipts(true)
                                             <CTableDataCell>{getDate(el.NewSlipDate,true)}</CTableDataCell>
                                             <CTableDataCell>{el.InvoiceNo +"RN"+ +(1+i)}</CTableDataCell>
                                             <CTableDataCell>{el.InvoiceNo}</CTableDataCell>
-                                            <CTableDataCell>{el.MemberId}</CTableDataCell>
+                                            <CTableDataCell>{el.clientId}</CTableDataCell>
                                             <CTableDataCell>{el.MemberName}</CTableDataCell>
                                             <CTableDataCell>{el.ServiceName}</CTableDataCell>
                                             <CTableDataCell>{el.Counseller}</CTableDataCell>

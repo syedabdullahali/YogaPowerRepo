@@ -27,6 +27,9 @@ import { useReactToPrint } from 'react-to-print'
 
 
 function Invoice ({allIvoiceOfaUser,showInvoiceModal,setInvoceModal,ClientData}){
+
+    
+
     console.log(allIvoiceOfaUser)
     const getDate = (date,val) => {
         const date2 = new Date(date).getDate() + "/" + (new Date(date).getMonth() + (val? 1:0)) + "/" + new Date(date).getFullYear()

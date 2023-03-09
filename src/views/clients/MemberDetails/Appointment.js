@@ -83,7 +83,7 @@ useEffect(() => {
    
 async function getEnquiry() {
        
-       const  {data} = await axios.get(`${url}/memberForm/${id}`, {
+       const  {data} = await axios.get(`${url1}/memberForm/${id}`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
