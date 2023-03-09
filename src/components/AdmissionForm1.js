@@ -408,7 +408,7 @@ const headers = {
                 setInvId(resp.data._id);
                 alert("successfully submitted")
                 setVisi1(true)
-                let data1 = { invoiceId: resp.data._id, invoiceNum: resp.data.InvoiceNo, startDate,
+                let data1 = { invoiceId: resp.data._id, invoiceNum: resp.data.InvoiceNo, startDate,duration:ser2,
                    endDate,plan: true,ClientId:`${centerCode}MEM${10+mem.length}`
                 }
                 axios.post(`${url1}/memberForm/update/${MemberId}`, data1, { headers },

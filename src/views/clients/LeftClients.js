@@ -1305,6 +1305,7 @@ const LeftClients = () => {
                                     <CTableHeaderCell>Invoice No</CTableHeaderCell>
                                     <CTableHeaderCell>Attendance ID</CTableHeaderCell>
                                     <CTableHeaderCell>Service</CTableHeaderCell>
+                                    <CTableHeaderCell>Duration</CTableHeaderCell>
                                     <CTableHeaderCell>Start Date</CTableHeaderCell>
                                     <CTableHeaderCell>End Date</CTableHeaderCell>
                                     <CTableHeaderCell>Fitness Goal</CTableHeaderCell>
@@ -1481,11 +1482,10 @@ const LeftClients = () => {
                                           return false                                                                         
                                      }).slice(paging * 10, paging * 10 + 10).filter((list) =>
                                     list.username === username
-                                    //  &&list.plan === false
-                                    // && list.Fullname.toLowerCase().includes(Search1.toLowerCase()) &&
-                                    // list.AttendanceID.toLowerCase().includes(Search5.toLowerCase()) &&
-                                    //  list.serviceName.toLowerCase().includes(Search6.toLowerCase()) &&
-                                    //   list.fitnessGoal.toLowerCase().includes(Search7.toLowerCase())
+                                    && list.Fullname.toLowerCase().includes(Search1.toLowerCase()) &&
+                                    list.AttendanceID.toLowerCase().includes(Search5.toLowerCase()) &&
+                                     list.serviceName.toLowerCase().includes(Search6.toLowerCase()) &&
+                                      list.fitnessGoal.toLowerCase().includes(Search7.toLowerCase())
                                 ).map((item, index) => (
                                     item.username === username && (
                                         <CTableRow key={index}>
@@ -1496,6 +1496,7 @@ const LeftClients = () => {
                                             <CTableDataCell> <label style={{ cursor: 'pointer' }} onClick={() => { setinvId(item.invoiceId), setCliId(item._id), handleInvoice(item.invoiceId, item._id) }}>{item.invoiceNum}</label> </CTableDataCell>
                                             <CTableDataCell>{item.AttendanceID}</CTableDataCell>
                                             <CTableDataCell>{item.serviceName}</CTableDataCell>
+                                            <CTableDataCell>{item?.duration}</CTableDataCell>
                                             <CTableDataCell>{moment(item.startDate).format("DD-MM-YYYY")}</CTableDataCell>
                                             <CTableDataCell>{moment(item.endDate).format("DD-MM-YYYY")}</CTableDataCell>
                                             <CTableDataCell>{item.fitnessGoal}</CTableDataCell>

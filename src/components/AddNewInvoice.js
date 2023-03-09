@@ -32,12 +32,8 @@ function AddNewInvoice({id,data23,viewInvoice,setViewInvoice,getDetails}){
     const url1 = useSelector((el)=>el.domainOfApi) 
 
 
-    const [Fullname, setFullname] = useState('')
-    const [ContactNumber, setContactNumber] = useState('')
-    const [Email, setEmail] = useState('')
-    const [serviceName, setserviceName] = useState('')
+
     const [GeneralTrainer, setGeneralTrainer] = useState('')
-    const [AttendanceID, setAttendanceID] = useState('')
     const [subService,setService] = useState([])
 
     
@@ -54,11 +50,11 @@ function AddNewInvoice({id,data23,viewInvoice,setViewInvoice,getDetails}){
     const [ser1, setSer1] = useState('')
     const [ser2, setSer2] = useState('')
     const [ser3, setSer3] = useState('')
-    const [ser4, setSer4] = useState('')
     const [ser5, setSer5] = useState('')
     const [ser6, setSer6] = useState('')
-    const [invId, setInvId] = useState('')
     const [invoiceNum,setInvoice] = useState([])
+    const [serviceDays,setServiceDays] = useState('')
+    const [errorMessage,setErrorMessage] = useState('')
 
 
     
@@ -95,13 +91,21 @@ function AddNewInvoice({id,data23,viewInvoice,setViewInvoice,getDetails}){
 
 
 const saveInvoice = () => {
+if(!(username && centerCode &&ser1 
+    && ser6 && ser2 && ser3
+    && ser5 && total && finalTotal && startDate && endDate && paymode
+)) {
+    setErrorMessage("Please Fill All Detail") 
+return 
+}
+
     let data = {
         username: username,
         date: datetime,
         centerName: centerCode,
         InvoiceNo: `INV${invoiceNum}`,
         MemberId: id, MemberName:`${data23?.Fullname}`,
-        ServiceName: serviceName, PackageName: ser6,
+        ServiceName: ser1, PackageName: ser6,
         duration: ser2, fees: ser3, startDate, endDate,
         counseller: ser5, trainer: GeneralTrainer,
         amount: total, tax, discount, totalAmount:
@@ -152,7 +156,8 @@ function getSubService() {
     })
         .then((res) => {
             setService(res.data)
-            console.log(res.data)
+          
+            console.log(res.data,"Package Master")
         })
         .catch((error) => {
             console.error(error)
@@ -164,6 +169,7 @@ useEffect(()=>{
 getStaff()
 getSubService()
 },[])
+
 
 const handleTaxTotal = (e) => {
     settax(e.target.value)
@@ -194,6 +200,36 @@ const handleDiscount = (e) => {
     }
     setDiscount(e.target.value)
 }
+
+
+
+
+const getCurrentDateInput = () => {
+    const dateObj = new Date(new Date(startDate).getTime()+(serviceDays *24*60*60*1000));
+    const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+    const day = ("0" + dateObj.getDate()).slice(-2);
+    const year = dateObj.getFullYear();
+    const shortDate = `${year}-${month}-${day}`;
+    return shortDate;
+  }
+
+useEffect(()=>{
+if(startDate&& serviceDays){
+console.log(startDate)
+// console.log(getCurrentDateInput())
+setEndDate(getCurrentDateInput())
+}
+},[startDate])
+
+useEffect(()=>{
+if(ser1){
+subService.forEach((el)=>{
+if(el.Service=== ser1){
+setServiceDays(el.Days)
+}
+})
+}
+},[ser1])
 
 
 
@@ -259,12 +295,15 @@ const handleDiscount = (e) => {
                     <CTableDataCell>
                         <CRow>
                             <CCol>
+                                
                                 <CFormSelect
                                     className="mb-1"
                                     aria-label="Select Service Name"
                                     value={ser1}
                                     onChange={(e) => setSer1(e.target.value)}
                                     label='Service Name'
+                                    style={{ minWidth: "210px" }}
+
                                 >
                                     <option>Select Service</option>
                                     {[...subService.filter((el)=>{
@@ -281,6 +320,8 @@ const handleDiscount = (e) => {
                                     value={ser6}
                                     label='Package Name'
                                     onChange={(e) => setSer6(e.target.value)}
+                                    style={{ minWidth: "210px" }}
+
                                 >
                                     <option>Select Package</option>
                                     {[...subService.filter((el)=>{
@@ -293,7 +334,11 @@ const handleDiscount = (e) => {
                                 </CFormSelect>
                             </CCol>
                         </CRow>
+
                         <CRow>
+                        {
+                        ser1 &&  
+                        <>
                             <CCol>
                                 <CInputGroup>
                                     <CInputGroupText
@@ -328,6 +373,8 @@ const handleDiscount = (e) => {
                                     />
                                 </CInputGroup>
                             </CCol>
+                        </>      
+                        }
                         </CRow>
 
                     </CTableDataCell>
@@ -341,6 +388,7 @@ const handleDiscount = (e) => {
                         >
                  <option>Select Duration</option>
                    {[...subService.filter((el)=>{
+                  
                  return el.username === username && el.Service=== ser1                                  
             })].map((el,i)=><option key={i}>{el.Duration
                 }</option>)
@@ -551,6 +599,8 @@ const handleDiscount = (e) => {
         </CTable>
 
     </CModalBody>
+    {errorMessage&& <CCol className="text-end px-5"><p style={{color:'red',fontSize:'15px'}}>{errorMessage}</p></CCol>}
+
     <CModalFooter>
         <CButton color="secondary" onClick={() => { setVisi(false) }}>
             Close

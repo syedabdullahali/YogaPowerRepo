@@ -1037,6 +1037,7 @@ const Renewed = () => {
                                     <CTableHeaderCell>Invoice No</CTableHeaderCell>
                                     <CTableHeaderCell>Attendance ID</CTableHeaderCell>
                                     <CTableHeaderCell>Service</CTableHeaderCell>
+                                    <CTableHeaderCell>Duration</CTableHeaderCell>
                                     <CTableHeaderCell>Start Date</CTableHeaderCell>
                                     <CTableHeaderCell>End Date</CTableHeaderCell>
                                     <CTableHeaderCell>Fitness Goal</CTableHeaderCell>
@@ -1218,6 +1219,7 @@ const Renewed = () => {
                                             <CTableDataCell>{item.InvoiceNo}</CTableDataCell>
                                             <CTableDataCell>{item.AttendanceID}</CTableDataCell>
                                             <CTableDataCell>{item.serviceName}</CTableDataCell>
+                                            <CTableDataCell>{item?.duration}</CTableDataCell>
                                             <CTableDataCell>{item.startDate}</CTableDataCell>
                                             <CTableDataCell>{item.endDate}</CTableDataCell>
                                             <CTableDataCell>{item.fitnessGoal}</CTableDataCell>

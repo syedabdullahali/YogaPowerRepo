@@ -83,12 +83,14 @@ const Receipt = () => {
                   headers: {
                       'Authorization': `Bearer ${token}`
                   }})          
-          setResiptData2(data.reverse().flatMap((el)=>el.Receipts.map((el2)=>{
+          setResiptData2(data.reverse().flatMap((el)=>el.Receipts.map((el2,i)=>{
             delete el2._id
-            return{...el,...el2}}) 
+            return{...el,...el2,length:i+1}}) 
             ))       
                   
   }  
+console.log(resiptData2)
+
 
 
 const getDate = (date,val) => {
@@ -298,7 +300,7 @@ setShowReceipts(true)
                                         return <CTableRow>
                                         <CTableDataCell>{i+pagination-10+1}</CTableDataCell>
                                             <CTableDataCell>{getDate(el.NewSlipDate,true)}</CTableDataCell>
-                                            <CTableDataCell>{el.InvoiceNo +"RN"+ +(1+i)}</CTableDataCell>
+                                            <CTableDataCell>{el.InvoiceNo +"RN"+ +(el.length)}</CTableDataCell>
                                             <CTableDataCell>{el.InvoiceNo}</CTableDataCell>
                                             <CTableDataCell>{el.clientId}</CTableDataCell>
                                             <CTableDataCell>{el.MemberName}</CTableDataCell>

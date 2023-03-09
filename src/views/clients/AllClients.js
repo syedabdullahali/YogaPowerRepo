@@ -153,6 +153,7 @@ const AllClients = () => {
             }
         })
             .then((res) => {
+                console.log(res.data)
                 setResult1(res.data.filter((list) => list.username === username).reverse())
                 setOgList(res.data.filter((list) => list.username === username).reverse())
             })
@@ -580,6 +581,7 @@ function updateRec(id, status) {
                                     <CTableHeaderCell>Invoice No</CTableHeaderCell>
                                     <CTableHeaderCell>Attendance ID</CTableHeaderCell>
                                     <CTableHeaderCell>Service</CTableHeaderCell>
+                                    <CTableHeaderCell>Duration</CTableHeaderCell>
                                     <CTableHeaderCell>Start Date</CTableHeaderCell>
                                     <CTableHeaderCell>End Date</CTableHeaderCell>
                                     <CTableHeaderCell>Fitness Goal</CTableHeaderCell>
@@ -756,7 +758,7 @@ function updateRec(id, status) {
                                 ).map((item, index) => {
                                    return item.username === username && (
                                         <CTableRow key={index}>
-                                            <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
+                                            <CTableDataCell>{ result1.length  -(index + 1 + (paging * 10))}</CTableDataCell>
                                             <CTableDataCell>{item.ClientId}</CTableDataCell>
                                             <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${item._id}/1`} target="_black">{item.Fullname}</Link></CTableDataCell>
                                             <CTableDataCell>{item.ContactNumber}</CTableDataCell>
@@ -764,6 +766,7 @@ function updateRec(id, status) {
                                                  { setinvId(item.invoiceId), setCliId(item._id), handleInvoice(item.invoiceId, item._id) }}>{item.invoiceNum}</label> </CTableDataCell>
                                             <CTableDataCell>{item.AttendanceID}</CTableDataCell>
                                             <CTableDataCell>{item.serviceName}</CTableDataCell>
+                                            <CTableDataCell>{item?.duration}</CTableDataCell>
                                             <CTableDataCell>{moment(item.startDate).format("DD-MM-YYYY")}</CTableDataCell>
                                             <CTableDataCell>{moment(item.endDate).format("DD-MM-YYYY")}</CTableDataCell>
                                             <CTableDataCell>

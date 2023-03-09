@@ -30,6 +30,8 @@ const url2 = 'https://yog-seven.vercel.app'
 
 
 const PackageMaster = () => {
+
+
     const url1 = useSelector((el)=>el.domainOfApi) 
 
 
@@ -124,6 +126,7 @@ const PackageMaster = () => {
         let data = 
         {
            "Sr_No":"21",
+           "Days":getNoOfDays,
            "Service": newservice,
            "Variation": variation,
            "Package_Name":Package_Name,
@@ -154,6 +157,20 @@ const PackageMaster = () => {
             })
         })
     }
+
+    const toGetDays = [
+        {duration:'Week',days:'7'},
+        {duration:'Month',days:'30'},
+        {duration:'Year',days:'365'}
+      ]
+    
+    
+    const getNoOfDays =   toGetDays.map((el)=>{
+    if(duration?.includes(el.duration)){
+      return  duration.split(' ')[0] *el.days
+    }
+      }).find((el)=>el)
+    
 
 
     return (
@@ -240,12 +257,12 @@ const PackageMaster = () => {
                                             value={duration}
                                             onChange={(e) => setDuration(e.target.value)}>
                                             <option value="">Select</option>
-                                            <option value=' 1 Week'>1 Week</option>
-                                            <option value=" 2 Week">2 Week</option>
-                                            <option value=" 3 Week">3 Week</option>
-                                            <option value=" 4 Week">4 Week</option>
-                                            <option value=" 5 Week">5 Week</option>
-                                            <option value=" 6 Week">6 Week</option>
+                                            <option value='1 Week'>1 Week</option>
+                                            <option value="2 Week">2 Week</option>
+                                            <option value="3 Week">3 Week</option>
+                                            <option value="4 Week">4 Week</option>
+                                            <option value="5 Week">5 Week</option>
+                                            <option value="6 Week">6 Week</option>
                                             <option value="1 Month">1 Month</option>
                                             <option value="2 Month">2 Month</option>
                                             <option value="3 Month">3 Month</option>

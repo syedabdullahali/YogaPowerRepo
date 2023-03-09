@@ -326,6 +326,7 @@ function ShowUserInvoceHandler (id,item){
                                     <CTableHeaderCell>Invoice No</CTableHeaderCell>
                                     <CTableHeaderCell>Attendance ID</CTableHeaderCell>
                                     <CTableHeaderCell>Service</CTableHeaderCell>
+                                    <CTableHeaderCell>Duration</CTableHeaderCell>
                                     <CTableHeaderCell>Start Date</CTableHeaderCell>
                                     <CTableHeaderCell>End Date</CTableHeaderCell>
                                     <CTableHeaderCell>Fitness Goal</CTableHeaderCell>
@@ -519,6 +520,7 @@ function ShowUserInvoceHandler (id,item){
                                             <CTableDataCell>{item.invoiceNum}</CTableDataCell>
                                             <CTableDataCell>{item.AttendanceID}</CTableDataCell>
                                             <CTableDataCell>{item.serviceName}</CTableDataCell>
+                                            <CTableDataCell>{item?.duration}</CTableDataCell>
                                             <CTableDataCell>{ getDate(item.startDate,true)}</CTableDataCell>
                                             <CTableDataCell>{ getEndDate(item.endDate)}</CTableDataCell>
                                             <CTableDataCell>{item.Fitness_Goal}</CTableDataCell>
