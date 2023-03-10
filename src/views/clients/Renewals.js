@@ -5,22 +5,12 @@ import {
     CCard,
     CCardBody,
     CCardHeader,
-    CCardTitle,
     CCol,
-    CForm,
     CFormInput,
     CFormSelect,
     CFormSwitch,
-    CFormTextarea,
     CInputGroup,
     CInputGroupText,
-    CModal,
-    CModalBody,
-    CModalFooter,
-    CModalHeader,
-    CModalTitle,
-    CPagination,
-    CPaginationItem,
     CRow,
     CTable,
     CTableBody,
@@ -28,7 +18,6 @@ import {
     CTableHead,
     CTableHeaderCell,
     CTableRow,
-    CImage,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
@@ -503,14 +492,19 @@ function ShowUserInvoceHandler (id,item){
                                     </CTableDataCell>
                                 </CTableRow>
                                 {result1.filter((list) =>{
-                                    const time =  (new Date(list.endDate) -new Date())
-                                    const days = Math.ceil(time/(1000*60*60*24))
-                                          if((days<=15 && days>=1 &&  list.username === username &&list.plan===true)){
-                                            console.log(list.invoiceId)
-                                             return true 
-                                          }
-                                          return false                                                                         
-                                     }).map((item, index) => (
+                                    console.log(list)
+        const time =  (new Date(list.endDate) -new Date())
+        const days = Math.ceil(time/(1000*60*60*24))
+              if((days<=15 && days>=1)){
+           
+                 return true 
+              }
+              return false                                                                         
+         }
+
+                       
+                                                                                                          
+                                     ).map((item, index) => (
                                         <CTableRow key={index}>
                                             <CTableDataCell>{index + 1 + (paging * 10)}</CTableDataCell>
                                             <CTableDataCell>{centerCode}MEM{index + 10 + (paging * 10)}</CTableDataCell>

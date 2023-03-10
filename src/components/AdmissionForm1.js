@@ -124,6 +124,8 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
     const [comments, setcomments] = useState('')
     const [subService,setService] = useState([])
 
+    const [wantToGiveMony,setWantToGiveMony] = useState(false)
+
 
 
 
@@ -287,6 +289,13 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
 
 
     const saveMember = () => {
+        if(!wantToGiveMony){
+         alert('Admission Rejected ')
+         clickfun(false)
+         
+         return 
+        }
+        
         let data = {
             username: username,
             image: imageUrl,
@@ -302,6 +311,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
              Diabetes, Epilepsy, FootPain, Glaucoma, HeartDiseaseCondition, HerniaDiastasisRecti,
             HighBloodPressure, Other: OtherText, Weight, Height, fitnessLevel,
              fitnessGoal, idealWeight, suggestion, comments, status: 'active',
+             ClientId:`${centerCode}MEM${10+mem.length}`
         }
 
 
@@ -356,6 +366,8 @@ if (deleteId != undefined && deleteId != null) {
     const [ser6, setSer6] = useState('')
     const [invId, setInvId] = useState('')
     const [invoiceNum,setInvoice] = useState([])
+    const [errorMessage,setErrorMessage] = useState('')
+    const [serviceDays,setServiceDays] = useState('')
 
  
 
@@ -378,10 +390,53 @@ const headers = {
 },[])
 
 
+const validation = username && centerCode &&ser1 
+&& ser6 && ser2 && ser3
+&& ser5 && total && finalTotal && startDate && endDate && paymode
 
+useEffect(()=>{
+if(validation){
+    setErrorMessage("") 
+}
+},[validation])
+
+
+
+const getCurrentDateInput = () => {
+    const dateObj = new Date(new Date(startDate).getTime()+(serviceDays *24*60*60*1000));
+    const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+    const day = ("0" + dateObj.getDate()).slice(-2);
+    const year = dateObj.getFullYear();
+    const shortDate = `${year}-${month}-${day}`;
+    return shortDate;
+  }
+
+useEffect(()=>{
+if(startDate&& serviceDays){
+console.log(startDate)
+// console.log(getCurrentDateInput())
+setEndDate(getCurrentDateInput())
+}
+},[startDate])
+
+useEffect(()=>{
+if(ser1){
+subService.forEach((el)=>{
+if(el.Service=== ser1){
+setServiceDays(el.Days)
+}
+})
+}
+},[ser1])
 
 
     const saveInvoice = () => {
+
+        if(!validation) {
+            setErrorMessage("Please Fill All Detail") 
+        return 
+        }
+
         let data = {
             username: username,
             date: datetime,
@@ -409,7 +464,7 @@ const headers = {
                 alert("successfully submitted")
                 setVisi1(true)
                 let data1 = { invoiceId: resp.data._id, invoiceNum: resp.data.InvoiceNo, startDate,duration:ser2,
-                   endDate,plan: true,ClientId:`${centerCode}MEM${10+mem.length}`
+                   endDate,plan: true,
                 }
                 axios.post(`${url1}/memberForm/update/${MemberId}`, data1, { headers },
                 )
@@ -1064,6 +1119,9 @@ const headers = {
                                                 </CListGroupItem>
                                             </CListGroup>
                                         </CCol>
+                                        
+                                        
+
                                         {Other && (
                                             <CCol lg={12}>
                                                 <CFormInput
@@ -1078,6 +1136,14 @@ const headers = {
                                             </CCol>
                                         )}
                                     </CRow>
+                                     <CRow className="p-3">
+                                                     <CFormSwitch size="xl" label="Want to Admission"
+                                                        checked={wantToGiveMony}
+
+                                                        onChange={() => setWantToGiveMony(!wantToGiveMony)} />
+                                        </CRow>
+                                            
+
                                     <CButton className='mt-2' onClick={() => saveMember()}>Next</CButton>
                                 </CForm>
                             </CTabPane>
@@ -1533,6 +1599,8 @@ const headers = {
                                 </CTable>
 
                             </CModalBody>
+                            {errorMessage&& <CCol className="text-end px-5"><p style={{color:'red',fontSize:'15px'}}>{errorMessage}</p></CCol>}
+
                             <CModalFooter>
                                 <CButton color="secondary" onClick={() => { setVisi(false) }}>
                                     Close

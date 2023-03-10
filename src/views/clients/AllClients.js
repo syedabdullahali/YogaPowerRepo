@@ -47,7 +47,6 @@ const url2 = 'https://yog-seven.vercel.app'
 
 const AllClients = () => {
     const url1 = useSelector((el)=>el.domainOfApi) 
-    const dispatch = useDispatch()
     const navigateFitnees = useNavigate()
 
     const [select, setSelect] = useState()
@@ -750,7 +749,6 @@ function updateRec(id, status) {
                                 </CTableRow>
                                 {result1.slice(paging * 10, paging * 10 + 10).filter((list) =>
                                     list.username === username
-                                    &&list.plan===true
                                     && list.Fullname.toLowerCase().includes(Search1.toLowerCase()) &&
                                     list.AttendanceID.toLowerCase().includes(Search5.toLowerCase()) &&
                                      list.serviceName.toLowerCase().includes(Search6.toLowerCase()) && 
@@ -758,12 +756,13 @@ function updateRec(id, status) {
                                 ).map((item, index) => {
                                    return item.username === username && (
                                         <CTableRow key={index}>
-                                            <CTableDataCell>{ result1.length  -(index + 1 + (paging * 10))}</CTableDataCell>
+                                            <CTableDataCell>{ result1.length  -(index+ (paging * 10))}</CTableDataCell>
                                             <CTableDataCell>{item.ClientId}</CTableDataCell>
                                             <CTableDataCell><Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${item._id}/1`} target="_black">{item.Fullname}</Link></CTableDataCell>
                                             <CTableDataCell>{item.ContactNumber}</CTableDataCell>
                                             <CTableDataCell><label style={{ cursor: 'pointer' }} onClick={() =>
-                                                 { setinvId(item.invoiceId), setCliId(item._id), handleInvoice(item.invoiceId, item._id) }}>{item.invoiceNum}</label> </CTableDataCell>
+                                                 { setinvId(item.invoiceId), setCliId(item._id),
+                                                  handleInvoice(item.invoiceId, item._id) }}>{item.invoiceNum}</label> </CTableDataCell>
                                             <CTableDataCell>{item.AttendanceID}</CTableDataCell>
                                             <CTableDataCell>{item.serviceName}</CTableDataCell>
                                             <CTableDataCell>{item?.duration}</CTableDataCell>

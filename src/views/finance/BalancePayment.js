@@ -220,8 +220,6 @@ console.log(obj)
 }
 
 console.log(AllInvoiceData)
-
-
     return (
         <CRow>
 

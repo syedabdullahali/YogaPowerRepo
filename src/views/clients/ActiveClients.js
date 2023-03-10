@@ -1519,7 +1519,7 @@ const ActiveClients = () => {
                                 ).map((item, index) => (
                                     item.username === username && (
                                         <CTableRow key={index}>
-                                            <CTableDataCell>{ result1.length  -(index + 1 + (paging * 10))}</CTableDataCell>
+                                            <CTableDataCell>{ result1.length+1  -(index + 1 + (paging * 10))}</CTableDataCell>
                                             <CTableDataCell>{item.ClientId}</CTableDataCell>
                                             <CTableDataCell> <Link index={-1} style={{ textDecoration: 'none' }} to={`/clients/member-details/${item._id}/1`} target="_black">{item.Fullname}</Link></CTableDataCell>
                                             <CTableDataCell>{item.ContactNumber}</CTableDataCell>

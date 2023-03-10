@@ -29,10 +29,24 @@ import { useSelector } from 'react-redux'
 
 function AddNewInvoice({id,data23,viewInvoice,setViewInvoice,getDetails}){
 
+  
+ const RenewedObj  = [data23].find((list) =>{
+        const time =  (new Date(data23.endDate) -new Date())
+        const days = Math.ceil(time/(1000*60*60*24))
+              if((days<=15)){           
+                 return true 
+              }
+              return false                                                                         
+         })
+
+
+
+
+console.log(RenewedObj)
+
+
+
     const url1 = useSelector((el)=>el.domainOfApi) 
-
-
-
     const [GeneralTrainer, setGeneralTrainer] = useState('')
     const [subService,setService] = useState([])
 
@@ -71,12 +85,14 @@ function AddNewInvoice({id,data23,viewInvoice,setViewInvoice,getDetails}){
     var currentdate = new Date();
     var datetime = currentdate.getDay() + "/" + currentdate.getMonth()
         + "/" + currentdate.getFullYear();
-    
- const getInvoiceNoFun =async ()=>{
+
     const headers = {
             'Authorization': `Bearer ${token}`,
             'My-Custom-Header': 'foobar'
     };
+    
+ const getInvoiceNoFun =async ()=>{
+ 
     
       await  axios.get(`${url1}/invoice/all`,{headers}).then(({data})=>{
         setInvoice(data.length)
@@ -89,15 +105,39 @@ function AddNewInvoice({id,data23,viewInvoice,setViewInvoice,getDetails}){
         getInvoiceNoFun()
     },[])
 
+const validation = username && centerCode &&ser1 
+&& ser6 && ser2 && ser3
+&& ser5 && total && finalTotal && startDate && endDate && paymode
+
+useEffect(()=>{
+if(validation){
+    setErrorMessage("") 
+}
+},[validation])
+
+
+const RenewedClient = async () =>{
+if(RenewedObj){
+  
+  const data1 = {"renewed": true}        
+
+ const {data} = await axios.post(`${url1}/memberForm/update/${RenewedObj?._id}`,data1,{headers})       
+console.log(data)
+}
+
+
+
+}
+
+
 
 const saveInvoice = () => {
-if(!(username && centerCode &&ser1 
-    && ser6 && ser2 && ser3
-    && ser5 && total && finalTotal && startDate && endDate && paymode
-)) {
+if(!validation) {
     setErrorMessage("Please Fill All Detail") 
 return 
 }
+
+
 
     let data = {
         username: username,
@@ -123,8 +163,14 @@ return
         .then((resp) => {
             console.log(resp.data,"ekfmkemfm new invoice no")
             alert('successfully Save')
+             RenewedClient() 
             setViewInvoice(false)
             getDetails()
+            let data1 = { invoiceId: resp.data._id, invoiceNum: resp.data.InvoiceNo, startDate,duration:ser2,
+                endDate,plan: true,
+             }
+             axios.post(`${url1}/memberForm/update/${id}`, data1, { headers },
+             )
         })
         .catch((error) => {
             console.error(error)

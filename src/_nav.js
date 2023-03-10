@@ -363,15 +363,16 @@ const _nav = [
             name: 'Services Wise Revenue',
             to: '/finance/service-revenue',
           },
-          {
-            component: CNavItem,
-            name: 'Renewls Revenue',
-            to: '/finance/renew-revenue',
-          },
+         
           {
             component: CNavItem,
             name: 'New Cilent Revenue',
             to: '/finance/newc-revenue',
+          },
+          {
+            component: CNavItem,
+            name: 'Renewals Revenue',
+            to: '/finance/renew-revenue',
           },
           {
             component: CNavItem,
