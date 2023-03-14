@@ -125,14 +125,7 @@ function clearFilter(){
                     </CCardHeader>
                     <CCardBody>
                     <CRow className=' mb-2' >
-                             <CCol lg={4} className='mb-2'>
-                             <CFormSelect value={month} onChange={(e)=>setMonth(e.target.value)}>
-                                <option>Select  Month </option>
-                                 {monthNaame.map((el,i)=>{
-                                    return <option key={i}> {el}</option>
-                                })}                                                                                 
-                           </CFormSelect>
-                            </CCol >
+                             
                             <CCol lg={4} className='mb-2'>
                             <CFormSelect value={selectedYear} onChange={(e)=>setSelectedYear(e.target.value)}>
                                 <option>Select Year</option>
@@ -142,6 +135,14 @@ function clearFilter(){
 
                             </CFormSelect>
                             </CCol>
+                            <CCol lg={4} className='mb-2'>
+                             <CFormSelect value={month} onChange={(e)=>setMonth(e.target.value)}>
+                                <option>Select  Month </option>
+                                 {monthNaame.map((el,i)=>{
+                                    return <option key={i}> {el}</option>
+                                })}                                                                                 
+                           </CFormSelect>
+                            </CCol >
                             
                         
                         </CRow>

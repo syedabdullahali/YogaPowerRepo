@@ -125,7 +125,7 @@ const CashReport = () => {
                                     <CTableHeaderCell scope="col">
                                         Cash Deposite to Bank
                                     </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Cash Handling By</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Cash Collected By</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Cash Hand Over to</CTableHeaderCell>
                                     {/* <CTableHeaderCell scope="col">Renewls Revenue</CTableHeaderCell> */}
                                     {/* <CTableHeaderCell scope="col">

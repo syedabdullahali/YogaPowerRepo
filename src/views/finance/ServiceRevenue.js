@@ -88,6 +88,9 @@ const [serviceData,setserviceData] = useState([])
            const val =  crr.some((el2)=>   el2.Service  === el.Service && el2.Month  === el.Month)
            if(!val){crr.push(el)}} return crr
            },[])
+           setYears([...new Set(classiFyAcordingToMonth.map((el)=>el.Year))])
+
+// console.log()
 
 
  const serviceRevenueData =  classiFyAcordingToMonth.map((el)=>{
@@ -103,6 +106,7 @@ const [serviceData,setserviceData] = useState([])
             }
          return   data.reduce((crr,el2)=>{
             if(el2.ServiceName === el.Service && new Date(el2.createdAt).getMonth()  === el.Month){
+
                 num++
                crr.noOfClient  = num 
                amount +=el2.amount
@@ -112,6 +116,9 @@ const [serviceData,setserviceData] = useState([])
             return crr
            },{...obj})
         }) 
+
+
+
 setServiceRevenueData(serviceRevenueData)
               
 
@@ -155,15 +162,7 @@ setServiceRevenueData(serviceRevenueData)
                 <CCardBody>
 
                 <CRow className=' mb-2' >
-                             <CCol lg={4} className='mb-2'>
-                             <CFormSelect value={month} onChange={(e)=>setMonth(e.target.value)}>
-                                <option>Select Your Month </option>
-                                 {monthName.map((el,i)=>{
-                                    return <option key={i}>{el}</option>
-                                })}                                                                                 
-                           </CFormSelect>
-                            </CCol >
-                            <CCol lg={4} className='mb-2'>
+                          <CCol lg={4} className='mb-2'>
                             <CFormSelect value={selectedYear} onChange={(e)=>setSelectedYear(e.target.value)}>
                                 <option>slecte Year</option>
                                 {years.map((el,i)=>{
@@ -172,6 +171,15 @@ setServiceRevenueData(serviceRevenueData)
 
                             </CFormSelect>
                             </CCol>
+                             <CCol lg={4} className='mb-2'>
+                             <CFormSelect value={month} onChange={(e)=>setMonth(e.target.value)}>
+                                <option>Select Your Month </option>
+                                 {monthName.map((el,i)=>{
+                                    return <option key={i}>{el}</option>
+                                })}                                                                                 
+                           </CFormSelect>
+                            </CCol >
+                          
                             <CCol lg={4}  className='mb-2'>
                             <CFormSelect  id="inputGroupSelect01"
                                      onChange={(e)=>setServiceName(e.target.value)}

@@ -66,7 +66,6 @@ const LeadReport= props => {
         
         const serviceAcordingToMonth   = ([...enquiryData.filter((list) => list.username === username)?.reverse()?.map((el)=>{
                         return {
-                           Service:el?.ServiceName,
                            Enquiry:el?.enquirytype,
                            Month:new Date(el.createdAt).getMonth(),
                            Year:new Date(el.createdAt).getFullYear()
@@ -113,7 +112,6 @@ const LeadReport= props => {
                     && new Date(el.createdAt).getMonth()  === element.month){
                 num++
                 element.noOfClient = num
-
                 invoiceData.forEach((el2)=>{
                     if( el._id===el2.MemberId){
                         element.amount+=el2.amount  
@@ -162,14 +160,7 @@ const LeadReport= props => {
                     </CCardHeader>
                     <CCardBody>
                     <CRow className=' mb-2' >
-                             <CCol lg={4} className='mb-2'>
-                             <CFormSelect value={month} onChange={(e)=>setMonth(e.target.value)}>
-                                <option>Select Your Month </option>
-                                 {monthName.map((el)=>{
-                                    return <option>{el}</option>
-                                })}                                                                                 
-                           </CFormSelect>
-                            </CCol >
+                             
                             <CCol lg={4} className='mb-2'>
                             <CFormSelect value={selectedYear} onChange={(e)=>setSelectedYear(e.target.value)}>
                                 <option>slecte Year</option>
@@ -178,6 +169,14 @@ const LeadReport= props => {
                                 })}  
                             </CFormSelect>
                             </CCol>
+                            <CCol lg={4} className='mb-2'>
+                             <CFormSelect value={month} onChange={(e)=>setMonth(e.target.value)}>
+                                <option>Select Your Month </option>
+                                 {monthName.map((el)=>{
+                                    return <option>{el}</option>
+                                })}                                                                                 
+                           </CFormSelect>
+                            </CCol >
                             <CCol lg={4}  className='mb-2'>
                             <CFormSelect  id="inputGroupSelect01"
                             value={serviceName}
