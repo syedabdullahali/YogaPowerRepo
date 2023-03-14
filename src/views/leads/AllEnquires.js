@@ -755,7 +755,7 @@ const AllEnquires = () => {
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">All Enquires <span className='float-end'>Total Member : 
+                        <strong className="mt-2">All Enquires <span className='float-end'>Total Enquires: 
                         {result1.filter((list) => list.username === username).length}</span></strong>
                     </CCardHeader>
                     <CCardBody>

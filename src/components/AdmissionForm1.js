@@ -53,7 +53,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
 
     const adId = JSON.parse(localStorage.getItem('adId'))
     console.log(adId);
-    console.log(ids,"ids");
+    console.log(ids._id,"ids");
     const componentRef = useRef()
 
     const handlePrint = useReactToPrint({
@@ -123,11 +123,7 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
     const [suggestion, setsuggestion] = useState('')
     const [comments, setcomments] = useState('')
     const [subService,setService] = useState([])
-
     const [wantToGiveMony,setWantToGiveMony] = useState(false)
-
-
-
 
 
     var currentdate = new Date();
@@ -300,19 +296,21 @@ const AdmissionForm1 = ({ add, clickfun, ids, deleteId }) => {
             username: username,
             image: imageUrl,
             Fullname, CountryCode, ContactNumber,
-             WhatsappNumber, Email, Gender, DateofBirth, 
-             Anniversarydate, Address, Area, city, pincode, state, BloodGroup,
+            WhatsappNumber, Email, Gender, DateofBirth, 
+            Anniversarydate, Address, Area, city, pincode, state, BloodGroup,
             FacebookID, sms, mail, pushnotification,
             Name, CountryCode1, ContactNumber1, Relationship,
             serviceName, serviceVaration, Customertype, EnquiryType,
-             AssignStaff, MemberManager, Batch, GeneralTrainer, AttendanceID,
-              CenterID, LockerKeyNo, PAN,
+            AssignStaff, MemberManager, Batch, GeneralTrainer, AttendanceID,
+            CenterID, LockerKeyNo, PAN,
             BackPain, BoneFracture, CarpalTunnel, AsthmaCOPD, DigestiveDisorder,
-             Diabetes, Epilepsy, FootPain, Glaucoma, HeartDiseaseCondition, HerniaDiastasisRecti,
+            Diabetes, Epilepsy, FootPain, Glaucoma, HeartDiseaseCondition, HerniaDiastasisRecti,
             HighBloodPressure, Other: OtherText, Weight, Height, fitnessLevel,
-             fitnessGoal, idealWeight, suggestion, comments, status: 'active',
-             ClientId:`${centerCode}MEM${10+mem.length}`
+            fitnessGoal, idealWeight, suggestion, comments, status: 'active',
+            ClientId:`${centerCode}MEM${10+mem.length}`,
+            // EnquiryId:ids._id
         }
+// console.log(EnquiryId,"Id of in Cl")
 
 
 const headers = {
@@ -450,6 +448,8 @@ setServiceDays(el.Days)
             finalTotal, paidAmount, pendingAmount, 
             paymode, status: 'active',typesofdiscount:dis1,
             clientId:`${centerCode}MEM${10+mem.length}`
+         // EnquiryId:ids._id
+
         }
 
         const headers = {

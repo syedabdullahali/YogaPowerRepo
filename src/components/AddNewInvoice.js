@@ -151,7 +151,8 @@ return
         amount: total, tax, discount, totalAmount:
         finalTotal, paidAmount, pendingAmount, 
         paymode, status: 'active',typesofdiscount:dis1,
-        clientId:`${data23?.ClientId}`
+        clientId:`${data23?.ClientId}`,
+        upgrade:(RenewedObj?true:false)    
     }
 
     const headers = {

@@ -10,6 +10,8 @@ import {
   CDropdownMenu,
   CDropdownToggle,
   CNavLink,
+  CCol,
+  CRow
 } from '@coreui/react'
 import {
   cilBell,
@@ -27,7 +29,8 @@ import {
   cilFingerprint,
   cilLinkAlt,
   cilEnvelopeClosed,
-  cilBasket
+  cilBasket,
+  
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 
@@ -45,27 +48,33 @@ const AppHeaderDropdown = () => {
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
         <CAvatar src={avatar8} size="md" />
-      </CDropdownToggle>
-      <CDropdownMenu className="pt-0" placement="bottom-end">
-      
-       
+       </CDropdownToggle>
+      <CDropdownMenu className="pt-0"   placement="bottom-end" style={{inset:'50px 0px auto auto',width:'180px'}} >
+             
+         <CCol className='p-4 text-center'>
+               <h6 className='mb-3' >Admin Yog Power</h6>    
+                  <CAvatar src={avatar8} size="md"  />
+               </CCol> 
+                <CDropdownItem href="#" className='text-center'>
+               <CIcon icon={cilSettings} className="me-2 " />
+                 Settings
+               </CDropdownItem>
+
         
-       
-        <CDropdownItem href="#">
-          <CIcon icon={cilUser} className="me-2" />
+
+         <CDropdownItem href="#" className='text-center'>
+          <CIcon icon={cilSettings} className="me-2" />
           Profile
         </CDropdownItem>
-        <CDropdownItem href="#">
-          <CIcon icon={cilSettings} className="me-2" />
-          Settings
-        </CDropdownItem>
        
         
-        <CDropdownDivider />
-        <CDropdownItem href="#" onClick={Logout} >
+        <CDropdownDivider  />
+        <CDropdownItem href="#" onClick={Logout} className='text-center'>
           <CIcon icon={cilLockLocked} className="me-2" />
           Logout
-        </CDropdownItem>
+        </CDropdownItem> *
+
+
       </CDropdownMenu>
     </CDropdown>
   )

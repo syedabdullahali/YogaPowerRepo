@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import {
     CButton,
     CButtonGroup,
@@ -20,8 +20,139 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop, cilPlus } from '@coreui/icons'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+const url = 'https://yog-seven.vercel.app'
+
+
+let user = JSON.parse(localStorage.getItem('user-info'))
+const token = user.token;
+const username = user.user.username;
+const centerCode = user.user.centerCode;
+
+const headers = {
+    'Authorization': `Bearer ${token}`,
+    'My-Custom-Header': 'foobar'
+   };
+
+   var monthName= ["January","February","March","April","May","June","July",
+"August","September","October","November","December"];
+
 
 const LeadReport= props => {
+
+
+    const [leadReportData,setLeadReportData] = useState([])
+    const url1 = useSelector((el)=>el.domainOfApi) 
+    const [years,setYears]= useState([])
+    const [selectedYear,setSelectedYear] = useState('')
+    const [month,setMonth] = useState('')
+    const [serviceName,setServiceName] = useState('')
+    const [serviceData,setserviceData] = useState([])
+
+
+    const getAllData = async  ()=>{
+        try{
+        const response1 = axios.get(`${url1}/invoice/all`,{headers})
+        const response2 = axios.get(`${url1}/memberForm/all`,{headers})
+        const response3 = axios.get(`${url}/enquiryForm/all`,{headers})
+              
+        const allApiData = await Promise.all([response1,response2,response3])
+        
+        const invoiceData = allApiData[0].data
+        const clientData = allApiData[1].data
+        const enquiryData = allApiData[2].data 
+
+        
+        const serviceAcordingToMonth   = ([...enquiryData.filter((list) => list.username === username)?.reverse()?.map((el)=>{
+                        return {
+                           Service:el?.ServiceName,
+                           Enquiry:el?.enquirytype,
+                           Month:new Date(el.createdAt).getMonth(),
+                           Year:new Date(el.createdAt).getFullYear()
+                        }}       
+        )].sort((a,b)=>b.Month-a.Month))         
+        
+        
+        const classiFyAcordingToMonth = [...serviceAcordingToMonth].reduce((crr,el,i)=>{
+            if(!crr.length){crr.push(el)}
+           else if(crr?.length) {
+           const val =  crr.some((el2)=>   el2.Enquiry  === el.Enquiry && el2.Month  === el.Month)
+           if(!val){crr.push(el)}} return crr
+        },[])
+        
+         const serviceRevenueData =  classiFyAcordingToMonth.map((el)=>{
+            let num =0;
+            const obj = {
+               month:el.Month,
+               typeOfEnquiry:el.Enquiry||"Other",
+               noOfClient:0,
+               noOfLeads:0,
+               amount:0 ,
+               date:el.date,
+               year:el.Year,
+               investmentAmount:0,
+            }
+
+
+         return   enquiryData.reduce((crr,el2)=>{
+            if(el2.enquirytype === el.Enquiry && new Date(el2.createdAt).getMonth()  === el.Month){
+                num++
+               crr.noOfLeads  = num 
+               return crr
+            }             
+            return crr
+           },{...obj})
+        }) 
+
+        console.log(serviceRevenueData)
+            serviceRevenueData.forEach(element => {
+                    let num =0
+                clientData.forEach((el)=>{
+                if(element.typeOfEnquiry===el.EnquiryType
+                    && new Date(el.createdAt).getMonth()  === element.month){
+                num++
+                element.noOfClient = num
+
+                invoiceData.forEach((el2)=>{
+                    if( el._id===el2.MemberId){
+                        element.amount+=el2.amount  
+                         if(el2.Receipts.length){
+                            el2?.Receipts.forEach((el3)=>{
+                                element.amount += (+el3.PaidAmount)
+                            })
+                         }
+                    }
+                })
+
+                }
+                })
+            })
+          setLeadReportData(serviceRevenueData)   
+          setserviceData([...new Set(serviceRevenueData.map((el)=>el.typeOfEnquiry))])
+          setYears([...new Set(serviceRevenueData.map((el)=>el.year))])
+
+        }catch(error){
+         console.error(error)
+        }
+        
+        }
+
+    useEffect(()=>{
+      getAllData()
+
+    },[])
+    console.log(leadReportData)
+
+
+    function clearFilter(){
+        setServiceName('')
+        setSelectedYear('')
+        setMonth('')
+    }
+    
+
+
   return (
     <CRow>
         <CCol lg={12} sm={12}>
@@ -30,141 +161,74 @@ const LeadReport= props => {
                         <strong className="mt-2">Lead Report</strong>
                     </CCardHeader>
                     <CCardBody>
-                        <CRow className='d-flex justify-content-center mb-2'>
-                            <CCol lg={3} sm={6} className='mb-2'>
-                                <CInputGroup
-                                    className='mb-2'
-                                >
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
+                    <CRow className=' mb-2' >
+                             <CCol lg={4} className='mb-2'>
+                             <CFormSelect value={month} onChange={(e)=>setMonth(e.target.value)}>
+                                <option>Select Your Month </option>
+                                 {monthName.map((el)=>{
+                                    return <option>{el}</option>
+                                })}                                                                                 
+                           </CFormSelect>
+                            </CCol >
+                            <CCol lg={4} className='mb-2'>
+                            <CFormSelect value={selectedYear} onChange={(e)=>setSelectedYear(e.target.value)}>
+                                <option>slecte Year</option>
+                                {years.map((el)=>{
+                                    return <option>{el}</option>
+                                })}  
+
+                            </CFormSelect>
+                            </CCol>
+                            <CCol lg={4}  className='mb-2'>
+                            <CFormSelect  id="inputGroupSelect01"
+                            value={serviceName}
+                                     onChange={(e)=>setServiceName(e.target.value)}
                                     >
-                                        From
-                                    </CInputGroupText>
-                                    <CFormInput
-                                        type='date'
-                                        placeholder="Search"
-                                        aria-label="Recipient's username"
-                                        aria-describedby="button-addon2"
-                                    />
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} sm={6} className='mb-2'>
-                                <CInputGroup className='mb-2'>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        To
-                                    </CInputGroupText>
-                                    <CFormInput
-                                        type='date'
-                                        placeholder="Search"
-                                        aria-label="Recipient's username"
-                                        aria-describedby="button-addon2"
-                                    />
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={5} className='mb-2'>
-                                <CButton type="button" color="primary">
-                                    Search
-                                </CButton>
-                            </CCol>
-                            <CCol></CCol>
+                                    <option>Select Source</option>
+                                        {serviceData.map((item, index) => (
+                                                    <option key={index}>{item}</option>                                                  
+                                                )                                            
+                                            )}
+                                    </CFormSelect>
+                        </CCol>
+                        
                         </CRow>
-                        <CRow >
-                            <CCol lg={2} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        All
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>Select</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>Service Receipt</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>Select Service</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={4} sm={6} className='mb-2' >
-                                <CButton color="primary" className='float-end '>
-                                    <CIcon icon={cilPlus} />
-                                    {' '}New Invoice
-                                </CButton>
+                        <CRow>
+                            <CCol className='px-3 mb-3'>
+                            <CButton onClick={(e)=>clearFilter(e.target.value)}>Clear Filter</CButton>
                             </CCol>
                         </CRow>
+                       
                         <CTable bordered style={{ borderColor: "#106103" }} responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
                             <CTableRow>
+
                                     <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
+                                    <CTableHeaderCell scope="col">Year</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Month</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Sources</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">
-                                        Investment Amount
-                                    </CTableHeaderCell>
                                     <CTableHeaderCell scope="col">No of Leads</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Conversion</CTableHeaderCell>
                                     <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
-                                    
+                                    <CTableHeaderCell scope="col">
+                                        Investment Amount
+                                    </CTableHeaderCell>                                    
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
-                                <CTableRow>
-                                <CTableDataCell>1</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    {/* <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell> */}
+                               {leadReportData.map((el,i)=>{
+                               return <CTableRow key={i}>
+                                <CTableDataCell>{i+1}</CTableDataCell>
+                                    <CTableDataCell>{el.year}</CTableDataCell>
+                                    <CTableDataCell>{monthName[el.month]}</CTableDataCell>
+                                    <CTableDataCell>{el.typeOfEnquiry}</CTableDataCell>
+                                    <CTableDataCell>{el.noOfLeads}</CTableDataCell>
+                                    <CTableDataCell>{el.noOfClient}</CTableDataCell>     
+                                    <CTableDataCell>Rs {el.amount}</CTableDataCell>   
+                                    <CTableDataCell>Rs {el.investmentAmount}</CTableDataCell>                                                                                                         
                                 </CTableRow>
-                                <CTableRow>
-                                <CTableDataCell>2</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    {/* <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell> */}
-                                </CTableRow>
-                                <CTableRow>
-                                <CTableDataCell>3</CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    <CTableDataCell></CTableDataCell>
-                                    {/* <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell> */}
-                                </CTableRow>
+                                })}
+                               
                             </CTableBody>
                         </CTable>
                     </CCardBody>

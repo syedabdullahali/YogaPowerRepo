@@ -179,6 +179,7 @@ function ShowUserInvoceHandler (id,item){
     setAllInvoiceOfUser(uniqUserInvoiceAllData)    
     setClient(item)
     setInvoceModal(true)      
+    
 }
 
 

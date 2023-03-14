@@ -1,9 +1,7 @@
 import React, { useRef} from 'react'
 import {
-    CButton,
-   
+    CButton,   
     CCol,
-  
     CModal,
     CModalBody,
     CModalFooter,

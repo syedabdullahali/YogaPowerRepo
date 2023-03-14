@@ -10,11 +10,7 @@ import {
 
 
 
-
 function FinanceRights(){
-
-
-
 
 
     return <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={true} >
