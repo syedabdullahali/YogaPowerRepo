@@ -25,13 +25,8 @@ import axios from 'axios'
 import { useSelector } from "react-redux";
 
 let user = JSON.parse(localStorage.getItem('user-info'))
-// console.log(user);
 const token = user.token;
 const username = user.user.username;
-
-
-
-
 
 var monthName= ["January","February","March","April","May","June","July",
 "August","September","October","November","December"];
@@ -58,7 +53,6 @@ const [serviceData,setserviceData] = useState([])
         })
             .then((res) => {
                 setResult(res.data)
-                console.log(res.data)
             })
             .catch((error) => {
                 console.error(error)
@@ -95,11 +89,10 @@ const [serviceData,setserviceData] = useState([])
            if(!val){crr.push(el)}} return crr
            },[])
 
-console.log(classiFyAcordingToMonth)
- console.log(setYears([...new Set(classiFyAcordingToMonth.map((el)=>el.Year))]))          
 
  const serviceRevenueData =  classiFyAcordingToMonth.map((el)=>{
             let num =0;
+            let amount =0
             const obj = {
                month:el.Month,
                typeOfService:el.Service,
@@ -112,7 +105,8 @@ console.log(classiFyAcordingToMonth)
             if(el2.ServiceName === el.Service && new Date(el2.createdAt).getMonth()  === el.Month){
                 num++
                crr.noOfClient  = num 
-               crr.amount +=el2.amount
+               amount +=el2.amount
+               crr.amount = amount
                return crr
             }             
             return crr
@@ -132,7 +126,6 @@ setServiceRevenueData(serviceRevenueData)
         })
             .then((res) => {
                 setserviceData(res.data)
-                console.log(res.data)
             })
             .catch((error) => {
                 console.error(error)
@@ -165,16 +158,16 @@ setServiceRevenueData(serviceRevenueData)
                              <CCol lg={4} className='mb-2'>
                              <CFormSelect value={month} onChange={(e)=>setMonth(e.target.value)}>
                                 <option>Select Your Month </option>
-                                 {monthName.map((el)=>{
-                                    return <option>{el}</option>
+                                 {monthName.map((el,i)=>{
+                                    return <option key={i}>{el}</option>
                                 })}                                                                                 
                            </CFormSelect>
                             </CCol >
                             <CCol lg={4} className='mb-2'>
                             <CFormSelect value={selectedYear} onChange={(e)=>setSelectedYear(e.target.value)}>
                                 <option>slecte Year</option>
-                                {years.map((el)=>{
-                                    return <option>{el}</option>
+                                {years.map((el,i)=>{
+                                    return <option key={i}>{el}</option>
                                 })}  
 
                             </CFormSelect>
@@ -220,14 +213,14 @@ setServiceRevenueData(serviceRevenueData)
                             {serviceRevinueData.filter((el)=>{
                 if(serviceName){
                     return serviceName=== el.typeOfService
-                }else if(month){
+                }if(month){
                     return month===monthName[el.month]         
-                }else if(selectedYear){
+                } if(selectedYear){
                     return selectedYear ==el.year                
                 }
                 return el
               }).map((el,i)=>
-                            <CTableRow>
+                            <CTableRow key={i}>
                               <CTableDataCell>{i+1}</CTableDataCell>
                                 <CTableDataCell>{el.year}</CTableDataCell>
                                 <CTableDataCell> {monthName[el.month]}</CTableDataCell>

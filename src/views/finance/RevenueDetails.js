@@ -79,7 +79,6 @@ let revenueDetails = {
 
 
 const total = AllYear.map((el)=>{
-    // console.log(el)
 
    return  {...el,...data.reverse().reduce((crr,el2)=>{
           if(new Date(el2.createdAt).getFullYear()  === el.Year && new Date(el2.createdAt).getMonth()  === el.Month){
@@ -100,12 +99,6 @@ return crr
 
 setAllYearToInfo(total)
 
-
-
-
-        //  ;[...getAllYearToCompare,2022,2021].map(())
-                
-    //   setAllYearToComapre([...getAllYearToCompare,2022,2021])   
     } 
     
     useEffect(()=>{
@@ -121,7 +114,6 @@ function clearFilter(){
     setMonth('')
 }
 
-console.log(selectedYear)
 
 
     return (
@@ -136,16 +128,16 @@ console.log(selectedYear)
                              <CCol lg={4} className='mb-2'>
                              <CFormSelect value={month} onChange={(e)=>setMonth(e.target.value)}>
                                 <option>Select  Month </option>
-                                 {monthNaame.map((el)=>{
-                                    return <option>{el}</option>
+                                 {monthNaame.map((el,i)=>{
+                                    return <option key={i}> {el}</option>
                                 })}                                                                                 
                            </CFormSelect>
                             </CCol >
                             <CCol lg={4} className='mb-2'>
                             <CFormSelect value={selectedYear} onChange={(e)=>setSelectedYear(e.target.value)}>
                                 <option>Select Year</option>
-                                {years.map((el)=>{
-                                    return <option>{el}</option>
+                                {years.map((el,i)=>{
+                                    return <option key={i}>{el}</option>
                                 })}  
 
                             </CFormSelect>
@@ -174,15 +166,13 @@ console.log(selectedYear)
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
-                                {AllYearInfo.filter((el)=>{
-                                   if(month){
-                                     return month===monthNaame[el.month]                
-                                   }else if(selectedYear){
-                                    return selectedYear == el.Year                
-                                   } 
-                                   return el                     
+                                {AllYearInfo.filter((el)=>{    
+                                   
+                                   return monthNaame[el.Month].includes(month) &&  
+                                   (el.Year+"").includes(selectedYear)
+                                   
                                 }).map((el,i)=>
-                                <CTableRow>
+                                <CTableRow key={i}>
                                 <CTableDataCell>{i+1}</CTableDataCell>
                                     <CTableDataCell>{el.Year}</CTableDataCell>
                                     <CTableDataCell>{monthNaame[el.Month]}</CTableDataCell>

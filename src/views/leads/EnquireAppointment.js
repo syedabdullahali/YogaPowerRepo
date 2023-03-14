@@ -37,6 +37,7 @@ import moment from 'moment/moment'
 import AdmissionForm1 from 'src/components/AdmissionForm1'
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
+import { useSelector } from 'react-redux'
 
 const EnquireAppointment = () => {
 
@@ -115,6 +116,8 @@ const EnquireAppointment = () => {
     const [appointmentTime, setappointmentTime] = useState("");
     const [appointmentfor, setappointmentfor] = useState("");
     const [trialDate, setTrialDate] = useState("");
+    const url1 = useSelector((el) => el.domainOfApi)
+
 
 
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -180,7 +183,7 @@ const EnquireAppointment = () => {
         console.log(edit)
         setEdit(null)
         if (id != null) {
-            axios.get(`${url}/enquiryForm/${id}`, {
+            axios.get(`${url1}/enquiryForm/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -206,7 +209,7 @@ const EnquireAppointment = () => {
             EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, Counseller: Counseller, trialDate: trialDate, status: "all_enquiry",
         }
 
-        fetch(`${url}/enquiryForm/update/${edit}`, {
+        fetch(`${url1}/enquiryForm/update/${edit}`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -278,7 +281,7 @@ const EnquireAppointment = () => {
                 status: 'CallReport'
             }
 
-            fetch(`${url}/enquiryForm/update/${followForm}`, {
+            fetch(`${url1}/enquiryForm/update/${followForm}`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -362,7 +365,7 @@ const EnquireAppointment = () => {
 
                 const data1 = { Counseller, CallStatus: CallStatus1 }
 
-                fetch(`${url}/enquiryForm/update/${followForm}`, {
+                fetch(`${url1}/enquiryForm/update/${followForm}`, {
                     method: "POST",
                     headers: {
                         "Authorization": `Bearer ${token}`,
@@ -393,7 +396,7 @@ const EnquireAppointment = () => {
 
                 const data1 = { Counseller, CallStatus: CallStatus1 }
 
-                fetch(`${url}/enquiryForm/update/${followForm}`, {
+                fetch(`${url1}/enquiryForm/update/${followForm}`, {
                     method: "POST",
                     headers: {
                         "Authorization": `Bearer ${token}`,
@@ -455,7 +458,7 @@ const EnquireAppointment = () => {
         })
         const data1 = { Counseller }
 
-        fetch(`${url}/enquiryForm/update/${followForm}`, {
+        fetch(`${url1}/enquiryForm/update/${followForm}`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -471,7 +474,7 @@ const EnquireAppointment = () => {
         })
     }
     function getEnquiry() {
-        axios.get(`${url}/enquiryForm/all`, {
+        axios.get(`${url1}/enquiryForm/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -504,7 +507,7 @@ const EnquireAppointment = () => {
             setResult1(og.filter((list) => list[filterBy] === v))
     }
     function getUpdate(id) {
-        axios.get(`${url}/enquiryForm/${id}`, {
+        axios.get(`${url1}/enquiryForm/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -543,7 +546,7 @@ const EnquireAppointment = () => {
             })
     }
     function getProspect(id) {
-        axios.get(`${url}/enquiryForm/${id}`, {
+        axios.get(`${url1}/enquiryForm/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -563,7 +566,7 @@ const EnquireAppointment = () => {
     }
 
     function getCallReport(id) {
-        axios.get(`${url}/enquiryForm/${id}`, {
+        axios.get(`${url1}/enquiryForm/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -586,7 +589,7 @@ const EnquireAppointment = () => {
     function deleteEnquiry(id) {
 
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/enquiryForm/delete/${id}`, {
+            fetch(`${url1}/enquiryForm/delete/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Authorization": `Bearer ${token}`,

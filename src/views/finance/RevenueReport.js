@@ -38,6 +38,9 @@ const headers = {
 const RevenueReport= () => {
     const url1 = useSelector((el)=>el.domainOfApi) 
     const [annualRevenue,setAnnualRevenue] = useState([])
+    const [selectedYear,setSelectedYear] = useState('')
+    const [years,setYears] = useState([])
+
 
     const getInvoiceDataToCollectAnualRevenue = async  ()=>{
         try{
@@ -101,8 +104,7 @@ console.log(AnnualRevenue)
 
 setAnnualRevenue(AnnualRevenue)
 
-
-
+setYears(AnnualRevenue.map((el)=>el.year))
 }catch(error){
     console.error(error)
  }
@@ -127,7 +129,14 @@ console.log(annualRevenue)
                     </CCardHeader>
                     <CCardBody>                        
                         <CRow >
-                            
+                        <CCol lg={4} className='mb-2'>
+                            <CFormSelect value={selectedYear} onChange={(e)=>setSelectedYear(e.target.value)}>
+                                <option>slecte Year</option>
+                                {years.map((el)=>{
+                                    return <option>{el}</option>
+                                })}  
+                            </CFormSelect>
+                            </CCol>                           
                         </CRow>
                         <CTable bordered style={{ borderColor: "#106103" }} responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }}>
@@ -160,7 +169,10 @@ console.log(annualRevenue)
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
-                                {annualRevenue.map((el,i)=>{
+                                {annualRevenue.filter((el)=>{                                       
+                                       return (el.year+"").includes(selectedYear)
+                                                               
+                                       }).map((el,i)=>{
                                     console.log(el)
                               return   <CTableRow key={i}>
                                    <CTableDataCell>{i+1}</CTableDataCell>

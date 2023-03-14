@@ -37,8 +37,10 @@ import moment from 'moment/moment'
 import AdmissionForm1 from 'src/components/AdmissionForm1'
 const url = 'https://yog-seven.vercel.app'
 const url2 = 'https://yog-seven.vercel.app'
+import { useSelector } from 'react-redux'
 
 const TrialEnquires = () => {
+    const url1 = useSelector((el) => el.domainOfApi)
     var currentdate = new Date();
     var day = currentdate.getDate() + '-' + (currentdate.getMonth() + 1) + '-' + currentdate.getFullYear();
     var month = currentdate.getMonth() + '-' + currentdate.getFullYear();
@@ -64,10 +66,6 @@ const TrialEnquires = () => {
     const [Search9, setSearch9] = useState('')
     const [Search10, setSearch10] = useState('')
 
-    const [filter1, setfilter1] = useState("Select");
-    const [filter2, setfilter2] = useState("Select");
-    const [filter3, setfilter3] = useState("Select");
-    const [filter4, setfilter4] = useState("Select");
 
     const [Name, setName] = useState("");
     const [Contact, setContact] = useState("");
@@ -178,7 +176,7 @@ const TrialEnquires = () => {
         console.log(edit)
         setEdit(null)
         if (id != null) {
-            axios.get(`${url}/enquiryForm/${id}`, {
+            axios.get(`${url1}/enquiryForm/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -204,7 +202,7 @@ const TrialEnquires = () => {
             EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, Counseller: counseller, trialDate: trialDate, status: "all_enquiry",
         }
 
-        fetch(`${url}/enquiryForm/update/${edit}`, {
+        fetch(`${url1}/enquiryForm/update/${edit}`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -237,7 +235,7 @@ const TrialEnquires = () => {
                 status: 'CallReport'
             }
 
-            fetch(`${url}/enquiryForm/update/${followForm}`, {
+            fetch(`${url1}/enquiryForm/update/${followForm}`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -276,7 +274,7 @@ const TrialEnquires = () => {
                 status: 'CallReport'
             }
 
-            fetch(`${url}/enquiryForm/update/${followForm}`, {
+            fetch(`${url1}/enquiryForm/update/${followForm}`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -360,7 +358,7 @@ const TrialEnquires = () => {
 
                 const data1 = { Counseller, CallStatus: CallStatus1 }
 
-                fetch(`${url}/enquiryForm/update/${followForm}`, {
+                fetch(`${url1}/enquiryForm/update/${followForm}`, {
                     method: "POST",
                     headers: {
                         "Authorization": `Bearer ${token}`,
@@ -391,7 +389,7 @@ const TrialEnquires = () => {
 
                 const data1 = { Counseller, CallStatus: CallStatus1 }
 
-                fetch(`${url}/enquiryForm/update/${followForm}`, {
+                fetch(`${url1}/enquiryForm/update/${followForm}`, {
                     method: "POST",
                     headers: {
                         "Authorization": `Bearer ${token}`,
@@ -453,7 +451,7 @@ const TrialEnquires = () => {
         })
         const data1 = { Counseller }
 
-        fetch(`${url}/enquiryForm/update/${followForm}`, {
+        fetch(`${url1}/enquiryForm/update/${followForm}`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -470,7 +468,7 @@ const TrialEnquires = () => {
     }
     const [ogList, setOgList] = useState([])
     function getEnquiry() {
-        axios.get(`${url}/enquiryForm/all`, {
+        axios.get(`${url1}/enquiryForm/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -504,7 +502,7 @@ const TrialEnquires = () => {
             setResult1(og.filter((list) => list[filterBy] === v))
     }
     function getUpdate(id) {
-        axios.get(`${url}/enquiryForm/${id}`, {
+        axios.get(`${url1}/enquiryForm/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -543,7 +541,7 @@ const TrialEnquires = () => {
             })
     }
     function getProspect(id) {
-        axios.get(`${url}/enquiryForm/${id}`, {
+        axios.get(`${url1}/enquiryForm/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -563,7 +561,7 @@ const TrialEnquires = () => {
     }
 
     function getCallReport(id) {
-        axios.get(`${url}/enquiryForm/${id}`, {
+        axios.get(`${url1}/enquiryForm/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -586,7 +584,7 @@ const TrialEnquires = () => {
     function deleteEnquiry(id) {
 
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/enquiryForm/delete/${id}`, {
+            fetch(`${url1}/enquiryForm/delete/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Authorization": `Bearer ${token}`,

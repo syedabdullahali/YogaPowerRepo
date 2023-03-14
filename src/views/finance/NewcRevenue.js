@@ -57,7 +57,7 @@ const getAllData = async  ()=>{
 try{
 const response1 = axios.get(`${url1}/invoice/all`,{headers})
 const response2 = axios.get(`${url1}/memberForm/all`,{headers})
-const response3 = axios.get(`${url}/enquiryForm/all`,{headers})
+const response3 = axios.get(`${url1}/enquiryForm/all`,{headers})
       
 const allApiData = await Promise.all([response1,response2,response3])
 
@@ -131,7 +131,6 @@ console.log(serviceRevenueData.filter((el,i,arr)=>arr.indexOf(el.year)===i))
     serviceRevenueData.forEach(element => {    
         let amount =0
     FilterFirstInvoiceData.forEach((el)=>{
-
         if(element.typeOfService===el.ServiceName && new Date(el.createdAt).getMonth()  === element.month ){
             console.log(element.typeOfService,'kff')
             console.log(el.ServiceName)
@@ -161,7 +160,7 @@ setYears([...new Set(AllYear.map((el)=>el.year)).filter((el)=>el)])
 }
 
 function getPackage() {
-    axios.get(`${url1}/packagemaster`, {
+    axios.get(`${url1}/packagemaster`, {headers
 
     })
         .then((res) => {
@@ -215,7 +214,7 @@ function clearFilter(){
                             </CFormSelect>
                             </CCol>
                             <CCol lg={4}  className='mb-2'>
-                            <CFormSelect  id="inputGroupSelect01"
+                            <CFormSelect  value={serviceName} id="inputGroupSelect01"
                                      onChange={(e)=>setServiceName(e.target.value)}
                                     >
                                     <option>Select Service</option>
@@ -252,14 +251,11 @@ function clearFilter(){
                             </CTableHead>
                             <CTableBody>
                                 {newcRevenue.filter((el)=>{
-                                   if(month){
-                                     return month===monthName[el.month]                
-                                   }else if(selectedYear){
-                                    return selectedYear ==el.year                
-                                   } else  if(serviceName){
-                                    return serviceName== el.typeOfService
-                                   }
-                                   return el                     
+                                       
+                                return monthName[el.month].includes(month) &&  
+                                (el.year+"").includes(selectedYear)&&
+                                el.typeOfService.includes(serviceName)   
+                    
                                 }).map((el,i)=>{
                                return <CTableRow key={i}>
                                 <CTableDataCell>{i+1}</CTableDataCell>

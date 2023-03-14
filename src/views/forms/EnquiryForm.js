@@ -101,7 +101,7 @@ console.log(trialDate)
                 console.error(error)
             })
 
-        axios.get(`${url}/enquiryForm/all`, {
+        axios.get(`${url1}/enquiryForm/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -231,7 +231,7 @@ return
         }
 
 
-        axios.post(`${url}/enquiryForm/create`, data, { headers })
+        axios.post(`${url1}/enquiryForm/create`, data, { headers })
             .then((resp) => {
                 console.log(resp)
                 alert("successfully submitted")

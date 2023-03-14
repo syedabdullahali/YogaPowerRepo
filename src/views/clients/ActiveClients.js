@@ -381,7 +381,7 @@ const ActiveClients = () => {
 
     function deleteEnquiry(id) {
         if (confirm('Do you want to delete this')) {
-            fetch(`${url}/memberForm/delete/${id}`, {
+            fetch(`${url1}/memberForm/delete/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -414,7 +414,7 @@ const ActiveClients = () => {
 
     const [callReport, setCallReport] = useState(false)
     function getCallReport(id) {
-        axios.get(`${url}/memberForm/${id}`, {
+        axios.get(`${url1}/memberForm/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -485,7 +485,7 @@ const ActiveClients = () => {
                 .catch((error) => {
                     console.error(error)
                 })
-            axios.get(`${url}/memberForm/${clId}`, {
+            axios.get(`${url1}/memberForm/${clId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

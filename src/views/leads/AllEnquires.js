@@ -232,7 +232,7 @@ const AllEnquires = () => {
              appointmentTime, appointmentfor: appointmentfor, Counseller: Counseller, trialDate: trialDate, status: "all_enquiry",
         }
 
-        fetch(`${ url }/enquiryForm/update/${ edit }`, {
+        fetch(`${ url1 }/enquiryForm/update/${ edit }`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${ token }`,
@@ -270,7 +270,7 @@ const AllEnquires = () => {
                 status: 'CallReport'
             }
 
-            fetch(`${ url }/enquiryForm/update/${ followForm }`, {
+            fetch(`${ url1 }/enquiryForm/update/${ followForm }`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${ token }`,
@@ -313,7 +313,7 @@ const AllEnquires = () => {
                 status: 'CallReport'
             }
 
-            fetch(`${ url }/enquiryForm/update/${followForm}`, {
+            fetch(`${ url1 }/enquiryForm/update/${followForm}`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${ token }`,
@@ -355,7 +355,7 @@ const AllEnquires = () => {
                 status: 'CallReport'
             }
 
-            fetch(`${ url }/enquiryForm/update/${ followForm }`, {
+            fetch(`${ url1 }/enquiryForm/update/${ followForm }`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${ token }`,
@@ -447,7 +447,7 @@ const AllEnquires = () => {
 
                 const data1 = { Counseller, CallStatus: CallStatus1 }
 
-                fetch(`${ url }/enquiryForm/update/${ followForm }`, {
+                fetch(`${ url1 }/enquiryForm/update/${ followForm }`, {
                     method: "POST",
                     headers: {
                         "Authorization": `Bearer ${ token }`,
@@ -480,7 +480,7 @@ const AllEnquires = () => {
 
                 const data1 = { Counseller, CallStatus: CallStatus1 }
 
-                fetch(`${ url }/enquiryForm/update/${ followForm }`, {
+                fetch(`${ url1 }/enquiryForm/update/${ followForm }`, {
                     method: "POST",
                     headers: {
                         "Authorization": `Bearer ${ token }`,
@@ -544,7 +544,7 @@ const AllEnquires = () => {
         })
         const data1 = { Counseller }
 
-        fetch(`${ url }/enquiryForm/update/${ followForm }`, {
+        fetch(`${ url1 }/enquiryForm/update/${ followForm }`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${ token }`,
@@ -562,7 +562,7 @@ const AllEnquires = () => {
     }
     const [ogList, setOgList] = useState([])
     function getEnquiry() {
-        axios.get(`${ url }/enquiryForm/all`, {
+        axios.get(`${ url1 }/enquiryForm/all`, {
             headers: {
                 'Authorization': `Bearer ${ token }`
             }
@@ -581,7 +581,7 @@ const AllEnquires = () => {
         console.log(edit)
         setEdit(null)
         if (id != null) {
-            axios.get(`${ url }/enquiryForm/${ id }`, {
+            axios.get(`${ url1 }/enquiryForm/${ id }`, {
                 headers: {
                     'Authorization': `Bearer ${ token }`
                 }
@@ -599,7 +599,7 @@ const AllEnquires = () => {
     }
     
     function getUpdate(id) {
-        axios.get(`${ url }/enquiryForm/${ id }`, {
+        axios.get(`${ url1 }/enquiryForm/${ id }`, {
             headers: {
                 'Authorization': `Bearer ${ token }`
             }
@@ -638,7 +638,7 @@ const AllEnquires = () => {
             })
     }
     function getProspect(id) {
-        axios.get(`${ url }/enquiryForm/${ id }`, {
+        axios.get(`${ url1 }/enquiryForm/${ id }`, {
             headers: {
                 'Authorization': `Bearer ${ token }`
             }
@@ -658,7 +658,7 @@ const AllEnquires = () => {
     }
 
     function getCallReport(id) {
-        axios.get(`${ url }/enquiryForm/${ id }`, {
+        axios.get(`${ url1 }/enquiryForm/${ id }`, {
             headers: {
                 'Authorization': `Bearer ${ token }`
             }
@@ -681,7 +681,7 @@ const AllEnquires = () => {
 
     function deleteEnquiry(id) {
         if (confirm('Do you want to delete this')) {
-            fetch(`${ url }/enquiryForm/delete/${ id }`, {
+            fetch(`${ url1 }/enquiryForm/delete/${ id }`, {
                 method: 'DELETE',
                 headers: {
                     "Authorization": `Bearer ${ token }`,

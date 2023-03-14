@@ -55,7 +55,7 @@ const LeadReport= props => {
         try{
         const response1 = axios.get(`${url1}/invoice/all`,{headers})
         const response2 = axios.get(`${url1}/memberForm/all`,{headers})
-        const response3 = axios.get(`${url}/enquiryForm/all`,{headers})
+        const response3 = axios.get(`${url1}/enquiryForm/all`,{headers})
               
         const allApiData = await Promise.all([response1,response2,response3])
         
@@ -176,7 +176,6 @@ const LeadReport= props => {
                                 {years.map((el)=>{
                                     return <option>{el}</option>
                                 })}  
-
                             </CFormSelect>
                             </CCol>
                             <CCol lg={4}  className='mb-2'>
@@ -216,7 +215,13 @@ const LeadReport= props => {
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
-                               {leadReportData.map((el,i)=>{
+                               {leadReportData.filter((el)=>{
+                                       
+                                       return monthName[el.month].includes(month) &&  
+                                       (el.year+"").includes(selectedYear)&&
+                                       el.typeOfEnquiry.includes(serviceName)   
+                           
+                                       }).map((el,i)=>{
                                return <CTableRow key={i}>
                                 <CTableDataCell>{i+1}</CTableDataCell>
                                     <CTableDataCell>{el.year}</CTableDataCell>

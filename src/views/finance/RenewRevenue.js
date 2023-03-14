@@ -319,15 +319,11 @@ getPackage()
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
-                                {getRenewRevenueData.filter((el)=>{
-                                   if(month){
-                                     return month===monthName[el.month]                
-                                   }else if(selectedYear){
-                                    return selectedYear ==el.year                
-                                   } else  if(serviceName){
-                                    return serviceName== el.typeOfService
-                                   }
-                                   return el                     
+                                {getRenewRevenueData.filter((el)=>{                                                                      
+                                   return monthName[el.month].includes(month) &&  
+                                   (el.year+"").includes(selectedYear)&&
+                                   el.typeOfService.includes(serviceName) 
+
                                 }).map((el,i)=>
                                 <CTableRow>
                                    <CTableDataCell>{i+1}</CTableDataCell>
