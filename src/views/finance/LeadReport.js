@@ -115,11 +115,12 @@ const LeadReport= props => {
                 invoiceData.forEach((el2)=>{
                     if( el._id===el2.MemberId){
                         element.amount+=el2.amount  
-                         if(el2.Receipts.length){
-                            el2?.Receipts.forEach((el3)=>{
-                                element.amount += (+el3.PaidAmount)
-                            })
-                         }
+                        
+                        //  if(el2.Receipts.length){
+                        //     el2?.Receipts.forEach((el3)=>{
+                        //         element.amount += (+el3.PaidAmount)
+                        //     })
+                        //  }
                     }
                 })
 
